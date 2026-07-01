@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Wordmark } from "@/components/site-chrome";
 import { LoginForm } from "./login-form";
 
 const ERROR_MESSAGES: Record<string, string> = {
@@ -17,18 +19,39 @@ export default async function LoginPage({
   const errorMessage = error ? ERROR_MESSAGES[error] ?? "Something went wrong." : null;
 
   return (
-    <div className="flex flex-1 items-center justify-center px-6 py-16">
+    <div className="flex flex-1 items-center justify-center px-5 py-16 sm:px-6">
       <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-          Enter your email and we&apos;ll send you a magic sign-in link. No password needed.
-        </p>
-        {errorMessage && (
-          <p className="mt-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-300">
-            {errorMessage}
+        <div className="flex justify-center">
+          <Wordmark />
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-border bg-surface p-6 shadow-sm sm:p-8">
+          <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
+          <p className="mt-2 text-sm text-muted">
+            Enter your email and we&apos;ll send you a magic sign-in link. No
+            password needed.
           </p>
-        )}
-        <LoginForm next={next} />
+
+          {errorMessage && (
+            <p className="mt-4 rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-sm text-danger">
+              {errorMessage}
+            </p>
+          )}
+
+          <div className="mt-6">
+            <LoginForm next={next} />
+          </div>
+        </div>
+
+        <p className="mt-6 text-center text-sm text-muted">
+          New here?{" "}
+          <span className="text-foreground">
+            Signing in creates your free account.
+          </span>{" "}
+          <Link href="/pricing" className="text-accent hover:underline">
+            See plans
+          </Link>
+        </p>
       </div>
     </div>
   );

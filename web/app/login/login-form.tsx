@@ -1,15 +1,23 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/cn";
 
 type Status = "idle" | "submitting" | "sent" | "error";
 
 export function LoginForm({
   next,
   autoFocus = true,
+  layout = "stack",
+  cta = "Send magic link",
 }: {
   next?: string;
   autoFocus?: boolean;
+  /** "row" keeps the email + button on one line (hero); "stack" is vertical. */
+  layout?: "stack" | "row";
+  cta?: string;
 }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -47,12 +55,12 @@ export function LoginForm({
 
   if (status === "sent") {
     return (
-      <div className="mt-6 rounded-md bg-green-50 px-4 py-3 text-sm text-green-800 dark:bg-green-950 dark:text-green-300">
-        <p>{message}</p>
+      <div className="rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm">
+        <p className="font-medium text-foreground">{message}</p>
         {devLink && (
-          <p className="mt-3 break-all text-xs text-green-700 dark:text-green-400">
+          <p className="mt-2 break-all text-xs text-muted">
             Dev link:{" "}
-            <a className="underline" href={devLink}>
+            <a className="text-accent underline" href={devLink}>
               {devLink}
             </a>
           </p>
@@ -61,26 +69,32 @@ export function LoginForm({
     );
   }
 
+  const isRow = layout === "row";
+
   return (
-    <form onSubmit={onSubmit} className="mt-6 flex flex-col gap-3">
-      <input
-        type="email"
-        required
-        autoFocus={autoFocus}
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="you@example.com"
-        className="w-full rounded-md border border-zinc-300 px-3 py-2 text-sm outline-none focus:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-900"
-      />
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="rounded-md bg-zinc-900 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-60 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+    <form onSubmit={onSubmit} className="flex flex-col gap-2.5">
+      <div
+        className={cn("flex gap-2.5", isRow ? "flex-col sm:flex-row" : "flex-col")}
       >
-        {status === "submitting" ? "Sending…" : "Send magic link"}
-      </button>
+        <Input
+          type="email"
+          required
+          autoFocus={autoFocus}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@example.com"
+          aria-label="Email address"
+        />
+        <Button
+          type="submit"
+          disabled={status === "submitting"}
+          className="shrink-0"
+        >
+          {status === "submitting" ? "Sending…" : cta}
+        </Button>
+      </div>
       {status === "error" && message && (
-        <p className="text-sm text-red-600 dark:text-red-400">{message}</p>
+        <p className="text-sm text-danger">{message}</p>
       )}
     </form>
   );

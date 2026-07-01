@@ -1,23 +1,36 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { BrandMark } from "@/components/brand-mark";
+import { cn } from "@/lib/cn";
 
 // Shared marketing chrome for public, crawlable pages (landing, pricing,
 // legal, ticker pages). Keeping one header/footer keeps navigation and the
 // internal-link graph consistent, which helps both users and crawlers.
 
+export function Wordmark({ className }: { className?: string }) {
+  return (
+    <Link
+      href="/"
+      aria-label="InsiderClusters home"
+      className={cn(
+        "group inline-flex items-center gap-2.5 font-semibold tracking-tight",
+        className
+      )}
+    >
+      <span className="relative grid h-8 w-8 place-items-center rounded-xl bg-linear-to-br from-accent to-accent-hover text-white ring-1 ring-inset ring-white/20 transition-transform duration-200 group-hover:-translate-y-0.5">
+        <BrandMark className="h-4.5 w-4.5" />
+      </span>
+      <span className="text-[15px]">InsiderClusters</span>
+    </Link>
+  );
+}
+
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold tracking-tight"
-        >
-          <span className="grid h-6 w-6 place-items-center rounded-md bg-accent text-xs font-bold text-accent-foreground">
-            IC
-          </span>
-          InsiderClusters
-        </Link>
+    <header className="sticky top-0 z-30 border-b border-border/70 bg-background/70 backdrop-blur-md">
+      <Container className="flex h-14 items-center justify-between">
+        <Wordmark />
         <nav className="flex items-center gap-1 sm:gap-2">
           <Link
             href="/pricing"
@@ -25,23 +38,57 @@ export function SiteHeader() {
           >
             Pricing
           </Link>
-          <ButtonLink href="/login" variant="secondary" size="sm">
+          <Link
+            href="/login"
+            className="hidden rounded-lg px-3 py-1.5 text-sm text-muted transition-colors hover:text-foreground sm:block"
+          >
             Sign in
+          </Link>
+          <ButtonLink href="/login" size="sm">
+            Get started
           </ButtonLink>
         </nav>
-      </div>
+      </Container>
     </header>
   );
 }
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-col gap-0.5">
-          <span>© {new Date().getFullYear()} InsiderClusters</span>
-          <span className="text-xs">
-            A product by{" "}
+    <footer className="mt-auto border-t border-border">
+      <Container className="py-10">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+          <div className="max-w-xs">
+            <Wordmark />
+            <p className="mt-3 text-sm text-muted">
+              High-signal insider cluster-buy alerts, sourced straight from SEC
+              Form 4 filings.
+            </p>
+          </div>
+          <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted">
+            <Link href="/pricing" className="transition-colors hover:text-foreground">
+              Pricing
+            </Link>
+            <Link href="/terms" className="transition-colors hover:text-foreground">
+              Terms
+            </Link>
+            <Link href="/privacy" className="transition-colors hover:text-foreground">
+              Privacy
+            </Link>
+            <a
+              href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-foreground"
+            >
+              SEC EDGAR
+            </a>
+          </nav>
+        </div>
+
+        <div className="mt-8 flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+          <span>
+            © {new Date().getFullYear()} InsiderClusters · A product by{" "}
             <a
               href="https://beelodev.com"
               target="_blank"
@@ -51,32 +98,12 @@ export function SiteFooter() {
               Beelodev
             </a>
           </span>
+          <span className="max-w-md sm:text-right">
+            Informational only — not investment advice. Data from public SEC
+            filings.
+          </span>
         </div>
-        <nav className="flex flex-wrap items-center gap-x-5 gap-y-2">
-          <Link href="/pricing" className="transition-colors hover:text-foreground">
-            Pricing
-          </Link>
-          <Link href="/terms" className="transition-colors hover:text-foreground">
-            Terms
-          </Link>
-          <Link href="/privacy" className="transition-colors hover:text-foreground">
-            Privacy
-          </Link>
-          <a
-            href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-foreground"
-          >
-            SEC EDGAR
-          </a>
-        </nav>
-      </div>
-      <div className="mx-auto max-w-5xl px-6 pb-8 text-xs text-muted">
-        Data sourced from public SEC Form 4 filings. InsiderClusters is an
-        informational tool and does not provide investment advice. Nothing here
-        is a recommendation to buy or sell any security.
-      </div>
+      </Container>
     </footer>
   );
 }
