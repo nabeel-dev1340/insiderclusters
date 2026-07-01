@@ -46,8 +46,11 @@ docs/DEPLOY.md       Coolify deploy runbook
   gating), cluster detail (transactions + EDGAR links), settings (email toggle,
   plan, billing/Discord placeholders). Emerald design system in
   `web/app/globals.css` + `web/components/ui/*`.
-- ✅ **Deployed** to production (web app) on Coolify. `https://insiderclusters.com`
-  live w/ Let's Encrypt TLS.
+- ✅ **Deployed** to production on Coolify. **web** app live at
+  `https://insiderclusters.com` + `https://www.insiderclusters.com` (both
+  Let's Encrypt TLS, "allow www & non-www"). **scraper** worker deployed and
+  running every 5 min, writing real filings/transactions to prod Postgres
+  (verified: `errors: 0`).
 - ⏭️ **Phase 4 — Billing (Lemon Squeezy).** Needs LS store + API key + webhook
   secret (user doesn't have yet). `web/lib/plan.ts` `effectivePlan()` already
   cross-checks plan + subscription_status; settings has a `BillingButton`
@@ -103,14 +106,17 @@ npm test --workspace @insiderclusters/scraper
 
 ## Open items / tech debt
 
-- **Scraper NOT yet deployed** to prod (only web). It's a second Coolify app —
-  same repo/Dockerfile, start command `npm run start --workspace
-  @insiderclusters/scraper`, same DB env, no domain. See DEPLOY.md §4. Until
-  deployed, prod has no real cluster data flowing in.
-- **`www` subdomain**: not serving HTTPS (cert/domain not set in Coolify). Add
-  `https://www.insiderclusters.com` as a domain on the web app, or drop www.
 - **Prod login is non-functional until email (Phase 5)** — devLink is gated to
-  non-production, so nobody can reach the dashboard in prod yet. By design.
+  non-production, so nobody can reach the dashboard in prod yet. By design. This
+  is the main blocker to a usable prod site; likely the first thing to tackle.
+  Needs Resend key + verified sender domain (DNS records in Hostinger).
+- **Scraper start log noise (cosmetic)**: prints `../.env not found. Continuing
+  without it.` from `--env-file-if-exists` in the scraper `start` script. Harmless;
+  can drop the flag for prod if desired.
+- **Non-deterministic prod install**: the Docker builds drop `package-lock.json`.
+  Consider committing a multi-platform lockfile and restoring `npm ci` later.
+- **Base image CVEs**: `node:22-slim` flags some criticals/highs. Harden later
+  (pin patched digest / slimmer runtime).
 - **Non-deterministic prod install**: the Docker build drops `package-lock.json`.
   Consider committing a multi-platform lockfile and restoring `npm ci` later.
 - **Base image CVEs**: `node:22-slim` flags some criticals/highs. Harden later
