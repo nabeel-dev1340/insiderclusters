@@ -1,8 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
-/.pnp
+# dependencies (match anywhere in the monorepo, not just root)
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
@@ -11,27 +11,36 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage/
 
 # next.js
-/.next/
-/out/
+.next/
+out/
 
-# production
-/build
+# builds
+build/
+dist/
 
-# misc
-.DS_Store
-*.pem
-
-# debug
+# logs
+logs/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# env / secrets (never commit; use .env.example instead)
+.env
+.env.local
+.env*.local
+
+# local postgres data
+.data/
+pgdata/
+
+# misc
+.DS_Store
+*.pem
 
 # vercel
 .vercel

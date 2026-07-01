@@ -1,0 +1,20 @@
+{
+  "name": "@insiderclusters/db",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared Postgres access + SQL migrations for web and scraper.",
+  "main": "./src/pool.ts",
+  "exports": {
+    ".": "./src/pool.ts"
+  },
+  "scripts": {
+    "migrate": "node --env-file-if-exists=../../.env migrate.mjs"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.10"
+  }
+}

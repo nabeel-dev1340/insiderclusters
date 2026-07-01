@@ -1,0 +1,19 @@
+{
+  "name": "@insiderclusters/scraper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "EDGAR poller + Form 4 parser + cluster detection (PRD Phase 1). Standalone service, no web dependency.",
+  "scripts": {
+    "dev": "node --env-file-if-exists=../.env --watch src/index.ts",
+    "start": "node --env-file-if-exists=../.env src/index.ts",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@insiderclusters/db": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,23 @@
+# Local development dependencies. In production, Postgres runs directly on the
+# Hetzner VPS (self-hosted) per the PRD — this compose file is for local dev only.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: insiderclusters-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: insider
+      POSTGRES_PASSWORD: insider
+      POSTGRES_DB: insiderclusters
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U insider -d insiderclusters"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
