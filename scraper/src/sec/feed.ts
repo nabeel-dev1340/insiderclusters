@@ -10,7 +10,9 @@ import { config } from "../config.ts";
 import { fetchText } from "./client.ts";
 
 const FEED_URL =
-  "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&company=&dateb=&owner=include&count=100&output=atom";
+  // count is the pre-filter window; type=4 is a prefix match so it's diluted by
+  // 497K/424B/etc. We over-fetch and then filter to genuine Form 4s below.
+  "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&company=&dateb=&owner=include&count=300&output=atom";
 
 export interface FeedEntry {
   accessionNumber: string; // e.g. 0001193125-26-291233
@@ -49,6 +51,13 @@ export async function fetchCurrentFilings(): Promise<FeedEntry[]> {
   const byAccession = new Map<string, FeedEntry>();
 
   for (const e of entries as Array<Record<string, unknown>>) {
+    // EDGAR's getcurrent `type` param is a *prefix* match, so type=4 also
+    // returns 497K, 424B3, 40-F, etc. Filter to genuine Form 4 (and 4/A
+    // amendments) via the entry's category term.
+    const category = e.category as { "@_term"?: string } | undefined;
+    const term = category?.["@_term"];
+    if (term !== "4" && term !== "4/A") continue;
+
     const id = typeof e.id === "string" ? e.id : "";
     const accessionNumber = accessionFromId(id);
     if (!accessionNumber) continue;
