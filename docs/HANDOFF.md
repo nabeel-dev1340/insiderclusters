@@ -3,7 +3,7 @@
 Everything a fresh session needs to continue. Pairs with [PRD.md](../PRD.md)
 (product spec) and [DEPLOY.md](./DEPLOY.md) (deploy runbook).
 
-_Last updated: 2026-07-01, after Phase 3 + first production deploy._
+_Last updated: 2026-07-01, after Phase 5 (email alerts) + scraper feed fix._
 
 ## What this is
 
@@ -55,6 +55,17 @@ docs/DEPLOY.md       Coolify deploy runbook
   secret (user doesn't have yet). `web/lib/plan.ts` `effectivePlan()` already
   cross-checks plan + subscription_status; settings has a `BillingButton`
   placeholder ready to wire.
+- ✅ **Phase 5 — Email alerts (Resend).** SDK-free transport (single `fetch`) in
+  both `scraper/src/email.ts` and `web/lib/email.ts`. Dispatcher
+  (`scraper/src/alerts.ts`) runs each cycle: **real-time** — every undispatched
+  cluster emails paid+active+alerts-on users, then stamps `clusters.alert_sent_at`
+  (dedupe, zero double-sends on re-run); **weekly digest** — the top cluster of the
+  last 7 days to free users, ≤ once/week each via `users.last_digest_sent_at`
+  (migration `0003`). Magic-link auth now actually delivers (was a console stub).
+  Dispatch is gated on `RESEND_API_KEY` at the pipeline level, so deploying before
+  email is configured is a no-op (never consumes the pending-cluster backlog).
+  Sender: `support@beelodev.com` (beelodev.com verified in Resend). 2 node:test
+  cases for dispatch idempotency; DB tests forced serial (`--test-concurrency=1`).
 - ✅ **Phase 7 — SEO / content layer.** Public, server-rendered per-ticker pages
   at `/stock/{TICKER}/insider-cluster-buys` (gated to last 3 clusters for
   anonymous visitors, full history when logged in), each with unique
@@ -68,7 +79,7 @@ docs/DEPLOY.md       Coolify deploy runbook
   intentionally NOT wired (Pro CTAs start the free signup). Shared marketing
   chrome extracted to `web/components/site-chrome.tsx`; pricing copy in
   `web/components/pricing.tsx`; legal shell in `web/components/legal-page.tsx`.
-- ⏭️ Phases 5 (email/Resend), 6 (Discord), 8 (ops/backups).
+- ⏭️ Phases 6 (Discord), 8 (ops/backups).
 
 ## Local dev
 
@@ -104,8 +115,13 @@ npm test --workspace @insiderclusters/scraper
   Coolify Postgres), `SEC_USER_AGENT`, `APP_URL=https://insiderclusters.com`,
   `NODE_ENV=production`.
 - **Migrations auto-run** on each web deploy (container CMD runs `npm run migrate`
-  then `next start`).
-- **Redeploy:** push to `main`, hit Redeploy in Coolify.
+  then `next start`). The **scraper** does NOT migrate.
+- **Redeploy:** push to `main`, hit Redeploy in Coolify. When a change touches
+  both a migration and the scraper (e.g. Phase 5's `0003` + digest query),
+  **redeploy web first, then scraper**, so the scraper never queries a column the
+  migration hasn't added yet.
+- **Phase 5 env vars** (set on the relevant app before redeploy): web needs
+  `RESEND_API_KEY` + `ALERT_FROM_EMAIL`; scraper needs those plus `APP_URL`.
 - **Prod DB starts empty** — no demo seed in prod; fills from the scraper.
 
 ### Deploy gotchas already solved (see Dockerfile comments)
@@ -117,12 +133,24 @@ npm test --workspace @insiderclusters/scraper
 3. `DATABASE_URL is not set` during `next build` → made the pg pool lazy
    (`packages/db/src/pool.ts`) so importing has no side effects.
 
+### Scraper / EDGAR gotchas already solved
+1. **`getcurrent` `type` is a PREFIX match, not exact.** `type=4` also returns
+   `497K`, `497`, `424B2/3`, `40-F`, etc. — any form starting with "4". Those have
+   no `<ownershipDocument>`, so the parser threw `No <ownershipDocument> element
+   found` and (via whole-submission fallback parsing) `Maximum nested tags
+   exceeded` — 53 errors/cycle, 0 real filings. Fix (`scraper/src/sec/feed.ts`):
+   filter each Atom entry to `category term === "4" | "4/A"` before fetch/parse,
+   and over-fetch (`count=300`) so real Form 4s aren't crowded out of the
+   pre-filter window during heavy fund-filing periods.
+2. **fast-xml-parser v5 default `maxNestedTags: 100`** is what surfaced the above
+   as a thrown error (older versions parsed silently). Keep filings scoped to the
+   extracted `<ownershipDocument>` slice, never the full SGML submission.
+
 ## Open items / tech debt
 
-- **Prod login is non-functional until email (Phase 5)** — devLink is gated to
-  non-production, so nobody can reach the dashboard in prod yet. By design. This
-  is the main blocker to a usable prod site; likely the first thing to tackle.
-  Needs Resend key + verified sender domain (DNS records in Hostinger).
+- **Prod login now works** via Resend magic links (Phase 5). Requires
+  `RESEND_API_KEY` + `ALERT_FROM_EMAIL` set on the **web** app in Coolify. The
+  non-prod devLink shortcut still exists for local dev.
 - **Scraper start log noise (cosmetic)**: prints `../.env not found. Continuing
   without it.` from `--env-file-if-exists` in the scraper `start` script. Harmless;
   can drop the flag for prod if desired.
@@ -146,7 +174,10 @@ npm test --workspace @insiderclusters/scraper
 ## Credentials still needed (per phase)
 
 - Phase 4: Lemon Squeezy — store, API key, webhook secret.
-- Phase 5: Resend (or SES) API key + verified sender domain.
+- ✅ Phase 5: Resend API key obtained; `beelodev.com` verified, sender
+  `support@beelodev.com`. Key lives ONLY as a Coolify env var on **both** web and
+  scraper apps (`RESEND_API_KEY`, `ALERT_FROM_EMAIL`; scraper also needs
+  `APP_URL` for email links). Rotate if ever exposed.
 - Phase 6: Discord bot token, OAuth2 client id/secret, guild/channel/role IDs.
 - SEC User-Agent contact already set: `support@beelodev.com`.
 
