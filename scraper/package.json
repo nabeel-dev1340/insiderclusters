@@ -7,10 +7,13 @@
   "scripts": {
     "dev": "node --env-file-if-exists=../.env --watch src/index.ts",
     "start": "node --env-file-if-exists=../.env src/index.ts",
-    "test": "node --test"
+    "once": "node --env-file-if-exists=../.env src/index.ts --once",
+    "test": "node --env-file-if-exists=../.env --test 'test/**/*.test.ts'",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@insiderclusters/db": "*"
+    "@insiderclusters/db": "*",
+    "fast-xml-parser": "^5.9.3"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
