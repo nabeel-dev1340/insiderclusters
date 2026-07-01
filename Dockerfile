@@ -9,13 +9,14 @@ FROM node:22-slim AS build
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 # Copy the whole repo (node_modules/.next excluded via .dockerignore), then
-# install ALL workspace deps. We use `npm install` (not `npm ci`) so npm
-# re-resolves platform-specific optional native deps for THIS platform — the
-# committed lockfile was generated on macOS and lacks the Linux binaries that
-# Tailwind v4's lightningcss / oxide need on the build server.
+# install ALL workspace deps. The committed lockfile was generated on macOS;
+# npm (both `ci` and `install`) replays it and never fetches the Linux native
+# binaries that Tailwind v4's lightningcss/oxide need (known npm optional-deps
+# bug). Removing the lockfile forces a fresh, platform-aware resolution so the
+# correct linux-x64-gnu binaries get installed.
 # `--include=dev` guarantees build-only deps even if NODE_ENV=production is set.
 COPY . .
-RUN npm install --include=dev --no-audit --no-fund
+RUN rm -f package-lock.json && npm install --include=dev --no-audit --no-fund
 RUN npm run build --workspace @insiderclusters/web
 
 FROM node:22-slim AS runner
