@@ -17,6 +17,16 @@ function required(name: string): string {
   return value;
 }
 
+function opt(name: string): string | null {
+  const value = process.env[name];
+  return value === undefined || value === "" ? null : value;
+}
+
+function str(name: string, fallback: string): string {
+  const raw = process.env[name];
+  return raw === undefined || raw === "" ? fallback : raw;
+}
+
 export const config = {
   // SEC requires a real contact in the User-Agent or it returns 403.
   secUserAgent: required("SEC_USER_AGENT"),
@@ -37,6 +47,15 @@ export const config = {
   // Politeness: SEC asks for <= 10 req/s. We stay well under.
   secRequestDelayMs: num("SEC_REQUEST_DELAY_MS", 200),
   maxFilingsPerCycle: num("MAX_FILINGS_PER_CYCLE", 100),
+
+  // Email alerts (Phase 5). When RESEND_API_KEY is unset the cycle skips email
+  // dispatch entirely (see pipeline.ts), so local/`--once` runs never touch a
+  // real inbox and never consume the undispatched-cluster backlog.
+  resendApiKey: opt("RESEND_API_KEY"),
+  alertFromEmail: str("ALERT_FROM_EMAIL", "InsiderClusters <support@beelodev.com>"),
+  appUrl: str("APP_URL", "https://insiderclusters.com").replace(/\/+$/, ""),
+  // Free tier gets the top cluster of the week, at most once per this many days.
+  digestIntervalDays: num("DIGEST_INTERVAL_DAYS", 7),
 } as const;
 
 export type Config = typeof config;

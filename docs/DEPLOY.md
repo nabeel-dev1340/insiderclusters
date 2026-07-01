@@ -50,6 +50,8 @@ select `nabeel-dev1340/insiderclusters` (branch `main`).
   SEC_USER_AGENT=InsiderClusters support@beelodev.com
   APP_URL=https://insiderclusters.com
   NODE_ENV=production
+  RESEND_API_KEY=<resend key>          # enables magic-link emails (Phase 5)
+  ALERT_FROM_EMAIL=InsiderClusters <support@beelodev.com>
   ```
 
 Deploy. The container runs `npm run migrate` (creates all tables) then starts
@@ -69,6 +71,9 @@ Coolify → **+ New** → **Application** → same repo/branch.
   SEC_USER_AGENT=InsiderClusters support@beelodev.com
   MIN_SIGNAL_VALUE=100000
   MAX_MARKET_CAP=2000000000
+  APP_URL=https://insiderclusters.com          # used for links in alert emails
+  RESEND_API_KEY=<resend key>                  # enables cluster alert emails (Phase 5)
+  ALERT_FROM_EMAIL=InsiderClusters <support@beelodev.com>
   ```
 
 Deploy. Logs should show `scraper starting` and, every ~5 min, `cycle complete`.
@@ -76,8 +81,8 @@ Deploy. Logs should show `scraper starting` and, every ~5 min, `cycle complete`.
 ## 5. Verify
 
 - Visit https://insiderclusters.com → landing page loads over HTTPS.
-- Sign-in link **won't email yet** (email provider is a later phase). Until then
-  the dashboard isn't reachable in production by design.
+- Sign-in emails a magic link via Resend when `RESEND_API_KEY` is set (Phase 5).
+  Without the key, the link is only logged to the web container's console.
 - Scraper logs show cycles running and (eventually) real filings/clusters.
 
 ## Notes

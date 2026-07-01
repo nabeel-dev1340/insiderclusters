@@ -10,6 +10,7 @@ import { knownAccessions, insertFiling, insertTransaction } from "./db.ts";
 import { isSignal } from "./signal.ts";
 import { getMarketCap, isWithinCap } from "./marketcap.ts";
 import { detectCluster } from "./clusters.ts";
+import { dispatchAlerts } from "./alerts.ts";
 
 export interface CycleStats {
   fetched: number;
@@ -18,6 +19,8 @@ export interface CycleStats {
   signals: number;
   clustersCreated: number;
   clustersUpdated: number;
+  alertsSent: number;
+  digestsSent: number;
   errors: number;
 }
 
@@ -62,6 +65,8 @@ export async function runCycle(): Promise<CycleStats> {
     signals: 0,
     clustersCreated: 0,
     clustersUpdated: 0,
+    alertsSent: 0,
+    digestsSent: 0,
     errors: 0,
   };
 
@@ -103,6 +108,22 @@ export async function runCycle(): Promise<CycleStats> {
     } catch (err) {
       stats.errors++;
       log.error("cluster detection failed", { ticker, error: (err as Error).message });
+    }
+  }
+
+  // Email dispatch (Phase 5). Gated on RESEND_API_KEY so deploying before email
+  // is configured never consumes the pending-cluster backlog (dispatch stamps
+  // alert_sent_at, which is irreversible). Isolated in try/catch so a mail
+  // failure never affects scraping — the next cycle retries anything undispatched.
+  if (config.resendApiKey) {
+    try {
+      const dispatch = await dispatchAlerts();
+      stats.alertsSent = dispatch.realtimeEmails;
+      stats.digestsSent = dispatch.digestEmails;
+      if (dispatch.emailFailures) stats.errors += dispatch.emailFailures;
+    } catch (err) {
+      stats.errors++;
+      log.error("alert dispatch failed", { error: (err as Error).message });
     }
   }
 
