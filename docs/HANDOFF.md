@@ -55,7 +55,20 @@ docs/DEPLOY.md       Coolify deploy runbook
   secret (user doesn't have yet). `web/lib/plan.ts` `effectivePlan()` already
   cross-checks plan + subscription_status; settings has a `BillingButton`
   placeholder ready to wire.
-- ⏭️ Phases 5 (email/Resend), 6 (Discord), 7 (SEO ticker pages), 8 (ops/backups).
+- ✅ **Phase 7 — SEO / content layer.** Public, server-rendered per-ticker pages
+  at `/stock/{TICKER}/insider-cluster-buys` (gated to last 3 clusters for
+  anonymous visitors, full history when logged in), each with unique
+  title/description/canonical + BreadcrumbList & Dataset JSON-LD. Auto-updating
+  `app/sitemap.ts` (all static pages + one URL per ticker, hourly revalidate) and
+  `app/robots.ts` (disallows `/dashboard`, `/api`, `/auth`, `/login`). Root
+  `layout.tsx` now sets `metadataBase`, title template, default OG/Twitter,
+  Organization JSON-LD, and optional Google Search Console meta verification via
+  `GOOGLE_SITE_VERIFICATION`. Also shipped **/pricing** (Free vs Pro $19/mo cards +
+  comparison table + FAQPage JSON-LD), **/terms**, **/privacy** — Lemon Squeezy
+  intentionally NOT wired (Pro CTAs start the free signup). Shared marketing
+  chrome extracted to `web/components/site-chrome.tsx`; pricing copy in
+  `web/components/pricing.tsx`; legal shell in `web/components/legal-page.tsx`.
+- ⏭️ Phases 5 (email/Resend), 6 (Discord), 8 (ops/backups).
 
 ## Local dev
 
@@ -122,6 +135,13 @@ npm test --workspace @insiderclusters/scraper
 - **Base image CVEs**: `node:22-slim` flags some criticals/highs. Harden later
   (pin patched digest / slimmer runtime).
 - **Demo clusters** exist in the LOCAL db only.
+- **Search Console submission (Phase 7 follow-ups):** (1) set
+  `GOOGLE_SITE_VERIFICATION` env in Coolify to the token from
+  search.google.com/search-console, redeploy, then verify + submit
+  `https://insiderclusters.com/sitemap.xml`. (2) Support/legal contact is
+  `support@beelodev.com` (Beelodev is the parent company; credited in the footer
+  + Organization JSON-LD). (3) Ticker pages fill in as the scraper
+  detects real clusters; sitemap already includes them within the hour.
 
 ## Credentials still needed (per phase)
 

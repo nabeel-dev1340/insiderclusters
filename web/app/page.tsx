@@ -3,6 +3,8 @@ import { getRecentClusters } from "@/lib/clusters";
 import { LoginForm } from "@/app/login/login-form";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
+import { SiteHeader, SiteFooter } from "@/components/site-chrome";
+import { tickerPath } from "@/lib/site";
 import {
   formatMoneyCompact,
   formatMarketCap,
@@ -78,7 +80,7 @@ export default async function Home() {
             {clusters.map((c) => (
               <Link
                 key={c.id}
-                href="/login"
+                href={tickerPath(c.ticker)}
                 className="group rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:border-accent/40 hover:shadow-md"
               >
                 <div className="flex items-center justify-between">
@@ -145,23 +147,7 @@ export default async function Home() {
   );
 }
 
-function SiteHeader() {
-  return (
-    <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
-        <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="grid h-6 w-6 place-items-center rounded-md bg-accent text-xs font-bold text-accent-foreground">
-            IC
-          </span>
-          InsiderClusters
-        </Link>
-        <ButtonLink href="/login" variant="secondary" size="sm">
-          Sign in
-        </ButtonLink>
-      </div>
-    </header>
-  );
-}
+// SiteHeader / SiteFooter now live in @/components/site-chrome.
 
 function Step({ n, title, body }: { n: number; title: string; body: string }) {
   return (
@@ -172,18 +158,5 @@ function Step({ n, title, body }: { n: number; title: string; body: string }) {
       <h3 className="mt-4 font-semibold">{title}</h3>
       <p className="mt-1 text-sm text-muted">{body}</p>
     </div>
-  );
-}
-
-function SiteFooter() {
-  return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-2 px-6 py-8 text-sm text-muted sm:flex-row">
-        <span>© {new Date().getFullYear()} InsiderClusters</span>
-        <span className="text-xs">
-          Not investment advice. Data sourced from public SEC filings.
-        </span>
-      </div>
-    </footer>
   );
 }

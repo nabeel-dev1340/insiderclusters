@@ -122,6 +122,73 @@ export async function getRecentClusters(limit: number): Promise<ClusterSummary[]
   return rows.map(mapCluster);
 }
 
+/** Non-gated visitors on the public ticker pages see only the most recent few. */
+export const PUBLIC_TICKER_CLUSTER_LIMIT = 3;
+
+export interface TickerPage {
+  ticker: string;
+  issuerName: string;
+  marketCap: number | null; // latest known cap for the ticker
+  clusters: ClusterSummary[]; // newest first, already sliced for the viewer
+  totalClusters: number; // across all history (for the "hidden" prompt)
+  insiderCount: number; // distinct insiders across all clusters
+  lastDetectedAt: Date;
+}
+
+/**
+ * Public per-ticker cluster history (Feature 7.1). Non-gated: anonymous
+ * visitors get the newest `limit` clusters, logged-in visitors get all of them.
+ * Returns null when the ticker has never appeared in a cluster.
+ */
+export async function getTickerPage(
+  ticker: string,
+  limit: number | null
+): Promise<TickerPage | null> {
+  const normalized = ticker.toUpperCase();
+  const { rows } = await pool.query<ClusterRow>(
+    `SELECT ${SELECT_COLS} FROM clusters WHERE ticker = $1 ORDER BY detected_at DESC`,
+    [normalized]
+  );
+  if (rows.length === 0) return null;
+
+  const all = rows.map(mapCluster);
+  const clusters = limit == null ? all : all.slice(0, limit);
+
+  // Distinct insiders across the ticker's clusters (union of transaction sets).
+  const { rows: insiderRows } = await pool.query<{ c: number }>(
+    `SELECT count(DISTINCT coalesce(t.insider_cik, t.insider_name))::int AS c
+       FROM clusters c
+       JOIN transactions t ON t.id = ANY(c.transaction_ids)
+      WHERE c.ticker = $1`,
+    [normalized]
+  );
+
+  const latest = all[0]!;
+  return {
+    ticker: normalized,
+    issuerName: latest.issuerName,
+    marketCap: latest.marketCap,
+    clusters,
+    totalClusters: all.length,
+    insiderCount: insiderRows[0]?.c ?? 0,
+    lastDetectedAt: latest.detectedAt,
+  };
+}
+
+/** Every ticker that has appeared in a cluster, with its latest activity (for the sitemap). */
+export async function getSitemapTickers(): Promise<
+  { ticker: string; lastModified: Date }[]
+> {
+  const { rows } = await pool.query<{ ticker: string; last_modified: Date }>(
+    `SELECT ticker, max(detected_at) AS last_modified
+       FROM clusters
+      WHERE ticker IS NOT NULL AND ticker <> ''
+      GROUP BY ticker
+      ORDER BY ticker`
+  );
+  return rows.map((r) => ({ ticker: r.ticker, lastModified: r.last_modified }));
+}
+
 export type ClusterAccess =
   | { status: "not_found" }
   | { status: "locked"; cluster: ClusterSummary } // real-time cluster, free user
