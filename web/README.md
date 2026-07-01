@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# @insiderclusters/web
 
-## Getting Started
+Next.js 16 (App Router) web app: dashboard, magic-link auth, billing, and SEO
+pages. Reads/writes the shared Postgres via `@insiderclusters/db`.
 
-First, run the development server:
+> **Next.js version note:** this is Next 16, which has breaking changes vs.
+> earlier versions. Notably `middleware` is renamed to **`proxy.ts`**. Read the
+> bundled docs under `node_modules/next/dist/docs/` before adding framework code.
+
+## Run
+
+Requires Node ≥ 22, a running Postgres with migrations applied, and env in the
+repo-root `.env` (symlinked here as `.env.local`).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev    --workspace @insiderclusters/web   # http://localhost:3000
+npm run build  --workspace @insiderclusters/web   # production build (also typechecks)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Auth (Phase 2 — magic link, no passwords)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Flow:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. `POST /api/auth/request-link` `{ email }` → creates a hashed, 15-min token in
+   `auth_tokens`, emails a link. Rate limited (burst + 3 / 15 min). In dev the
+   response includes `devLink` so the flow is testable without an email provider.
+2. `GET /auth/verify?token=…` → atomically consumes the token, find-or-creates
+   the user, creates a session, sets an **httpOnly** cookie, redirects to
+   `/dashboard`. Invalid/expired/reused tokens redirect to `/login?error=…`.
+3. `POST /api/auth/logout` → deletes the session row and clears the cookie.
 
-## Learn More
+Session gating (`/dashboard/*`) is two-layer:
 
-To learn more about Next.js, take a look at the following resources:
+- [`proxy.ts`](./proxy.ts) — coarse cookie-presence check, redirects to `/login`.
+  Does **no** DB work (proxy may run outside the app runtime).
+- [`app/dashboard/layout.tsx`](./app/dashboard/layout.tsx) — authoritative check:
+  validates the session against the DB (existence + expiry) on every request.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Security notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Tokens (magic-link + session) are random 256-bit values; only their SHA-256
+  hash is stored. The raw value lives in the email link / cookie.
+- Token consumption is a single atomic `UPDATE … WHERE used=FALSE AND not expired
+  RETURNING`, so reuse and concurrent verifies can't both succeed.
+- No account enumeration: `request-link` responds identically whether or not the
+  email maps to an existing user.
 
-## Deploy on Vercel
+## Key files
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Path | Responsibility |
+| --- | --- |
+| `lib/auth/constants.ts` | `SESSION_COOKIE` (no imports — safe for `proxy.ts`) |
+| `lib/auth/crypto.ts` | token generation + SHA-256 hashing |
+| `lib/auth/tokens.ts` | create / atomically consume magic-link tokens |
+| `lib/auth/session.ts` | create/read/delete sessions, cookie helpers |
+| `lib/auth/rate-limit.ts` | burst + windowed request-link rate limiting |
+| `lib/email.ts` | email transport (dev = console log; Resend in Phase 5) |
+| `proxy.ts` | coarse `/dashboard/*` auth gate |
