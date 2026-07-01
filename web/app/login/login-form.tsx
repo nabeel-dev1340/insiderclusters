@@ -4,7 +4,13 @@ import { useState, type FormEvent } from "react";
 
 type Status = "idle" | "submitting" | "sent" | "error";
 
-export function LoginForm({ next }: { next?: string }) {
+export function LoginForm({
+  next,
+  autoFocus = true,
+}: {
+  next?: string;
+  autoFocus?: boolean;
+}) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState<string | null>(null);
@@ -60,7 +66,7 @@ export function LoginForm({ next }: { next?: string }) {
       <input
         type="email"
         required
-        autoFocus
+        autoFocus={autoFocus}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="you@example.com"
