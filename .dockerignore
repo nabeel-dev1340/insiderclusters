@@ -1,0 +1,14 @@
+**/node_modules
+**/.next
+**/dist
+**/build
+.git
+.env
+.env.local
+**/.env.local
+**/*.log
+.DS_Store
+web/.env.local
+scratchpad
+*.md
+!AGENTS.md
