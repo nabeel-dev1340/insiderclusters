@@ -175,6 +175,53 @@ export async function getTickerPage(
   };
 }
 
+export interface TickerDirectoryEntry {
+  ticker: string;
+  issuerName: string;
+  marketCap: number | null;
+  totalClusters: number;
+  insiderCount: number; // distinct insiders across the ticker's clusters
+  lastDetectedAt: Date;
+}
+
+/**
+ * Every ticker that has ever appeared in a cluster, with aggregate stats, for
+ * the public /stocks hub. This hub is what makes the programmatic ticker pages
+ * discoverable via crawlable internal links (not just the XML sitemap), so the
+ * ordering is newest-activity-first to surface the freshest pages.
+ */
+export async function getTickerDirectory(): Promise<TickerDirectoryEntry[]> {
+  const { rows } = await pool.query<{
+    ticker: string;
+    issuer_name: string;
+    market_cap: string | null;
+    total_clusters: number;
+    insider_count: number;
+    last_detected_at: Date;
+  }>(
+    `SELECT
+       c.ticker,
+       (array_agg(c.issuer_name ORDER BY c.detected_at DESC))[1] AS issuer_name,
+       (array_agg(c.market_cap  ORDER BY c.detected_at DESC))[1] AS market_cap,
+       count(DISTINCT c.id)::int AS total_clusters,
+       count(DISTINCT coalesce(t.insider_cik, t.insider_name))::int AS insider_count,
+       max(c.detected_at) AS last_detected_at
+     FROM clusters c
+     JOIN transactions t ON t.id = ANY(c.transaction_ids)
+     WHERE c.ticker IS NOT NULL AND c.ticker <> ''
+     GROUP BY c.ticker
+     ORDER BY max(c.detected_at) DESC`
+  );
+  return rows.map((r) => ({
+    ticker: r.ticker,
+    issuerName: r.issuer_name,
+    marketCap: r.market_cap == null ? null : Number(r.market_cap),
+    totalClusters: r.total_clusters,
+    insiderCount: r.insider_count,
+    lastDetectedAt: r.last_detected_at,
+  }));
+}
+
 /** Every ticker that has appeared in a cluster, with its latest activity (for the sitemap). */
 export async function getSitemapTickers(): Promise<
   { ticker: string; lastModified: Date }[]

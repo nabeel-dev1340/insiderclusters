@@ -33,6 +33,12 @@ export function SiteHeader() {
         <Wordmark />
         <nav className="flex items-center gap-1 sm:gap-2">
           <Link
+            href="/stocks"
+            className="hidden rounded-lg px-3 py-1.5 text-sm text-muted transition-colors hover:text-foreground sm:block"
+          >
+            Stocks
+          </Link>
+          <Link
             href="/pricing"
             className="rounded-lg px-3 py-1.5 text-sm text-muted transition-colors hover:text-foreground"
           >
@@ -66,6 +72,9 @@ export function SiteFooter() {
             </p>
           </div>
           <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted">
+            <Link href="/stocks" className="transition-colors hover:text-foreground">
+              Stocks
+            </Link>
             <Link href="/pricing" className="transition-colors hover:text-foreground">
               Pricing
             </Link>

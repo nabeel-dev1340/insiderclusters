@@ -1,7 +1,16 @@
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth/session";
 import { effectivePlan } from "@/lib/plan";
 import { DashboardNav } from "@/components/dashboard-nav";
+
+// Defense in depth: the whole /dashboard/* area is gated (redirects to /login)
+// and Disallow-ed in robots.txt, but robots.txt only blocks crawling — a URL
+// linked externally could still be indexed URL-only. An explicit noindex on the
+// segment ensures none of these authenticated pages ever enter the index.
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 // Authoritative session check for every /dashboard/* route (Feature 2.3).
 // Validates the session against the DB (not just cookie presence) and computes

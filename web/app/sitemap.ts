@@ -7,10 +7,13 @@ import { SITE_URL, tickerPath } from "@/lib/site";
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Only index-worthy, crawlable pages belong here. /login is intentionally
+  // omitted — it's Disallow-ed in robots.txt and has no organic value, so
+  // listing it would send Google a contradictory signal.
   const staticEntries: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, changeFrequency: "daily", priority: 1 },
+    { url: `${SITE_URL}/stocks`, changeFrequency: "daily", priority: 0.9 },
     { url: `${SITE_URL}/pricing`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/login`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
   ];

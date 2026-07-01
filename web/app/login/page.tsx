@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Wordmark } from "@/components/site-chrome";
 import { LoginForm } from "./login-form";
+
+// Sign-in has no organic value and is disallowed in robots.txt. Declare its own
+// noindex + self-canonical so it doesn't inherit the site's canonical/index
+// signals if it's ever crawled from an external link.
+export const metadata: Metadata = {
+  title: "Sign in",
+  alternates: { canonical: "/login" },
+  robots: { index: false, follow: false },
+};
 
 const ERROR_MESSAGES: Record<string, string> = {
   invalid: "That sign-in link was invalid. Request a new one below.",

@@ -33,7 +33,10 @@ export const metadata: Metadata = {
     "small-cap stocks",
     "insider transactions",
   ],
-  alternates: { canonical: "/" },
+  // NOTE: intentionally no `alternates.canonical` here. Metadata fields are
+  // inherited by every route that doesn't override them, so a canonical set on
+  // the root layout would make every page without its own canonical (e.g. a new
+  // public page) claim to be a duplicate of "/". Each page declares its own.
   openGraph: {
     type: "website",
     siteName: "InsiderClusters",

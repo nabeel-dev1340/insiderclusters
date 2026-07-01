@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getRecentClusters, type ClusterSummary } from "@/lib/clusters";
 import { LoginForm } from "@/app/login/login-form";
@@ -19,6 +20,12 @@ import {
 // crawlability; revalidated periodically so social proof stays fresh without a
 // DB hit on every request. All motion is CSS-only for a light PageSpeed budget.
 export const revalidate = 600;
+
+// Self-referencing canonical for the homepage. The root layout deliberately
+// leaves canonical unset (see app/layout.tsx), so each page owns its own.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default async function Home() {
   // Degrade gracefully: if the DB is unreachable (e.g. at build time), still
@@ -283,10 +290,10 @@ function LiveClusters({ clusters }: { clusters: ClusterSummary[] }) {
             </p>
           </div>
           <Link
-            href="/login"
+            href="/stocks"
             className="text-sm font-medium text-accent transition-opacity hover:opacity-80"
           >
-            See the full feed →
+            Browse all stocks →
           </Link>
         </div>
 
