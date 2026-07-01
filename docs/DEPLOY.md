@@ -59,14 +59,9 @@ Next.js. Watch the deploy logs for `Applied N migration(s)` then `Ready`.
 
 Coolify → **+ New** → **Application** → same repo/branch.
 
-- **Build Pack:** Dockerfile, **Dockerfile location:** `/Dockerfile`
+- **Build Pack:** Dockerfile, **Dockerfile location:** `/scraper.Dockerfile`
+  (dedicated worker image — no web build, no start-command override needed).
 - **No domain** (background worker, not web-facing).
-- **Start command (override):**
-
-  ```
-  npm run start --workspace @insiderclusters/scraper
-  ```
-
 - **Environment variables:**
 
   ```
