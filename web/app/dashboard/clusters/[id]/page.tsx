@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth/session";
 import { effectivePlan } from "@/lib/plan";
+import { posthog } from "@/lib/posthog";
 import {
   getClusterForUser,
   avgBuyPrice,
@@ -43,6 +44,17 @@ export default async function ClusterDetailPage({
   if (result.status === "not_found") notFound();
 
   const { cluster } = result;
+
+  posthog().capture({
+    distinctId: user.email,
+    event: result.status === "locked" ? "cluster locked" : "cluster viewed",
+    properties: {
+      cluster_id: clusterId,
+      ticker: cluster.ticker,
+      plan,
+      insider_count: cluster.insiderCount,
+    },
+  });
 
   return (
     <div>

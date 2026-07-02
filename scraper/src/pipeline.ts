@@ -7,10 +7,11 @@ import { log } from "./logger.ts";
 import { fetchCurrentFilings, type FeedEntry } from "./sec/feed.ts";
 import { fetchAndParseFiling } from "./sec/form4.ts";
 import { knownAccessions, insertFiling, insertTransaction } from "./db.ts";
-import { isSignal } from "./signal.ts";
-import { getMarketCap, isWithinCap } from "./marketcap.ts";
+import { isSignal, isPlausiblePrice, SUSPECT_PRICE_PER_SHARE } from "./signal.ts";
+import { getMarketCap, getCurrentPrice, isWithinCap } from "./marketcap.ts";
 import { detectCluster } from "./clusters.ts";
 import { dispatchAlerts } from "./alerts.ts";
+import { posthog } from "./posthog.ts";
 
 export interface CycleStats {
   fetched: number;
@@ -47,7 +48,22 @@ async function processFiling(
 
   for (const tx of parsed.transactions) {
     if (!tx.transactionDate) continue; // malformed row
-    const signal = isSignal(tx, config.minSignalValue, parsed.ticker);
+    let signal = isSignal(tx, config.minSignalValue, parsed.ticker);
+    // Filer-error guard: a suspect price must be vouched for by the ticker's
+    // current price, or the "signal" is a total typed into the price field.
+    if (
+      signal &&
+      tx.pricePerShare != null &&
+      tx.pricePerShare > SUSPECT_PRICE_PER_SHARE &&
+      !isPlausiblePrice(tx.pricePerShare, await getCurrentPrice(parsed.ticker!))
+    ) {
+      signal = false;
+      log.warn("implausible price per share, demoting signal", {
+        accession: entry.accessionNumber,
+        ticker: parsed.ticker,
+        pricePerShare: tx.pricePerShare,
+      });
+    }
     await insertTransaction(filingId, owner, tx, signal);
     stats.transactions++;
     if (signal) {
@@ -88,6 +104,7 @@ export async function runCycle(): Promise<CycleStats> {
         url: entry.submissionUrl,
         error: (err as Error).message,
       });
+      posthog().captureException(err as Error, "system");
     }
   }
 
@@ -108,6 +125,7 @@ export async function runCycle(): Promise<CycleStats> {
     } catch (err) {
       stats.errors++;
       log.error("cluster detection failed", { ticker, error: (err as Error).message });
+      posthog().captureException(err as Error, "system");
     }
   }
 
@@ -128,5 +146,12 @@ export async function runCycle(): Promise<CycleStats> {
   }
 
   log.info("cycle complete", { ...stats });
+
+  posthog().capture({
+    distinctId: "system",
+    event: "pipeline cycle completed",
+    properties: { ...stats },
+  });
+
   return stats;
 }

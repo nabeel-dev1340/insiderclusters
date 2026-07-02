@@ -140,6 +140,22 @@ export async function getMarketCap(ticker: string): Promise<number | null> {
 }
 
 /**
+ * Latest known share price for a ticker, refreshing the cache on the same
+ * cadence as getMarketCap (one HTTP call captures both). Null when the source
+ * doesn't cover the ticker (delisted, fund, OTC).
+ */
+export async function getCurrentPrice(ticker: string): Promise<number | null> {
+  const key = ticker.toUpperCase();
+  await getMarketCap(key); // ensures a fresh cache row
+  const { rows } = await pool.query<{ price: string | null }>(
+    `SELECT price FROM market_cap_cache WHERE ticker = $1`,
+    [key]
+  );
+  const p = rows[0]?.price;
+  return p == null ? null : Number(p);
+}
+
+/**
  * Whether a ticker is within the cluster-eligible market-cap ceiling.
  * Unknown market cap (null) is treated as eligible so we don't silently drop
  * small/new tickers the data source doesn't cover — better a false include than

@@ -301,6 +301,40 @@ export async function getClusterFeed(
   };
 }
 
+export interface ClusterStats {
+  clusterCount: number;
+  tickerCount: number;
+  totalValue: number; // Σ insider dollars across all clusters
+  since: string | null; // earliest cluster window start (ISO date)
+}
+
+/**
+ * Aggregate track record for the public landing page. Includes the historical
+ * backfill, so the numbers read "since <first window>" rather than "since we
+ * launched" — that history is the credibility claim.
+ */
+export async function getClusterStats(): Promise<ClusterStats> {
+  const { rows } = await pool.query<{
+    cluster_count: number;
+    ticker_count: number;
+    total_value: string | null;
+    since: string | null;
+  }>(
+    `SELECT count(*)::int AS cluster_count,
+            count(DISTINCT ticker)::int AS ticker_count,
+            sum(total_value) AS total_value,
+            min(window_start)::text AS since
+       FROM clusters`
+  );
+  const r = rows[0]!;
+  return {
+    clusterCount: r.cluster_count,
+    tickerCount: r.ticker_count,
+    totalValue: r.total_value == null ? 0 : Number(r.total_value),
+    since: r.since,
+  };
+}
+
 /** Newest clusters for the public landing page (social proof). */
 export async function getRecentClusters(limit: number): Promise<ClusterSummary[]> {
   const { rows } = await pool.query<ClusterRow>(

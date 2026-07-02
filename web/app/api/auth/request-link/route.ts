@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createMagicToken } from "@/lib/auth/tokens";
 import { isRateLimited } from "@/lib/auth/rate-limit";
 import { sendMagicLink } from "@/lib/email";
+import { posthog } from "@/lib/posthog";
 
 // Simple, permissive email shape check. Real validity is proven by the user
 // actually receiving and clicking the link.
@@ -32,6 +33,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const link = `${appUrl}/auth/verify?token=${encodeURIComponent(token)}`;
 
   await sendMagicLink(email, link);
+
+  posthog().capture({ distinctId: email, event: "magic link requested" });
 
   // Always respond the same way regardless of whether the email maps to an
   // existing user (no account enumeration). In dev, surface the link so the

@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@insiderclusters/db": "*",
-    "fast-xml-parser": "^5.9.3"
+    "fast-xml-parser": "^5.9.3",
+    "posthog-node": "^5.39.2"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

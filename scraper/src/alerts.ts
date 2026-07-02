@@ -17,6 +17,7 @@ import { pool } from "@insiderclusters/db";
 import { config } from "./config.ts";
 import { log } from "./logger.ts";
 import { sendEmail } from "./email.ts";
+import { posthog } from "./posthog.ts";
 
 export interface DispatchStats {
   clustersDispatched: number;
@@ -225,8 +226,16 @@ async function dispatchRealtime(stats: DispatchStats): Promise<void> {
 
     for (const r of recipients) {
       const ok = await sendEmail({ to: r.email, ...email });
-      if (ok) stats.realtimeEmails++;
-      else stats.emailFailures++;
+      if (ok) {
+        stats.realtimeEmails++;
+        posthog().capture({
+          distinctId: r.email,
+          event: "realtime alert sent",
+          properties: { cluster_id: cluster.id, ticker: cluster.ticker },
+        });
+      } else {
+        stats.emailFailures++;
+      }
     }
 
     // Stamp regardless of recipient count so the undispatched set always drains
@@ -264,6 +273,11 @@ async function dispatchDigest(stats: DispatchStats): Promise<void> {
       continue; // leave last_digest_sent_at untouched so it retries next cycle
     }
     stats.digestEmails++;
+    posthog().capture({
+      distinctId: r.email,
+      event: "digest alert sent",
+      properties: { cluster_id: top.id, ticker: top.ticker },
+    });
     await pool.query(`UPDATE users SET last_digest_sent_at = now() WHERE id = $1`, [r.id]);
   }
 }

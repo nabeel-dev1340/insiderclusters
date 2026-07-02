@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { consumeToken } from "@/lib/auth/tokens";
 import { createSession, setSessionCookie } from "@/lib/auth/session";
+import { posthog } from "@/lib/posthog";
 
 // GET /auth/verify?token=xxx
 // Validates and consumes the magic-link token, creates a session, sets the
@@ -20,6 +21,16 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
   }
 
   const { token: sessionToken, expiresAt } = await createSession(consumed.email);
+
+  posthog().identify({
+    distinctId: consumed.email,
+    properties: { email: consumed.email },
+  });
+  posthog().capture({
+    distinctId: consumed.email,
+    event: "user signed in",
+  });
+
   const res = NextResponse.redirect(new URL("/dashboard", base));
   setSessionCookie(res, sessionToken, expiresAt);
   return res;

@@ -32,8 +32,8 @@ import { pathToFileURL } from "node:url";
 import { pool } from "@insiderclusters/db";
 import { config } from "./config.ts";
 import { log } from "./logger.ts";
-import { isSignal } from "./signal.ts";
-import { getMarketCap, isWithinCap } from "./marketcap.ts";
+import { isSignal, isPlausiblePrice, SUSPECT_PRICE_PER_SHARE } from "./signal.ts";
+import { getMarketCap, getCurrentPrice, isWithinCap } from "./marketcap.ts";
 import { knownAccessions, insertFiling, insertTransaction } from "./db.ts";
 import { fetchAndParseFiling } from "./sec/form4.ts";
 import type { FeedEntry } from "./sec/feed.ts";
@@ -247,7 +247,56 @@ async function runCrawl(fromIso: string, toIso: string): Promise<void> {
 
 // --- historical cluster sweep --------------------------------------------------
 
+/**
+ * Data-quality pre-pass: demote signal transactions whose price per share is a
+ * filer error (see isPlausiblePrice), then delete any cluster referencing a
+ * demoted transaction — the main sweep below re-detects whatever legitimately
+ * remains for those tickers.
+ */
+async function demoteImplausibleSignals(): Promise<void> {
+  const { rows } = await pool.query<{ id: number; ticker: string; price: string }>(
+    `SELECT t.id, f.ticker, t.price_per_share AS price
+       FROM transactions t
+       JOIN filings f ON f.id = t.filing_id
+      WHERE t.is_signal AND f.ticker IS NOT NULL AND t.price_per_share > $1
+      ORDER BY f.ticker`,
+    [SUSPECT_PRICE_PER_SHARE]
+  );
+  if (rows.length === 0) return;
+
+  const demote: number[] = [];
+  const priceByTicker = new Map<string, number | null>();
+  for (const r of rows) {
+    if (!priceByTicker.has(r.ticker)) {
+      priceByTicker.set(r.ticker, await getCurrentPrice(r.ticker));
+    }
+    if (!isPlausiblePrice(Number(r.price), priceByTicker.get(r.ticker)!)) {
+      demote.push(r.id);
+    }
+  }
+  if (demote.length === 0) return;
+
+  await pool.query(`UPDATE transactions SET is_signal = FALSE WHERE id = ANY($1)`, [
+    demote,
+  ]);
+  // Clusters must reference signal transactions only — repair the invariant.
+  const deleted = await pool.query<{ ticker: string }>(
+    `DELETE FROM clusters c
+      WHERE EXISTS (
+        SELECT 1 FROM transactions t
+         WHERE t.id = ANY(c.transaction_ids) AND NOT t.is_signal
+      )
+      RETURNING ticker`
+  );
+  log.info("implausible signals demoted", {
+    suspect: rows.length,
+    demoted: demote.length,
+    clustersDeleted: deleted.rows.map((r) => r.ticker),
+  });
+}
+
 async function runSweep(): Promise<void> {
+  await demoteImplausibleSignals();
   const { rows } = await pool.query<{
     id: number;
     ticker: string;

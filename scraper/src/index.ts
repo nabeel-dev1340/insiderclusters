@@ -8,6 +8,7 @@ import { pool } from "@insiderclusters/db";
 import { config } from "./config.ts";
 import { log } from "./logger.ts";
 import { runCycle } from "./pipeline.ts";
+import { posthog } from "./posthog.ts";
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -49,6 +50,7 @@ async function main(): Promise<void> {
     await sleep(config.pollIntervalSeconds * 1000);
   } while (!shuttingDown);
 
+  await posthog().shutdown();
   await pool.end();
   log.info("scraper stopped");
 }

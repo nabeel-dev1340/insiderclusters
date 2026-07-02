@@ -9,6 +9,7 @@
 import { pool } from "@insiderclusters/db";
 import { config } from "./config.ts";
 import { log } from "./logger.ts";
+import { posthog } from "./posthog.ts";
 
 interface QualifyingSet {
   transactionIds: number[];
@@ -147,6 +148,17 @@ export async function detectCluster(
     clusterId: id,
     insiderCount: set.insiderCount,
     totalValue: set.totalValue,
+  });
+  posthog().capture({
+    distinctId: "system",
+    event: "cluster detected",
+    properties: {
+      ticker,
+      cluster_id: id,
+      insider_count: set.insiderCount,
+      total_value: set.totalValue,
+      issuer_name: set.issuerName,
+    },
   });
   return { clusterId: id, created: true, insiderCount: set.insiderCount };
 }

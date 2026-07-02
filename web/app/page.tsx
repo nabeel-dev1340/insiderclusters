@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getRecentClusters, type ClusterSummary } from "@/lib/clusters";
+import {
+  getRecentClusters,
+  getClusterStats,
+  type ClusterSummary,
+  type ClusterStats,
+} from "@/lib/clusters";
 import { LoginForm } from "@/app/login/login-form";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { HeroVisual } from "@/components/landing/hero-visual";
@@ -32,8 +37,9 @@ export default async function Home() {
   // Degrade gracefully: if the DB is unreachable (e.g. at build time), still
   // render the page without the social-proof section rather than failing.
   let clusters: ClusterSummary[] = [];
+  let stats: ClusterStats | null = null;
   try {
-    clusters = await getRecentClusters(3);
+    [clusters, stats] = await Promise.all([getRecentClusters(3), getClusterStats()]);
   } catch {
     clusters = [];
   }
@@ -47,7 +53,7 @@ export default async function Home() {
         <Thesis />
         <HowItWorks />
         <Features />
-        {clusters.length > 0 && <LiveClusters clusters={clusters} />}
+        {clusters.length > 0 && <LiveClusters clusters={clusters} stats={stats} />}
         <PricingPreview />
         <FinalCta />
       </main>
@@ -276,7 +282,34 @@ function Features() {
 /* Live clusters (real social proof)                                          */
 /* -------------------------------------------------------------------------- */
 
-function LiveClusters({ clusters }: { clusters: ClusterSummary[] }) {
+// Only brag about the track record once it's a track record — below this the
+// plain copy reads better than a small number.
+const MIN_STATS_CLUSTERS = 25;
+
+function trackRecordLine(stats: ClusterStats): string {
+  const since = stats.since
+    ? new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+      }).format(new Date(stats.since))
+    : null;
+  const clusters = stats.clusterCount.toLocaleString("en-US");
+  const companies = stats.tickerCount.toLocaleString("en-US");
+  const dollars = formatMoneyCompact(stats.totalValue);
+  return `${clusters} clusters across ${companies} small-caps${
+    since ? ` since ${since}` : ""
+  } — ${dollars} of insider buying, every dollar traced to an SEC filing.`;
+}
+
+function LiveClusters({
+  clusters,
+  stats,
+}: {
+  clusters: ClusterSummary[];
+  stats: ClusterStats | null;
+}) {
+  const showStats = stats != null && stats.clusterCount >= MIN_STATS_CLUSTERS;
   return (
     <section className="border-y border-border bg-surface-muted/40 py-20 sm:py-24">
       <Container>
@@ -286,8 +319,9 @@ function LiveClusters({ clusters }: { clusters: ClusterSummary[] }) {
               Recently detected clusters
             </h2>
             <p className="mt-2 text-muted">
-              Live examples of multi-insider buying we surfaced from public
-              filings.
+              {showStats
+                ? trackRecordLine(stats)
+                : "Live examples of multi-insider buying we surfaced from public filings."}
             </p>
           </div>
           <Link
