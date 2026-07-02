@@ -52,6 +52,9 @@
   --animate-float: float 7s ease-in-out infinite;
   --animate-pulse-ring: pulse-ring 2.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee 64s linear infinite;
+  --animate-scan: scan 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
 }
 
 body {
@@ -75,6 +78,57 @@ body {
 /* Utility: numeric columns line up nicely */
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------------------
+   Marketing surface treatments. Reusable so decorative texture stays token-
+   driven (auto light/dark) instead of scattered arbitrary values.
+--------------------------------------------------------------------------- */
+
+/* Accent gradient headline word — a hair richer than flat `text-accent`. */
+.text-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--accent) 0%,
+    color-mix(in oklab, var(--accent) 55%, var(--foreground)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Faint blueprint grid, faded out toward the edges via a radial mask. Wrap in
+   an aria-hidden, -z-10 element so it sits behind content. */
+.bg-grid {
+  background-image: linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 54px 54px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 65% 55% at 50% 0%,
+    #000 30%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 0%, #000 30%, transparent 100%);
+}
+
+/* Dotted field variant used behind the final CTA. */
+.bg-dots {
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 80%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, #000 20%, transparent 80%);
+}
+
+/* Edge fade for horizontal marquees (ticker tape / logo rails). */
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
 }
 
 /* ---------------------------------------------------------------------------
@@ -112,5 +166,32 @@ body {
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* Vertical "radar sweep" that travels across the hero mini-chart, selling the
+   real-time monitoring idea without any JS. */
+@keyframes scan {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  35%,
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(320%);
+    opacity: 0;
+  }
+}
+
+/* Slow sheen used on the "LIVE" chip's underline. */
+@keyframes shimmer {
+  from {
+    background-position: -160% 0;
+  }
+  to {
+    background-position: 160% 0;
   }
 }
