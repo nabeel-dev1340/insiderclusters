@@ -9,6 +9,7 @@ import { Reveal } from "@/components/reveal";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
+import { ConvictionBadge } from "@/components/conviction-badge";
 import { tickerPath } from "@/lib/site";
 import {
   formatMoneyCompact,
@@ -304,11 +305,14 @@ function LiveClusters({ clusters }: { clusters: ClusterSummary[] }) {
                 href={tickerPath(c.ticker)}
                 className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <span className="font-mono text-lg font-bold">{c.ticker}</span>
-                  <Badge tone="accent">{c.insiderCount} insiders</Badge>
+                  <Badge tone="neutral">{c.insiderCount} insiders</Badge>
                 </div>
-                <p className="mt-1 truncate text-sm text-muted">{c.issuerName}</p>
+                <div className="mt-1 flex items-center gap-2">
+                  <p className="truncate text-sm text-muted">{c.issuerName}</p>
+                  {c.hasSeniorInsider && <ConvictionBadge size="xs" className="shrink-0" />}
+                </div>
                 <div className="mt-4 flex items-center justify-between text-sm">
                   <span className="font-semibold tabular-nums">
                     {formatMoneyCompact(c.totalValue)}

@@ -3,7 +3,7 @@
 Everything a fresh session needs to continue. Pairs with [PRD.md](../PRD.md)
 (product spec) and [DEPLOY.md](./DEPLOY.md) (deploy runbook).
 
-_Last updated: 2026-07-01, after Phase 5 (email alerts) + scraper feed fix._
+_Last updated: 2026-07-02 — UI/branding polish, conviction badge, NONE data-quality fix, isSignal ticker-gate, and all four competitor-insight features DONE + committed. Coolify auto-deploys on push to `main`, so shipped in TWO pushes to order the schema change ahead of the scraper: web+migration 0004 first, then scraper. See the "Session 2026-07-02" section below._
 
 ## What this is
 
@@ -80,6 +80,91 @@ docs/DEPLOY.md       Coolify deploy runbook
   chrome extracted to `web/components/site-chrome.tsx`; pricing copy in
   `web/components/pricing.tsx`; legal shell in `web/components/legal-page.tsx`.
 - ⏭️ Phases 6 (Discord), 8 (ops/backups).
+
+## Session 2026-07-02 — UI polish + competitor insights (IN PROGRESS, uncommitted)
+
+Everything below is in the **working tree, not committed and not deployed**. The
+scraper fixes here (NONE ticker, isSignal ticker-gate) require a **scraper
+redeploy** to take effect in prod; the prod data was already cleaned manually.
+
+### ✅ Done & verified this session
+1. **Logo unified across every screen.** New `web/components/logo.tsx` `LogoTile`
+   (BrandMark glyph on accent gradient) now used by both marketing chrome
+   (`site-chrome.tsx`) and the dashboard nav (`dashboard-nav.tsx`, which used to
+   render a flat "IC" text tile). One source of truth.
+2. **"High conviction" badge (competitor-inspired, 13Radar/InsiderAction).** A
+   cluster is flagged when any buyer is a C-suite/officer (not just a director /
+   10% owner), derived from `insider_role` — **no schema change**. New
+   `web/components/conviction-badge.tsx`; SQL predicate `HAS_SENIOR_INSIDER_SQL`
+   in `web/lib/clusters.ts` (`hasSeniorInsider` on `ClusterSummary` +
+   `hasSeniorInsider` on the /stocks directory via `bool_or`); matching JS
+   `isSeniorInsiderRole()` in `web/lib/format.ts` (keep the two patterns in sync).
+   Rendered on: cluster cards, cluster detail header, ticker pages, /stocks hub,
+   landing live-clusters; detail page also dots senior rows in the tx table.
+   Verified live on prod: NVCT correctly flags high-conviction.
+3. **NONE / junk-cluster data-quality fix.** Root cause: a Blackstone fund LP's
+   Form 4 put `NONE` in `<issuerTradingSymbol>`, treated as a real ticker →
+   junk cluster + junk public SEO page. Fix: `normalizeTicker()` in
+   `scraper/src/form4.parse.ts` maps placeholders (NONE/N/A/-/…) and non-symbols
+   to null; the pipeline `if (parsed.ticker)` guard drops them. Tests added.
+   **Prod cleaned manually** (via ssh+docker exec): deleted the NONE cluster,
+   nulled 17 placeholder filing tickers, dropped NONE/N-A cache rows → prod = 1
+   clean cluster (NVCT).
+4. **`isSignal` now requires a real ticker.** `scraper/src/signal.ts` gained a
+   `ticker` param; a code-P purchase with no ticker (non-traded funds/BDCs — e.g.
+   the $100M TPG Twin Brook capital subscription) is no longer counted as a
+   signal. Verified the $100M tx is arithmetically correct (not a mis-parse), it
+   just isn't an open-market small-cap buy. `pipeline.ts` passes `parsed.ticker`.
+   17/17 scraper tests pass, typecheck clean.
+
+### ✅ Competitor-insight bundles — all four DONE, verified, committed
+Source: what InsiderAction.io + 13Radar surface, filtered to what's cheap given
+our schema. All verified against the 5 local demo clusters (rendered HTML via the
+dev magic-link, free + Pro) and a prod `next build`.
+
+- **Bundle 1 — Cluster depth (web only).** `ClusterSummary` now carries
+  `totalShares`, `roleMix` (a `ROLE_MIX_SQL` aggregate bucketing distinct
+  insiders officer > director > owner, summing to `insiderCount`), plus helpers
+  `avgBuyPrice()` (VWAP), `buyFractionOfCompany()`. Surfaced on `cluster-card.tsx`
+  (avg paid, role-mix, % of company) and the detail page (those + total shares +
+  role-mix subtitle). New `format.ts` helpers: `formatSharePrice`,
+  `formatPercent`, `formatSignedPercent`, `formatRoleMix`. **Note:** role-mix
+  went on the *card* too (needed the SQL aggregate) — a slight expansion of the
+  "no new SQL" note in the original plan.
+- **Feed sorting/ranking.** `getClusterFeed` takes `FeedOptions {sort, minInsiders}`
+  (whitelisted ORDER BY; size-tier filter applied to both plan tiers and to
+  `hiddenCount`). `app/dashboard/page.tsx` has Newest/Biggest + All/3+/5+ toggles
+  that persist across pagination via a `feedUrl()` builder.
+- **Most-active insiders leaderboard.** `getMostActiveInsiders()` groups
+  `is_signal` buys by `coalesce(insider_cik, insider_name)` (total $, # buys,
+  distinct tickers, senior flag). Public **`/insiders`** route (SEO meta +
+  ItemList/Breadcrumb JSON-LD, hourly revalidate), linked from header/footer nav
+  and `sitemap.ts`.
+- **Bundle 2 — Return since cluster.** Migration **`0004`** adds
+  `market_cap_cache.price` + `.sector` (nullable, additive). `marketcap.ts` now
+  `parseOverview()`s price (last intraday `chart.data[].c`) + sector (infoTable)
+  from the same `/overview` call and upserts all three (3 new unit tests). Web
+  enriches clusters via `attachMarketData()` (one round-trip, kept out of
+  SELECT_COLS to avoid the `weekly`-subquery alias clash) + `returnSinceCluster()`
+  helper; new `return-badge.tsx` (accent up / danger down) + sector tag on card &
+  detail. `scripts/seed-demo.mjs` now seeds price/sector so this renders locally.
+  **Deploy order: web (runs migration 0004) FIRST, then scraper** (the scraper's
+  new price/sector INSERT needs the columns to exist).
+
+### State of the working tree right now
+- **Committed to `main` in two commits, pushed in order** (Coolify auto-deploys
+  on push, so the push order enforces the deploy order):
+  1. **web + migration 0004** — branding, conviction badge, and all four insight
+     bundles (`clusters.ts`, `format.ts`, pages, new components, `/insiders`,
+     `sitemap.ts`, migration `0004`, `seed-demo.mjs`, this doc). Push #1; wait
+     until prod `/insiders` returns 200 (⇒ new web live ⇒ migration applied).
+  2. **scraper** — `marketcap.ts` price/sector capture + NONE fix + isSignal gate
+     + tests. Push #2, only after #1 is live, so the scraper's price/sector INSERT
+     always finds the columns.
+  The branding/conviction and bundle changes share several web files, so they
+  landed together rather than as a separate branding commit.
+- **Verification:** web `tsc --noEmit` clean, `next build` green (20 routes incl.
+  `/insiders`), scraper **20/20** node:tests pass.
 
 ## Local dev
 

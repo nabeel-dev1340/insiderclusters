@@ -4,6 +4,7 @@ import { getTickerDirectory, type TickerDirectoryEntry } from "@/lib/clusters";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
+import { ConvictionBadge } from "@/components/conviction-badge";
 import { SITE_URL, tickerPath } from "@/lib/site";
 import { formatMarketCap, formatDate, formatNumber } from "@/lib/format";
 
@@ -138,9 +139,10 @@ export default async function StocksPage() {
                       {t.totalClusters === 1 ? "cluster" : "clusters"}
                     </Badge>
                   </div>
-                  <p className="mt-1 truncate text-sm text-muted">
-                    {t.issuerName}
-                  </p>
+                  <div className="mt-1 flex items-center gap-2">
+                    <p className="truncate text-sm text-muted">{t.issuerName}</p>
+                    {t.hasSeniorInsider && <ConvictionBadge size="xs" className="shrink-0" />}
+                  </div>
                   <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted">
                     <span>
                       {formatNumber(t.insiderCount)} insiders ·{" "}

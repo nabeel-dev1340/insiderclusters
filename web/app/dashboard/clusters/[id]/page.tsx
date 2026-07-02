@@ -2,10 +2,18 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth/session";
 import { effectivePlan } from "@/lib/plan";
-import { getClusterForUser, type ClusterTransaction } from "@/lib/clusters";
+import {
+  getClusterForUser,
+  avgBuyPrice,
+  buyFractionOfCompany,
+  returnSinceCluster,
+  type ClusterTransaction,
+} from "@/lib/clusters";
 import { Card, CardBody } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
+import { ConvictionBadge } from "@/components/conviction-badge";
+import { ReturnBadge } from "@/components/return-badge";
 import {
   formatMoney,
   formatMoneyCompact,
@@ -13,6 +21,10 @@ import {
   formatNumber,
   formatDate,
   formatDateRange,
+  formatSharePrice,
+  formatPercent,
+  formatRoleMix,
+  isSeniorInsiderRole,
 } from "@/lib/format";
 
 export default async function ClusterDetailPage({
@@ -43,13 +55,19 @@ export default async function ClusterDetailPage({
 
       <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <h1 className="font-mono text-3xl font-bold tracking-tight">
               {cluster.ticker}
             </h1>
-            <Badge tone="accent">{cluster.insiderCount} insiders buying</Badge>
+            <Badge tone="neutral">{cluster.insiderCount} insiders buying</Badge>
+            {cluster.hasSeniorInsider && <ConvictionBadge />}
+            {cluster.sector && <Badge tone="muted">{cluster.sector}</Badge>}
+            <ReturnBadge fraction={returnSinceCluster(cluster)} />
           </div>
           <p className="mt-1 text-muted">{cluster.issuerName}</p>
+          {formatRoleMix(cluster.roleMix) && (
+            <p className="mt-0.5 text-sm text-muted">{formatRoleMix(cluster.roleMix)}</p>
+          )}
         </div>
       </div>
 
@@ -59,6 +77,13 @@ export default async function ClusterDetailPage({
         <>
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
             <SummaryStat label="Total bought" value={formatMoneyCompact(cluster.totalValue)} />
+            <SummaryStat label="Avg paid" value={formatSharePrice(avgBuyPrice(cluster))} />
+            <SummaryStat label="Latest price" value={formatSharePrice(cluster.lastPrice)} />
+            <SummaryStat label="Total shares" value={formatNumber(cluster.totalShares)} />
+            <SummaryStat
+              label="% of company"
+              value={formatPercent(buyFractionOfCompany(cluster))}
+            />
             <SummaryStat label="Insiders" value={String(cluster.insiderCount)} />
             <SummaryStat label="Market cap" value={formatMarketCap(cluster.marketCap)} />
             <SummaryStat
@@ -70,6 +95,13 @@ export default async function ClusterDetailPage({
           <h2 className="mt-8 text-lg font-semibold">Transactions</h2>
           <p className="mt-1 text-sm text-muted">
             Open-market purchases that make up this cluster.
+            {cluster.hasSeniorInsider && (
+              <>
+                {" "}
+                A <span className="inline-block h-1.5 w-1.5 -translate-y-px rounded-full bg-accent align-middle" />{" "}
+                marks a C-suite / executive officer.
+              </>
+            )}
           </p>
           <TransactionsTable transactions={result.transactions} />
         </>
@@ -130,10 +162,25 @@ function TransactionsTable({ transactions }: { transactions: ClusterTransaction[
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {transactions.map((t) => (
+            {transactions.map((t) => {
+              const senior = isSeniorInsiderRole(t.insiderRole);
+              return (
               <tr key={t.id} className="bg-surface transition-colors hover:bg-surface-muted/50">
-                <td className="px-4 py-3 font-medium">{t.insiderName}</td>
-                <td className="px-4 py-3 text-muted">{t.insiderRole ?? "—"}</td>
+                <td className="px-4 py-3 font-medium">
+                  <span className="inline-flex items-center gap-1.5">
+                    {senior && (
+                      <span
+                        aria-hidden
+                        title="C-suite / executive officer"
+                        className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                      />
+                    )}
+                    {t.insiderName}
+                  </span>
+                </td>
+                <td className={senior ? "px-4 py-3 font-medium text-foreground" : "px-4 py-3 text-muted"}>
+                  {t.insiderRole ?? "—"}
+                </td>
                 <td className="px-4 py-3 tabular-nums text-muted">{formatDate(t.transactionDate)}</td>
                 <td className="px-4 py-3 text-right tabular-nums">{formatNumber(t.shares)}</td>
                 <td className="px-4 py-3 text-right tabular-nums">
@@ -153,7 +200,8 @@ function TransactionsTable({ transactions }: { transactions: ClusterTransaction[
                   </a>
                 </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       </div>

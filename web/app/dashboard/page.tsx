@@ -1,25 +1,57 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth/session";
 import { effectivePlan } from "@/lib/plan";
-import { getClusterFeed } from "@/lib/clusters";
+import { getClusterFeed, type FeedSort } from "@/lib/clusters";
 import { ClusterCard } from "@/components/cluster-card";
 import { ButtonLink } from "@/components/ui/button";
 
 const PAGE_SIZE = 12;
 const NEW_WINDOW_MS = 24 * 60 * 60 * 1000;
 
+const SORTS: { value: FeedSort; label: string }[] = [
+  { value: "newest", label: "Newest" },
+  { value: "biggest", label: "Biggest" },
+];
+
+// Size tiers, InsiderAction-style — every cluster has ≥2 insiders by definition.
+const TIERS: { value: number; label: string }[] = [
+  { value: 2, label: "All" },
+  { value: 3, label: "3+" },
+  { value: 5, label: "5+" },
+];
+
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; sort?: string; tier?: string }>;
 }) {
   const user = (await getCurrentUser())!; // guaranteed by layout
   const plan = effectivePlan(user);
-  const { page: pageParam } = await searchParams;
+  const { page: pageParam, sort: sortParam, tier: tierParam } = await searchParams;
   const page = Math.max(1, Number(pageParam) || 1);
+  const sort: FeedSort = sortParam === "biggest" ? "biggest" : "newest";
+  const minInsiders = TIERS.some((t) => t.value === Number(tierParam))
+    ? Number(tierParam)
+    : 2;
 
-  const { clusters, total, hiddenCount } = await getClusterFeed(plan, page, PAGE_SIZE);
+  const { clusters, total, hiddenCount } = await getClusterFeed(plan, page, PAGE_SIZE, {
+    sort,
+    minInsiders,
+  });
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+  // Build a feed URL preserving the current sort/tier (page changes reset to 1).
+  const feedUrl = (next: { page?: number; sort?: FeedSort; tier?: number }) => {
+    const p = new URLSearchParams();
+    const s = next.sort ?? sort;
+    const t = next.tier ?? minInsiders;
+    const pg = next.page ?? 1;
+    if (s !== "newest") p.set("sort", s);
+    if (t !== 2) p.set("tier", String(t));
+    if (pg !== 1) p.set("page", String(pg));
+    const qs = p.toString();
+    return qs ? `/dashboard?${qs}` : "/dashboard";
+  };
 
   return (
     <div>
@@ -37,6 +69,29 @@ export default async function DashboardPage({
             Upgrade to Pro
           </ButtonLink>
         )}
+      </div>
+
+      <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <Segmented label="Sort">
+          {SORTS.map((s) => (
+            <SegLink
+              key={s.value}
+              href={feedUrl({ sort: s.value })}
+              active={sort === s.value}
+              label={s.label}
+            />
+          ))}
+        </Segmented>
+        <Segmented label="Insiders">
+          {TIERS.map((t) => (
+            <SegLink
+              key={t.value}
+              href={feedUrl({ tier: t.value })}
+              active={minInsiders === t.value}
+              label={t.label}
+            />
+          ))}
+        </Segmented>
       </div>
 
       {plan === "free" && hiddenCount > 0 && (
@@ -57,9 +112,21 @@ export default async function DashboardPage({
 
       {clusters.length === 0 ? (
         <div className="mt-10 rounded-xl border border-dashed border-border p-12 text-center">
-          <p className="font-medium">No clusters yet</p>
+          <p className="font-medium">
+            {minInsiders > 2 ? "No clusters this large yet" : "No clusters yet"}
+          </p>
           <p className="mt-1 text-sm text-muted">
-            New insider cluster buys will appear here as they&apos;re detected.
+            {minInsiders > 2 ? (
+              <>
+                Try the{" "}
+                <Link href={feedUrl({ tier: 2 })} className="text-accent hover:underline">
+                  All
+                </Link>{" "}
+                filter — nothing hit {minInsiders}+ insiders.
+              </>
+            ) : (
+              <>New insider cluster buys will appear here as they&apos;re detected.</>
+            )}
           </p>
         </div>
       ) : (
@@ -76,23 +143,58 @@ export default async function DashboardPage({
 
       {totalPages > 1 && (
         <nav className="mt-8 flex items-center justify-center gap-3 text-sm">
-          <PageLink page={page - 1} disabled={page <= 1} label="← Prev" />
+          <PageLink href={feedUrl({ page: page - 1 })} disabled={page <= 1} label="← Prev" />
           <span className="text-muted tabular-nums">
             Page {page} of {totalPages}
           </span>
-          <PageLink page={page + 1} disabled={page >= totalPages} label="Next →" />
+          <PageLink href={feedUrl({ page: page + 1 })} disabled={page >= totalPages} label="Next →" />
         </nav>
       )}
     </div>
   );
 }
 
+function Segmented({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-xs uppercase tracking-wide text-muted">{label}</span>
+      <div className="inline-flex rounded-lg border border-border bg-surface p-0.5">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function SegLink({
+  href,
+  active,
+  label,
+}: {
+  href: string;
+  active: boolean;
+  label: string;
+}) {
+  return (
+    <Link
+      href={href}
+      aria-current={active ? "true" : undefined}
+      className={
+        active
+          ? "rounded-md bg-accent px-3 py-1 text-sm font-medium text-accent-foreground"
+          : "rounded-md px-3 py-1 text-sm text-muted transition-colors hover:text-foreground"
+      }
+    >
+      {label}
+    </Link>
+  );
+}
+
 function PageLink({
-  page,
+  href,
   disabled,
   label,
 }: {
-  page: number;
+  href: string;
   disabled: boolean;
   label: string;
 }) {
@@ -101,7 +203,7 @@ function PageLink({
   }
   return (
     <Link
-      href={`/dashboard?page=${page}`}
+      href={href}
       className="rounded-md border border-border px-3 py-1.5 transition-colors hover:bg-surface-muted"
     >
       {label}

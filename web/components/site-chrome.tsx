@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { BrandMark } from "@/components/brand-mark";
+import { LogoTile } from "@/components/logo";
 import { cn } from "@/lib/cn";
 
 // Shared marketing chrome for public, crawlable pages (landing, pricing,
@@ -18,9 +18,7 @@ export function Wordmark({ className }: { className?: string }) {
         className
       )}
     >
-      <span className="relative grid h-8 w-8 place-items-center rounded-xl bg-linear-to-br from-accent to-accent-hover text-white ring-1 ring-inset ring-white/20 transition-transform duration-200 group-hover:-translate-y-0.5">
-        <BrandMark className="h-4.5 w-4.5" />
-      </span>
+      <LogoTile className="transition-transform duration-200 group-hover:-translate-y-0.5" />
       <span className="text-[15px]">InsiderClusters</span>
     </Link>
   );
@@ -37,6 +35,12 @@ export function SiteHeader() {
             className="hidden rounded-lg px-3 py-1.5 text-sm text-muted transition-colors hover:text-foreground sm:block"
           >
             Stocks
+          </Link>
+          <Link
+            href="/insiders"
+            className="hidden rounded-lg px-3 py-1.5 text-sm text-muted transition-colors hover:text-foreground sm:block"
+          >
+            Insiders
           </Link>
           <Link
             href="/pricing"
@@ -74,6 +78,9 @@ export function SiteFooter() {
           <nav className="flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted">
             <Link href="/stocks" className="transition-colors hover:text-foreground">
               Stocks
+            </Link>
+            <Link href="/insiders" className="transition-colors hover:text-foreground">
+              Insiders
             </Link>
             <Link href="/pricing" className="transition-colors hover:text-foreground">
               Pricing

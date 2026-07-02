@@ -10,12 +10,19 @@ import pg from "pg";
 
 const DEMO_PREFIX = "DEMO-";
 
-/** ticker, issuer, marketCap, hours-ago detected, and the participating insiders */
+/**
+ * ticker, issuer, marketCap, hours-ago detected, and the participating insiders.
+ * `price`/`sector` seed the market_cap_cache so Bundle 2 (return-since-cluster +
+ * sector tag) has data locally; prices are chosen to show both up and down moves
+ * vs. the cluster's avg buy price.
+ */
 const CLUSTERS = [
   {
     ticker: "SOUN",
     issuer: "SoundHound AI, Inc.",
     marketCap: 1_580_000_000,
+    price: 10.2, // VWAP ~8.85 -> up
+    sector: "Technology",
     detectedHoursAgo: 10, // < 24h -> real-time (free tier locked)
     insiders: [
       { name: "Keyvan Mohajer", role: "CEO, Director", cik: "0001680048", shares: 40000, price: 8.9 },
@@ -28,6 +35,8 @@ const CLUSTERS = [
     ticker: "RGTI",
     issuer: "Rigetti Computing, Inc.",
     marketCap: 1_240_000_000,
+    price: 11.1, // VWAP ~12.35 -> down
+    sector: "Technology",
     detectedHoursAgo: 74, // ~3 days -> delayed, free tier sees it
     insiders: [
       { name: "Subodh Kulkarni", role: "CEO, Director", cik: "0001838831", shares: 55000, price: 12.4 },
@@ -39,6 +48,8 @@ const CLUSTERS = [
     ticker: "LUNR",
     issuer: "Intuitive Machines, Inc.",
     marketCap: 940_000_000,
+    price: 12.0, // VWAP ~9.53 -> up
+    sector: "Industrials",
     detectedHoursAgo: 200, // ~8 days -> a different ISO week
     insiders: [
       { name: "Stephen Altemus", role: "CEO, President", cik: "0001844452", shares: 30000, price: 9.6 },
@@ -49,6 +60,8 @@ const CLUSTERS = [
     ticker: "BBAI",
     issuer: "BigBear.ai Holdings, Inc.",
     marketCap: 720_000_000,
+    price: 3.1, // VWAP ~3.52 -> down
+    sector: "Technology",
     detectedHoursAgo: 130, // ~5 days
     insiders: [
       { name: "Mandy Long", role: "CEO", cik: "0001836981", shares: 45000, price: 3.55 },
@@ -59,6 +72,8 @@ const CLUSTERS = [
     ticker: "CIFR",
     issuer: "Cipher Mining Inc.",
     marketCap: 1_090_000_000,
+    price: 5.4, // VWAP ~4.33 -> up
+    sector: "Financials",
     detectedHoursAgo: 480, // ~20 days -> older week
     insiders: [
       { name: "Tyler Page", role: "CEO, Director", cik: "0001819989", shares: 60000, price: 4.35 },
@@ -154,6 +169,19 @@ async function main() {
           txIds,
           c.detectedHoursAgo,
         ]
+      );
+
+      // Seed the market-cap cache so return-since-cluster + sector tags render.
+      await client.query(
+        `INSERT INTO market_cap_cache (ticker, market_cap, price, sector, source, fetched_at)
+         VALUES ($1, $2, $3, $4, 'demo', now())
+         ON CONFLICT (ticker)
+         DO UPDATE SET market_cap = EXCLUDED.market_cap,
+                       price = EXCLUDED.price,
+                       sector = EXCLUDED.sector,
+                       source = EXCLUDED.source,
+                       fetched_at = now()`,
+        [c.ticker, c.marketCap, c.price, c.sector]
       );
 
       console.log(

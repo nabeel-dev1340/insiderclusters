@@ -7,6 +7,7 @@ import { getCurrentUser } from "@/lib/auth/session";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
+import { ConvictionBadge } from "@/components/conviction-badge";
 import { SITE_URL, tickerPath } from "@/lib/site";
 import {
   formatMoneyCompact,
@@ -157,9 +158,10 @@ export default async function TickerPage({
                         Detected {formatDate(c.detectedAt)}
                       </div>
                     </div>
-                    <Badge tone="accent" className="shrink-0">
-                      {c.insiderCount} insiders
-                    </Badge>
+                    <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
+                      {c.hasSeniorInsider && <ConvictionBadge size="xs" />}
+                      <Badge tone="neutral">{c.insiderCount} insiders</Badge>
+                    </div>
                   </div>
                   <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
                     <Stat label="Total bought" value={formatMoneyCompact(c.totalValue)} />
