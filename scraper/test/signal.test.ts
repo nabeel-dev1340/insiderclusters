@@ -30,6 +30,12 @@ test("threshold is inclusive and configurable", () => {
   assert.equal(isSignal({ transactionCode: "P", value: null }, 100_000, "ABC"), false);
 });
 
+test("implausibly large values are filer errors, not signals", () => {
+  // Real case (REEMF): total dollars typed into the price field -> $2.4e15 "buy".
+  assert.equal(isSignal({ transactionCode: "P", value: 2.4e15 }, MIN, "REEMF"), false);
+  assert.equal(isSignal({ transactionCode: "P", value: 9e9 }, MIN, "ABC"), true);
+});
+
 test("a qualifying purchase with no ticker is not a signal (non-traded funds/BDCs)", () => {
   // The $100M TPG/Blackstone fund-subscription case: code P, well over
   // threshold, but the issuer has no tradable symbol so it can never cluster.

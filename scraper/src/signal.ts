@@ -14,16 +14,24 @@
 
 import type { ParsedTransaction } from "./form4.parse.ts";
 
+// Plausibility ceiling: no genuine open-market insider purchase reaches $10B.
+// Values above it are filer errors (e.g. the total dollar amount typed into the
+// price-per-share field, seen in real EDGAR data at $2.4e15) and would dwarf
+// every honest cluster stat they touch.
+export const MAX_PLAUSIBLE_SIGNAL_VALUE = 10_000_000_000;
+
 export function isSignal(
   tx: Pick<ParsedTransaction, "transactionCode" | "value">,
   minSignalValue: number,
-  ticker: string | null
+  ticker: string | null,
+  maxSignalValue: number = MAX_PLAUSIBLE_SIGNAL_VALUE
 ): boolean {
   return (
     ticker != null &&
     ticker !== "" &&
     tx.transactionCode === "P" &&
     tx.value != null &&
-    tx.value >= minSignalValue
+    tx.value >= minSignalValue &&
+    tx.value <= maxSignalValue
   );
 }
