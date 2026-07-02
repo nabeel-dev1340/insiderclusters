@@ -1,6 +1,12 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseAbbreviatedNumber, isWithinCap } from "../src/marketcap.ts";
+import {
+  parseAbbreviatedNumber,
+  isWithinCap,
+  parseOverview,
+  extractLatestPrice,
+  extractSector,
+} from "../src/marketcap.ts";
 
 test("parses abbreviated market-cap strings", () => {
   assert.equal(parseAbbreviatedNumber("6.39B"), 6.39e9);
@@ -26,4 +32,40 @@ test("market-cap gate: mega-cap excluded, sub-ceiling and unknown allowed", () =
   assert.equal(isWithinCap(6.39e9), false); // above 2B ceiling
   assert.equal(isWithinCap(1.5e9), true); // sub-2B — proceeds
   assert.equal(isWithinCap(null), true); // unknown — do not silently drop
+});
+
+test("extractLatestPrice takes the last intraday close", () => {
+  assert.equal(
+    extractLatestPrice({ chart: { data: [{ c: 19.53 }, { c: 19.54 }, { c: 19.52 }] } }),
+    19.52
+  );
+  assert.equal(extractLatestPrice({ chart: { data: [] } }), null);
+  assert.equal(extractLatestPrice({}), null);
+});
+
+test("extractSector reads the Sector row from infoTable", () => {
+  const info = [
+    { t: "Industry", v: "Biotechnology" },
+    { t: "Sector", v: "Healthcare" },
+    { t: "Employees", v: "12" },
+  ];
+  assert.equal(extractSector({ infoTable: info }), "Healthcare");
+  assert.equal(extractSector({ infoTable: [{ t: "Sector", v: "n/a" }] }), null);
+  assert.equal(extractSector({}), null);
+});
+
+test("parseOverview pulls market cap, price, and sector together", () => {
+  const body = JSON.stringify({
+    status: 200,
+    data: {
+      marketCap: "517.78M",
+      chart: { data: [{ c: 19.5 }, { c: 19.61 }] },
+      infoTable: [{ t: "Sector", v: "Healthcare" }],
+    },
+  });
+  assert.deepEqual(parseOverview(body), {
+    marketCap: 517.78e6,
+    price: 19.61,
+    sector: "Healthcare",
+  });
 });

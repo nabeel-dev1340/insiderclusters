@@ -11,21 +11,30 @@ const fixture = (name: string) =>
 
 test("A-grant (code A) is never a signal", () => {
   const f = parseForm4Xml(fixture("uctt_grant_A.xml"));
-  assert.equal(isSignal(f.transactions[0]!, MIN), false);
+  assert.equal(isSignal(f.transactions[0]!, MIN, f.ticker), false);
 });
 
 test("only the large open-market purchase (P, value >= threshold) is a signal", () => {
   const f = parseForm4Xml(fixture("synthetic_multi.xml"));
   const [bigP, smallP, taxF, exerciseM] = f.transactions;
 
-  assert.equal(isSignal(bigP!, MIN), true); // P, 150000
-  assert.equal(isSignal(smallP!, MIN), false); // P but only 2000
-  assert.equal(isSignal(taxF!, MIN), false); // F disposition
-  assert.equal(isSignal(exerciseM!, MIN), false); // M exercise
+  assert.equal(isSignal(bigP!, MIN, f.ticker), true); // P, 150000
+  assert.equal(isSignal(smallP!, MIN, f.ticker), false); // P but only 2000
+  assert.equal(isSignal(taxF!, MIN, f.ticker), false); // F disposition
+  assert.equal(isSignal(exerciseM!, MIN, f.ticker), false); // M exercise
 });
 
 test("threshold is inclusive and configurable", () => {
-  assert.equal(isSignal({ transactionCode: "P", value: 100_000 }, 100_000), true);
-  assert.equal(isSignal({ transactionCode: "P", value: 99_999 }, 100_000), false);
-  assert.equal(isSignal({ transactionCode: "P", value: null }, 100_000), false);
+  assert.equal(isSignal({ transactionCode: "P", value: 100_000 }, 100_000, "ABC"), true);
+  assert.equal(isSignal({ transactionCode: "P", value: 99_999 }, 100_000, "ABC"), false);
+  assert.equal(isSignal({ transactionCode: "P", value: null }, 100_000, "ABC"), false);
+});
+
+test("a qualifying purchase with no ticker is not a signal (non-traded funds/BDCs)", () => {
+  // The $100M TPG/Blackstone fund-subscription case: code P, well over
+  // threshold, but the issuer has no tradable symbol so it can never cluster.
+  const tx = { transactionCode: "P", value: 100_000_000 };
+  assert.equal(isSignal(tx, MIN, null), false);
+  assert.equal(isSignal(tx, MIN, ""), false);
+  assert.equal(isSignal(tx, MIN, "TPGX"), true); // same tx, real ticker -> signal
 });

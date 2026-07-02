@@ -62,6 +62,27 @@ function toNumber(s: string | null): number | null {
   return Number.isFinite(n) ? n : null;
 }
 
+// Issuers without a listed symbol frequently type a placeholder into the Form 4
+// <issuerTradingSymbol> field ("NONE", "N/A", "-", etc.) rather than leaving it
+// blank. Left as-is these masquerade as real tickers and produce junk clusters
+// on non-tradable entities (e.g. private fund LPs). Normalize any such
+// placeholder — or anything that isn't a plausible ticker symbol — to null so
+// the pipeline's `if (parsed.ticker)` guard drops it before cluster detection.
+const TICKER_PLACEHOLDERS = new Set([
+  "NONE", "N/A", "NA", "N.A.", "NULL", "NIL", "NONE.", "NOSYMBOL",
+  "-", "--", "---", "—", ".", "..", "*",
+]);
+
+export function normalizeTicker(raw: string | null | undefined): string | null {
+  if (raw == null) return null;
+  const t = raw.trim().toUpperCase();
+  if (t === "" || TICKER_PLACEHOLDERS.has(t)) return null;
+  // A real symbol is uppercase alphanumerics, optionally with a "." or "-"
+  // suffix (e.g. BRK.B, ABC-U), 1–10 chars, and must contain a letter.
+  if (!/^[A-Z0-9][A-Z0-9.-]{0,9}$/.test(t) || !/[A-Z]/.test(t)) return null;
+  return t;
+}
+
 function asArray<T>(v: T | T[] | undefined | null): T[] {
   if (v == null) return [];
   return Array.isArray(v) ? v : [v];
@@ -121,13 +142,11 @@ export function parseForm4Xml(xmlOrSubmission: string): ParsedFiling {
     };
   });
 
-  const ticker = val(issuer.issuerTradingSymbol);
-
   return {
     documentType: val(od.documentType),
     issuerCik: val(issuer.issuerCik),
     issuerName: val(issuer.issuerName) ?? "Unknown",
-    ticker: ticker ? ticker.toUpperCase() : null,
+    ticker: normalizeTicker(val(issuer.issuerTradingSymbol)),
     owners,
     transactions,
   };

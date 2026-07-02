@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { parseForm4Xml } from "../src/form4.parse.ts";
+import { parseForm4Xml, normalizeTicker } from "../src/form4.parse.ts";
 
 const fixture = (name: string) =>
   readFileSync(fileURLToPath(new URL(`../fixtures/${name}`, import.meta.url)), "utf8");
@@ -39,4 +39,19 @@ test("parses multi-transaction filing and normalises ticker to uppercase", () =>
 
 test("throws on XML with no ownershipDocument", () => {
   assert.throws(() => parseForm4Xml("<foo>bar</foo>"));
+});
+
+test("normalizeTicker keeps real symbols (incl. dotted/hyphenated) as uppercase", () => {
+  assert.equal(normalizeTicker("nvct"), "NVCT");
+  assert.equal(normalizeTicker(" SOUN "), "SOUN");
+  assert.equal(normalizeTicker("BRK.B"), "BRK.B");
+  assert.equal(normalizeTicker("ABC-U"), "ABC-U");
+});
+
+test("normalizeTicker rejects placeholder / non-symbol values to null", () => {
+  // The exact case that leaked a junk cluster in prod: a fund LP whose Form 4
+  // listed "NONE" as its trading symbol.
+  for (const junk of ["NONE", "none", "N/A", "NA", "n.a.", "NULL", "-", "—", ".", "", "   ", null, undefined]) {
+    assert.equal(normalizeTicker(junk as string | null), null, `expected ${JSON.stringify(junk)} -> null`);
+  }
 });

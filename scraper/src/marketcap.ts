@@ -35,23 +35,76 @@ export function parseAbbreviatedNumber(raw: unknown): number | null {
   return suffix ? n * mult[suffix]! : n;
 }
 
-async function fetchFromSource(ticker: string): Promise<number | null> {
+/** What we extract from one /overview response. */
+export interface TickerOverview {
+  marketCap: number | null;
+  price: number | null; // latest traded price
+  sector: string | null; // e.g. "Healthcare"
+}
+
+interface OverviewData {
+  marketCap?: unknown;
+  chart?: { data?: { c?: unknown }[] };
+  infoTable?: { t?: unknown; v?: unknown }[];
+}
+
+/**
+ * Latest price = the close of the last point in the intraday `chart.data`
+ * series. Null when the chart is missing/empty (e.g. an untraded ticker).
+ */
+export function extractLatestPrice(data: OverviewData): number | null {
+  const points = data.chart?.data;
+  if (!Array.isArray(points) || points.length === 0) return null;
+  const c = points[points.length - 1]?.c;
+  if (typeof c === "number") return Number.isFinite(c) ? c : null;
+  return parseAbbreviatedNumber(c);
+}
+
+/** Sector from the overview `infoTable` (row where t === "Sector"). */
+export function extractSector(data: OverviewData): string | null {
+  const info = data.infoTable;
+  if (!Array.isArray(info)) return null;
+  const row = info.find(
+    (r) => typeof r?.t === "string" && r.t.toLowerCase() === "sector"
+  );
+  const v = row?.v;
+  if (typeof v !== "string") return null;
+  const s = v.trim();
+  if (s === "" || /^n\/?a$/i.test(s)) return null;
+  return s;
+}
+
+/** Parse a raw /overview body into the fields we persist. */
+export function parseOverview(body: string): TickerOverview {
+  const json = JSON.parse(body) as { data?: OverviewData };
+  const data = json.data ?? {};
+  return {
+    marketCap: parseAbbreviatedNumber(data.marketCap),
+    price: extractLatestPrice(data),
+    sector: extractSector(data),
+  };
+}
+
+const EMPTY_OVERVIEW: TickerOverview = { marketCap: null, price: null, sector: null };
+
+async function fetchOverview(ticker: string): Promise<TickerOverview> {
   const url = `https://stockanalysis.com/api/symbol/s/${encodeURIComponent(
     ticker
   )}/overview`;
   try {
     const body = await fetchText(url, { retries: 2 });
-    const json = JSON.parse(body) as { data?: { marketCap?: unknown } };
-    return parseAbbreviatedNumber(json.data?.marketCap);
+    return parseOverview(body);
   } catch (err) {
-    log.warn("market cap fetch failed", { ticker, error: (err as Error).message });
-    return null;
+    log.warn("overview fetch failed", { ticker, error: (err as Error).message });
+    return EMPTY_OVERVIEW;
   }
 }
 
 /**
- * Return the market cap for a ticker, using the DB cache when fresh.
- * Returns null when unknown (caller decides how to treat unknowns).
+ * Return the market cap for a ticker, using the DB cache when fresh. Each
+ * refresh also captures the latest price and sector (same HTTP call) so the web
+ * layer can show return-since-cluster and a sector tag. Returns null market cap
+ * when unknown (caller decides how to treat unknowns).
  */
 export async function getMarketCap(ticker: string): Promise<number | null> {
   const key = ticker.toUpperCase();
@@ -69,19 +122,21 @@ export async function getMarketCap(ticker: string): Promise<number | null> {
     }
   }
 
-  const marketCap = await fetchFromSource(key);
+  const overview = await fetchOverview(key);
 
   await pool.query(
-    `INSERT INTO market_cap_cache (ticker, market_cap, source, fetched_at)
-     VALUES ($1, $2, $3, now())
+    `INSERT INTO market_cap_cache (ticker, market_cap, price, sector, source, fetched_at)
+     VALUES ($1, $2, $3, $4, $5, now())
      ON CONFLICT (ticker)
      DO UPDATE SET market_cap = EXCLUDED.market_cap,
+                   price = EXCLUDED.price,
+                   sector = EXCLUDED.sector,
                    source = EXCLUDED.source,
                    fetched_at = now()`,
-    [key, marketCap, SOURCE]
+    [key, overview.marketCap, overview.price, overview.sector, SOURCE]
   );
 
-  return marketCap;
+  return overview.marketCap;
 }
 
 /**

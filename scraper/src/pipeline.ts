@@ -47,7 +47,7 @@ async function processFiling(
 
   for (const tx of parsed.transactions) {
     if (!tx.transactionDate) continue; // malformed row
-    const signal = isSignal(tx, config.minSignalValue);
+    const signal = isSignal(tx, config.minSignalValue, parsed.ticker);
     await insertTransaction(filingId, owner, tx, signal);
     stats.transactions++;
     if (signal) {
