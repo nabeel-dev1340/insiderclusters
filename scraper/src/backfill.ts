@@ -199,11 +199,24 @@ async function runBulk(quarters: string[]): Promise<void> {
 
 async function runCrawl(fromIso: string, toIso: string): Promise<void> {
   const days = dateRange(fromIso, toIso);
+  // Missing daily indexes are normal for weekends/holidays (max ~4 in a row
+  // around a holiday weekend); many more in a row means SEC is refusing us and
+  // silently skipping would fake an empty market.
+  let consecutiveMisses = 0;
   for (const day of days) {
     const stats: IngestStats = { filings: 0, transactions: 0, skippedKnown: 0 };
     let errors = 0;
 
     const entries = await fetchDayFilings(day);
+    if (entries == null) {
+      consecutiveMisses++;
+      if (consecutiveMisses > 5) {
+        throw new Error(`no daily index for ${consecutiveMisses} days straight (through ${day}) — blocked by SEC?`);
+      }
+      log.info("no daily index (weekend/holiday)", { day });
+      continue;
+    }
+    consecutiveMisses = 0;
     const known = await knownAccessions(entries.map((e) => e.accessionNumber));
     const fresh = entries.filter((e) => !known.has(e.accessionNumber));
 

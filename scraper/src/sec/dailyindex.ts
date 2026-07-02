@@ -42,13 +42,21 @@ export function parseFormIndex(body: string, filedAt: Date): FeedEntry[] {
   return entries;
 }
 
-/** Form 4 entries filed on `isoDate` (empty on weekends/holidays). */
-export async function fetchDayFilings(isoDate: string): Promise<FeedEntry[]> {
+/**
+ * Form 4 entries filed on `isoDate`, or null when no index exists for that day
+ * (weekend/holiday). EDGAR answers 403 — not 404 — for nonexistent daily-index
+ * files (verified live: Sat 2026-04-04 → 403, adjacent weekdays → 200), so
+ * both count as "no index". Callers should treat a long run of misses as a
+ * real block rather than a holiday.
+ */
+export async function fetchDayFilings(isoDate: string): Promise<FeedEntry[] | null> {
   let body: string;
   try {
     body = await fetchText(dailyIndexUrl(isoDate));
   } catch (err) {
-    if (err instanceof HttpError && err.status === 404) return [];
+    if (err instanceof HttpError && (err.status === 404 || err.status === 403)) {
+      return null;
+    }
     throw err;
   }
   return parseFormIndex(body, new Date(`${isoDate}T00:00:00Z`));
