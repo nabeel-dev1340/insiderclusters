@@ -83,6 +83,19 @@ export function normalizeTicker(raw: string | null | undefined): string | null {
   return t;
 }
 
+// Form 4 XML zero-pads CIKs to 10 digits ("0001234567") while the DERA bulk
+// datasets ship them unpadded ("1234567"). CIK is the identity key for
+// distinct-insider counting and the public insider pages, so both sources must
+// produce the same value. Canonical form: unpadded digit string (matches
+// EDGAR person URLs). Migration 0005 backfills rows written before this fix.
+export function normalizeCik(raw: string | null | undefined): string | null {
+  if (raw == null) return null;
+  const t = raw.trim();
+  if (!/^\d+$/.test(t)) return null;
+  const digits = t.replace(/^0+/, "");
+  return digits === "" ? null : digits;
+}
+
 function asArray<T>(v: T | T[] | undefined | null): T[] {
   if (v == null) return [];
   return Array.isArray(v) ? v : [v];
@@ -116,7 +129,7 @@ export function parseForm4Xml(xmlOrSubmission: string): ParsedFiling {
     const idNode = (o.reportingOwnerId ?? {}) as Record<string, unknown>;
     const relNode = o.reportingOwnerRelationship as Record<string, unknown> | undefined;
     return {
-      cik: val(idNode.rptOwnerCik),
+      cik: normalizeCik(val(idNode.rptOwnerCik)),
       name: val(idNode.rptOwnerName) ?? "Unknown",
       role: deriveRole(relNode),
     };

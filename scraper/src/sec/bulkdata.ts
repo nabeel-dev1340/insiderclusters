@@ -8,7 +8,7 @@
 // pipeline — signal filter, DB inserts, role-based conviction SQL in the web
 // layer — treats backfilled rows identically to live ones.
 
-import { normalizeTicker, type ParsedOwner, type ParsedTransaction } from "../form4.parse.ts";
+import { normalizeCik, normalizeTicker, type ParsedOwner, type ParsedTransaction } from "../form4.parse.ts";
 
 export interface BulkFiling {
   accessionNumber: string;
@@ -96,7 +96,7 @@ export function buildBulkFilings(tsvs: BulkTsvs): BulkFiling[] {
     const acc = r.ACCESSION_NUMBER!;
     if (ownerByAccession.has(acc)) continue;
     ownerByAccession.set(acc, {
-      cik: r.RPTOWNERCIK?.trim() || null,
+      cik: normalizeCik(r.RPTOWNERCIK),
       name: r.RPTOWNERNAME?.trim() || "Unknown",
       role: roleFromRelationship(
         r.RPTOWNER_RELATIONSHIP ?? "",

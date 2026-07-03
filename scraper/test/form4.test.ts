@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { parseForm4Xml, normalizeTicker } from "../src/form4.parse.ts";
+import { parseForm4Xml, normalizeTicker, normalizeCik } from "../src/form4.parse.ts";
 
 const fixture = (name: string) =>
   readFileSync(fileURLToPath(new URL(`../fixtures/${name}`, import.meta.url)), "utf8");
@@ -46,6 +46,22 @@ test("normalizeTicker keeps real symbols (incl. dotted/hyphenated) as uppercase"
   assert.equal(normalizeTicker(" SOUN "), "SOUN");
   assert.equal(normalizeTicker("BRK.B"), "BRK.B");
   assert.equal(normalizeTicker("ABC-U"), "ABC-U");
+});
+
+test("normalizeCik canonicalizes padded XML CIKs to the unpadded DERA form", () => {
+  // Form 4 XML zero-pads; DERA bulk data doesn't. Both must map to one key or
+  // the same insider splits into two identities across sources.
+  assert.equal(normalizeCik("0001234567"), "1234567");
+  assert.equal(normalizeCik("1234567"), "1234567");
+  assert.equal(normalizeCik(" 0001275014 "), "1275014");
+  for (const junk of ["", "   ", "0", "000", "12A34", null, undefined]) {
+    assert.equal(normalizeCik(junk as string | null), null, `expected ${JSON.stringify(junk)} -> null`);
+  }
+});
+
+test("parsed owner CIK comes out unpadded", () => {
+  const f = parseForm4Xml(fixture("uctt_grant_A.xml"));
+  assert.match(f.owners[0]!.cik ?? "", /^[1-9]\d*$/);
 });
 
 test("normalizeTicker rejects placeholder / non-symbol values to null", () => {
