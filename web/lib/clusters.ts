@@ -374,6 +374,12 @@ export interface TickerPage {
   insiderCount: number; // distinct insiders across all qualifying buys
   lastActivityAt: Date; // latest cluster detection or signal filing
   buys: TickerBuy[]; // every qualifying open-market buy, newest first
+  /**
+   * Below this bar (no cluster, single buy) the page renders but is noindexed
+   * and left out of the sitemap — same thin-content control as insider
+   * profiles. Concentrates crawl budget on pages with real substance.
+   */
+  indexable: boolean;
 }
 
 /**
@@ -477,6 +483,7 @@ export async function getTickerPage(
     insiderCount: insiderKeys.size,
     lastActivityAt,
     buys,
+    indexable: rows.length > 0 || buys.length >= 2,
   };
 }
 
@@ -650,9 +657,10 @@ export async function getMostActiveInsiders(limit: number): Promise<InsiderLeade
 }
 
 /**
- * Every ticker with a page (any qualifying open-market buy), with its latest
- * activity, for the sitemap. Cluster detections and new filings both bump
- * lastModified.
+ * Every *indexable* ticker page (has a cluster or ≥2 qualifying buys), with
+ * its latest activity, for the sitemap. Single-buy pages exist but are
+ * noindexed, so listing them would just feed "discovered — not indexed".
+ * Cluster detections and new filings both bump lastModified.
  */
 export async function getSitemapTickers(): Promise<
   { ticker: string; lastModified: Date }[]
@@ -664,6 +672,7 @@ export async function getSitemapTickers(): Promise<
        LEFT JOIN clusters c ON c.ticker = f.ticker
       WHERE t.is_signal = TRUE AND f.ticker IS NOT NULL AND f.ticker <> ''
       GROUP BY f.ticker
+     HAVING count(DISTINCT t.id) >= 2 OR bool_or(c.id IS NOT NULL)
       ORDER BY f.ticker`
   );
   return rows.map((r) => ({ ticker: r.ticker, lastModified: r.last_modified }));

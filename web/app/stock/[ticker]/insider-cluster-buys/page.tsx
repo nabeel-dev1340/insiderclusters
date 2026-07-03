@@ -2,7 +2,12 @@ import { cache } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getTickerPage, PUBLIC_TICKER_CLUSTER_LIMIT } from "@/lib/clusters";
+import {
+  getTickerPage,
+  getTickerDirectory,
+  PUBLIC_TICKER_CLUSTER_LIMIT,
+  type TickerDirectoryEntry,
+} from "@/lib/clusters";
 import { getCurrentUser } from "@/lib/auth/session";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
@@ -54,6 +59,9 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical },
+    // Single-buy, cluster-less pages stay useful to visitors and pass link
+    // equity (follow) but don't compete for crawl budget.
+    robots: data.indexable ? undefined : { index: false, follow: true },
     openGraph: {
       title,
       description,
@@ -87,6 +95,19 @@ export default async function TickerPage({
 
   const totalBought = data.buys.reduce((s, b) => s + (b.value ?? 0), 0);
   const hasClusters = data.totalClusters > 0;
+
+  // Same-sector cluster stocks — cross-links that keep crawlers (and readers)
+  // moving between ticker pages instead of dead-ending here.
+  let related: TickerDirectoryEntry[] = [];
+  if (data.sector) {
+    try {
+      related = (await getTickerDirectory())
+        .filter((t) => t.sector === data.sector && t.ticker !== data.ticker)
+        .slice(0, 6);
+    } catch {
+      related = [];
+    }
+  }
 
   const jsonLd = [
     {
@@ -337,6 +358,42 @@ export default async function TickerPage({
                 to see the full history.
               </div>
             )}
+          </section>
+        )}
+
+        {related.length > 0 && (
+          <section className="mt-12">
+            <h2 className="text-lg font-semibold">
+              More {data.sector} stocks with insider cluster buys
+            </h2>
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+              {related.map((t) => (
+                <li key={t.ticker}>
+                  <Link
+                    href={tickerPath(t.ticker)}
+                    className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4 text-sm shadow-sm transition-all hover:border-accent/40 hover:shadow-md"
+                  >
+                    <span className="min-w-0">
+                      <span className="font-mono font-bold">{t.ticker}</span>
+                      <span className="mt-0.5 block truncate text-muted">
+                        {t.issuerName}
+                      </span>
+                    </span>
+                    <Badge tone="neutral" className="shrink-0">
+                      {t.totalClusters} {t.totalClusters === 1 ? "cluster" : "clusters"}
+                    </Badge>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-3 text-sm text-muted">
+              <Link
+                href={sectorPath(data.sector!)}
+                className="text-accent hover:underline"
+              >
+                All insider buying in {data.sector} →
+              </Link>
+            </p>
           </section>
         )}
 
