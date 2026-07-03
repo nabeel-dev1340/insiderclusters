@@ -45,6 +45,9 @@ const FOOTER_COLUMNS: {
     links: [
       { label: "Stocks", href: "/stocks" },
       { label: "Insiders", href: "/insiders" },
+      { label: "Sectors", href: "/sectors" },
+      { label: "Monthly archive", href: "/insider-buying" },
+      { label: "Learn", href: "/learn" },
       { label: "Pricing", href: "/pricing" },
     ],
   },

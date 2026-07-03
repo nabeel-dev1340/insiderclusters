@@ -78,7 +78,7 @@ export function buyFractionOfCompany(
 // the same rows on the detail page). Covers spelled-out and abbreviated C-suite
 // titles; the \m…\M word boundaries stop short tokens like "vp"/"cao" matching
 // inside unrelated words.
-const SENIOR_ROLE_PATTERN = `(chief|officer|president|principal|vice[ -]?president|\\m(ceo|cfo|coo|cao|cio|cto|cmo|cro|caio|vp|svp|evp)\\M)`;
+export const SENIOR_ROLE_PATTERN = `(chief|officer|president|principal|vice[ -]?president|\\m(ceo|cfo|coo|cao|cio|cto|cmo|cro|caio|vp|svp|evp)\\M)`;
 
 const HAS_SENIOR_INSIDER_SQL = `EXISTS (
   SELECT 1 FROM transactions st
@@ -122,6 +122,7 @@ function toRoleMix(raw: Record<string, number> | null): RoleMix {
 
 export interface ClusterTransaction {
   id: number;
+  insiderCik: string | null; // links to the public insider profile page
   insiderName: string;
   insiderRole: string | null;
   transactionCode: string;
@@ -347,20 +348,41 @@ export async function getRecentClusters(limit: number): Promise<ClusterSummary[]
 /** Non-gated visitors on the public ticker pages see only the most recent few. */
 export const PUBLIC_TICKER_CLUSTER_LIMIT = 3;
 
+/** One qualifying open-market buy on a ticker page's "all notable buys" list. */
+export interface TickerBuy {
+  id: number;
+  insiderCik: string | null;
+  insiderName: string;
+  insiderRole: string | null;
+  transactionDate: string;
+  shares: number | null;
+  pricePerShare: number | null;
+  value: number | null;
+  filingUrl: string;
+  /** True when this buy is part of a detected cluster. */
+  inCluster: boolean;
+}
+
 export interface TickerPage {
   ticker: string;
   issuerName: string;
   marketCap: number | null; // latest known cap for the ticker
+  sector: string | null;
+  lastPrice: number | null;
   clusters: ClusterSummary[]; // newest first, already sliced for the viewer
   totalClusters: number; // across all history (for the "hidden" prompt)
-  insiderCount: number; // distinct insiders across all clusters
-  lastDetectedAt: Date;
+  insiderCount: number; // distinct insiders across all qualifying buys
+  lastActivityAt: Date; // latest cluster detection or signal filing
+  buys: TickerBuy[]; // every qualifying open-market buy, newest first
 }
 
 /**
- * Public per-ticker cluster history (Feature 7.1). Non-gated: anonymous
- * visitors get the newest `limit` clusters, logged-in visitors get all of them.
- * Returns null when the ticker has never appeared in a cluster.
+ * Public per-ticker insider-buying history (Feature 7.1, broadened). The page
+ * exists for any ticker with at least one qualifying open-market buy — not
+ * just cluster tickers — because "[TICKER] insider buying" is the query people
+ * actually search; clusters are the headline section when present.
+ * Non-gated: anonymous visitors get the newest `limit` clusters, logged-in
+ * visitors get all of them. Returns null when the ticker has no signal buys.
  */
 export async function getTickerPage(
   ticker: string,
@@ -371,29 +393,90 @@ export async function getTickerPage(
     `SELECT ${SELECT_COLS} FROM clusters WHERE ticker = $1 ORDER BY detected_at DESC`,
     [normalized]
   );
-  if (rows.length === 0) return null;
+
+  // Every qualifying open-market buy for the ticker, cluster or not.
+  const { rows: buyRows } = await pool.query<{
+    id: number;
+    insider_cik: string | null;
+    insider_name: string;
+    insider_role: string | null;
+    transaction_date: string;
+    shares: string | null;
+    price_per_share: string | null;
+    value: string | null;
+    raw_xml_url: string;
+    filed_at: Date;
+    issuer_name: string;
+    in_cluster: boolean;
+  }>(
+    `SELECT t.id, t.insider_cik, t.insider_name, t.insider_role,
+            t.transaction_date::text, t.shares, t.price_per_share, t.value,
+            f.raw_xml_url, f.filed_at, f.issuer_name,
+            EXISTS (SELECT 1 FROM clusters c WHERE t.id = ANY(c.transaction_ids)) AS in_cluster
+       FROM transactions t
+       JOIN filings f ON f.id = t.filing_id
+      WHERE f.ticker = $1 AND t.is_signal = TRUE
+      ORDER BY t.transaction_date DESC, t.value DESC NULLS LAST`,
+    [normalized]
+  );
+
+  if (rows.length === 0 && buyRows.length === 0) return null;
 
   const all = await attachMarketData(rows.map(mapCluster));
   const clusters = limit == null ? all : all.slice(0, limit);
 
-  // Distinct insiders across the ticker's clusters (union of transaction sets).
-  const { rows: insiderRows } = await pool.query<{ c: number }>(
-    `SELECT count(DISTINCT coalesce(t.insider_cik, t.insider_name))::int AS c
-       FROM clusters c
-       JOIN transactions t ON t.id = ANY(c.transaction_ids)
-      WHERE c.ticker = $1`,
-    [normalized]
-  );
+  const buys: TickerBuy[] = buyRows.map((b) => ({
+    id: b.id,
+    insiderCik: b.insider_cik,
+    insiderName: b.insider_name,
+    insiderRole: b.insider_role,
+    transactionDate: b.transaction_date,
+    shares: b.shares == null ? null : Number(b.shares),
+    pricePerShare: b.price_per_share == null ? null : Number(b.price_per_share),
+    value: b.value == null ? null : Number(b.value),
+    filingUrl: filingIndexUrl(b.raw_xml_url),
+    inCluster: b.in_cluster,
+  }));
 
-  const latest = all[0]!;
+  const insiderKeys = new Set(buyRows.map((b) => b.insider_cik ?? b.insider_name));
+
+  // Market data for cluster-less tickers isn't attached via clusters — fetch it.
+  let marketCap = all[0]?.marketCap ?? null;
+  let sector = all[0]?.sector ?? null;
+  let lastPrice = all[0]?.lastPrice ?? null;
+  if (all.length === 0) {
+    const { rows: capRows } = await pool.query<{
+      market_cap: string | null;
+      price: string | null;
+      sector: string | null;
+    }>(`SELECT market_cap, price, sector FROM market_cap_cache WHERE ticker = $1`, [
+      normalized,
+    ]);
+    const cap = capRows[0];
+    marketCap = cap?.market_cap == null ? null : Number(cap.market_cap);
+    sector = cap?.sector ?? null;
+    lastPrice = cap?.price == null ? null : Number(cap.price);
+  }
+
+  const latestFiledAt = buyRows[0]
+    ? buyRows.reduce((m, b) => (b.filed_at > m ? b.filed_at : m), buyRows[0].filed_at)
+    : null;
+  const lastActivityAt =
+    all[0] && (!latestFiledAt || all[0].detectedAt > latestFiledAt)
+      ? all[0].detectedAt
+      : latestFiledAt ?? new Date();
+
   return {
     ticker: normalized,
-    issuerName: latest.issuerName,
-    marketCap: latest.marketCap,
+    issuerName: all[0]?.issuerName ?? buyRows[0]?.issuer_name ?? normalized,
+    marketCap,
+    sector,
+    lastPrice,
     clusters,
     totalClusters: all.length,
-    insiderCount: insiderRows[0]?.c ?? 0,
-    lastDetectedAt: latest.detectedAt,
+    insiderCount: insiderKeys.size,
+    lastActivityAt,
+    buys,
   };
 }
 
@@ -401,6 +484,7 @@ export interface TickerDirectoryEntry {
   ticker: string;
   issuerName: string;
   marketCap: number | null;
+  sector: string | null; // from the market-cap cache; powers the sector hubs
   totalClusters: number;
   insiderCount: number; // distinct insiders across the ticker's clusters
   lastDetectedAt: Date;
@@ -418,29 +502,36 @@ export async function getTickerDirectory(): Promise<TickerDirectoryEntry[]> {
     ticker: string;
     issuer_name: string;
     market_cap: string | null;
+    sector: string | null;
     total_clusters: number;
     insider_count: number;
     last_detected_at: Date;
     has_senior_insider: boolean;
   }>(
     `SELECT
-       c.ticker,
-       (array_agg(c.issuer_name ORDER BY c.detected_at DESC))[1] AS issuer_name,
-       (array_agg(c.market_cap  ORDER BY c.detected_at DESC))[1] AS market_cap,
-       count(DISTINCT c.id)::int AS total_clusters,
-       count(DISTINCT coalesce(t.insider_cik, t.insider_name))::int AS insider_count,
-       max(c.detected_at) AS last_detected_at,
-       bool_or(t.insider_role ~* '${SENIOR_ROLE_PATTERN}') AS has_senior_insider
-     FROM clusters c
-     JOIN transactions t ON t.id = ANY(c.transaction_ids)
-     WHERE c.ticker IS NOT NULL AND c.ticker <> ''
-     GROUP BY c.ticker
-     ORDER BY max(c.detected_at) DESC`
+       agg.*, m.sector
+     FROM (
+       SELECT
+         c.ticker,
+         (array_agg(c.issuer_name ORDER BY c.detected_at DESC))[1] AS issuer_name,
+         (array_agg(c.market_cap  ORDER BY c.detected_at DESC))[1] AS market_cap,
+         count(DISTINCT c.id)::int AS total_clusters,
+         count(DISTINCT coalesce(t.insider_cik, t.insider_name))::int AS insider_count,
+         max(c.detected_at) AS last_detected_at,
+         bool_or(t.insider_role ~* '${SENIOR_ROLE_PATTERN}') AS has_senior_insider
+       FROM clusters c
+       JOIN transactions t ON t.id = ANY(c.transaction_ids)
+       WHERE c.ticker IS NOT NULL AND c.ticker <> ''
+       GROUP BY c.ticker
+     ) agg
+     LEFT JOIN market_cap_cache m ON m.ticker = agg.ticker
+     ORDER BY agg.last_detected_at DESC`
   );
   return rows.map((r) => ({
     ticker: r.ticker,
     issuerName: r.issuer_name,
     marketCap: r.market_cap == null ? null : Number(r.market_cap),
+    sector: r.sector,
     totalClusters: r.total_clusters,
     insiderCount: r.insider_count,
     lastDetectedAt: r.last_detected_at,
@@ -448,8 +539,54 @@ export async function getTickerDirectory(): Promise<TickerDirectoryEntry[]> {
   }));
 }
 
+export interface SignalOnlyTicker {
+  ticker: string;
+  issuerName: string;
+  buyCount: number;
+  totalValue: number;
+  lastBuyDate: string;
+}
+
+/**
+ * Tickers with qualifying open-market buys but no detected cluster (yet).
+ * Rendered as a compact secondary section on /stocks so the broadened ticker
+ * pages (which now exist for these too) are reachable via crawlable links,
+ * not only via the sitemap.
+ */
+export async function getSignalOnlyTickers(): Promise<SignalOnlyTicker[]> {
+  const { rows } = await pool.query<{
+    ticker: string;
+    issuer_name: string;
+    buy_count: number;
+    total_value: string | null;
+    last_buy_date: string;
+  }>(
+    `SELECT
+       f.ticker,
+       (array_agg(f.issuer_name ORDER BY f.filed_at DESC))[1] AS issuer_name,
+       count(*)::int AS buy_count,
+       sum(t.value) AS total_value,
+       max(t.transaction_date)::text AS last_buy_date
+     FROM transactions t
+     JOIN filings f ON f.id = t.filing_id
+     WHERE t.is_signal = TRUE
+       AND f.ticker IS NOT NULL AND f.ticker <> ''
+       AND NOT EXISTS (SELECT 1 FROM clusters c WHERE c.ticker = f.ticker)
+     GROUP BY f.ticker
+     ORDER BY max(t.transaction_date) DESC`
+  );
+  return rows.map((r) => ({
+    ticker: r.ticker,
+    issuerName: r.issuer_name,
+    buyCount: r.buy_count,
+    totalValue: r.total_value == null ? 0 : Number(r.total_value),
+    lastBuyDate: r.last_buy_date,
+  }));
+}
+
 export interface InsiderLeader {
   key: string; // dedupe key (CIK when known, else name)
+  cik: string | null; // set when the key is a CIK — enables the profile-page link
   name: string;
   role: string | null; // most recent role text
   isSenior: boolean; // C-suite / officer (drives the conviction marker)
@@ -469,6 +606,7 @@ export interface InsiderLeader {
 export async function getMostActiveInsiders(limit: number): Promise<InsiderLeader[]> {
   const { rows } = await pool.query<{
     key: string;
+    cik: string | null;
     name: string;
     role: string | null;
     is_senior: boolean;
@@ -480,6 +618,7 @@ export async function getMostActiveInsiders(limit: number): Promise<InsiderLeade
   }>(
     `SELECT
        coalesce(t.insider_cik, t.insider_name) AS key,
+       max(t.insider_cik) AS cik,
        (array_agg(t.insider_name ORDER BY f.filed_at DESC))[1] AS name,
        (array_agg(t.insider_role ORDER BY f.filed_at DESC))[1] AS role,
        bool_or(t.insider_role ~* '${SENIOR_ROLE_PATTERN}') AS is_senior,
@@ -498,6 +637,7 @@ export async function getMostActiveInsiders(limit: number): Promise<InsiderLeade
   );
   return rows.map((r) => ({
     key: r.key,
+    cik: r.cik,
     name: r.name,
     role: r.role,
     isSenior: r.is_senior ?? false,
@@ -509,18 +649,42 @@ export async function getMostActiveInsiders(limit: number): Promise<InsiderLeade
   }));
 }
 
-/** Every ticker that has appeared in a cluster, with its latest activity (for the sitemap). */
+/**
+ * Every ticker with a page (any qualifying open-market buy), with its latest
+ * activity, for the sitemap. Cluster detections and new filings both bump
+ * lastModified.
+ */
 export async function getSitemapTickers(): Promise<
   { ticker: string; lastModified: Date }[]
 > {
   const { rows } = await pool.query<{ ticker: string; last_modified: Date }>(
-    `SELECT ticker, max(detected_at) AS last_modified
-       FROM clusters
-      WHERE ticker IS NOT NULL AND ticker <> ''
-      GROUP BY ticker
-      ORDER BY ticker`
+    `SELECT f.ticker, greatest(max(f.filed_at), max(c.detected_at)) AS last_modified
+       FROM transactions t
+       JOIN filings f ON f.id = t.filing_id
+       LEFT JOIN clusters c ON c.ticker = f.ticker
+      WHERE t.is_signal = TRUE AND f.ticker IS NOT NULL AND f.ticker <> ''
+      GROUP BY f.ticker
+      ORDER BY f.ticker`
   );
   return rows.map((r) => ({ ticker: r.ticker, lastModified: r.last_modified }));
+}
+
+/**
+ * Clusters whose buying window ended inside [start, endExclusive), biggest
+ * first — powers the monthly archive pages. Window end (not detected_at) is
+ * the semantic "when the buying happened" date.
+ */
+export async function getClustersInRange(
+  start: string,
+  endExclusive: string
+): Promise<ClusterSummary[]> {
+  const { rows } = await pool.query<ClusterRow>(
+    `SELECT ${SELECT_COLS} FROM clusters
+      WHERE window_end >= $1 AND window_end < $2
+      ORDER BY total_value DESC`,
+    [start, endExclusive]
+  );
+  return attachMarketData(rows.map(mapCluster));
 }
 
 export type ClusterAccess =
@@ -529,7 +693,7 @@ export type ClusterAccess =
   | { status: "ok"; cluster: ClusterSummary; transactions: ClusterTransaction[] };
 
 /** Derive the human-facing EDGAR filing index URL from the stored submission URL. */
-function filingIndexUrl(rawUrl: string): string {
+export function filingIndexUrl(rawUrl: string): string {
   return rawUrl.replace(/\.txt$/i, "-index.htm");
 }
 
@@ -557,6 +721,7 @@ export async function getClusterForUser(
 
   const { rows: txRows } = await pool.query<{
     id: number;
+    insider_cik: string | null;
     insider_name: string;
     insider_role: string | null;
     transaction_code: string;
@@ -567,7 +732,7 @@ export async function getClusterForUser(
     accession_number: string;
     raw_xml_url: string;
   }>(
-    `SELECT t.id, t.insider_name, t.insider_role, t.transaction_code,
+    `SELECT t.id, t.insider_cik, t.insider_name, t.insider_role, t.transaction_code,
             t.transaction_date::text, t.shares, t.price_per_share, t.value,
             f.accession_number, f.raw_xml_url
      FROM transactions t
@@ -579,6 +744,7 @@ export async function getClusterForUser(
 
   const transactions: ClusterTransaction[] = txRows.map((t) => ({
     id: t.id,
+    insiderCik: t.insider_cik,
     insiderName: t.insider_name,
     insiderRole: t.insider_role,
     transactionCode: t.transaction_code,

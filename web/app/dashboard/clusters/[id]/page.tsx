@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth/session";
+import { insiderPath } from "@/lib/site";
 import { effectivePlan } from "@/lib/plan";
 import { posthog } from "@/lib/posthog";
 import {
@@ -187,7 +188,16 @@ function TransactionsTable({ transactions }: { transactions: ClusterTransaction[
                         className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
                       />
                     )}
-                    {t.insiderName}
+                    {t.insiderCik ? (
+                      <Link
+                        href={insiderPath(t.insiderCik, t.insiderName)}
+                        className="hover:text-accent hover:underline"
+                      >
+                        {t.insiderName}
+                      </Link>
+                    ) : (
+                      t.insiderName
+                    )}
                   </span>
                 </td>
                 <td className={senior ? "px-4 py-3 font-medium text-foreground" : "px-4 py-3 text-muted"}>

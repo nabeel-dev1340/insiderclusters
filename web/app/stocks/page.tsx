@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getTickerDirectory, type TickerDirectoryEntry } from "@/lib/clusters";
+import {
+  getTickerDirectory,
+  getSignalOnlyTickers,
+  type TickerDirectoryEntry,
+  type SignalOnlyTicker,
+} from "@/lib/clusters";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { ConvictionBadge } from "@/components/conviction-badge";
 import { SITE_URL, tickerPath } from "@/lib/site";
-import { formatMarketCap, formatDate, formatNumber } from "@/lib/format";
+import { formatMarketCap, formatDate, formatMoneyCompact, formatNumber } from "@/lib/format";
 
 const TITLE = "Stocks with insider cluster buys";
 const DESCRIPTION =
@@ -31,10 +36,15 @@ export const revalidate = 3600;
 export default async function StocksPage() {
   // Degrade gracefully if the DB is unreachable at build time.
   let tickers: TickerDirectoryEntry[] = [];
+  let signalOnly: SignalOnlyTicker[] = [];
   try {
-    tickers = await getTickerDirectory();
+    [tickers, signalOnly] = await Promise.all([
+      getTickerDirectory(),
+      getSignalOnlyTickers(),
+    ]);
   } catch {
     tickers = [];
+    signalOnly = [];
   }
 
   const totalClusters = tickers.reduce((s, t) => s + t.totalClusters, 0);
@@ -154,6 +164,60 @@ export default async function StocksPage() {
               </li>
             ))}
           </ul>
+        )}
+
+        {signalOnly.length > 0 && (
+          <section className="mt-14">
+            <h2 className="text-xl font-semibold tracking-tight">
+              More stocks with notable insider buying
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm text-muted">
+              Companies where insiders have made qualifying open-market buys but
+              no cluster has formed (yet). Each page lists every buy, who made
+              it, and the price paid.
+            </p>
+            <div className="mt-6 overflow-hidden rounded-xl border border-border">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-160 text-sm">
+                  <thead>
+                    <tr className="border-b border-border bg-surface-muted text-left text-xs uppercase tracking-wide text-muted">
+                      <th className="px-4 py-3 font-medium">Ticker</th>
+                      <th className="px-4 py-3 font-medium">Company</th>
+                      <th className="px-4 py-3 text-right font-medium">Buys</th>
+                      <th className="px-4 py-3 text-right font-medium">Total bought</th>
+                      <th className="px-4 py-3 text-right font-medium">Last buy</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    {signalOnly.map((t) => (
+                      <tr key={t.ticker} className="bg-surface transition-colors hover:bg-surface-muted/50">
+                        <td className="px-4 py-3">
+                          <Link
+                            href={tickerPath(t.ticker)}
+                            className="font-mono font-semibold hover:text-accent"
+                          >
+                            {t.ticker}
+                          </Link>
+                        </td>
+                        <td className="max-w-64 truncate px-4 py-3 text-muted">
+                          {t.issuerName}
+                        </td>
+                        <td className="px-4 py-3 text-right tabular-nums">
+                          {formatNumber(t.buyCount)}
+                        </td>
+                        <td className="px-4 py-3 text-right font-semibold tabular-nums">
+                          {formatMoneyCompact(t.totalValue)}
+                        </td>
+                        <td className="px-4 py-3 text-right tabular-nums text-muted">
+                          {formatDate(t.lastBuyDate)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
         )}
       </main>
 

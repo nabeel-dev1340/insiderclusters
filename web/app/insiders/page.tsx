@@ -5,7 +5,7 @@ import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { ConvictionBadge } from "@/components/conviction-badge";
-import { SITE_URL, tickerPath } from "@/lib/site";
+import { SITE_URL, insiderPath, tickerPath } from "@/lib/site";
 import { formatMoneyCompact, formatDate, formatNumber } from "@/lib/format";
 
 const TITLE = "Most active insiders";
@@ -56,6 +56,7 @@ export default async function InsidersPage() {
         "@type": "ListItem",
         position: i + 1,
         name: l.name,
+        ...(l.cik ? { url: `${SITE_URL}${insiderPath(l.cik, l.name)}` } : {}),
       })),
     },
   ];
@@ -98,7 +99,7 @@ export default async function InsidersPage() {
         ) : (
           <div className="mt-8 overflow-hidden rounded-xl border border-border">
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[720px] text-sm">
+              <table className="w-full min-w-180 text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-muted text-left text-xs uppercase tracking-wide text-muted">
                     <th className="px-4 py-3 font-medium">#</th>
@@ -118,7 +119,16 @@ export default async function InsidersPage() {
                       <td className="px-4 py-3 tabular-nums text-muted">{i + 1}</td>
                       <td className="px-4 py-3">
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="font-medium">{l.name}</span>
+                          {l.cik ? (
+                            <Link
+                              href={insiderPath(l.cik, l.name)}
+                              className="font-medium hover:text-accent hover:underline"
+                            >
+                              {l.name}
+                            </Link>
+                          ) : (
+                            <span className="font-medium">{l.name}</span>
+                          )}
                           {l.isSenior && <ConvictionBadge size="xs" />}
                         </div>
                         {l.role && (
