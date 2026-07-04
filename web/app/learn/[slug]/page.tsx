@@ -89,6 +89,17 @@ export default async function LearnArticlePage({
       author: { "@type": "Organization", name: "InsiderClusters" },
       publisher: { "@type": "Organization", name: "InsiderClusters" },
     },
+    // FAQPage mirrors the visible FAQ section verbatim (a validity
+    // requirement) so AI engines and rich results can quote exact answers.
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: article.faq.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
   ];
 
   return (
@@ -116,6 +127,20 @@ export default async function LearnArticlePage({
             Updated {article.updated} · InsiderClusters
           </div>
           <div className="mt-2 text-[15px]">{article.body}</div>
+
+          <section className="mt-10">
+            <h2 className="text-xl font-semibold tracking-tight">
+              Frequently asked questions
+            </h2>
+            <dl className="mt-4 space-y-5">
+              {article.faq.map((f) => (
+                <div key={f.q}>
+                  <dt className="font-medium">{f.q}</dt>
+                  <dd className="mt-1 leading-relaxed text-muted">{f.a}</dd>
+                </div>
+              ))}
+            </dl>
+          </section>
         </article>
 
         {recent.length > 0 && (

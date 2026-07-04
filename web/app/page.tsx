@@ -835,8 +835,23 @@ const FAQS = [
 ];
 
 function Faq() {
+  // FAQPage schema mirrors the visible questions verbatim so AI engines and
+  // rich results can lift exact answers from the page.
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
   return (
     <section className="py-20 sm:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Container>
         <SectionHeading
           eyebrow="FAQ"

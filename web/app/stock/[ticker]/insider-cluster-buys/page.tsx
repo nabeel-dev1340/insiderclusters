@@ -96,6 +96,32 @@ export default async function TickerPage({
   const totalBought = data.buys.reduce((s, b) => s + (b.value ?? 0), 0);
   const hasClusters = data.totalClusters > 0;
 
+  // Data-driven FAQ: the questions people ask AI engines about a ticker,
+  // answered with this page's live numbers. Plain strings so the visible
+  // section and the FAQPage JSON-LD below stay identical (a requirement for
+  // the markup to be valid).
+  const insiderNoun = data.insiderCount === 1 ? "insider" : "insiders";
+  const faqs: { q: string; a: string }[] = [
+    {
+      q: `Are insiders buying ${data.ticker} stock?`,
+      a: hasClusters
+        ? `Yes — ${formatNumber(data.insiderCount)} distinct ${insiderNoun} have bought ${data.ticker} (${data.issuerName}) on the open market, including ${formatNumber(data.totalClusters)} cluster ${data.totalClusters === 1 ? "buy" : "buys"} where two or more insiders bought within a 15-day window. The most recent qualifying activity was ${formatDate(data.lastActivityAt)}.`
+        : `${formatNumber(data.insiderCount)} ${insiderNoun} ${data.insiderCount === 1 ? "has" : "have"} bought ${data.ticker} (${data.issuerName}) on the open market, most recently on ${formatDate(data.lastActivityAt)}. No cluster buy — two or more distinct insiders within a 15-day window — has been detected yet.`,
+    },
+    {
+      q: `How much ${data.ticker} stock have insiders bought?`,
+      a: `Insiders have bought a combined ${formatMoneyCompact(totalBought)} of ${data.ticker} across ${formatNumber(data.buys.length)} open-market ${data.buys.length === 1 ? "purchase" : "purchases"} above the $100,000 signal threshold, based on SEC Form 4 filings.`,
+    },
+    {
+      q: `What is an insider cluster buy in ${data.ticker}?`,
+      a: `A cluster buy is two or more distinct ${data.issuerName} insiders — officers, directors, or 10% owners — each buying ${data.ticker} on the open market within a rolling 15-day window. ${hasClusters ? `${data.ticker} has ${formatNumber(data.totalClusters)} detected cluster ${data.totalClusters === 1 ? "buy" : "buys"} to date.` : `None has been detected in ${data.ticker} yet.`}`,
+    },
+    {
+      q: `Where does this ${data.ticker} insider trading data come from?`,
+      a: `Every figure is parsed directly from SEC Form 4 filings on EDGAR, and each purchase on this page links back to its original filing document.`,
+    },
+  ];
+
   // Same-sector cluster stocks — cross-links that keep crawlers (and readers)
   // moving between ticker pages instead of dead-ending here.
   let related: TickerDirectoryEntry[] = [];
@@ -133,6 +159,15 @@ export default async function TickerPage({
       creator: { "@type": "Organization", name: "InsiderClusters" },
       isBasedOn: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
       dateModified: data.lastActivityAt.toISOString(),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
     },
   ];
 
@@ -396,6 +431,20 @@ export default async function TickerPage({
             </p>
           </section>
         )}
+
+        <section className="mt-12 border-t border-border pt-8">
+          <h2 className="text-lg font-semibold">
+            {data.ticker} insider buying — FAQ
+          </h2>
+          <dl className="mt-4 space-y-5">
+            {faqs.map((f) => (
+              <div key={f.q}>
+                <dt className="text-sm font-medium">{f.q}</dt>
+                <dd className="mt-1 text-sm leading-relaxed text-muted">{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
 
         <section className="mt-12 border-t border-border pt-8">
           <h2 className="text-lg font-semibold">

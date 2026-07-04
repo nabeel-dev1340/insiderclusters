@@ -14,6 +14,12 @@ export interface LearnArticle {
   updated: string;
   related: string[]; // slugs
   body: ReactNode;
+  /**
+   * Mini-FAQ rendered at the end of the article and emitted as FAQPage
+   * schema. Plain strings (no JSX) so the visible text and the JSON-LD are
+   * guaranteed identical — a requirement for the markup to be valid.
+   */
+  faq: { q: string; a: string }[];
 }
 
 // --- shared typography helpers (keep articles visually identical) ----------
@@ -43,6 +49,20 @@ function A({ href, children }: { href: string; children: ReactNode }) {
     <Link href={href} className="text-accent hover:underline">
       {children}
     </Link>
+  );
+}
+
+/** External citation — credible primary sources (SEC, investor.gov, research). */
+function Ext({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-accent hover:underline"
+    >
+      {children}
+    </a>
   );
 }
 
@@ -81,8 +101,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "What is an insider cluster buy?",
     description:
       "A cluster buy is two or more corporate insiders buying their own company's stock on the open market within days of each other. Here's why it's the strongest insider signal — and how to track it.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["insider-buying-vs-selling", "who-counts-as-an-insider", "why-small-cap-insider-buying-matters"],
+    faq: [
+      {
+        q: "How many insiders make a cluster buy?",
+        a: "A cluster buy requires two or more distinct insiders — officers, directors, or 10% owners — each making an open-market purchase of the same stock within a 15-day window.",
+      },
+      {
+        q: "Are cluster buys a bullish signal?",
+        a: "Research on insider trading finds that consensus purchases by multiple insiders predict forward returns better than lone purchases, with the effect strongest in small-cap stocks.",
+      },
+      {
+        q: "Do option exercises or stock grants count toward a cluster?",
+        a: "No. Only open-market purchases (Form 4 transaction code P) count; grants, option exercises, tax withholding, and 10b5-1 scheduled trades are excluded.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -95,8 +129,13 @@ export const LEARN_ARTICLES: LearnArticle[] = [
         </P>
         <H2>Why clusters beat single buys</H2>
         <P>
-          The academic literature on insider trading keeps landing on the same
-          two findings: purchases predict returns better than sales predict
+          The academic literature on insider trading — from{" "}
+          <Ext href="https://www.nber.org/papers/w16454">
+            Cohen, Malloy &amp; Pomorski&apos;s &quot;Decoding Inside
+            Information&quot;
+          </Ext>{" "}
+          to decades of earlier studies — keeps landing on the same two
+          findings: purchases predict returns better than sales predict
           declines, and <Strong>consensus</Strong> purchases — multiple insiders
           buying together — outperform lone purchases. A single director's buy
           might be portfolio rebalancing, an optics purchase after a bad
@@ -149,17 +188,33 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "Form 4 transaction codes explained (P, S, A, M, F, G…)",
     description:
       "Every SEC Form 4 transaction carries a one-letter code. P and S are the ones that matter for signal — here's the full table and what each code actually means.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["how-to-read-a-form-4", "what-is-open-market-purchase", "form-3-vs-form-4-vs-form-5"],
+    faq: [
+      {
+        q: "What does transaction code P mean on a Form 4?",
+        a: "Code P marks an open-market or private purchase — the insider voluntarily spent personal cash to buy company stock, making it the strongest signal among Form 4 codes.",
+      },
+      {
+        q: "What does transaction code A mean on a Form 4?",
+        a: "Code A marks a grant or award of shares from the company. It is compensation, not a buying decision, so it carries no signal about the insider's outlook.",
+      },
+      {
+        q: "Which Form 4 codes indicate real insider buying?",
+        a: "Only code P reflects a voluntary purchase with the insider's own money; codes A, M, F, G, C, D, and X describe compensation or administrative events.",
+      },
+    ],
     body: (
       <>
         <P>
-          Every transaction reported on a Form 4 carries a single-letter code
-          describing <em>how</em> the insider acquired or disposed of the
-          shares. Most codes describe administrative events — compensation,
-          taxes, transfers. Only a couple describe an insider making a real
-          market decision with real money, which is why filtering by code is
-          the first step in any insider-trading analysis.
+          Every transaction reported on a{" "}
+          <Ext href="https://www.sec.gov/about/forms/form4.pdf">SEC Form 4</Ext>{" "}
+          carries a single-letter code describing <em>how</em> the insider
+          acquired or disposed of the shares. Most codes describe
+          administrative events — compensation, taxes, transfers. Only a couple
+          describe an insider making a real market decision with real money,
+          which is why filtering by code is the first step in any
+          insider-trading analysis.
         </P>
         <H2>The codes that matter</H2>
         <CodeTable
@@ -204,8 +259,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "How to read a Form 4 filing",
     description:
       "A walkthrough of the SEC Form 4: the reporting owner, Table I vs Table II, transaction codes, prices, and footnotes — and the traps that mislead first-time readers.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["form-4-transaction-codes", "form-3-vs-form-4-vs-form-5", "form-4-filing-deadline"],
+    faq: [
+      {
+        q: "What is Table I on a Form 4?",
+        a: "Table I lists non-derivative transactions in the company's stock — the date, one-letter transaction code, share count, price, and shares owned after the transaction.",
+      },
+      {
+        q: "Why do option exercises look like buying on a Form 4?",
+        a: "An option exercise (code M) shows shares being acquired without any market purchase, and it is often paired with a same-day sale of the exercised shares.",
+      },
+      {
+        q: "Where does a Form 4 show that a trade was under a 10b5-1 plan?",
+        a: "In the plan checkbox and the footnotes — a footnoted 10b5-1 trade was scheduled months in advance and carries far less signal than a discretionary buy.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -268,8 +337,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "What is a 10b5-1 trading plan?",
     description:
       "10b5-1 plans let insiders schedule trades in advance to avoid insider-trading liability. Here's how they work and why plan trades carry less signal than discretionary buys.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["how-to-read-a-form-4", "insider-buying-vs-selling", "form-4-filing-deadline"],
+    faq: [
+      {
+        q: "What is a Rule 10b5-1 plan in simple terms?",
+        a: "A 10b5-1 plan is a written schedule an insider adopts in advance that lets a broker trade their company stock automatically, giving the insider a defense against insider-trading charges.",
+      },
+      {
+        q: "Do 10b5-1 plan trades carry any signal?",
+        a: "Very little — plan trades were scheduled months earlier, so they reflect an old decision rather than a fresh judgment about today's price.",
+      },
+      {
+        q: "How can I tell if a Form 4 trade was made under a 10b5-1 plan?",
+        a: "Since the SEC's 2023 amendments, Form 4 includes a checkbox identifying plan transactions, with the plan adoption date disclosed in the footnotes.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -283,7 +366,11 @@ export const LEARN_ARTICLES: LearnArticle[] = [
         <H2>The 2023 tightening</H2>
         <P>
           After research showed plan trades beating the market suspiciously
-          often, the SEC tightened Rule 10b5-1 in 2023: a mandatory cooling-off
+          often, the SEC{" "}
+          <Ext href="https://www.sec.gov/news/press-release/2022-222">
+            tightened Rule 10b5-1
+          </Ext>{" "}
+          effective 2023: a mandatory cooling-off
           period before the first trade (90+ days for officers and directors),
           a ban on overlapping plans, limits on single-trade plans, and a
           checkbox on Form 4 itself identifying plan transactions.
@@ -323,14 +410,31 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "Who counts as a corporate insider?",
     description:
       "Officers, directors, and 10% owners are the 'Section 16 insiders' who must file Form 4s. Here's who's included, and why a CEO's buy means more than a passive fund's.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["what-is-a-cluster-buy", "how-to-read-a-form-4", "form-4-filing-deadline"],
+    faq: [
+      {
+        q: "Who is required to file a Form 4?",
+        a: "Section 16 insiders — a company's officers, its directors, and any person or entity beneficially owning more than 10% of a registered class of its stock.",
+      },
+      {
+        q: "Are large shareholders always corporate insiders?",
+        a: "Only holders above the 10% threshold are Section 16 insiders, and some are passive funds that crossed the line mechanically and see nothing beyond public filings.",
+      },
+      {
+        q: "Whose insider buying carries the most signal?",
+        a: "Executives closest to the numbers — the CEO and CFO — which is why clusters that include a C-suite buyer are tagged as high conviction.",
+      },
+    ],
     body: (
       <>
         <P>
-          "Insider" has a precise legal meaning. Section 16 of the Securities
-          Exchange Act applies to three groups, and only these three must
-          report their trades on Form 4:
+          "Insider" has a precise legal meaning.{" "}
+          <Ext href="https://www.investor.gov/introduction-investing/investing-basics/glossary/forms-3-4-5">
+            Section 16 of the Securities Exchange Act
+          </Ext>{" "}
+          applies to three groups, and only these three must report their
+          trades on Form 4:
         </P>
         <UL>
           <li>
@@ -377,8 +481,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "How fast must insiders report trades? (Form 4 deadlines)",
     description:
       "Insiders must file a Form 4 within two business days of a trade. Here's the exact rule, the exceptions, and why the deadline makes real-time monitoring possible.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["how-to-read-a-form-4", "form-3-vs-form-4-vs-form-5", "what-is-sec-edgar"],
+    faq: [
+      {
+        q: "How long do insiders have to report a trade?",
+        a: "Insiders must file a Form 4 before the end of the second business day after the transaction — trade on Monday, file by Wednesday.",
+      },
+      {
+        q: "What happens if an insider files a Form 4 late?",
+        a: "Late filings are still accepted and processed — the form has a box for explaining the delay — which is why a new filing can carry an old transaction date.",
+      },
+      {
+        q: "When do new Form 4 filings appear on EDGAR?",
+        a: "EDGAR accepts filings from 6 a.m. to 10 p.m. Eastern on business days and publishes them publicly within seconds of acceptance.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -427,8 +545,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "Form 3 vs Form 4 vs Form 5: what's the difference?",
     description:
       "Form 3 declares initial ownership, Form 4 reports trades within two days, Form 5 catches up on exempt transactions annually. Which one carries signal?",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["how-to-read-a-form-4", "form-4-filing-deadline", "form-4-transaction-codes"],
+    faq: [
+      {
+        q: "What is the difference between Form 3 and Form 4?",
+        a: "Form 3 is a one-time snapshot of holdings filed within 10 days of becoming an insider; Form 4 reports actual trades within two business days of each transaction.",
+      },
+      {
+        q: "What is a Form 5 used for?",
+        a: "Form 5 is an annual catch-up, filed within 45 days of fiscal year-end, covering exempt transactions and any trades that should have been reported earlier on a Form 4.",
+      },
+      {
+        q: "Which SEC form matters for tracking insider buying?",
+        a: "Form 4 — it is the only one of the three filed fast enough, and with enough transaction detail, to act on.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -475,8 +607,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "Insider buying vs insider selling: why the signals aren't symmetric",
     description:
       "Insiders sell for dozens of reasons but buy for one. The research and the intuition behind why purchases predict returns and sales mostly don't.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["what-is-a-cluster-buy", "what-is-a-10b5-1-plan", "form-4-transaction-codes"],
+    faq: [
+      {
+        q: "Is insider selling a bearish signal?",
+        a: "Usually not — insiders sell for taxes, diversification, and life expenses, and much of it runs on pre-scheduled 10b5-1 plans, so aggregate sales carry little predictive power.",
+      },
+      {
+        q: "Why is insider buying more predictive than insider selling?",
+        a: "An open-market purchase concentrates the insider's wealth further into a stock they are already exposed to, with after-tax personal cash — there is only one plausible motive.",
+      },
+      {
+        q: "What is the strongest form of insider buying?",
+        a: "A cluster buy — two or more distinct insiders purchasing the same stock on the open market within days of each other, especially in small-caps.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -510,9 +656,10 @@ export const LEARN_ARTICLES: LearnArticle[] = [
           insider already has concentrated exposure through options, RSUs, and
           salary tied to the same company — and chooses to concentrate{" "}
           <em>further</em>, with after-tax personal cash. There's no
-          compensation mechanics, no diversification logic, no tax motive. The
-          academic record agrees: purchases carry predictive power for
-          forward returns; sales, in aggregate, carry very little.
+          compensation mechanics, no diversification logic, no tax motive. The{" "}
+          <Ext href="https://www.nber.org/papers/w16454">academic record</Ext>{" "}
+          agrees: purchases carry predictive power for forward returns; sales,
+          in aggregate, carry very little.
         </P>
         <H2>And the strongest form of buying</H2>
         <P>
@@ -533,8 +680,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "Insider buying vs share buybacks: which signal is stronger?",
     description:
       "Buybacks spend shareholder money; insider buys spend the executive's own. Why personal purchases are the cleaner conviction signal, and what each is good for.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["insider-buying-vs-selling", "what-is-a-cluster-buy", "what-is-open-market-purchase"],
+    faq: [
+      {
+        q: "Are share buybacks a reliable bullish signal?",
+        a: "Mixed at best — many buybacks exist to offset stock-compensation dilution or support EPS targets, and announced authorizations often go partly unused.",
+      },
+      {
+        q: "Why is insider buying a cleaner signal than a buyback?",
+        a: "An insider buy risks the executive's own after-tax cash, while a buyback spends shareholder money — personal risk is what makes the signal credible.",
+      },
+      {
+        q: "What is the strongest combination of the two?",
+        a: "An insider cluster buy occurring during an active repurchase program — personal and corporate conviction pointing in the same direction at once.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -578,8 +739,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "What is an open-market purchase (Form 4 code P)?",
     description:
       "An open-market purchase is an insider buying company stock on the exchange with personal cash — transaction code P on Form 4. Why it's the only routine filing event with real signal.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["form-4-transaction-codes", "insider-buying-vs-selling", "what-is-a-cluster-buy"],
+    faq: [
+      {
+        q: "What code marks an open-market purchase on a Form 4?",
+        a: "Transaction code P in Table I of the Form 4 — the insider bought shares at market price with personal cash.",
+      },
+      {
+        q: "Is an option exercise an open-market purchase?",
+        a: "No. Exercises are reported under code M and convert compensation the company already awarded; no personal cash buys shares at the market price.",
+      },
+      {
+        q: "What size of insider purchase is meaningful?",
+        a: "Purchases that are large relative to the insider's salary and existing stake carry the signal — InsiderClusters applies a $100,000 minimum per purchase.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -634,8 +809,22 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "Why insider buying matters most in small-caps",
     description:
       "The information gap between insiders and the market is widest in small and micro-cap stocks — no analyst coverage, thin liquidity, and binary outcomes. Here's the logic and the evidence.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["what-is-a-cluster-buy", "insider-buying-vs-selling", "who-counts-as-an-insider"],
+    faq: [
+      {
+        q: "Why is insider buying a stronger signal in small-cap stocks?",
+        a: "The information gap between insiders and the market is widest in small-caps — many sub-$2B companies have little or no analyst coverage, so an insider's edge is largest there.",
+      },
+      {
+        q: "What counts as a small-cap for cluster detection?",
+        a: "InsiderClusters runs cluster detection on companies under a $2B market cap, with a $100,000 minimum per open-market purchase.",
+      },
+      {
+        q: "Does insider buying predict returns in large-cap stocks?",
+        a: "The effect exists across the market but is much weaker in large-caps, where heavy analyst and quant coverage shrinks the insider's information advantage.",
+      },
+    ],
     body: (
       <>
         <P>
@@ -685,13 +874,29 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     title: "What is SEC EDGAR (and how insider filings get there)?",
     description:
       "EDGAR is the SEC's public filing system — every Form 4 appears there within seconds of acceptance. How the pipeline works and how to read filings at the source.",
-    updated: "2026-07-03",
+    updated: "2026-07-04",
     related: ["form-4-filing-deadline", "how-to-read-a-form-4", "form-3-vs-form-4-vs-form-5"],
+    faq: [
+      {
+        q: "Is SEC EDGAR free to use?",
+        a: "Yes. Every filing on EDGAR — including all insider Forms 3, 4, and 5 — is publicly readable for free at sec.gov within seconds of acceptance.",
+      },
+      {
+        q: "How quickly do Form 4 filings appear on EDGAR?",
+        a: "Essentially instantly — EDGAR publishes accepted filings to its full-text and index feeds within seconds, during filing hours of 6 a.m. to 10 p.m. Eastern.",
+      },
+      {
+        q: "What does EDGAR not do for insider-trading analysis?",
+        a: "EDGAR doesn't filter or connect filings — it won't separate open-market buys from compensation noise or detect multiple insiders buying the same stock in the same window.",
+      },
+    ],
     body: (
       <>
         <P>
           <Strong>EDGAR</Strong> (Electronic Data Gathering, Analysis, and
-          Retrieval) is the SEC's filing system. Every public-company document
+          Retrieval) is{" "}
+          <Ext href="https://www.sec.gov/edgar">the SEC's filing system</Ext>.
+          Every public-company document
           — 10-Ks, 8-Ks, prospectuses, and every insider Form 3, 4, and 5 —
           is filed through EDGAR and becomes publicly readable within seconds
           of acceptance, for free.
