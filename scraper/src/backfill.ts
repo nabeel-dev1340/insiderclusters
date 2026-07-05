@@ -44,6 +44,7 @@ import {
   type BulkFiling,
 } from "./sec/bulkdata.ts";
 import { detectEpisodes, type SignalTx } from "./episodes.ts";
+import { posthog } from "./posthog.ts";
 
 const execFileP = promisify(execFile);
 
@@ -191,6 +192,18 @@ async function runBulk(quarters: string[]): Promise<void> {
       totalForm4s: filings.length,
       signalFilings: withSignals.length,
       ...stats,
+    });
+    posthog().capture({
+      distinctId: "system",
+      event: "backfill quarter ingested",
+      properties: {
+        quarter,
+        total_form4s: filings.length,
+        signal_filings: withSignals.length,
+        filings_inserted: stats.filings,
+        transactions_inserted: stats.transactions,
+        skipped_known: stats.skippedKnown,
+      },
     });
   }
 }
@@ -411,6 +424,16 @@ async function runSweep(): Promise<void> {
     skippedExisting,
     skippedCap,
   });
+  posthog().capture({
+    distinctId: "system",
+    event: "backfill sweep complete",
+    properties: {
+      tickers: byTicker.size,
+      clusters_created: created,
+      skipped_existing: skippedExisting,
+      skipped_cap: skippedCap,
+    },
+  });
 }
 
 // --- CLI -------------------------------------------------------------------------
@@ -440,6 +463,7 @@ async function main(): Promise<void> {
   }
   if (sweep) await runSweep();
 
+  await posthog().shutdown();
   await pool.end();
 }
 

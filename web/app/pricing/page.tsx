@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { PricingCards, PRO_PRICE_MONTHLY } from "@/components/pricing";
 import { SITE_URL } from "@/lib/site";
+import { getCurrentUser } from "@/lib/auth/session";
+import { effectivePlan } from "@/lib/plan";
+import { posthog } from "@/lib/posthog";
 
 export const metadata: Metadata = {
   title: "Pricing — Free insider-buy alerts, or real-time Pro",
@@ -44,7 +47,15 @@ const FAQ: { q: string; a: string }[] = [
   },
 ];
 
-export default function PricingPage() {
+export default async function PricingPage() {
+  const user = await getCurrentUser();
+  const distinctId = user?.email ?? "anonymous";
+  posthog().capture({
+    distinctId,
+    event: "pricing page viewed",
+    properties: { plan: user ? effectivePlan(user) : "none" },
+  });
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
