@@ -3,7 +3,7 @@ import { pool } from "@/lib/db";
 import { logger } from "../logger";
 
 export interface AuditLogEntry {
-  userId?: string; // UUID
+  userId?: number; // users.id is SERIAL (integer)
   email: string;
   action: string;
   resourceId?: string;

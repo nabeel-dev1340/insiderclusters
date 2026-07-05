@@ -13,10 +13,12 @@ export const emailSchema = z
   .trim()
   .max(255, "Email is too long");
 
-// Token validation: should be a hex string (64 chars)
+// Token validation. Magic-link/session tokens are `randomBytes(32)` encoded as
+// base64url (see lib/auth/crypto.ts) — i.e. ~43 chars from [A-Za-z0-9_-], not
+// hex. Keep the bound generous so a valid token is never rejected.
 export const tokenSchema = z
   .string()
-  .regex(/^[0-9a-f]{64}$/i, "Token must be 64 hexadecimal characters");
+  .regex(/^[A-Za-z0-9_-]{32,128}$/, "Invalid token format");
 
 // Session token validation
 export const sessionTokenSchema = z

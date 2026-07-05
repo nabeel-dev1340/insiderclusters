@@ -29,7 +29,7 @@ const API_KEY_REGISTRY: Record<string, APIKeyConfig> = {
   },
   POSTHOG: {
     serviceName: "PostHog",
-    envVarName: "NEXT_PUBLIC_POSTHOG_KEY",
+    envVarName: "POSTHOG_API_KEY",
     description: "Analytics API key",
   },
   DISCORD_BOT_TOKEN: {

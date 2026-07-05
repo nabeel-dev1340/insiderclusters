@@ -3,55 +3,29 @@ import { cookies } from "next/headers";
 import { getCurrentUser, deleteSession, clearSessionCookie } from "@/lib/auth/session";
 import { SESSION_COOKIE } from "@/lib/auth/constants";
 import { posthog } from "@/lib/posthog";
-import { validateCSRFRequest } from "@/lib/middleware/csrf";
-import { checkRateLimit, RateLimitPolicy, getClientIP } from "@/lib/middleware/rate-limit";
+import { isSameOrigin } from "@/lib/http/origin";
+import { getClientIP } from "@/lib/middleware/rate-limit";
 import { handleError } from "@/lib/error-handler";
 import { logger } from "@/lib/logger";
+import { auditLog, AUDIT_EVENTS } from "@/lib/audit/log";
 
 // POST /api/auth/logout — delete the session row, clear the cookie, redirect.
+// Triggered by a same-origin <form> POST from the dashboard nav.
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const requestId = req.headers.get("x-request-id") || crypto.randomUUID();
-  const clientIP = getClientIP(req);
 
   try {
-    // 1. Validate CSRF token
-    const isCsrfValid = await validateCSRFRequest(req);
-    if (!isCsrfValid) {
-      logger.security("CSRF validation failed (logout)", { requestId, clientIP });
-      return NextResponse.json(
-        { error: "Security validation failed." },
-        { status: 403 }
-      );
+    // Same-origin (CSRF) guard. The session cookie is SameSite=Lax so a
+    // cross-site POST wouldn't carry it anyway; this is defense-in-depth.
+    if (!isSameOrigin(req)) {
+      logger.security("Cross-origin logout blocked", { requestId });
+      return NextResponse.json({ error: "Invalid request origin." }, { status: 403 });
     }
 
-    // 2. Get current user
     const user = await getCurrentUser();
-
-    // 3. Check rate limit (per session/user)
-    if (user) {
-      const userRateLimit = checkRateLimit({
-        policy: RateLimitPolicy.API_SESSION,
-        identifier: `logout:${user.id}`,
-      });
-      if (!userRateLimit.allowed) {
-        logger.security("Rate limit exceeded (logout)", {
-          userId: user.id,
-          requestId,
-        });
-        return NextResponse.json(
-          { error: "Too many requests. Please try again." },
-          { status: 429, headers: { "Retry-After": String(userRateLimit.retryAfter) } }
-        );
-      }
-    }
-
-    // 4. Delete session
     const raw = (await cookies()).get(SESSION_COOKIE)?.value;
-    if (raw) {
-      await deleteSession(raw);
-    }
+    if (raw) await deleteSession(raw);
 
-    // 5. Log event
     if (user) {
       posthog().capture({
         distinctId: user.email,
@@ -59,9 +33,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         properties: { plan: user.plan },
       });
       logger.info("logout", "User logged out", { userId: user.id, requestId });
+      void auditLog({
+        userId: user.id,
+        email: user.email,
+        action: AUDIT_EVENTS.USER_SIGNED_OUT,
+        ipAddress: getClientIP(req) !== "unknown" ? getClientIP(req) : undefined,
+        userAgent: req.headers.get("user-agent") || undefined,
+      });
     }
 
-    // 6. Redirect to login
     const base = process.env.APP_URL ?? req.nextUrl.origin;
     const res = NextResponse.redirect(new URL("/login", base), { status: 303 });
     clearSessionCookie(res);
