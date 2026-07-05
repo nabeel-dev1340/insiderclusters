@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS audit_logs (
   id BIGSERIAL PRIMARY KEY,
-  user_id UUID REFERENCES users(id) ON DELETE SET NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
   email TEXT NOT NULL,
   action TEXT NOT NULL, -- e.g., 'auth_magic_link_requested', 'user_signed_in', 'email_alerts_toggled'
   resource_id TEXT, -- e.g., ticker, watchlist ID if applicable
