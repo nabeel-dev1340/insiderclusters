@@ -76,9 +76,14 @@ export function getAPIKey(keyName: keyof typeof API_KEY_REGISTRY): string | unde
 /**
  * Validate that all required API keys are configured.
  * Call this during app startup to catch configuration issues early.
+ *
+ * Note: Only keys for implemented phases are required:
+ * - Phase 5 (email alerts): RESEND
+ * - Phase 4 (billing): LEMONSQUEEZY_WEBHOOK_SECRET (not yet implemented, optional)
+ * - Phase 6 (Discord): DISCORD_BOT_TOKEN (not yet implemented, optional)
  */
 export function validateRequiredAPIKeys(): { valid: boolean; missing: string[] } {
-  const required = ["RESEND", "LEMONSQUEEZY_WEBHOOK_SECRET"];
+  const required = ["RESEND"]; // Only email is required (Phase 5 done)
   const missing: string[] = [];
 
   for (const keyName of required) {
