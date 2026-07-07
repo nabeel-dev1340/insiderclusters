@@ -10,7 +10,7 @@ import { formatMoneyCompact, formatDate, formatNumber } from "@/lib/format";
 
 const TITLE = "Most active insiders";
 const DESCRIPTION =
-  "The insiders buying the most stock on the open market, ranked by total dollars purchased across SEC Form 4 filings. See who's backing their own small-cap companies.";
+  "The insiders buying the most stock on the open market, ranked by total dollars purchased across SEC Form 4 filings. See who's backing their own companies.";
 
 const LIMIT = 100;
 

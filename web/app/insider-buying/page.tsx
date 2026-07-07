@@ -7,7 +7,7 @@ import { formatMoneyCompact, formatNumber } from "@/lib/format";
 
 const TITLE = "Insider buying by month";
 const DESCRIPTION =
-  "Month-by-month archive of notable insider buying in small-cap stocks: the biggest Form 4 purchases and every detected cluster buy, back through our full coverage.";
+  "Month-by-month archive of notable insider buying: the biggest Form 4 purchases and every detected cluster buy, back through our full coverage.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -83,7 +83,7 @@ export default async function InsiderBuyingIndexPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted">
             Every month of coverage, archived: the biggest open-market insider
-            purchases and every cluster buy detected in small-cap stocks,
+            purchases and every cluster buy we detected,
             parsed from SEC Form 4 filings.
           </p>
         </header>

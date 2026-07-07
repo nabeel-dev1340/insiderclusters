@@ -324,7 +324,7 @@ export default async function InsiderPage({
           </p>
           <p className="mx-auto mt-1 max-w-md text-sm text-muted">
             We watch every Form 4 as it hits SEC EDGAR and alert you when
-            insiders cluster into the same small-cap stock.
+            insiders cluster into the same stock.
           </p>
           <div className="mt-4 flex justify-center gap-3">
             <ButtonLink href="/login">Get alerts free</ButtonLink>
@@ -339,8 +339,8 @@ export default async function InsiderPage({
           <p className="mt-3 text-sm leading-relaxed text-muted">
             Figures are parsed from {data.name}&apos;s Form 4 filings on SEC
             EDGAR (CIK {data.cik}) and cover open-market purchases (transaction
-            code <span className="font-mono">P</span>) above our signal
-            threshold — grants, option exercises, and sales are excluded, which
+            code <span className="font-mono">P</span>) — grants, option
+            exercises, and sales are excluded, which
             is why totals here can differ from raw filing counts. Every row
             links to its source document.
           </p>

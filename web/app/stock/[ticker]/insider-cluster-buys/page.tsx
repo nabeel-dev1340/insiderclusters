@@ -105,16 +105,16 @@ export default async function TickerPage({
     {
       q: `Are insiders buying ${data.ticker} stock?`,
       a: hasClusters
-        ? `Yes — ${formatNumber(data.insiderCount)} distinct ${insiderNoun} have bought ${data.ticker} (${data.issuerName}) on the open market, including ${formatNumber(data.totalClusters)} cluster ${data.totalClusters === 1 ? "buy" : "buys"} where two or more insiders bought within a 15-day window. The most recent qualifying activity was ${formatDate(data.lastActivityAt)}.`
-        : `${formatNumber(data.insiderCount)} ${insiderNoun} ${data.insiderCount === 1 ? "has" : "have"} bought ${data.ticker} (${data.issuerName}) on the open market, most recently on ${formatDate(data.lastActivityAt)}. No cluster buy — two or more distinct insiders within a 15-day window — has been detected yet.`,
+        ? `Yes — ${formatNumber(data.insiderCount)} distinct ${insiderNoun} have bought ${data.ticker} (${data.issuerName}) on the open market, including ${formatNumber(data.totalClusters)} cluster ${data.totalClusters === 1 ? "buy" : "buys"} where two or more insiders bought within a rolling window. The most recent qualifying activity was ${formatDate(data.lastActivityAt)}.`
+        : `${formatNumber(data.insiderCount)} ${insiderNoun} ${data.insiderCount === 1 ? "has" : "have"} bought ${data.ticker} (${data.issuerName}) on the open market, most recently on ${formatDate(data.lastActivityAt)}. No cluster buy — two or more distinct insiders within a rolling window — has been detected yet.`,
     },
     {
       q: `How much ${data.ticker} stock have insiders bought?`,
-      a: `Insiders have bought a combined ${formatMoneyCompact(totalBought)} of ${data.ticker} across ${formatNumber(data.buys.length)} open-market ${data.buys.length === 1 ? "purchase" : "purchases"} above the $100,000 signal threshold, based on SEC Form 4 filings.`,
+      a: `Insiders have bought a combined ${formatMoneyCompact(totalBought)} of ${data.ticker} across ${formatNumber(data.buys.length)} open-market ${data.buys.length === 1 ? "purchase" : "purchases"}, based on SEC Form 4 filings.`,
     },
     {
       q: `What is an insider cluster buy in ${data.ticker}?`,
-      a: `A cluster buy is two or more distinct ${data.issuerName} insiders — officers, directors, or 10% owners — each buying ${data.ticker} on the open market within a rolling 15-day window. ${hasClusters ? `${data.ticker} has ${formatNumber(data.totalClusters)} detected cluster ${data.totalClusters === 1 ? "buy" : "buys"} to date.` : `None has been detected in ${data.ticker} yet.`}`,
+      a: `A cluster buy is two or more distinct ${data.issuerName} insiders — officers, directors, or 10% owners — each buying ${data.ticker} on the open market within a rolling window. ${hasClusters ? `${data.ticker} has ${formatNumber(data.totalClusters)} detected cluster ${data.totalClusters === 1 ? "buy" : "buys"} to date.` : `None has been detected in ${data.ticker} yet.`}`,
     },
     {
       q: `Where does this ${data.ticker} insider trading data come from?`,
@@ -214,7 +214,7 @@ export default async function TickerPage({
             {hasClusters ? (
               <>
                 When two or more insiders at {data.issuerName} buy {data.ticker}{" "}
-                on the open market within days of each other, that clustered
+                on the open market around the same time, that clustered
                 conviction is one of the highest-signal patterns in SEC filing
                 data. Below is every cluster we&apos;ve detected in{" "}
                 {data.ticker} plus the full record of qualifying open-market
@@ -226,7 +226,7 @@ export default async function TickerPage({
                 Every qualifying open-market purchase of {data.ticker} reported
                 to the SEC on Form 4, parsed directly from the filings and
                 linked back to the source on EDGAR. No buying cluster — two or
-                more distinct insiders inside a 15-day window — has been
+                more distinct insiders inside a rolling window — has been
                 detected in {data.ticker} yet; if one forms, it appears here
                 (and hits our alert subscribers in real time).
               </>
@@ -314,7 +314,7 @@ export default async function TickerPage({
               All notable open-market buys in {data.ticker}
             </h2>
             <p className="mt-2 text-sm text-muted">
-              Every Form 4 purchase above our signal threshold, newest first.
+              Every open-market Form 4 purchase, newest first.
               Click an insider to see their full buying record across companies.
             </p>
             <div className="mt-4 overflow-hidden rounded-xl border border-border">
@@ -455,8 +455,8 @@ export default async function TickerPage({
             open-market purchase (transaction code <span className="font-mono">P</span>).
             A cluster is recorded when two or more <em>distinct</em> insiders —
             officers, directors, or 10% owners — each buy {data.ticker} within a
-            rolling 15-day window. We focus on companies under a $2B market cap,
-            where insider conviction historically carries the most signal. Every
+            rolling window. We track clusters at every company size, from
+            micro-caps to mega-caps. Every
             figure on this page traces back to an official filing; open any row
             to jump straight to the source document.{" "}
             <Link href="/learn/what-is-a-cluster-buy" className="text-accent hover:underline">

@@ -37,7 +37,7 @@ export async function generateMetadata({
   const title = `Biggest Insider Buys of ${label} — Clusters & Form 4 Purchases`;
   const description =
     `${formatMoneyCompact(data.summary.totalValue)} of notable open-market insider buying across ` +
-    `${data.summary.tickerCount} small-cap stocks in ${label}, including ` +
+    `${data.summary.tickerCount} stocks in ${label}, including ` +
     `${data.summary.clusterCount} cluster ${data.summary.clusterCount === 1 ? "buy" : "buys"} — ` +
     `every figure parsed from SEC Form 4 filings.`;
   const canonical = monthPath(data.ym);
@@ -90,7 +90,7 @@ export default async function MonthArchivePage({
       "@context": "https://schema.org",
       "@type": "Dataset",
       name: `Insider buying in ${label}`,
-      description: `Notable open-market insider purchases and cluster buys in small-cap stocks during ${label}, derived from public SEC Form 4 filings.`,
+      description: `Notable open-market insider purchases and cluster buys during ${label}, derived from public SEC Form 4 filings.`,
       url: `${SITE_URL}${monthPath(data.ym)}`,
       creator: { "@type": "Organization", name: "InsiderClusters" },
       isBasedOn: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
@@ -121,8 +121,8 @@ export default async function MonthArchivePage({
           </h1>
           <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted">
             What corporate insiders bought with their own money in {label}:
-            every qualifying open-market purchase in small-caps, and the
-            stocks where two or more insiders bought within the same 15-day
+            every qualifying open-market purchase, and the
+            stocks where two or more insiders bought within the same rolling
             window. Parsed from SEC Form 4 filings, linked to the source.
           </p>
         </header>

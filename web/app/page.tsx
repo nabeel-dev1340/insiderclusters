@@ -114,7 +114,7 @@ function Hero({ featured }: { featured?: ClusterSummary }) {
 
           <p className="mt-5 max-w-lg text-pretty text-lg text-muted">
             InsiderClusters parses every SEC Form 4 filing and alerts you when
-            two or more insiders buy the same small-cap stock within days — the
+            two or more insiders buy the same stock around the same time — the
             rarest, highest-signal pattern in insider trading.
           </p>
 
@@ -151,8 +151,8 @@ function TrustItem({ children }: { children: React.ReactNode }) {
 
 const DETECTION = [
   { value: "2+", label: "distinct insiders" },
-  { value: "≤ 15 days", label: "rolling window" },
-  { value: "< $2B", label: "market cap" },
+  { value: "Open-market", label: "code-P buys" },
+  { value: "Any size", label: "market cap" },
   { value: "Real-time", label: "EDGAR polling" },
 ];
 
@@ -208,10 +208,9 @@ function NoiseVsSignal() {
               <p>
                 But when several{" "}
                 <span className="font-medium text-foreground">independent</span>{" "}
-                insiders buy the same company within a two-week window, that&apos;s
-                coordinated conviction that&apos;s hard to fake. We surface only
-                those events, and only in the sub-$2B names where they move the
-                most — every figure one click from an official SEC filing.
+                insiders buy the same company within a short window, that&apos;s
+                coordinated conviction that&apos;s hard to fake. We surface those
+                events — every figure one click from an official SEC filing.
               </p>
             </div>
           </Reveal>
@@ -281,7 +280,7 @@ const STEPS = [
   },
   {
     title: "We detect clusters",
-    body: "When 2+ distinct insiders buy the same sub-$2B stock inside a rolling 15-day window, that's flagged as a cluster.",
+    body: "When 2+ distinct insiders buy the same stock inside a rolling window, that's flagged as a cluster.",
     icon: LayersIcon,
   },
   {
@@ -365,8 +364,8 @@ function Features() {
               <FeatureIcon icon={LayersIcon} />
               <h3 className="mt-4 font-semibold">Cluster detection engine</h3>
               <p className="mt-2 text-sm text-muted">
-                Rolling 15-day window, distinct-insider dedupe, and a sub-$2B
-                market-cap gate applied automatically to every filing.
+                Rolling detection window, distinct-insider dedupe, and
+                open-market-only filtering applied automatically to every filing.
               </p>
             </BentoCell>
           </Reveal>
@@ -482,8 +481,8 @@ const ANATOMY = [
   },
   {
     n: 5,
-    label: "Rolling window & cap",
-    body: "Every buy lands inside a 15-day window, in a sub-$2B name where it moves the needle.",
+    label: "Rolling window",
+    body: "Every buy lands inside a rolling window, so you see conviction that clusters in time.",
   },
 ];
 
@@ -590,7 +589,7 @@ function trackRecordLine(stats: ClusterStats): string {
   const clusters = stats.clusterCount.toLocaleString("en-US");
   const companies = stats.tickerCount.toLocaleString("en-US");
   const dollars = formatMoneyCompact(stats.totalValue);
-  return `${clusters} clusters across ${companies} small-caps${
+  return `${clusters} clusters across ${companies} companies${
     since ? ` since ${since}` : ""
   } — ${dollars} of insider buying, every dollar traced to an SEC filing.`;
 }
@@ -684,7 +683,7 @@ const COMPARE_ROWS: {
   screener: boolean | string;
 }[] = [
   { label: "Multi-insider cluster detection", us: true, manual: "Manual", screener: false },
-  { label: "Sub-$2B small-cap focus", us: true, manual: false, screener: "Partial" },
+  { label: "All market caps, no blind spots", us: true, manual: false, screener: "Partial" },
   { label: "Real-time as filings land", us: true, manual: false, screener: "Varies" },
   { label: "Every figure linked to its SEC filing", us: true, manual: true, screener: false },
   { label: "Role-weighted conviction flag", us: true, manual: false, screener: false },
@@ -810,7 +809,7 @@ function PricingPreview() {
 const FAQS = [
   {
     q: "What exactly counts as a “cluster”?",
-    a: "Two or more distinct insiders making open-market purchases of the same sub-$2B stock inside a rolling 15-day window. We dedupe by person, so one insider filing twice never counts as two.",
+    a: "Two or more distinct insiders making open-market purchases of the same stock inside a rolling window. We dedupe by person, so one insider filing twice never counts as two.",
   },
   {
     q: "Where does the data come from?",
@@ -821,8 +820,8 @@ const FAQS = [
     a: "On Pro, clusters reach you in real time, the moment we detect them. On the free plan you get one cluster per week on a 24-hour delay — enough to see the signal, a step behind the market.",
   },
   {
-    q: "Why only small-cap companies?",
-    a: "Insider buying moves the needle far more in sub-$2B names than in mega-caps, where a few million dollars is a rounding error. Focusing there keeps the feed high-signal.",
+    q: "Do you cover large-caps too, or only small companies?",
+    a: "Every company size. We track clusters from micro-caps to mega-caps — wherever two or more insiders buy on the open market together, it shows up in the feed. No market-cap blind spots.",
   },
   {
     q: "Do I need a credit card to start?",

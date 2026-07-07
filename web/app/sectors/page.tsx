@@ -8,7 +8,7 @@ import { formatDate, formatNumber } from "@/lib/format";
 
 const TITLE = "Insider buying by sector";
 const DESCRIPTION =
-  "Which sectors insiders are buying right now: cluster buys in healthcare, tech, financials, energy and more, detected from SEC Form 4 filings on small-cap stocks.";
+  "Which sectors insiders are buying right now: cluster buys in healthcare, tech, financials, energy and more, detected from SEC Form 4 filings.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -80,8 +80,8 @@ export default async function SectorsPage() {
           </h1>
           <p className="mt-4 text-pretty leading-relaxed text-muted">
             Where insiders are putting their own money, grouped by sector. Each
-            hub lists every small-cap in the sector with a detected cluster buy
-            — two or more insiders buying on the open market within days —
+            hub lists every company in the sector with a detected cluster buy
+            — two or more insiders buying on the open market around the same time —
             parsed from SEC Form 4 filings.
           </p>
         </header>

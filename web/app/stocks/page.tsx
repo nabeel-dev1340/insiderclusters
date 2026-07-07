@@ -15,7 +15,7 @@ import { formatMarketCap, formatDate, formatMoneyCompact, formatNumber } from "@
 
 const TITLE = "Stocks with insider cluster buys";
 const DESCRIPTION =
-  "Browse every small-cap stock where two or more insiders bought on the open market within days, detected from SEC Form 4 filings. See each ticker's full cluster-buy history.";
+  "Browse every stock where two or more insiders bought on the open market around the same time, detected from SEC Form 4 filings. See each ticker's full cluster-buy history.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -102,8 +102,8 @@ export default async function StocksPage() {
             Stocks with insider cluster buys
           </h1>
           <p className="mt-4 text-pretty leading-relaxed text-muted">
-            Every small-cap company where two or more insiders bought stock on
-            the open market within a rolling 15-day window — the highest-signal
+            Every company where two or more insiders bought stock on
+            the open market within a rolling window — the highest-signal
             pattern in SEC filing data. Each ticker links to its full cluster
             history, parsed directly from Form 4 filings.
           </p>

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const FAQ: { q: string; a: string }[] = [
   {
     q: "What counts as a cluster buy?",
-    a: "A cluster buy is when two or more distinct company insiders — officers, directors, or 10% owners — each report an open-market purchase (SEC transaction code P) of the same stock within a rolling 15-day window. We only surface companies under a $2B market cap, where insider conviction tends to move the needle most.",
+    a: "A cluster buy is when two or more distinct company insiders — officers, directors, or 10% owners — each report an open-market purchase (SEC transaction code P) of the same stock within a rolling window. We track them at every company size, from micro-caps to mega-caps.",
   },
   {
     q: "How fast are Pro alerts?",

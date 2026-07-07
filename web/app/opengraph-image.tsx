@@ -5,7 +5,7 @@ import { OgMark } from "@/components/og-mark";
 // to every route unless a segment provides its own opengraph-image. Rendered
 // with next/og so it stays on-brand and needs no binary asset in the repo.
 export const alt =
-  "InsiderClusters — real-time alerts when multiple insiders buy the same small-cap stock";
+  "InsiderClusters — real-time alerts when multiple insiders buy the same stock";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -61,14 +61,14 @@ export default function OpengraphImage() {
             <span style={{ color: "#34d399" }}>clusters.</span>
           </div>
           <div style={{ fontSize: 30, color: "#9a9aa6", maxWidth: 880, lineHeight: 1.35 }}>
-            Real-time alerts when 2+ insiders buy the same sub-$2B stock within
-            days — parsed straight from SEC Form 4 filings.
+            Real-time alerts when 2+ insiders buy the same stock around the same
+            time — parsed straight from SEC Form 4 filings.
           </div>
         </div>
 
         {/* footer chips */}
         <div style={{ display: "flex", gap: 14 }}>
-          {["2+ insiders", "≤ 15-day window", "< $2B market cap", "SEC EDGAR"].map(
+          {["2+ insiders", "Open-market buys", "Any market cap", "SEC EDGAR"].map(
             (chip) => (
               <div
                 key={chip}

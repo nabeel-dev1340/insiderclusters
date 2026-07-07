@@ -106,7 +106,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     faq: [
       {
         q: "How many insiders make a cluster buy?",
-        a: "A cluster buy requires two or more distinct insiders — officers, directors, or 10% owners — each making an open-market purchase of the same stock within a 15-day window.",
+        a: "A cluster buy requires two or more distinct insiders — officers, directors, or 10% owners — each making an open-market purchase of the same stock within a rolling window.",
       },
       {
         q: "Are cluster buys a bullish signal?",
@@ -122,8 +122,8 @@ export const LEARN_ARTICLES: LearnArticle[] = [
         <P>
           A <Strong>cluster buy</Strong> is when two or more distinct insiders —
           officers, directors, or 10% owners of the same company — each buy the
-          company's stock on the open market within a short window (we use 15
-          days). One insider buying can mean many things. Several insiders
+          company's stock on the open market within a short, rolling window.
+          One insider buying can mean many things. Several insiders
           reaching the same conclusion independently, at the same time, with
           their own money, is a much harder signal to explain away.
         </P>
@@ -140,7 +140,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
           buying together — outperform lone purchases. A single director's buy
           might be portfolio rebalancing, an optics purchase after a bad
           quarter, or a scheduled accumulation. When the CFO, a director, and a
-          10% owner all step in during the same two weeks, each of them is
+          10% owner all step in during the same short window, each of them is
           making an independent judgment from a different vantage point inside
           the same business.
         </P>
@@ -157,17 +157,13 @@ export const LEARN_ARTICLES: LearnArticle[] = [
             twice is one insider, not a cluster.
           </li>
           <li>
-            <Strong>Within a rolling 15-day window</Strong> — close enough in
+            <Strong>Within a rolling window</Strong> — close enough in
             time that the buys reflect the same information environment.
           </li>
           <li>
-            <Strong>Meaningful size</Strong> — we require at least $100,000 per
-            purchase, which filters out token "confidence" buys.
-          </li>
-          <li>
-            <Strong>Small-caps</Strong> — companies under a $2B market cap,
-            where the information gap between insiders and the market is
-            widest. See{" "}
+            <Strong>Any company size</Strong> — we track clusters from
+            micro-caps to mega-caps. The signal tends to run strongest in
+            smaller names; see{" "}
             <A href="/learn/why-small-cap-insider-buying-matters">
               why small-cap insider buying matters
             </A>.
@@ -249,7 +245,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
           same stock within days, that's a{" "}
           <A href="/learn/what-is-a-cluster-buy">cluster buy</A> — the pattern
           this site tracks in real time across <A href="/stocks">every
-          small-cap with detected activity</A>.
+          stock with detected activity</A>.
         </P>
       </>
     ),
@@ -534,7 +530,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
           <A href="/learn/what-is-a-cluster-buy">cluster buys</A> detectable in
           near-real-time: we poll EDGAR continuously, parse each Form 4 as it
           lands, and alert the moment a second distinct insider buys the same
-          small-cap within the window. Paid subscribers get that alert while
+          stock within the window. Paid subscribers get that alert while
           the window is still open — see <A href="/pricing">pricing</A>.
         </P>
       </>
@@ -752,7 +748,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
       },
       {
         q: "What size of insider purchase is meaningful?",
-        a: "Purchases that are large relative to the insider's salary and existing stake carry the signal — InsiderClusters applies a $100,000 minimum per purchase.",
+        a: "Purchases that are large relative to the insider's salary and existing stake carry the most signal. InsiderClusters surfaces every open-market purchase, so you can weigh each buy's size in context rather than having a fixed cutoff applied for you.",
       },
     ],
     body: (
@@ -792,11 +788,11 @@ export const LEARN_ARTICLES: LearnArticle[] = [
         <P>
           Signal scales with commitment. A $5,000 optics buy after an ugly
           earnings call is noise; a purchase that's large relative to the
-          insider's salary and existing stake is information. We apply a
-          $100,000 minimum, weight C-suite buyers over passive holders, and —
-          most importantly — watch for{" "}
+          insider's salary and existing stake is information. We surface every
+          open-market buy so you can weigh size in context, weight C-suite
+          buyers over passive holders, and — most importantly — watch for{" "}
           <A href="/learn/what-is-a-cluster-buy">multiple insiders buying
-          within the same 15-day window</A>. Every qualifying purchase we've
+          within the same rolling window</A>. Every qualifying purchase we've
           parsed is browsable per stock on{" "}
           <A href="/stocks">the stocks directory</A> and per person on{" "}
           <A href="/insiders">the insider leaderboard</A>.
@@ -814,11 +810,11 @@ export const LEARN_ARTICLES: LearnArticle[] = [
     faq: [
       {
         q: "Why is insider buying a stronger signal in small-cap stocks?",
-        a: "The information gap between insiders and the market is widest in small-caps — many sub-$2B companies have little or no analyst coverage, so an insider's edge is largest there.",
+        a: "The information gap between insiders and the market is widest in small-caps — many smaller companies have little or no analyst coverage, so an insider's edge is largest there.",
       },
       {
-        q: "What counts as a small-cap for cluster detection?",
-        a: "InsiderClusters runs cluster detection on companies under a $2B market cap, with a $100,000 minimum per open-market purchase.",
+        q: "Does InsiderClusters only track small-cap cluster buys?",
+        a: "No — we run cluster detection on companies of every size, from micro-caps to mega-caps. The signal simply tends to be strongest in smaller names, for the reasons above.",
       },
       {
         q: "Does insider buying predict returns in large-cap stocks?",
@@ -858,13 +854,14 @@ export const LEARN_ARTICLES: LearnArticle[] = [
           one person's guess. See{" "}
           <A href="/learn/what-is-a-cluster-buy">what makes a cluster buy</A>.
         </P>
-        <H2>Our filter</H2>
+        <H2>How we track it</H2>
         <P>
-          We only run cluster detection on companies under a{" "}
-          <Strong>$2B market cap</Strong>, with a $100,000 minimum per
-          purchase. The result — every small-cap cluster since our records
-          begin — is browsable <A href="/stocks">by stock</A> and{" "}
-          <A href="/sectors">by sector</A>.
+          We run cluster detection across companies of{" "}
+          <Strong>every size</Strong> — micro-caps to mega-caps, with no
+          market-cap ceiling and no minimum purchase size. The signal runs
+          strongest in the smaller names above, but you see every cluster
+          either way. The full record is browsable{" "}
+          <A href="/stocks">by stock</A> and <A href="/sectors">by sector</A>.
         </P>
       </>
     ),

@@ -69,7 +69,7 @@ export default function LearnIndexPage() {
           <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted">
             Short, practical guides to reading SEC insider filings — what the
             forms and codes mean, which transactions carry signal, and why
-            clustered buying in small-caps is the pattern worth watching.
+            clustered insider buying is the pattern worth watching.
           </p>
         </header>
 

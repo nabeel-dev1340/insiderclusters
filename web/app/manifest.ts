@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "InsiderClusters",
     short_name: "InsiderClusters",
     description:
-      "Real-time alerts when multiple insiders buy the same small-cap stock, sourced from SEC Form 4 filings.",
+      "Real-time alerts when multiple insiders buy the same stock, sourced from SEC Form 4 filings.",
     start_url: "/",
     display: "standalone",
     background_color: "#0a0a0c",

@@ -26,11 +26,12 @@ test("returns null for missing / non-numeric values", () => {
   assert.equal(parseAbbreviatedNumber(undefined), null);
 });
 
-test("market-cap gate: mega-cap excluded, sub-ceiling and unknown allowed", () => {
-  // MAX_MARKET_CAP defaults to 2e9 in config.
-  assert.equal(isWithinCap(3.5e12), false); // e.g. AAPL — excluded
-  assert.equal(isWithinCap(6.39e9), false); // above 2B ceiling
-  assert.equal(isWithinCap(1.5e9), true); // sub-2B — proceeds
+test("market-cap gate disabled by default: every size proceeds", () => {
+  // MAX_MARKET_CAP defaults to Infinity in config — the size ceiling is off, so
+  // clusters form regardless of company size. (Set a finite env value to gate.)
+  assert.equal(isWithinCap(3.5e12), true); // e.g. AAPL — now included
+  assert.equal(isWithinCap(6.39e9), true); // former >2B names — now included
+  assert.equal(isWithinCap(1.5e9), true); // small-cap — proceeds
   assert.equal(isWithinCap(null), true); // unknown — do not silently drop
 });
 

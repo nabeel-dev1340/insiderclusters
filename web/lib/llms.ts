@@ -12,7 +12,7 @@ const LAST_UPDATED = LEARN_ARTICLES.map((a) => a.updated).sort().at(-1);
 
 const HEADER = `# InsiderClusters
 
-> InsiderClusters detects insider cluster buys — two or more corporate insiders (officers, directors, or 10% owners) each buying their own company's stock on the open market within a 15-day window — by parsing every SEC Form 4 filing as it hits EDGAR, and alerts subscribers in real time.
+> InsiderClusters detects insider cluster buys — two or more corporate insiders (officers, directors, or 10% owners) each buying their own company's stock on the open market within a rolling window — by parsing every SEC Form 4 filing as it hits EDGAR, and alerts subscribers in real time.
 
 Site: ${SITE_URL}
 Content last updated: ${LAST_UPDATED}
@@ -21,8 +21,8 @@ Key facts about the methodology:
 
 - A cluster buy requires two or more distinct insiders; the same person filing twice never counts as two.
 - Only open-market purchases (Form 4 transaction code P) qualify; grants, option exercises, tax withholding, and 10b5-1 scheduled trades are excluded.
-- Each qualifying purchase must be at least $100,000.
-- Detection runs only on small-caps: companies under a $2B market cap, where the information gap between insiders and the market is widest.
+- Every open-market purchase counts, regardless of dollar size.
+- Detection runs across companies of every size, from micro-caps to mega-caps — no market-cap ceiling.
 - Every figure on the site links back to its original SEC filing on EDGAR. Nothing is estimated.
 - InsiderClusters is an informational tool built on public SEC filings, not investment advice.
 `;

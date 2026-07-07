@@ -606,7 +606,7 @@ export interface InsiderLeader {
 
 /**
  * Most-active insiders across all qualifying open-market buys (is_signal =
- * P-code purchases with a real ticker at or above the signal threshold),
+ * P-code purchases with a real ticker and a positive dollar value),
  * ranked by total dollars bought. Powers the public /insiders leaderboard — a
  * crawlable surface and a "who's buying" view competitors (13Radar) lean on.
  */

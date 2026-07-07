@@ -69,8 +69,9 @@ Coolify → **+ New** → **Application** → same repo/branch.
   ```
   DATABASE_URL=<same internal URL>
   SEC_USER_AGENT=InsiderClusters support@beelodev.com
-  MIN_SIGNAL_VALUE=100000
-  MAX_MARKET_CAP=2000000000
+  MIN_SIGNAL_VALUE=1                            # $1 floor — capture every real open-market buy
+  CLUSTER_WINDOW_DAYS=90                        # rolling window for grouping distinct insiders
+  # MAX_MARKET_CAP omitted → size gate disabled (clusters at any company size). Set a finite USD value to re-enable.
   APP_URL=https://insiderclusters.com          # used for links in alert emails
   RESEND_API_KEY=<resend key>                  # enables cluster alert emails (Phase 5)
   ALERT_FROM_EMAIL=InsiderClusters <support@beelodev.com>

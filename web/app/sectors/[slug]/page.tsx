@@ -34,7 +34,7 @@ export async function generateMetadata({
   const title = `Insider Buying in ${data.sector} Stocks — Cluster Buys`;
   const description =
     `${data.clusterCount} insider cluster ${data.clusterCount === 1 ? "buy" : "buys"} across ` +
-    `${data.tickerCount} small-cap ${data.sector.toLowerCase()} ${data.tickerCount === 1 ? "stock" : "stocks"}, ` +
+    `${data.tickerCount} ${data.sector.toLowerCase()} ${data.tickerCount === 1 ? "stock" : "stocks"}, ` +
     `detected from SEC Form 4 filings. See which ${data.sector.toLowerCase()} companies insiders are buying and when.`;
   const canonical = sectorPath(data.slug);
 
@@ -165,7 +165,7 @@ export default async function SectorPage({
           </p>
           <p className="mx-auto mt-1 max-w-md text-sm text-muted">
             We watch every Form 4 as it hits SEC EDGAR. Real-time alerts the
-            moment two or more insiders buy the same small-cap.
+            moment two or more insiders buy the same stock.
           </p>
           <div className="mt-4 flex justify-center gap-3">
             <ButtonLink href="/login">Get alerts free</ButtonLink>

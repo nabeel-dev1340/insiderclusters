@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 const TITLE = "InsiderClusters — Insider cluster-buy alerts";
 const DESCRIPTION =
-  "InsiderClusters watches every SEC Form 4 filing and alerts you when two or more insiders buy the same small-cap stock within days — the highest-signal pattern in insider trading.";
+  "InsiderClusters watches every SEC Form 4 filing and alerts you when two or more insiders buy the same stock around the same time — the highest-signal pattern in insider trading.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "insider cluster buys",
     "SEC Form 4",
     "insider buying alerts",
-    "small-cap stocks",
+    "open-market purchases",
     "insider transactions",
   ],
   // NOTE: intentionally no `alternates.canonical` here. Metadata fields are
