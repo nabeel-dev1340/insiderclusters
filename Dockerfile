@@ -17,6 +17,18 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # `--include=dev` guarantees build-only deps even if NODE_ENV=production is set.
 COPY . .
 RUN rm -f package-lock.json && npm install --include=dev --no-audit --no-fund
+# PostHog's browser SDK (pageviews, autocapture, session replay) reads
+# NEXT_PUBLIC_* vars, which Next.js INLINES into the client bundle at build
+# time — not at runtime. They must therefore be present during `npm run build`,
+# not just in the running container. Coolify injects runtime env into the
+# container but NOT into `docker build` unless a var is marked as a Build
+# Variable; declaring them as ARGs here lets that value flow into the build.
+# Missing here => `process.env.NEXT_PUBLIC_POSTHOG_KEY` compiles to undefined and
+# posthog-js never initialises in the browser.
+ARG NEXT_PUBLIC_POSTHOG_KEY
+ARG NEXT_PUBLIC_POSTHOG_HOST
+ENV NEXT_PUBLIC_POSTHOG_KEY=$NEXT_PUBLIC_POSTHOG_KEY
+ENV NEXT_PUBLIC_POSTHOG_HOST=$NEXT_PUBLIC_POSTHOG_HOST
 RUN npm run build --workspace @insiderclusters/web
 
 FROM node:22-slim AS runner
