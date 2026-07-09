@@ -61,6 +61,11 @@ export const config = {
   appUrl: str("APP_URL", "https://insiderclusters.com").replace(/\/+$/, ""),
   // Free tier gets the top cluster of the week, at most once per this many days.
   digestIntervalDays: num("DIGEST_INTERVAL_DAYS", 7),
+
+  // Telegram alerts (Phase 6). When TELEGRAM_BOT_TOKEN is unset the cycle skips
+  // Telegram dispatch entirely (see pipeline.ts / telegram.ts) — same gating as
+  // email, so an unconfigured deploy never drains the undispatched backlog.
+  telegramBotToken: opt("TELEGRAM_BOT_TOKEN"),
 } as const;
 
 export type Config = typeof config;

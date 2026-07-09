@@ -22,6 +22,7 @@ export interface CycleStats {
   clustersUpdated: number;
   alertsSent: number;
   digestsSent: number;
+  telegramSent: number;
   errors: number;
 }
 
@@ -83,6 +84,7 @@ export async function runCycle(): Promise<CycleStats> {
     clustersUpdated: 0,
     alertsSent: 0,
     digestsSent: 0,
+    telegramSent: 0,
     errors: 0,
   };
 
@@ -129,16 +131,20 @@ export async function runCycle(): Promise<CycleStats> {
     }
   }
 
-  // Email dispatch (Phase 5). Gated on RESEND_API_KEY so deploying before email
-  // is configured never consumes the pending-cluster backlog (dispatch stamps
-  // alert_sent_at, which is irreversible). Isolated in try/catch so a mail
+  // Alert dispatch (Phase 5 email / Phase 6 Telegram). Gated on at least one
+  // transport being configured so deploying before alerts are set up never
+  // consumes the pending-cluster backlog (dispatch stamps alert_sent_at, which
+  // is irreversible). Each transport also self-gates, so with only one key set
+  // the other channel is simply a no-op. Isolated in try/catch so a provider
   // failure never affects scraping — the next cycle retries anything undispatched.
-  if (config.resendApiKey) {
+  if (config.resendApiKey || config.telegramBotToken) {
     try {
       const dispatch = await dispatchAlerts();
       stats.alertsSent = dispatch.realtimeEmails;
       stats.digestsSent = dispatch.digestEmails;
+      stats.telegramSent = dispatch.telegramMessages;
       if (dispatch.emailFailures) stats.errors += dispatch.emailFailures;
+      if (dispatch.telegramFailures) stats.errors += dispatch.telegramFailures;
     } catch (err) {
       stats.errors++;
       log.error("alert dispatch failed", { error: (err as Error).message });

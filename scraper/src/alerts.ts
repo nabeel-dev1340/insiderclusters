@@ -17,13 +17,16 @@ import { pool } from "@insiderclusters/db";
 import { config } from "./config.ts";
 import { log } from "./logger.ts";
 import { sendEmail } from "./email.ts";
+import { sendTelegram, telegramEscape } from "./telegram.ts";
 import { posthog } from "./posthog.ts";
 
 export interface DispatchStats {
   clustersDispatched: number;
   realtimeEmails: number;
   digestEmails: number;
+  telegramMessages: number;
   emailFailures: number;
+  telegramFailures: number;
 }
 
 interface ClusterRow {
@@ -41,6 +44,18 @@ interface ClusterRow {
 interface Recipient {
   id: number;
   email: string;
+  telegramChatId: string | null;
+  emailAlertsEnabled: boolean;
+  telegramAlertsEnabled: boolean;
+}
+
+// A recipient can run email, Telegram, both, or neither. The eligibility queries
+// guarantee at least one channel is deliverable; these decide which to attempt.
+function wantsEmail(r: Recipient): boolean {
+  return r.emailAlertsEnabled;
+}
+function wantsTelegram(r: Recipient): r is Recipient & { telegramChatId: string } {
+  return r.telegramAlertsEnabled && r.telegramChatId != null;
 }
 
 // --- formatting -------------------------------------------------------------
@@ -180,24 +195,63 @@ function clusterEmail(
   return { subject, text, html };
 }
 
+/** Telegram HTML-parse-mode body for a cluster. Mirrors the email content. */
+function clusterTelegram(
+  cluster: ClusterRow,
+  insiders: Insider[],
+  opts: { digest: boolean }
+): string {
+  const link = `${config.appUrl}/dashboard/clusters/${cluster.id}`;
+  const heading = opts.digest
+    ? "📊 This week's top insider cluster buy"
+    : "🚨 New insider cluster buy";
+  const e = telegramEscape;
+
+  return [
+    `<b>${e(heading)}</b>`,
+    "",
+    `<b>${e(cluster.ticker)}</b> — ${e(cluster.issuer_name)}`,
+    "",
+    `Insiders: ${cluster.insider_count} (${e(insidersLine(insiders))})`,
+    `Total bought: ${e(money(cluster.total_value))}`,
+    `Market cap: ${e(marketCap(cluster.market_cap))}`,
+    `Window: ${e(dateRange(cluster.window_start, cluster.window_end))}`,
+    "",
+    `<a href="${e(link)}">View cluster details</a>`,
+  ].join("\n");
+}
+
 // --- recipient queries ------------------------------------------------------
 
-/** Paid + active + alerts-on. */
+// A user is deliverable when at least one channel is on: email, or Telegram with
+// a linked chat. Both queries share this predicate so we never return a user we
+// can't actually message (which for the digest would spin without ever stamping
+// last_digest_sent_at).
+const HAS_A_CHANNEL =
+  `(email_alerts_enabled = TRUE
+    OR (telegram_alerts_enabled = TRUE AND telegram_chat_id IS NOT NULL))`;
+
+const RECIPIENT_COLS = `id, email,
+    telegram_chat_id        AS "telegramChatId",
+    email_alerts_enabled    AS "emailAlertsEnabled",
+    telegram_alerts_enabled AS "telegramAlertsEnabled"`;
+
+/** Paid + active + at least one channel on. */
 async function eligiblePaidUsers(): Promise<Recipient[]> {
   const { rows } = await pool.query<Recipient>(
-    `SELECT id, email FROM users
+    `SELECT ${RECIPIENT_COLS} FROM users
       WHERE plan = 'paid'
         AND subscription_status = 'active'
-        AND email_alerts_enabled = TRUE`
+        AND ${HAS_A_CHANNEL}`
   );
   return rows;
 }
 
-/** Free (not paid+active) + alerts-on + not digested within the window. */
+/** Free (not paid+active) + a channel on + not digested within the window. */
 async function eligibleDigestUsers(): Promise<Recipient[]> {
   const { rows } = await pool.query<Recipient>(
-    `SELECT id, email FROM users
-      WHERE email_alerts_enabled = TRUE
+    `SELECT ${RECIPIENT_COLS} FROM users
+      WHERE ${HAS_A_CHANNEL}
         AND NOT (plan = 'paid' AND subscription_status = 'active')
         AND (last_digest_sent_at IS NULL
              OR last_digest_sent_at < now() - ($1 || ' days')::interval)`,
@@ -223,23 +277,31 @@ async function dispatchRealtime(stats: DispatchStats): Promise<void> {
   for (const cluster of clusters) {
     const insiders = await clusterInsiders(cluster.transaction_ids);
     const email = clusterEmail(cluster, insiders, { digest: false });
+    const telegram = clusterTelegram(cluster, insiders, { digest: false });
+    const props = { cluster_id: cluster.id, ticker: cluster.ticker };
 
     for (const r of recipients) {
-      const ok = await sendEmail({ to: r.email, ...email });
-      if (ok) {
-        stats.realtimeEmails++;
-        posthog().capture({
-          distinctId: r.email,
-          event: "realtime alert sent",
-          properties: { cluster_id: cluster.id, ticker: cluster.ticker },
-        });
-      } else {
-        stats.emailFailures++;
+      if (wantsEmail(r)) {
+        if (await sendEmail({ to: r.email, ...email })) {
+          stats.realtimeEmails++;
+          posthog().capture({ distinctId: r.email, event: "realtime alert sent", properties: props });
+        } else {
+          stats.emailFailures++;
+        }
+      }
+      if (wantsTelegram(r)) {
+        if (await sendTelegram({ chatId: r.telegramChatId, text: telegram })) {
+          stats.telegramMessages++;
+          posthog().capture({ distinctId: r.email, event: "realtime telegram alert sent", properties: props });
+        } else {
+          stats.telegramFailures++;
+        }
       }
     }
 
     // Stamp regardless of recipient count so the undispatched set always drains
-    // and re-runs never re-send. (Zero paid users => nothing to send, still done.)
+    // and re-runs never re-send. (Zero recipients => nothing to send, still done.)
+    // One stamp covers all channels: a re-run re-sends nothing on email OR Telegram.
     await pool.query(`UPDATE clusters SET alert_sent_at = now() WHERE id = $1`, [
       cluster.id,
     ]);
@@ -265,20 +327,38 @@ async function dispatchDigest(stats: DispatchStats): Promise<void> {
 
   const insiders = await clusterInsiders(top.transaction_ids);
   const email = clusterEmail(top, insiders, { digest: true });
+  const telegram = clusterTelegram(top, insiders, { digest: true });
+  const props = { cluster_id: top.id, ticker: top.ticker };
 
   for (const r of recipients) {
-    const ok = await sendEmail({ to: r.email, ...email });
-    if (!ok) {
-      stats.emailFailures++;
-      continue; // leave last_digest_sent_at untouched so it retries next cycle
+    // Attempt every enabled channel; a channel failure is counted but doesn't
+    // block the others. We only stamp last_digest_sent_at when at least one
+    // channel delivered, so a total failure retries the whole recipient next
+    // cycle (a partial success won't re-fire the succeeded channel — acceptable).
+    let delivered = false;
+
+    if (wantsEmail(r)) {
+      if (await sendEmail({ to: r.email, ...email })) {
+        stats.digestEmails++;
+        delivered = true;
+        posthog().capture({ distinctId: r.email, event: "digest alert sent", properties: props });
+      } else {
+        stats.emailFailures++;
+      }
     }
-    stats.digestEmails++;
-    posthog().capture({
-      distinctId: r.email,
-      event: "digest alert sent",
-      properties: { cluster_id: top.id, ticker: top.ticker },
-    });
-    await pool.query(`UPDATE users SET last_digest_sent_at = now() WHERE id = $1`, [r.id]);
+    if (wantsTelegram(r)) {
+      if (await sendTelegram({ chatId: r.telegramChatId, text: telegram })) {
+        stats.telegramMessages++;
+        delivered = true;
+        posthog().capture({ distinctId: r.email, event: "digest telegram alert sent", properties: props });
+      } else {
+        stats.telegramFailures++;
+      }
+    }
+
+    if (delivered) {
+      await pool.query(`UPDATE users SET last_digest_sent_at = now() WHERE id = $1`, [r.id]);
+    }
   }
 }
 
@@ -288,13 +368,21 @@ export async function dispatchAlerts(): Promise<DispatchStats> {
     clustersDispatched: 0,
     realtimeEmails: 0,
     digestEmails: 0,
+    telegramMessages: 0,
     emailFailures: 0,
+    telegramFailures: 0,
   };
 
   await dispatchRealtime(stats);
   await dispatchDigest(stats);
 
-  if (stats.clustersDispatched || stats.digestEmails || stats.emailFailures) {
+  if (
+    stats.clustersDispatched ||
+    stats.digestEmails ||
+    stats.telegramMessages ||
+    stats.emailFailures ||
+    stats.telegramFailures
+  ) {
     log.info("alerts dispatched", { ...stats });
   }
   return stats;

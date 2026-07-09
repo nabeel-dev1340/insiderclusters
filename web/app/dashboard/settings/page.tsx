@@ -3,12 +3,13 @@ import { effectivePlan } from "@/lib/plan";
 import { Card, CardBody } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EmailAlertsToggle } from "@/components/email-alerts-toggle";
+import { TelegramConnect } from "@/components/telegram-connect";
 import { BillingButton } from "@/components/billing-button";
 
 const PRO_FEATURES = [
   "Real-time cluster alerts (no 24h delay)",
   "Full cluster history, no weekly cap",
-  "Email + Discord alerts",
+  "Email + Telegram alerts",
 ];
 
 export default async function SettingsPage() {
@@ -72,10 +73,17 @@ export default async function SettingsPage() {
           <EmailAlertsToggle initial={user.emailAlertsEnabled} />
         </Row>
         <Row
-          label="Discord"
-          description="Real-time alerts in the members Discord."
+          label="Telegram"
+          description={
+            user.telegramLinked
+              ? "Connected. Get cluster alerts in Telegram."
+              : "Get cluster alerts as Telegram messages."
+          }
         >
-          <Badge tone="muted">Coming soon</Badge>
+          <TelegramConnect
+            linked={user.telegramLinked}
+            alertsEnabled={user.telegramAlertsEnabled}
+          />
         </Row>
       </Section>
     </div>

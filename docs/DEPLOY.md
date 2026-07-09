@@ -92,7 +92,9 @@ Deploy. Logs should show `scraper starting` and, every ~5 min, `cycle complete`.
   applied files are skipped).
 - **Redeploys:** push to `main`, then hit Redeploy in Coolify (or enable
   auto-deploy on push).
-- **Secrets** for later phases (Lemon Squeezy, Resend, Discord) get added as env
-  vars on the relevant app when we build those phases.
+- **Secrets** for later phases (Lemon Squeezy, Resend, Telegram) get added as env
+  vars on the relevant app when we build those phases. For Telegram, set
+  `TELEGRAM_BOT_TOKEN` on both apps, `TELEGRAM_BOT_USERNAME` + `TELEGRAM_WEBHOOK_SECRET`
+  on web, then run `npm run telegram:webhook` once to register the webhook.
 - The demo seed (`npm run seed`) is **local-only** — production starts empty and
   fills in from real SEC data as the scraper runs.

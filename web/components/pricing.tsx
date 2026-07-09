@@ -50,7 +50,7 @@ export const PLANS: Plan[] = [
       "Real-time clusters — no 24-hour delay",
       "Unlimited feed and full cluster history",
       "Instant email alerts as clusters form",
-      "Discord alerts and Pro role (coming soon)",
+      "Instant Telegram alerts as clusters form",
       "Cancel anytime",
     ],
   },

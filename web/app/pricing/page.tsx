@@ -8,7 +8,7 @@ import { posthog } from "@/lib/posthog";
 
 export const metadata: Metadata = {
   title: "Pricing — Free insider-buy alerts, or real-time Pro",
-  description: `Track SEC insider cluster buys free with a weekly, delayed feed, or go Pro for $${PRO_PRICE_MONTHLY}/month to get every cluster in real time with instant email and Discord alerts.`,
+  description: `Track SEC insider cluster buys free with a weekly, delayed feed, or go Pro for $${PRO_PRICE_MONTHLY}/month to get every cluster in real time with instant email and Telegram alerts.`,
   alternates: { canonical: "/pricing" },
   openGraph: {
     title: "InsiderClusters Pricing",
@@ -39,7 +39,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: `What do I get for $${PRO_PRICE_MONTHLY} a month?`,
-    a: "Real-time access to every cluster the moment it's detected, unlimited history, instant email alerts, and Discord alerts as they roll out — with no weekly cap and no delay. You can cancel anytime.",
+    a: "Real-time access to every cluster the moment it's detected, unlimited history, and instant email and Telegram alerts — with no weekly cap and no delay. You can cancel anytime.",
   },
   {
     q: "Do I need a credit card to start?",
@@ -105,7 +105,7 @@ export default async function PricingPage() {
               <ComparisonRow feature="Full transaction breakdown" free pro />
               <ComparisonRow feature="Public ticker pages" free pro />
               <ComparisonRow feature="Instant email alerts" free={false} pro />
-              <ComparisonRow feature="Discord alerts" free={false} pro="Soon" />
+              <ComparisonRow feature="Telegram alerts" free={false} pro />
             </tbody>
           </table>
         </div>

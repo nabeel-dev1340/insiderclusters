@@ -2,7 +2,7 @@
 
 SaaS that monitors SEC EDGAR Form 4 filings in real time, detects **cluster buys**
 (2+ distinct insiders buying open-market shares of the same small/micro-cap stock
-within a rolling window), and delivers alerts via web dashboard, email, and Discord.
+within a rolling window), and delivers alerts via web dashboard, email, and Telegram.
 
 See [PRD.md](./PRD.md) for the full product spec and phased build order.
 
@@ -70,6 +70,6 @@ criteria before the next begins.
 3. **Phase 3** — Web dashboard
 4. **Phase 4** — Billing (Lemon Squeezy)
 5. **Phase 5** — Email alerts
-6. **Phase 6** — Discord bot
+6. **Phase 6** — Telegram alerts
 7. **Phase 7** — SEO / content layer
 8. **Phase 8** — Ops / deployment (Coolify on Hetzner)

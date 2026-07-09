@@ -32,10 +32,15 @@ const API_KEY_REGISTRY: Record<string, APIKeyConfig> = {
     envVarName: "POSTHOG_API_KEY",
     description: "Analytics API key",
   },
-  DISCORD_BOT_TOKEN: {
-    serviceName: "Discord",
-    envVarName: "DISCORD_BOT_TOKEN",
-    description: "Discord bot authentication token",
+  TELEGRAM_BOT_TOKEN: {
+    serviceName: "Telegram",
+    envVarName: "TELEGRAM_BOT_TOKEN",
+    description: "Telegram bot authentication token",
+  },
+  TELEGRAM_WEBHOOK_SECRET: {
+    serviceName: "Telegram Webhook",
+    envVarName: "TELEGRAM_WEBHOOK_SECRET",
+    description: "Telegram webhook secret-token verification",
   },
 };
 
@@ -80,7 +85,7 @@ export function getAPIKey(keyName: keyof typeof API_KEY_REGISTRY): string | unde
  * Note: Only keys for implemented phases are required:
  * - Phase 5 (email alerts): RESEND
  * - Phase 4 (billing): LEMONSQUEEZY_WEBHOOK_SECRET (not yet implemented, optional)
- * - Phase 6 (Discord): DISCORD_BOT_TOKEN (not yet implemented, optional)
+ * - Phase 6 (Telegram alerts): TELEGRAM_BOT_TOKEN + TELEGRAM_WEBHOOK_SECRET (optional)
  */
 export function validateRequiredAPIKeys(): { valid: boolean; missing: string[] } {
   const required = ["RESEND"]; // Only email is required (Phase 5 done)

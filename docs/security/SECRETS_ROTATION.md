@@ -19,7 +19,8 @@ Secrets are stored as environment variables in Coolify and loaded at application
 | Resend | `RESEND_API_KEY` | Email delivery | Quarterly |
 | Lemon Squeezy | `LEMONSQUEEZY_API_KEY` | Payment API | Quarterly |
 | Lemon Squeezy | `LEMONSQUEEZY_WEBHOOK_SECRET` | Webhook signature | Quarterly or on compromise |
-| Discord | `DISCORD_BOT_TOKEN` | Bot authentication | Quarterly or on compromise |
+| Telegram | `TELEGRAM_BOT_TOKEN` | Bot authentication | Quarterly or on compromise |
+| Telegram | `TELEGRAM_WEBHOOK_SECRET` | Webhook spoof protection | Quarterly or on compromise |
 | PostHog | `NEXT_PUBLIC_POSTHOG_KEY` | Analytics (public, but rotate if abuse) | As needed |
 | Database | `DATABASE_URL` | PostgreSQL connection | After password change only |
 
@@ -117,27 +118,33 @@ Secrets are stored as environment variables in Coolify and loaded at application
 
 ---
 
-### 4. Discord Bot Token Rotation
+### 4. Telegram Bot Token Rotation
 
 **Timeline**: ~5 minutes  
-**Downtime**: ~30 seconds (bot restarts)
+**Downtime**: ~30 seconds (bot restarts + webhook re-register)
 
 #### Steps:
 
 1. **Generate new token**:
-   - Go to [Discord Developer Portal](https://discord.com/developers/applications)
-   - Select the "InsiderClusters" application
-   - Click "Regenerate" under the TOKEN section
+   - Message [@BotFather](https://t.me/BotFather) on Telegram
+   - `/mybots` → select the InsiderClusters bot → API Token → Revoke current token
    - Copy the new token (shown once)
 
 2. **Update Coolify**:
-   - Update `DISCORD_BOT_TOKEN` in environment variables
+   - Update `TELEGRAM_BOT_TOKEN` on BOTH the web and scraper apps
    - Redeploy
 
-3. **Verify**:
-   - Check Discord logs/activity
-   - If bot posts messages, verify they still work
+3. **Re-register the webhook** (the secret token is bound to the bot, not rotated
+   here, but the webhook must be re-set against the new token):
+   - Run `npm run telegram:webhook` (or `-- info` to confirm)
+
+4. **Verify**:
+   - Send `/start` to the bot; confirm it replies
    - Old token becomes invalid immediately
+
+> To rotate `TELEGRAM_WEBHOOK_SECRET` instead: pick a new random value, update it
+> on the web app, then re-run `npm run telegram:webhook` so Telegram sends the new
+> secret-token header. Requests with the old secret are rejected immediately.
 
 ---
 

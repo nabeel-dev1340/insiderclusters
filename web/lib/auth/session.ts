@@ -13,6 +13,8 @@ export interface SessionUser {
   plan: string;
   subscriptionStatus: string | null;
   emailAlertsEnabled: boolean;
+  telegramLinked: boolean;
+  telegramAlertsEnabled: boolean;
 }
 
 /**
@@ -83,8 +85,11 @@ export async function getCurrentUser(): Promise<SessionUser | null> {
     plan: string;
     subscription_status: string | null;
     email_alerts_enabled: boolean;
+    telegram_chat_id: string | null;
+    telegram_alerts_enabled: boolean;
   }>(
-    `SELECT u.id, u.email, u.plan, u.subscription_status, u.email_alerts_enabled
+    `SELECT u.id, u.email, u.plan, u.subscription_status, u.email_alerts_enabled,
+            u.telegram_chat_id, u.telegram_alerts_enabled
        FROM sessions s
        JOIN users u ON u.id = s.user_id
       WHERE s.session_token = $1 AND s.expires_at > now()`,
@@ -99,6 +104,8 @@ export async function getCurrentUser(): Promise<SessionUser | null> {
     plan: u.plan,
     subscriptionStatus: u.subscription_status,
     emailAlertsEnabled: u.email_alerts_enabled,
+    telegramLinked: u.telegram_chat_id != null,
+    telegramAlertsEnabled: u.telegram_alerts_enabled,
   };
 }
 

@@ -397,8 +397,8 @@ function Features() {
               <FeatureIcon icon={BellIcon} />
               <h3 className="mt-4 font-semibold">Alerts where you work</h3>
               <p className="mt-2 text-sm text-muted">
-                Get clusters in your dashboard and inbox today, with Discord
-                alerts rolling out for Pro members shortly.
+                Get clusters in your dashboard, inbox, and Telegram — real-time
+                for Pro members, the moment they form.
               </p>
             </BentoCell>
           </Reveal>
