@@ -29,6 +29,19 @@ ARG NEXT_PUBLIC_POSTHOG_KEY
 ARG NEXT_PUBLIC_POSTHOG_HOST
 ENV NEXT_PUBLIC_POSTHOG_KEY=$NEXT_PUBLIC_POSTHOG_KEY
 ENV NEXT_PUBLIC_POSTHOG_HOST=$NEXT_PUBLIC_POSTHOG_HOST
+# Fail loudly if the browser key is missing at build time. Without this the key
+# inlines as `undefined`, posthog-js is tree-shaken out, and a keyless bundle
+# ships silently (no pageviews/replay) — the exact failure we hit when the
+# Coolify var was misnamed. Escape hatch: set ALLOW_MISSING_POSTHOG=1 for
+# intentional keyless builds (local/CI/preview without the secret).
+ARG ALLOW_MISSING_POSTHOG
+RUN if [ -z "$NEXT_PUBLIC_POSTHOG_KEY" ] && [ -z "$ALLOW_MISSING_POSTHOG" ]; then \
+      echo "ERROR: NEXT_PUBLIC_POSTHOG_KEY is empty at build time. The browser" \
+           "PostHog SDK will be tree-shaken out and no client events will fire." \
+           "Set it as a Coolify BUILD variable (exact name, no API_), or pass" \
+           "--build-arg ALLOW_MISSING_POSTHOG=1 for an intentional keyless build." >&2; \
+      exit 1; \
+    fi
 RUN npm run build --workspace @insiderclusters/web
 
 FROM node:22-slim AS runner
