@@ -49,11 +49,19 @@ export function setSessionCookie(
   token: string,
   expiresAt: Date
 ): void {
+  // Set BOTH Max-Age and Expires. Max-Age (relative seconds) takes precedence
+  // in modern browsers and is immune to client clock skew — an `Expires` date
+  // computed on the server can read as already-past on a device whose clock is
+  // wrong, causing the browser to silently discard an otherwise-valid session
+  // cookie ("logged out after closing the browser"). Expires is kept as a
+  // fallback for any client that ignores Max-Age.
+  const maxAge = Math.max(0, Math.floor((expiresAt.getTime() - Date.now()) / 1000));
   res.cookies.set(SESSION_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/",
+    maxAge,
     expires: expiresAt,
   });
 }
