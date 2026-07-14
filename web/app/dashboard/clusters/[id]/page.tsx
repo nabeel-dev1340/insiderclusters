@@ -2,7 +2,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth/session";
 import { insiderPath } from "@/lib/site";
-import { effectivePlan } from "@/lib/plan";
 import { posthog } from "@/lib/posthog";
 import {
   getClusterForUser,
@@ -13,7 +12,6 @@ import {
 } from "@/lib/clusters";
 import { Card, CardBody } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ButtonLink } from "@/components/ui/button";
 import { ConvictionBadge } from "@/components/conviction-badge";
 import { ReturnBadge } from "@/components/return-badge";
 import {
@@ -39,8 +37,7 @@ export default async function ClusterDetailPage({
   if (!Number.isInteger(clusterId)) notFound();
 
   const user = (await getCurrentUser())!;
-  const plan = effectivePlan(user);
-  const result = await getClusterForUser(clusterId, plan);
+  const result = await getClusterForUser(clusterId);
 
   if (result.status === "not_found") notFound();
 
@@ -48,11 +45,10 @@ export default async function ClusterDetailPage({
 
   posthog().capture({
     distinctId: user.email,
-    event: result.status === "locked" ? "cluster locked" : "cluster viewed",
+    event: "cluster viewed",
     properties: {
       cluster_id: clusterId,
       ticker: cluster.ticker,
-      plan,
       insider_count: cluster.insiderCount,
     },
   });
@@ -84,41 +80,35 @@ export default async function ClusterDetailPage({
         </div>
       </div>
 
-      {result.status === "locked" ? (
-        <LockedNotice ticker={cluster.ticker} />
-      ) : (
-        <>
-          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <SummaryStat label="Total bought" value={formatMoneyCompact(cluster.totalValue)} />
-            <SummaryStat label="Avg paid" value={formatSharePrice(avgBuyPrice(cluster))} />
-            <SummaryStat label="Latest price" value={formatSharePrice(cluster.lastPrice)} />
-            <SummaryStat label="Total shares" value={formatNumber(cluster.totalShares)} />
-            <SummaryStat
-              label="% of company"
-              value={formatPercent(buyFractionOfCompany(cluster))}
-            />
-            <SummaryStat label="Insiders" value={String(cluster.insiderCount)} />
-            <SummaryStat label="Market cap" value={formatMarketCap(cluster.marketCap)} />
-            <SummaryStat
-              label="Window"
-              value={formatDateRange(cluster.windowStart, cluster.windowEnd)}
-            />
-          </div>
+      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <SummaryStat label="Total bought" value={formatMoneyCompact(cluster.totalValue)} />
+        <SummaryStat label="Avg paid" value={formatSharePrice(avgBuyPrice(cluster))} />
+        <SummaryStat label="Latest price" value={formatSharePrice(cluster.lastPrice)} />
+        <SummaryStat label="Total shares" value={formatNumber(cluster.totalShares)} />
+        <SummaryStat
+          label="% of company"
+          value={formatPercent(buyFractionOfCompany(cluster))}
+        />
+        <SummaryStat label="Insiders" value={String(cluster.insiderCount)} />
+        <SummaryStat label="Market cap" value={formatMarketCap(cluster.marketCap)} />
+        <SummaryStat
+          label="Window"
+          value={formatDateRange(cluster.windowStart, cluster.windowEnd)}
+        />
+      </div>
 
-          <h2 className="mt-8 text-lg font-semibold">Transactions</h2>
-          <p className="mt-1 text-sm text-muted">
-            Open-market purchases that make up this cluster.
-            {cluster.hasSeniorInsider && (
-              <>
-                {" "}
-                A <span className="inline-block h-1.5 w-1.5 -translate-y-px rounded-full bg-accent align-middle" />{" "}
-                marks a C-suite / executive officer.
-              </>
-            )}
-          </p>
-          <TransactionsTable transactions={result.transactions} />
-        </>
-      )}
+      <h2 className="mt-8 text-lg font-semibold">Transactions</h2>
+      <p className="mt-1 text-sm text-muted">
+        Open-market purchases that make up this cluster.
+        {cluster.hasSeniorInsider && (
+          <>
+            {" "}
+            A <span className="inline-block h-1.5 w-1.5 -translate-y-px rounded-full bg-accent align-middle" />{" "}
+            marks a C-suite / executive officer.
+          </>
+        )}
+      </p>
+      <TransactionsTable transactions={result.transactions} />
     </div>
   );
 }
@@ -129,30 +119,6 @@ function SummaryStat({ label, value }: { label: string; value: string }) {
       <CardBody className="p-4">
         <div className="text-[11px] uppercase tracking-wide text-muted">{label}</div>
         <div className="mt-1 font-semibold tabular-nums">{value}</div>
-      </CardBody>
-    </Card>
-  );
-}
-
-function LockedNotice({ ticker }: { ticker: string }) {
-  return (
-    <Card className="mt-6 border-accent/30 bg-accent/5">
-      <CardBody className="flex flex-col items-center gap-3 py-12 text-center">
-        <span className="grid h-11 w-11 place-items-center rounded-full bg-accent/15 text-accent">
-          {/* lock glyph */}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="4" y="10" width="16" height="10" rx="2" />
-            <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-          </svg>
-        </span>
-        <h2 className="text-lg font-semibold">This is a real-time cluster</h2>
-        <p className="max-w-md text-sm text-muted">
-          Insider buying in {ticker} was detected within the last 24 hours. Upgrade
-          to Pro to view real-time clusters and the full transaction breakdown.
-        </p>
-        <ButtonLink href="/dashboard/settings" className="mt-1">
-          Upgrade to Pro
-        </ButtonLink>
       </CardBody>
     </Card>
   );

@@ -37,7 +37,7 @@ ${line("Stocks with insider buying", "/stocks", "every stock with a detected clu
 ${line("Insider leaderboard", "/insiders", "the individual insiders buying the most, each with a cross-company purchase history")}
 ${line("Sectors", "/sectors", "insider cluster activity grouped by sector")}
 ${line("Monthly archives", "/insider-buying", "every detected cluster buy, month by month")}
-${line("Pricing", "/pricing", "free tier (weekly digest, 24h delay) and Pro (real-time cluster alerts)")}`;
+${line("Pricing", "/pricing", "Basic (real-time feed + weekly digest) and Pro (adds instant email/Telegram alerts), both with a 7-day free trial")}`;
 
 function learnIndex(): string {
   const items = LEARN_ARTICLES.map((a) =>

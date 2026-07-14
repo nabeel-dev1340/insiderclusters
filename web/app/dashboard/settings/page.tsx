@@ -1,20 +1,21 @@
 import { getCurrentUser } from "@/lib/auth/session";
 import { effectivePlan } from "@/lib/plan";
-import { Card, CardBody } from "@/components/ui/card";
+import { MONTHLY_PRICE } from "@/lib/billing";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
 import { EmailAlertsToggle } from "@/components/email-alerts-toggle";
 import { TelegramConnect } from "@/components/telegram-connect";
-import { BillingButton } from "@/components/billing-button";
 
-const PRO_FEATURES = [
-  "Real-time cluster alerts (no 24h delay)",
-  "Full cluster history, no weekly cap",
-  "Email + Telegram alerts",
+const PRO_EXTRAS = [
+  "Instant email alerts as clusters form",
+  "Instant Telegram alerts as clusters form",
 ];
 
 export default async function SettingsPage() {
   const user = (await getCurrentUser())!;
-  const plan = effectivePlan(user);
+  const plan = effectivePlan(user); // "basic" | "pro" — paywall guards "none"
+  const trialing = user.subscriptionStatus === "trialing";
 
   return (
     <div className="mx-auto max-w-2xl">
@@ -32,25 +33,26 @@ export default async function SettingsPage() {
         <Row
           label="Current plan"
           description={
-            plan === "paid"
-              ? "You have real-time access to every cluster."
-              : "Free — delayed 24h, one cluster per week."
+            plan === "pro"
+              ? "Real-time feed plus instant email and Telegram alerts."
+              : "Real-time feed and history, with a weekly email digest."
           }
         >
-          <Badge tone={plan === "paid" ? "accent" : "muted"} className="uppercase">
-            {plan === "paid" ? "Pro" : "Free"}
-          </Badge>
+          <span className="flex items-center gap-2">
+            {trialing && <Badge tone="muted">Trial</Badge>}
+            <Badge tone="accent" className="uppercase">
+              {plan === "pro" ? "Pro" : "Basic"}
+            </Badge>
+          </span>
         </Row>
 
-        {plan === "paid" ? (
-          <div className="px-5 py-4">
-            <BillingButton label="Manage subscription" />
-          </div>
-        ) : (
+        {plan === "basic" && (
           <div className="px-5 py-5">
-            <p className="text-sm font-medium">Upgrade to Pro</p>
+            <p className="text-sm font-medium">
+              Upgrade to Pro — ${MONTHLY_PRICE.pro}/month
+            </p>
             <ul className="mt-3 space-y-2">
-              {PRO_FEATURES.map((f) => (
+              {PRO_EXTRAS.map((f) => (
                 <li key={f} className="flex items-center gap-2 text-sm text-muted">
                   <CheckIcon />
                   {f}
@@ -58,32 +60,51 @@ export default async function SettingsPage() {
               ))}
             </ul>
             <div className="mt-4">
-              <BillingButton label="Upgrade to Pro" />
+              <ButtonLink href="/checkout?plan=pro">Upgrade to Pro</ButtonLink>
             </div>
           </div>
         )}
+
+        <Row
+          label="Billing"
+          description="Invoices, card, plan changes, and cancellation are handled by Polar — use the secure link in any Polar receipt email."
+        >
+          <span />
+        </Row>
       </Section>
 
       {/* Alerts */}
       <Section title="Alerts">
         <Row
           label="Email alerts"
-          description="Get an email when a new cluster is detected."
+          description={
+            plan === "pro"
+              ? "Get an email the moment a new cluster is detected."
+              : "Get the weekly digest email. Instant per-cluster email is a Pro feature."
+          }
         >
           <EmailAlertsToggle initial={user.emailAlertsEnabled} />
         </Row>
         <Row
           label="Telegram"
           description={
-            user.telegramLinked
-              ? "Connected. Get cluster alerts in Telegram."
-              : "Get cluster alerts as Telegram messages."
+            plan !== "pro"
+              ? "Instant Telegram alerts are a Pro feature."
+              : user.telegramLinked
+                ? "Connected. Get cluster alerts in Telegram."
+                : "Get cluster alerts as Telegram messages."
           }
         >
-          <TelegramConnect
-            linked={user.telegramLinked}
-            alertsEnabled={user.telegramAlertsEnabled}
-          />
+          {plan === "pro" ? (
+            <TelegramConnect
+              linked={user.telegramLinked}
+              alertsEnabled={user.telegramAlertsEnabled}
+            />
+          ) : (
+            <ButtonLink href="/checkout?plan=pro" size="sm" variant="secondary">
+              Upgrade
+            </ButtonLink>
+          )}
         </Row>
       </Section>
     </div>

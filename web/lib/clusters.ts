@@ -1,6 +1,5 @@
 import "server-only";
 import { pool } from "./db";
-import { FREE_DELAY_HOURS, type EffectivePlan } from "./plan";
 
 export interface ClusterSummary {
   id: number;
@@ -215,8 +214,7 @@ const SELECT_COLS = `id, ticker, issuer_name, market_cap, insider_count,
 
 export interface FeedResult {
   clusters: ClusterSummary[];
-  total: number; // visible-to-this-plan total (for pagination)
-  hiddenCount: number; // clusters this plan can't see (upgrade prompt)
+  total: number; // total matching the filter (for pagination)
 }
 
 /** How the feed is ordered. Mapped to a fixed ORDER BY — never interpolate raw. */
@@ -237,15 +235,11 @@ const FEED_ORDER_BY: Record<FeedSort, string> = {
 };
 
 /**
- * Cluster feed for a user, gated by plan (PRD 3.2) and filtered/sorted by the
- * caller's options.
- * - paid: every cluster matching the size tier, ordered by `sort`.
- * - free: delayed FREE_DELAY_HOURS and capped to one (highest-value) per ISO week.
- * The size-tier filter applies to both tiers; `hiddenCount` is relative to the
- * filtered set so the upgrade prompt stays accurate under any filter.
+ * Cluster feed, filtered/sorted by the caller's options. Every subscriber sees
+ * the full real-time feed — access itself is gated upstream by the dashboard
+ * paywall (no free tier), and the Basic/Pro split is alert channels, not data.
  */
 export async function getClusterFeed(
-  plan: EffectivePlan,
   page: number,
   pageSize: number,
   options: FeedOptions = DEFAULT_FEED_OPTIONS
@@ -258,47 +252,16 @@ export async function getClusterFeed(
     `SELECT count(*)::int AS c FROM clusters WHERE insider_count >= $1`,
     [minInsiders]
   );
-  const grandTotal = totalRows[0]!.c;
-
-  if (plan === "paid") {
-    const { rows } = await pool.query<ClusterRow>(
-      `SELECT ${SELECT_COLS} FROM clusters
-        WHERE insider_count >= $1
-        ORDER BY ${orderBy} LIMIT $2 OFFSET $3`,
-      [minInsiders, pageSize, offset]
-    );
-    return {
-      clusters: await attachMarketData(rows.map(mapCluster)),
-      total: grandTotal,
-      hiddenCount: 0,
-    };
-  }
-
-  // Free tier: one per week, delayed.
-  const freeBase = `
-    SELECT ${SELECT_COLS} FROM (
-      SELECT DISTINCT ON (date_trunc('week', detected_at)) *
-      FROM clusters
-      WHERE detected_at <= now() - ($1 || ' hours')::interval
-        AND insider_count >= $2
-      ORDER BY date_trunc('week', detected_at) DESC, total_value DESC
-    ) weekly`;
-
-  const { rows: visibleTotalRows } = await pool.query<{ c: number }>(
-    `SELECT count(*)::int AS c FROM (${freeBase}) v`,
-    [FREE_DELAY_HOURS, minInsiders]
-  );
-  const visibleTotal = visibleTotalRows[0]!.c;
 
   const { rows } = await pool.query<ClusterRow>(
-    `${freeBase} ORDER BY ${orderBy} LIMIT $3 OFFSET $4`,
-    [FREE_DELAY_HOURS, minInsiders, pageSize, offset]
+    `SELECT ${SELECT_COLS} FROM clusters
+      WHERE insider_count >= $1
+      ORDER BY ${orderBy} LIMIT $2 OFFSET $3`,
+    [minInsiders, pageSize, offset]
   );
-
   return {
     clusters: await attachMarketData(rows.map(mapCluster)),
-    total: visibleTotal,
-    hiddenCount: Math.max(0, grandTotal - visibleTotal),
+    total: totalRows[0]!.c,
   };
 }
 
@@ -698,7 +661,6 @@ export async function getClustersInRange(
 
 export type ClusterAccess =
   | { status: "not_found" }
-  | { status: "locked"; cluster: ClusterSummary } // real-time cluster, free user
   | { status: "ok"; cluster: ClusterSummary; transactions: ClusterTransaction[] };
 
 /** Derive the human-facing EDGAR filing index URL from the stored submission URL. */
@@ -706,27 +668,17 @@ export function filingIndexUrl(rawUrl: string): string {
   return rawUrl.replace(/\.txt$/i, "-index.htm");
 }
 
-/** Fetch a single cluster + its transactions, enforcing the free-tier delay. */
-export async function getClusterForUser(
-  id: number,
-  plan: EffectivePlan
-): Promise<ClusterAccess> {
-  const { rows } = await pool.query<
-    ClusterRow & { is_delayed: boolean; transaction_ids: number[] }
-  >(
-    `SELECT ${SELECT_COLS}, transaction_ids,
-            (detected_at <= now() - ($2 || ' hours')::interval) AS is_delayed
-     FROM clusters WHERE id = $1`,
-    [id, FREE_DELAY_HOURS]
+/** Fetch a single cluster + its transactions. */
+export async function getClusterForUser(id: number): Promise<ClusterAccess> {
+  const { rows } = await pool.query<ClusterRow & { transaction_ids: number[] }>(
+    `SELECT ${SELECT_COLS}, transaction_ids FROM clusters WHERE id = $1`,
+    [id]
   );
   const row = rows[0];
   if (!row) return { status: "not_found" };
 
   const cluster = mapCluster(row);
   await attachMarketData([cluster]);
-  if (plan === "free" && !row.is_delayed) {
-    return { status: "locked", cluster };
-  }
 
   const { rows: txRows } = await pool.query<{
     id: number;

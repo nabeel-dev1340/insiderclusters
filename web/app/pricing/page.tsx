@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
-import { PricingCards, PRO_PRICE_MONTHLY } from "@/components/pricing";
+import { PricingCards } from "@/components/pricing";
+import { MONTHLY_PRICE, TRIAL_DAYS, ANNUAL_DISCOUNT_PCT } from "@/lib/billing";
 import { SITE_URL } from "@/lib/site";
 import { getCurrentUser } from "@/lib/auth/session";
 import { effectivePlan } from "@/lib/plan";
 import { posthog } from "@/lib/posthog";
 
 export const metadata: Metadata = {
-  title: "Pricing — Free insider-buy alerts, or real-time Pro",
-  description: `Track SEC insider cluster buys free with a weekly, delayed feed, or go Pro for $${PRO_PRICE_MONTHLY}/month to get every cluster in real time with instant email and Telegram alerts.`,
+  title: "Pricing — Real-time insider cluster-buy alerts",
+  description: `Track SEC insider cluster buys in real time from $${MONTHLY_PRICE.basic}/month, or go Pro for $${MONTHLY_PRICE.pro}/month with instant email and Telegram alerts. Every plan starts with a ${TRIAL_DAYS}-day free trial.`,
   alternates: { canonical: "/pricing" },
   openGraph: {
     title: "InsiderClusters Pricing",
-    description: `Free weekly feed or real-time Pro at $${PRO_PRICE_MONTHLY}/month.`,
+    description: `Real-time cluster feed from $${MONTHLY_PRICE.basic}/month, instant alerts on Pro at $${MONTHLY_PRICE.pro}/month. ${TRIAL_DAYS}-day free trial.`,
     url: `${SITE_URL}/pricing`,
     type: "website",
   },
@@ -26,8 +27,20 @@ const FAQ: { q: string; a: string }[] = [
     a: "A cluster buy is when two or more distinct company insiders — officers, directors, or 10% owners — each report an open-market purchase (SEC transaction code P) of the same stock within a rolling window. We track them at every company size, from micro-caps to mega-caps.",
   },
   {
+    q: "How does the free trial work?",
+    a: `Both plans start with a ${TRIAL_DAYS}-day free trial. You enter a card at checkout but aren't charged until the trial ends, and you can cancel any time before then at no cost. Polar, our payment provider, emails you a reminder before the trial converts.`,
+  },
+  {
+    q: `What's the difference between Basic and Pro?`,
+    a: `Both plans get the full real-time cluster feed and complete history. Basic ($${MONTHLY_PRICE.basic}/month) includes a weekly email digest of the top cluster; Pro ($${MONTHLY_PRICE.pro}/month) adds instant email and Telegram alerts the moment each cluster is detected.`,
+  },
+  {
+    q: "How does annual billing work?",
+    a: `Each plan has an annual option at ${ANNUAL_DISCOUNT_PCT}% off the monthly price — you'll see both billing choices side by side at checkout.`,
+  },
+  {
     q: "How fast are Pro alerts?",
-    a: "Our scraper polls SEC EDGAR continuously. When a new Form 4 completes a cluster, Pro members get it in the dashboard and by email within minutes. Free members see a single cluster per week on a 24-hour delay.",
+    a: "Our scraper polls SEC EDGAR continuously. When a new Form 4 completes a cluster, Pro members get it in the dashboard, by email, and on Telegram within minutes.",
   },
   {
     q: "Where does the data come from?",
@@ -36,14 +49,6 @@ const FAQ: { q: string; a: string }[] = [
   {
     q: "Is this investment advice?",
     a: "No. InsiderClusters is an informational tool that organizes public filing data. It is not a recommendation to buy or sell any security. Always do your own research.",
-  },
-  {
-    q: `What do I get for $${PRO_PRICE_MONTHLY} a month?`,
-    a: "Real-time access to every cluster the moment it's detected, unlimited history, and instant email and Telegram alerts — with no weekly cap and no delay. You can cancel anytime.",
-  },
-  {
-    q: "Do I need a credit card to start?",
-    a: "No. Sign in with a magic link and use the free plan indefinitely. Upgrade to Pro from your dashboard whenever you're ready.",
   },
 ];
 
@@ -75,16 +80,16 @@ export default async function PricingPage() {
           Simple pricing for a single, high-signal edge
         </h1>
         <p className="mx-auto mt-3 max-w-xl text-muted">
-          Start free and watch the pattern a week behind, or go Pro to see every
-          insider cluster buy in real time. No contracts, cancel anytime.
+          See every insider cluster buy in real time. Both plans start with a{" "}
+          {TRIAL_DAYS}-day free trial — no charge until it ends, cancel anytime.
         </p>
       </section>
 
       <section className="mx-auto w-full max-w-3xl px-6 py-12">
-        <PricingCards />
+        <PricingCards checkout={!!user} />
         <p className="mt-6 text-center text-xs text-muted">
-          Pro checkout is launching shortly. Start on the free plan today — your
-          account and alert history carry straight over when you upgrade.
+          Annual billing ({ANNUAL_DISCOUNT_PCT}% off) is offered at checkout.
+          Your card isn&apos;t charged until the trial ends.
         </p>
       </section>
 
@@ -95,17 +100,17 @@ export default async function PricingPage() {
             <thead>
               <tr className="border-b border-border bg-surface-muted text-left">
                 <th className="px-4 py-3 font-medium">Feature</th>
-                <th className="px-4 py-3 text-center font-medium">Free</th>
+                <th className="px-4 py-3 text-center font-medium">Basic</th>
                 <th className="px-4 py-3 text-center font-medium text-accent">Pro</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
-              <ComparisonRow feature="Clusters shown" free="1 / week" pro="Unlimited" />
-              <ComparisonRow feature="Delay" free="24 hours" pro="Real-time" />
-              <ComparisonRow feature="Full transaction breakdown" free pro />
-              <ComparisonRow feature="Public ticker pages" free pro />
-              <ComparisonRow feature="Instant email alerts" free={false} pro />
-              <ComparisonRow feature="Telegram alerts" free={false} pro />
+              <ComparisonRow feature="Real-time cluster feed" basic pro />
+              <ComparisonRow feature="Full cluster history" basic pro />
+              <ComparisonRow feature="Full transaction breakdown" basic pro />
+              <ComparisonRow feature="Weekly email digest" basic pro />
+              <ComparisonRow feature="Instant email alerts" basic={false} pro />
+              <ComparisonRow feature="Instant Telegram alerts" basic={false} pro />
             </tbody>
           </table>
         </div>
@@ -138,17 +143,17 @@ export default async function PricingPage() {
 
 function ComparisonRow({
   feature,
-  free,
+  basic,
   pro,
 }: {
   feature: string;
-  free?: boolean | string;
+  basic?: boolean | string;
   pro?: boolean | string;
 }) {
   return (
     <tr className="bg-surface">
       <td className="px-4 py-3">{feature}</td>
-      <td className="px-4 py-3 text-center text-muted">{renderCell(free)}</td>
+      <td className="px-4 py-3 text-center text-muted">{renderCell(basic)}</td>
       <td className="px-4 py-3 text-center font-medium">{renderCell(pro)}</td>
     </tr>
   );

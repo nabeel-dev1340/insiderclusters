@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@insiderclusters/db": "*",
+    "@polar-sh/sdk": "^0.48.1",
     "next": "16.2.9",
     "posthog-js": "^1.396.6",
     "posthog-node": "^5.39.2",

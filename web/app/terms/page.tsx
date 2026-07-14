@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/legal-page";
-import { PRO_PRICE_MONTHLY } from "@/components/pricing";
+import { MONTHLY_PRICE, TRIAL_DAYS, ANNUAL_DISCOUNT_PCT } from "@/lib/billing";
 
 const SUPPORT_EMAIL = "support@beelodev.com";
 
@@ -58,14 +58,19 @@ export default function TermsPage() {
       <section>
         <h2>4. Plans and billing</h2>
         <p>
-          The Service offers a free plan with a delayed, limited feed and a paid
-          “Pro” plan at ${PRO_PRICE_MONTHLY} per month that provides real-time
-          access and additional alert channels. Paid subscriptions renew
-          automatically each billing period until cancelled. You may cancel at
-          any time, and cancellation takes effect at the end of the current
-          billing period. Fees are stated exclusive of any applicable taxes.
-          Where payments are processed by a third-party payment provider, that
-          provider’s terms also apply to the transaction.
+          The Service is offered as a paid subscription: a “Basic” plan at $
+          {MONTHLY_PRICE.basic} per month with real-time access and a weekly
+          email digest, and a “Pro” plan at ${MONTHLY_PRICE.pro} per month that
+          adds instant alert channels. Each plan is also available with annual
+          billing at a {ANNUAL_DISCOUNT_PCT}% discount. New subscriptions begin
+          with a {TRIAL_DAYS}-day free trial; a payment method is collected at
+          checkout and the first charge occurs when the trial ends, unless you
+          cancel before then. Paid subscriptions renew automatically each
+          billing period until cancelled. You may cancel at any time, and
+          cancellation takes effect at the end of the current billing period.
+          Fees are stated exclusive of any applicable taxes. Where payments are
+          processed by a third-party payment provider, that provider’s terms
+          also apply to the transaction.
         </p>
       </section>
 

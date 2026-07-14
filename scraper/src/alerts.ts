@@ -1,15 +1,18 @@
 // Feature 5.1 / 5.2 — Alert dispatcher + email templates.
 //
-// Runs once per scraper cycle (every ~5 min). Two independent paths:
+// Runs once per scraper cycle (every ~5 min). Two independent paths, keyed to
+// the paid tiers (there is no free tier; users without an active/trialing
+// subscription get nothing):
 //
-//   Real-time (paid):  every undispatched cluster is emailed to each eligible
-//                      paid user, then clusters.alert_sent_at is stamped so a
-//                      re-run sends zero duplicates.
-//   Weekly digest (free): the single highest-value cluster of the last N days is
-//                      emailed to each eligible free user at most once per N days,
-//                      deduped via users.last_digest_sent_at.
+//   Real-time (Pro):   every undispatched cluster is sent (email + Telegram)
+//                      to each eligible Pro user, then clusters.alert_sent_at
+//                      is stamped so a re-run sends zero duplicates.
+//   Weekly digest (Basic): the single highest-value cluster of the last N days
+//                      is emailed (email only — Telegram is Pro) to each
+//                      eligible Basic user at most once per N days, deduped
+//                      via users.last_digest_sent_at.
 //
-// The two paths are decoupled on purpose: alert_sent_at gates the paid path only;
+// The two paths are decoupled on purpose: alert_sent_at gates the Pro path only;
 // the digest selects by detected_at so it still surfaces the week's top cluster
 // even after it's been dispatched in real time.
 
@@ -236,23 +239,28 @@ const RECIPIENT_COLS = `id, email,
     email_alerts_enabled    AS "emailAlertsEnabled",
     telegram_alerts_enabled AS "telegramAlertsEnabled"`;
 
-/** Paid + active + at least one channel on. */
-async function eligiblePaidUsers(): Promise<Recipient[]> {
+// Mirrors web/lib/plan.ts hasAccess: a tier counts only while the subscription
+// is active or trialing (7-day trials get full tier behavior).
+const TIER_LIVE = `subscription_status IN ('active', 'trialing')`;
+
+/** Pro + live subscription + at least one channel on. */
+async function eligibleProUsers(): Promise<Recipient[]> {
   const { rows } = await pool.query<Recipient>(
     `SELECT ${RECIPIENT_COLS} FROM users
-      WHERE plan = 'paid'
-        AND subscription_status = 'active'
+      WHERE plan = 'pro'
+        AND ${TIER_LIVE}
         AND ${HAS_A_CHANNEL}`
   );
   return rows;
 }
 
-/** Free (not paid+active) + a channel on + not digested within the window. */
+/** Basic + live subscription + email on + not digested within the window. */
 async function eligibleDigestUsers(): Promise<Recipient[]> {
   const { rows } = await pool.query<Recipient>(
     `SELECT ${RECIPIENT_COLS} FROM users
-      WHERE ${HAS_A_CHANNEL}
-        AND NOT (plan = 'paid' AND subscription_status = 'active')
+      WHERE plan = 'basic'
+        AND ${TIER_LIVE}
+        AND email_alerts_enabled = TRUE
         AND (last_digest_sent_at IS NULL
              OR last_digest_sent_at < now() - ($1 || ' days')::interval)`,
     [config.digestIntervalDays]
@@ -272,7 +280,7 @@ async function dispatchRealtime(stats: DispatchStats): Promise<void> {
   );
   if (clusters.length === 0) return;
 
-  const recipients = await eligiblePaidUsers();
+  const recipients = await eligibleProUsers();
 
   for (const cluster of clusters) {
     const insiders = await clusterInsiders(cluster.transaction_ids);
@@ -327,37 +335,17 @@ async function dispatchDigest(stats: DispatchStats): Promise<void> {
 
   const insiders = await clusterInsiders(top.transaction_ids);
   const email = clusterEmail(top, insiders, { digest: true });
-  const telegram = clusterTelegram(top, insiders, { digest: true });
   const props = { cluster_id: top.id, ticker: top.ticker };
 
   for (const r of recipients) {
-    // Attempt every enabled channel; a channel failure is counted but doesn't
-    // block the others. We only stamp last_digest_sent_at when at least one
-    // channel delivered, so a total failure retries the whole recipient next
-    // cycle (a partial success won't re-fire the succeeded channel — acceptable).
-    let delivered = false;
-
-    if (wantsEmail(r)) {
-      if (await sendEmail({ to: r.email, ...email })) {
-        stats.digestEmails++;
-        delivered = true;
-        posthog().capture({ distinctId: r.email, event: "digest alert sent", properties: props });
-      } else {
-        stats.emailFailures++;
-      }
-    }
-    if (wantsTelegram(r)) {
-      if (await sendTelegram({ chatId: r.telegramChatId, text: telegram })) {
-        stats.telegramMessages++;
-        delivered = true;
-        posthog().capture({ distinctId: r.email, event: "digest telegram alert sent", properties: props });
-      } else {
-        stats.telegramFailures++;
-      }
-    }
-
-    if (delivered) {
+    // Email only — Telegram is a Pro channel. We only stamp last_digest_sent_at
+    // on delivery, so a failure retries the recipient next cycle.
+    if (await sendEmail({ to: r.email, ...email })) {
+      stats.digestEmails++;
+      posthog().capture({ distinctId: r.email, event: "digest alert sent", properties: props });
       await pool.query(`UPDATE users SET last_digest_sent_at = now() WHERE id = $1`, [r.id]);
+    } else {
+      stats.emailFailures++;
     }
   }
 }

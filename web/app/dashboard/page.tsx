@@ -1,9 +1,6 @@
 import Link from "next/link";
-import { getCurrentUser } from "@/lib/auth/session";
-import { effectivePlan } from "@/lib/plan";
 import { getClusterFeed, type FeedSort } from "@/lib/clusters";
 import { ClusterCard } from "@/components/cluster-card";
-import { ButtonLink } from "@/components/ui/button";
 
 const PAGE_SIZE = 12;
 const NEW_WINDOW_MS = 24 * 60 * 60 * 1000;
@@ -25,8 +22,6 @@ export default async function DashboardPage({
 }: {
   searchParams: Promise<{ page?: string; sort?: string; tier?: string }>;
 }) {
-  const user = (await getCurrentUser())!; // guaranteed by layout
-  const plan = effectivePlan(user);
   const { page: pageParam, sort: sortParam, tier: tierParam } = await searchParams;
   const page = Math.max(1, Number(pageParam) || 1);
   const sort: FeedSort = sortParam === "biggest" ? "biggest" : "newest";
@@ -34,7 +29,7 @@ export default async function DashboardPage({
     ? Number(tierParam)
     : 2;
 
-  const { clusters, total, hiddenCount } = await getClusterFeed(plan, page, PAGE_SIZE, {
+  const { clusters, total } = await getClusterFeed(page, PAGE_SIZE, {
     sort,
     minInsiders,
   });
@@ -59,16 +54,9 @@ export default async function DashboardPage({
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Cluster feed</h1>
           <p className="mt-1 text-sm text-muted">
-            {plan === "paid"
-              ? "Real-time. Newest cluster buys first."
-              : "Free plan — delayed 24h, one cluster per week."}
+            Real-time. Newest cluster buys first.
           </p>
         </div>
-        {plan === "free" && (
-          <ButtonLink href="/dashboard/settings" size="sm">
-            Upgrade to Pro
-          </ButtonLink>
-        )}
       </div>
 
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -93,22 +81,6 @@ export default async function DashboardPage({
           ))}
         </Segmented>
       </div>
-
-      {plan === "free" && hiddenCount > 0 && (
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-accent/30 bg-accent/5 p-4">
-          <p className="text-sm">
-            <span className="font-semibold text-accent">
-              {hiddenCount} more cluster{hiddenCount === 1 ? "" : "s"}
-            </span>{" "}
-            <span className="text-muted">
-              are available in real time on Pro, plus the full history.
-            </span>
-          </p>
-          <ButtonLink href="/dashboard/settings" size="sm">
-            Unlock real-time
-          </ButtonLink>
-        </div>
-      )}
 
       {clusters.length === 0 ? (
         <div className="mt-10 rounded-xl border border-dashed border-border p-12 text-center">

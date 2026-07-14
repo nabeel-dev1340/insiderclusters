@@ -16,7 +16,7 @@ export function DashboardNav({
   plan,
 }: {
   email: string;
-  plan: "free" | "paid";
+  plan: "none" | "basic" | "pro";
 }) {
   const pathname = usePathname();
 
@@ -53,8 +53,8 @@ export function DashboardNav({
         </div>
 
         <div className="flex items-center gap-3">
-          <Badge tone={plan === "paid" ? "accent" : "muted"} className="uppercase">
-            {plan === "paid" ? "Pro" : "Free"}
+          <Badge tone={plan === "none" ? "muted" : "accent"} className="uppercase">
+            {plan === "pro" ? "Pro" : plan === "basic" ? "Basic" : "No plan"}
           </Badge>
           <span className="hidden text-sm text-muted sm:inline">{email}</span>
           <form action="/api/auth/logout" method="post">

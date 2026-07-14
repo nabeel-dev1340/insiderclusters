@@ -24,7 +24,7 @@ async function cleanup() {
   await pool.query(`DELETE FROM users WHERE email = $1`, [EMAIL]);
 }
 
-async function seedClusterAndPaidUser() {
+async function seedClusterAndProUser() {
   const { rows: f } = await pool.query<{ id: number }>(
     `INSERT INTO filings
        (accession_number, issuer_cik, issuer_name, ticker, filed_at, raw_xml_url, processed_at)
@@ -61,14 +61,14 @@ async function seedClusterAndPaidUser() {
 
   await pool.query(
     `INSERT INTO users (email, plan, subscription_status, email_alerts_enabled)
-     VALUES ($1, 'paid', 'active', TRUE)`,
+     VALUES ($1, 'pro', 'active', TRUE)`,
     [EMAIL]
   );
 }
 
 before(async () => {
   await cleanup();
-  await seedClusterAndPaidUser();
+  await seedClusterAndProUser();
 });
 after(async () => {
   await cleanup();
@@ -100,14 +100,14 @@ test("re-run does not re-dispatch the same cluster (no duplicates)", async () =>
   assert.equal(await sentAt(), before, "alert_sent_at unchanged — not re-dispatched");
 });
 
-// Telegram (Phase 6): a paid user with ONLY Telegram enabled (email off) is
+// Telegram (Phase 6): a Pro user with ONLY Telegram enabled (email off) is
 // still eligible, and the cluster drains exactly once. TELEGRAM_BOT_TOKEN is
 // unset in test, so sendTelegram is a no-op — we assert dispatch semantics
 // (eligibility + single stamp), not real delivery.
 const TG_TICKER = "ZZTGTEST";
 const TG_EMAIL = "zz-tg-test@example.com";
 
-test("telegram-only paid user is eligible and cluster drains once", async () => {
+test("telegram-only pro user is eligible and cluster drains once", async () => {
   await pool.query(`DELETE FROM clusters WHERE ticker = $1`, [TG_TICKER]);
   await pool.query(
     `DELETE FROM transactions WHERE filing_id IN
@@ -149,7 +149,7 @@ test("telegram-only paid user is eligible and cluster drains once", async () => 
     `INSERT INTO users
        (email, plan, subscription_status, email_alerts_enabled,
         telegram_chat_id, telegram_alerts_enabled)
-     VALUES ($1, 'paid', 'active', FALSE, '123456', TRUE)`,
+     VALUES ($1, 'pro', 'active', FALSE, '123456', TRUE)`,
     [TG_EMAIL]
   );
 

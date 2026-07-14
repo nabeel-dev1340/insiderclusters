@@ -56,7 +56,8 @@ export default async function LoginPage({
         <p className="mt-6 text-center text-sm text-muted">
           New here?{" "}
           <span className="text-foreground">
-            Signing in creates your free account.
+            Signing in creates your account — every plan starts with a 7-day
+            free trial.
           </span>{" "}
           <Link href="/pricing" className="text-accent hover:underline">
             See plans

@@ -119,10 +119,10 @@ function Hero({ featured }: { featured?: ClusterSummary }) {
           </p>
 
           <div className="mt-8 max-w-md">
-            <LoginForm autoFocus={false} layout="row" cta="Get started free" />
+            <LoginForm autoFocus={false} layout="row" cta="Start free trial" />
             <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted">
-              <TrustItem>Free forever plan</TrustItem>
-              <TrustItem>No credit card</TrustItem>
+              <TrustItem>7-day free trial</TrustItem>
+              <TrustItem>Cancel anytime</TrustItem>
               <TrustItem>Straight from SEC EDGAR</TrustItem>
             </p>
           </div>
@@ -285,7 +285,7 @@ const STEPS = [
   },
   {
     title: "You get alerted",
-    body: "Clusters land in your dashboard and inbox — real-time for Pro, on a weekly digest for free — before the crowd notices.",
+    body: "Clusters land in your dashboard in real time — plus instant email and Telegram alerts on Pro — before the crowd notices.",
     icon: BellIcon,
   },
 ];
@@ -397,8 +397,8 @@ function Features() {
               <FeatureIcon icon={BellIcon} />
               <h3 className="mt-4 font-semibold">Alerts where you work</h3>
               <p className="mt-2 text-sm text-muted">
-                Get clusters in your dashboard, inbox, and Telegram — real-time
-                for Pro members, the moment they form.
+                Get clusters in your dashboard, inbox, and Telegram — instant
+                alerts for Pro members, the moment they form.
               </p>
             </BentoCell>
           </Reveal>
@@ -783,8 +783,8 @@ function PricingPreview() {
       <Container size="lg">
         <SectionHeading
           eyebrow="Pricing"
-          title="Start free. Upgrade when the edge pays for itself."
-          subtitle="One high-signal feed — a week behind on free, real-time on Pro."
+          title="Try it free for 7 days. Keep it when the edge pays for itself."
+          subtitle="One high-signal feed, real-time on every plan — instant alerts on Pro."
         />
         <div className="mx-auto mt-12 max-w-3xl">
           <Reveal>
@@ -817,7 +817,7 @@ const FAQS = [
   },
   {
     q: "How fast are the alerts?",
-    a: "On Pro, clusters reach you in real time, the moment we detect them. On the free plan you get one cluster per week on a 24-hour delay — enough to see the signal, a step behind the market.",
+    a: "Every plan gets the cluster feed in real time, the moment we detect them. Pro adds instant email and Telegram alerts, so clusters reach you without opening the dashboard; Basic includes a weekly digest of the top cluster.",
   },
   {
     q: "Do you cover large-caps too, or only small companies?",
@@ -825,7 +825,7 @@ const FAQS = [
   },
   {
     q: "Do I need a credit card to start?",
-    a: "No. The free plan is free forever and signup is a single magic link — no card, no trial timer. Upgrade to Pro in-app whenever you're ready.",
+    a: "Signup itself is a single magic link, no card. Both plans then start with a 7-day free trial — you add a card at checkout but aren't charged until the trial ends, and you can cancel anytime before that at no cost.",
   },
   {
     q: "Is this investment advice?",
@@ -894,13 +894,12 @@ function FinalCta() {
             Start tracking insider conviction today
           </h2>
           <p className="mx-auto mt-3 max-w-md text-pretty text-muted">
-            Create a free account in seconds. Upgrade to real-time whenever
-            you&apos;re ready.
+            Create your account in seconds, then try any plan free for 7 days.
           </p>
           <div className="mx-auto mt-8 max-w-md text-left">
-            <LoginForm autoFocus={false} layout="row" cta="Get started free" />
+            <LoginForm autoFocus={false} layout="row" cta="Start free trial" />
             <p className="mt-3 text-center text-sm text-muted">
-              Free forever · No credit card · Data straight from SEC EDGAR.
+              7-day free trial · Cancel anytime · Data straight from SEC EDGAR.
             </p>
           </div>
         </Reveal>
