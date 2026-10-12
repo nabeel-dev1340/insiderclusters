@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getArchiveMonths, ymLabel, type MonthSummary } from "@/lib/months";
@@ -68,7 +69,11 @@ export default async function InsiderBuyingIndexPage() {
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-3xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-3xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -83,26 +88,50 @@ export default async function InsiderBuyingIndexPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted">
             Every month of coverage, archived: the biggest open-market insider
-            purchases and every cluster buy we detected,
-            parsed from SEC Form 4 filings.
+            purchases and every cluster buy we detected, parsed from SEC Form 4
+            filings.
           </p>
         </header>
 
         {months.length === 0 ? (
           <div className="mt-10 rounded-xl border border-border bg-surface p-8 text-center">
-            <p className="text-sm text-muted">Archive fills in as data lands.</p>
+            <p className="text-sm text-muted">
+              Archive fills in as data lands.
+            </p>
           </div>
         ) : (
           <div className="mt-8 overflow-hidden rounded-xl border border-border">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-120 text-sm">
+            <div className="responsive-records overflow-x-auto">
+              <table role="table" className="w-full min-w-120 text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-muted text-left text-xs uppercase tracking-wide text-muted">
-                    <th className="px-4 py-3 font-medium">Month</th>
-                    <th className="px-4 py-3 text-right font-medium">Clusters</th>
-                    <th className="px-4 py-3 text-right font-medium">Notable buys</th>
-                    <th className="px-4 py-3 text-right font-medium">Stocks</th>
-                    <th className="px-4 py-3 text-right font-medium">Total bought</th>
+                    <th scope="col" className="px-4 py-3 font-medium">
+                      Month
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Clusters
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Notable buys
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Stocks
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Total bought
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
@@ -111,7 +140,7 @@ export default async function InsiderBuyingIndexPage() {
                       key={m.ym}
                       className="bg-surface transition-colors hover:bg-surface-muted/50"
                     >
-                      <td className="px-4 py-3">
+                      <td data-label="Month" className="px-4 py-3">
                         <Link
                           href={monthPath(m.ym)}
                           className="font-medium hover:text-accent hover:underline"
@@ -119,16 +148,28 @@ export default async function InsiderBuyingIndexPage() {
                           {ymLabel(m.ym)}
                         </Link>
                       </td>
-                      <td className="px-4 py-3 text-right tabular-nums">
+                      <td
+                        data-label="Clusters"
+                        className="px-4 py-3 text-right tabular-nums"
+                      >
                         {formatNumber(m.clusterCount)}
                       </td>
-                      <td className="px-4 py-3 text-right tabular-nums">
+                      <td
+                        data-label="Notable buys"
+                        className="px-4 py-3 text-right tabular-nums"
+                      >
                         {formatNumber(m.buyCount)}
                       </td>
-                      <td className="px-4 py-3 text-right tabular-nums">
+                      <td
+                        data-label="Stocks"
+                        className="px-4 py-3 text-right tabular-nums"
+                      >
                         {formatNumber(m.tickerCount)}
                       </td>
-                      <td className="px-4 py-3 text-right font-semibold tabular-nums">
+                      <td
+                        data-label="Total bought"
+                        className="px-4 py-3 text-right font-semibold tabular-nums"
+                      >
                         {formatMoneyCompact(m.totalValue)}
                       </td>
                     </tr>
@@ -142,10 +183,7 @@ export default async function InsiderBuyingIndexPage() {
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }

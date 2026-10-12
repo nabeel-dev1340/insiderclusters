@@ -19,7 +19,11 @@ export function LegalPage({
   return (
     <div className="flex min-h-full flex-col">
       <SiteHeader />
-      <article className="mx-auto w-full max-w-3xl px-6 py-14">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-3xl px-6 py-14"
+      >
         <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
         <p className="mt-2 text-sm text-muted">Effective {effectiveDate}</p>
         <p className="mt-6 text-muted">{intro}</p>
@@ -33,7 +37,7 @@ export function LegalPage({
         >
           {children}
         </div>
-      </article>
+      </main>
       <SiteFooter />
     </div>
   );

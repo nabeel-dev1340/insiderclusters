@@ -9,9 +9,9 @@ export default function robots(): MetadataRoute.Robots {
       // Gated app surface and machinery — no SEO value, keep it out of the index.
       disallow: ["/dashboard", "/api/", "/auth/", "/login"],
     },
-    // Split sitemaps (generateSitemaps) — Next serves them at /sitemap/<id>.xml
-    // and produces no index file, so each one is listed here.
+    // Index plus the existing per-template sitemaps.
     sitemap: [
+      `${SITE_URL}/sitemap-index.xml`,
       `${SITE_URL}/sitemap/core.xml`,
       `${SITE_URL}/sitemap/stocks.xml`,
       `${SITE_URL}/sitemap/insiders.xml`,

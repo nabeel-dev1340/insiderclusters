@@ -1,11 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Newsreader, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bodyFont = DM_Sans({
+  variable: "--font-body",
+  display: "swap",
   subsets: ["latin"],
+});
+
+const editorialFont = Newsreader({
+  variable: "--font-editorial",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -13,9 +21,9 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const TITLE = "InsiderClusters — Insider cluster-buy alerts";
+const TITLE = "Insider Buying & Cluster Alerts | InsiderClusters";
 const DESCRIPTION =
-  "InsiderClusters watches every SEC Form 4 filing and alerts you when two or more insiders buy the same stock around the same time — the highest-signal pattern in insider trading.";
+  "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -46,8 +54,6 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
-    description: DESCRIPTION,
   },
   robots: {
     index: true,
@@ -62,15 +68,13 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f7f8" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0c" },
-  ],
+  themeColor: "#234f3d",
 };
 
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${SITE_URL}/#organization`,
   name: "InsiderClusters",
   url: SITE_URL,
   description: DESCRIPTION,
@@ -79,7 +83,7 @@ const orgJsonLd = {
     name: "Beelodev",
     url: "https://beelodev.com",
   },
-  sameAs: ["https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4"],
+  logo: `${SITE_URL}/icon.svg`,
 };
 
 export default function RootLayout({
@@ -90,13 +94,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${bodyFont.variable} ${editorialFont.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
         {children}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(orgJsonLd).replace(/</g, "\\u003c"),
+          }}
         />
       </body>
     </html>

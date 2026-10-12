@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LEARN_ARTICLES } from "@/lib/learn";
@@ -27,7 +28,12 @@ export default function LearnIndexPage() {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Learn", item: `${SITE_URL}/learn` },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Learn",
+          item: `${SITE_URL}/learn`,
+        },
       ],
     },
     {
@@ -53,7 +59,11 @@ export default function LearnIndexPage() {
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-3xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-3xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -73,17 +83,17 @@ export default function LearnIndexPage() {
           </p>
         </header>
 
-        <ul className="mt-8 space-y-4">
+        <ul className="library-list mt-8">
           {LEARN_ARTICLES.map((a) => (
             <li key={a.slug}>
-              <Link
-                href={learnPath(a.slug)}
-                className="block rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:border-accent/40 hover:shadow-md"
-              >
-                <h2 className="font-semibold">{a.title}</h2>
-                <p className="mt-1 text-sm leading-relaxed text-muted">
-                  {a.description}
-                </p>
+              <Link href={learnPath(a.slug)} className="library-link">
+                <div>
+                  <h2>{a.title}</h2>
+                  <p className="mt-1 text-sm leading-relaxed text-muted">
+                    {a.description}
+                  </p>
+                </div>
+                <span aria-hidden>↗</span>
               </Link>
             </li>
           ))}
@@ -92,10 +102,7 @@ export default function LearnIndexPage() {
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }

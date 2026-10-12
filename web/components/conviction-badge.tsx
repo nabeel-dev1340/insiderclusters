@@ -14,15 +14,15 @@ export function ConvictionBadge({
 }) {
   return (
     <span
-      title="High conviction: a C-suite officer bought alongside other insiders — historically the strongest cluster signal."
+      title="Includes a senior executive buyer, classified from the role text in the SEC filing. This is a role label, not a prediction of returns."
       className={cn(
         "inline-flex shrink-0 items-center gap-1 rounded-full bg-accent font-semibold text-accent-foreground",
         size === "xs" ? "px-2 py-0.5 text-[10px]" : "px-2.5 py-0.5 text-xs",
-        className
+        className,
       )}
     >
       <SparkIcon />
-      High conviction
+      Executive buyer
     </span>
   );
 }

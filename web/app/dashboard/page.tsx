@@ -22,8 +22,14 @@ export default async function DashboardPage({
 }: {
   searchParams: Promise<{ page?: string; sort?: string; tier?: string }>;
 }) {
-  const { page: pageParam, sort: sortParam, tier: tierParam } = await searchParams;
-  const page = Math.max(1, Number(pageParam) || 1);
+  const {
+    page: pageParam,
+    sort: sortParam,
+    tier: tierParam,
+  } = await searchParams;
+  const parsedPage = Number(pageParam);
+  const page =
+    Number.isSafeInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
   const sort: FeedSort = sortParam === "biggest" ? "biggest" : "newest";
   const minInsiders = TIERS.some((t) => t.value === Number(tierParam))
     ? Number(tierParam)
@@ -33,6 +39,9 @@ export default async function DashboardPage({
     sort,
     minInsiders,
   });
+  // Compute request-time freshness once, outside the JSX map.
+  // eslint-disable-next-line react-hooks/purity -- server-rendered request timestamp
+  const requestTime = Date.now();
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   // Build a feed URL preserving the current sort/tier (page changes reset to 1).
@@ -52,9 +61,12 @@ export default async function DashboardPage({
     <div>
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Cluster feed</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            Cluster feed
+          </h1>
           <p className="mt-1 text-sm text-muted">
-            Real-time. Newest cluster buys first.
+            Qualifying insider purchases, connected. Filter by buyer count or
+            sort by activity.
           </p>
         </div>
       </div>
@@ -91,13 +103,19 @@ export default async function DashboardPage({
             {minInsiders > 2 ? (
               <>
                 Try the{" "}
-                <Link href={feedUrl({ tier: 2 })} className="text-accent hover:underline">
+                <Link
+                  href={feedUrl({ tier: 2 })}
+                  className="text-accent hover:underline"
+                >
                   All
                 </Link>{" "}
                 filter — nothing hit {minInsiders}+ insiders.
               </>
             ) : (
-              <>New insider cluster buys will appear here as they&apos;re detected.</>
+              <>
+                New insider cluster buys will appear here as they&apos;re
+                detected.
+              </>
             )}
           </p>
         </div>
@@ -107,7 +125,9 @@ export default async function DashboardPage({
             <ClusterCard
               key={c.id}
               cluster={c}
-              isNew={Date.now() - new Date(c.detectedAt).getTime() < NEW_WINDOW_MS}
+              isNew={
+                requestTime - new Date(c.detectedAt).getTime() < NEW_WINDOW_MS
+              }
             />
           ))}
         </div>
@@ -115,21 +135,37 @@ export default async function DashboardPage({
 
       {totalPages > 1 && (
         <nav className="mt-8 flex items-center justify-center gap-3 text-sm">
-          <PageLink href={feedUrl({ page: page - 1 })} disabled={page <= 1} label="← Prev" />
+          <PageLink
+            href={feedUrl({ page: page - 1 })}
+            disabled={page <= 1}
+            label="← Prev"
+          />
           <span className="text-muted tabular-nums">
             Page {page} of {totalPages}
           </span>
-          <PageLink href={feedUrl({ page: page + 1 })} disabled={page >= totalPages} label="Next →" />
+          <PageLink
+            href={feedUrl({ page: page + 1 })}
+            disabled={page >= totalPages}
+            label="Next →"
+          />
         </nav>
       )}
     </div>
   );
 }
 
-function Segmented({ label, children }: { label: string; children: React.ReactNode }) {
+function Segmented({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex items-center gap-2">
-      <span className="text-xs uppercase tracking-wide text-muted">{label}</span>
+      <span className="text-xs uppercase tracking-wide text-muted">
+        {label}
+      </span>
       <div className="inline-flex rounded-lg border border-border bg-surface p-0.5">
         {children}
       </div>
@@ -152,8 +188,8 @@ function SegLink({
       aria-current={active ? "true" : undefined}
       className={
         active
-          ? "rounded-md bg-accent px-3 py-1 text-sm font-medium text-accent-foreground"
-          : "rounded-md px-3 py-1 text-sm text-muted transition-colors hover:text-foreground"
+          ? "inline-flex min-h-11 items-center rounded-sm bg-accent px-3 py-2 text-sm font-medium text-accent-foreground"
+          : "inline-flex min-h-11 items-center rounded-sm px-3 py-2 text-sm text-muted transition-colors hover:text-foreground"
       }
     >
       {label}
@@ -171,7 +207,11 @@ function PageLink({
   label: string;
 }) {
   if (disabled) {
-    return <span className="cursor-not-allowed rounded-md px-3 py-1.5 text-muted opacity-50">{label}</span>;
+    return (
+      <span className="cursor-not-allowed rounded-md px-3 py-1.5 text-muted opacity-50">
+        {label}
+      </span>
+    );
   }
   return (
     <Link

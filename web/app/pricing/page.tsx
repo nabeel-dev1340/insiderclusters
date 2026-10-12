@@ -1,4 +1,7 @@
+import { JsonLd } from "@/components/json-ld";
 import type { Metadata } from "next";
+import Link from "next/link";
+import { Container } from "@/components/ui/container";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { PricingCards } from "@/components/pricing";
 import { MONTHLY_PRICE, TRIAL_DAYS, ANNUAL_DISCOUNT_PCT } from "@/lib/billing";
@@ -8,7 +11,7 @@ import { effectivePlan } from "@/lib/plan";
 import { posthog } from "@/lib/posthog";
 
 export const metadata: Metadata = {
-  title: "Pricing — Real-time insider cluster-buy alerts",
+  title: "Insider Buying Alerts Pricing",
   description: `Track SEC insider cluster buys in real time from $${MONTHLY_PRICE.basic}/month, or go Pro for $${MONTHLY_PRICE.pro}/month with instant email and Telegram alerts. Every plan starts with a ${TRIAL_DAYS}-day free trial.`,
   alternates: { canonical: "/pricing" },
   openGraph: {
@@ -20,11 +23,11 @@ export const metadata: Metadata = {
 };
 
 // Straightforward, specific answers — no filler. These double as the FAQPage
-// structured data below so they can surface directly in search results.
+// structured data below so the machine-readable and visible answers agree.
 const FAQ: { q: string; a: string }[] = [
   {
     q: "What counts as a cluster buy?",
-    a: "A cluster buy is when two or more distinct company insiders — officers, directors, or 10% owners — each report an open-market purchase (SEC transaction code P) of the same stock within a rolling window. We track them at every company size, from micro-caps to mega-caps.",
+    a: "A cluster groups qualifying code-P purchases by at least two distinct insiders in the same ticker within the detection window. Read our methodology for the filters, default window, and limitations.",
   },
   {
     q: "How does the free trial work?",
@@ -40,7 +43,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How fast are Pro alerts?",
-    a: "Our scraper polls SEC EDGAR continuously. When a new Form 4 completes a cluster, Pro members get it in the dashboard, by email, and on Telegram within minutes.",
+    a: "Pro alerts are dispatched after a qualifying cluster is detected from public filings. Filing delays, polling, processing, and delivery affect timing. They are not notifications at the moment a trade takes place.",
   },
   {
     q: "Where does the data come from?",
@@ -75,68 +78,122 @@ export default async function PricingPage() {
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <section className="mx-auto w-full max-w-5xl px-6 pt-16 text-center sm:pt-20">
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          Simple pricing for a single, high-signal edge
-        </h1>
-        <p className="mx-auto mt-3 max-w-xl text-muted">
-          See every insider cluster buy in real time. Both plans start with a{" "}
-          {TRIAL_DAYS}-day free trial — no charge until it ends, cancel anytime.
-        </p>
-      </section>
-
-      <section className="mx-auto w-full max-w-3xl px-6 py-12">
-        <PricingCards checkout={!!user} />
-        <p className="mt-6 text-center text-xs text-muted">
-          Annual billing ({ANNUAL_DISCOUNT_PCT}% off) is offered at checkout.
-          Your card isn&apos;t charged until the trial ends.
-        </p>
-      </section>
-
-      {/* Feature comparison */}
-      <section className="mx-auto w-full max-w-3xl px-6 pb-12">
-        <div className="overflow-hidden rounded-2xl border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-surface-muted text-left">
-                <th className="px-4 py-3 font-medium">Feature</th>
-                <th className="px-4 py-3 text-center font-medium">Basic</th>
-                <th className="px-4 py-3 text-center font-medium text-accent">Pro</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border">
-              <ComparisonRow feature="Real-time cluster feed" basic pro />
-              <ComparisonRow feature="Full cluster history" basic pro />
-              <ComparisonRow feature="Full transaction breakdown" basic pro />
-              <ComparisonRow feature="Weekly email digest" basic pro />
-              <ComparisonRow feature="Instant email alerts" basic={false} pro />
-              <ComparisonRow feature="Instant Telegram alerts" basic={false} pro />
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="mx-auto w-full max-w-3xl px-6 pb-20">
-        <h2 className="text-center text-2xl font-semibold tracking-tight">
-          Questions, answered
-        </h2>
-        <dl className="mt-8 divide-y divide-border">
-          {FAQ.map((f) => (
-            <div key={f.q} className="py-5">
-              <dt className="font-semibold">{f.q}</dt>
-              <dd className="mt-2 text-sm text-muted">{f.a}</dd>
+      <main id="main-content" tabIndex={-1} className="pricing-page">
+        <Container>
+          <section
+            className="home-section pricing-layout"
+            aria-labelledby="pricing-title"
+          >
+            <div>
+              <span className="eyebrow">A plan for your research</span>
+              <h1 id="pricing-title" className="mt-5 text-5xl sm:text-6xl">
+                The evidence.
+                <br />
+                <em>On your terms.</em>
+              </h1>
+              <p className="mt-5">
+                Both plans include the full cluster feed and purchase history.
+                Choose Pro to receive email and Telegram notifications after
+                detection.
+              </p>
+              <p className="mt-5 text-xs">
+                {TRIAL_DAYS}-day free trial · Card required at checkout
+                <br />
+                Cancel before the trial ends to avoid a charge.
+              </p>
+              <Link href="/stocks" className="text-link mt-5">
+                Explore public data first ↗
+              </Link>
             </div>
-          ))}
-        </dl>
-      </section>
+            <div>
+              <PricingCards checkout={!!user} />
+              <p className="mt-5 text-xs text-muted">
+                Annual billing saves {ANNUAL_DISCOUNT_PCT}% and is available at
+                checkout. Your card is charged after the trial unless you
+                cancel.
+              </p>
+            </div>
+          </section>
+          <section
+            className="border-t border-border pb-16 pt-12"
+            aria-labelledby="comparison-heading"
+          >
+            <div className="section-heading">
+              <div>
+                <span className="eyebrow">Side by side</span>
+                <h2 id="comparison-heading">
+                  Same research. Different delivery.
+                </h2>
+              </div>
+              <Link href="/methodology" className="text-link">
+                How we detect clusters ↗
+              </Link>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <caption className="sr-only">
+                  Basic and Pro subscription features
+                </caption>
+                <thead>
+                  <tr className="border-y border-border text-left">
+                    <th scope="col" className="px-3 py-4 font-medium">
+                      Included
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-4 text-center font-medium"
+                    >
+                      Basic
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-3 py-4 text-center font-medium text-accent"
+                    >
+                      Pro
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  <ComparisonRow feature="Cluster feed" basic pro />
+                  <ComparisonRow feature="Full cluster history" basic pro />
+                  <ComparisonRow feature="Transaction breakdown" basic pro />
+                  <ComparisonRow feature="Weekly email digest" basic pro />
+                  <ComparisonRow
+                    feature="Instant email alerts"
+                    basic={false}
+                    pro
+                  />
+                  <ComparisonRow feature="Telegram alerts" basic={false} pro />
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section className="home-section border-t border-border">
+            <div className="faq-layout">
+              <div>
+                <span className="eyebrow">The details</span>
+                <h2>
+                  Before you
+                  <br />
+                  <em>choose a plan.</em>
+                </h2>
+              </div>
+              <div>
+                {FAQ.map((f) => (
+                  <details key={f.q} className="faq-item">
+                    <summary>{f.q}</summary>
+                    <p>{f.a}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          </section>
+        </Container>
+      </main>
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
+      <JsonLd data={faqJsonLd} />
     </div>
   );
 }
@@ -151,7 +208,7 @@ function ComparisonRow({
   pro?: boolean | string;
 }) {
   return (
-    <tr className="bg-surface">
+    <tr className="hover:bg-surface-muted/50">
       <td className="px-4 py-3">{feature}</td>
       <td className="px-4 py-3 text-center text-muted">{renderCell(basic)}</td>
       <td className="px-4 py-3 text-center font-medium">{renderCell(pro)}</td>
@@ -161,5 +218,10 @@ function ComparisonRow({
 
 function renderCell(v: boolean | string | undefined) {
   if (typeof v === "string") return v;
-  return v ? "✓" : "—";
+  return (
+    <>
+      <span aria-hidden>{v ? "✓" : "—"}</span>
+      <span className="sr-only">{v ? "Included" : "Not included"}</span>
+    </>
+  );
 }

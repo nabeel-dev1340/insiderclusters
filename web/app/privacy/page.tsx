@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
 import { LegalPage } from "@/components/legal-page";
 
 const SUPPORT_EMAIL = "support@beelodev.com";
@@ -7,6 +8,11 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "How InsiderClusters collects, uses, and protects your data. We collect the minimum needed to run the Service — primarily your email address.",
+  openGraph: {
+    title: "Privacy Policy",
+    url: `${SITE_URL}/privacy`,
+    type: "website",
+  },
   alternates: { canonical: "/privacy" },
   robots: { index: true, follow: true },
 };
@@ -28,13 +34,14 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong>Authentication data:</strong> single-use sign-in tokens and
-            session records used to keep you logged in. Tokens are stored hashed,
-            never in plain text.
+            session records used to keep you logged in. Tokens are stored
+            hashed, never in plain text.
           </li>
           <li>
             <strong>Billing data:</strong> if you subscribe to Pro, our payment
             processor handles your card details. We never see or store full card
-            numbers; we retain only a customer/subscription reference and status.
+            numbers; we retain only a customer/subscription reference and
+            status.
           </li>
           <li>
             <strong>Usage and technical data:</strong> basic server logs and, if
@@ -79,12 +86,12 @@ export default function PrivacyPage() {
       <section>
         <h2>4. How we share information</h2>
         <p>
-          We do not sell your personal information. We share it only with service
-          providers who process it on our behalf under appropriate safeguards,
-          such as our hosting/database provider, our email delivery provider, our
-          payment processor, and (if enabled) our analytics provider. We may also
-          disclose information where required by law or to protect our rights and
-          the safety of others.
+          We do not sell your personal information. We share it only with
+          service providers who process it on our behalf under appropriate
+          safeguards, such as our hosting/database provider, our email delivery
+          provider, our payment processor, and (if enabled) our analytics
+          provider. We may also disclose information where required by law or to
+          protect our rights and the safety of others.
         </p>
       </section>
 
@@ -102,13 +109,13 @@ export default function PrivacyPage() {
       <section>
         <h2>6. Your rights</h2>
         <p>
-          Depending on where you live, you may have the right to access, correct,
-          export, or delete your personal data, and to object to or restrict
-          certain processing. You can exercise these rights — or delete your
-          account entirely — by emailing{" "}
+          Depending on where you live, you may have the right to access,
+          correct, export, or delete your personal data, and to object to or
+          restrict certain processing. You can exercise these rights — or delete
+          your account entirely — by emailing{" "}
           <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>. You can also
-          unsubscribe from alert emails at any time from your settings or via the
-          link in each email.
+          unsubscribe from alert emails at any time from your settings or via
+          the link in each email.
         </p>
       </section>
 
@@ -116,8 +123,8 @@ export default function PrivacyPage() {
         <h2>7. Security</h2>
         <p>
           We protect data in transit with TLS, store authentication tokens
-          hashed, and limit access to production systems. No method of storage or
-          transmission is perfectly secure, but we work to protect your
+          hashed, and limit access to production systems. No method of storage
+          or transmission is perfectly secure, but we work to protect your
           information and to respond promptly to any incident.
         </p>
       </section>
@@ -125,17 +132,17 @@ export default function PrivacyPage() {
       <section>
         <h2>8. Children</h2>
         <p>
-          The Service is not directed to anyone under 18, and we do not knowingly
-          collect personal information from children. If you believe a child has
-          provided us data, contact us and we will delete it.
+          The Service is not directed to anyone under 18, and we do not
+          knowingly collect personal information from children. If you believe a
+          child has provided us data, contact us and we will delete it.
         </p>
       </section>
 
       <section>
         <h2>9. Changes to this policy</h2>
         <p>
-          We may update this Privacy Policy from time to time. We will revise the
-          effective date above and, for material changes, provide additional
+          We may update this Privacy Policy from time to time. We will revise
+          the effective date above and, for material changes, provide additional
           notice where appropriate.
         </p>
       </section>

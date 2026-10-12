@@ -16,13 +16,11 @@ export function ReturnBadge({
   const up = fraction >= 0;
   return (
     <span
-      title="Return from the price insiders paid (VWAP) to the latest price"
+      title="Price change from the average recorded purchase price to the latest cached price. Excludes dividends and may use delayed prices."
       className={cn(
         "inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold",
-        up
-          ? "bg-accent/10 text-accent"
-          : "bg-danger/10 text-danger",
-        className
+        up ? "bg-accent/10 text-accent" : "bg-danger/10 text-danger",
+        className,
       )}
     >
       <span aria-hidden>{up ? "▲" : "▼"}</span>

@@ -6,11 +6,11 @@ export function Input({ className, ...props }: ComponentProps<"input">) {
   return (
     <input
       className={cn(
-        "h-11 w-full rounded-lg border border-border bg-surface px-3.5 text-sm text-foreground",
-        "placeholder:text-muted/70 shadow-sm transition-colors",
+        "h-12 w-full rounded-sm border border-border bg-surface px-3.5 text-base text-foreground",
+        "placeholder:text-muted transition-colors",
         "focus:border-accent/50 focus-visible:outline-none",
         "disabled:opacity-60",
-        className
+        className,
       )}
       {...props}
     />

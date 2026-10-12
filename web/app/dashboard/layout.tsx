@@ -29,9 +29,13 @@ export default async function DashboardLayout({
   const plan = effectivePlan(user);
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="dashboard-shell flex min-h-full flex-col">
       <DashboardNav email={user.email} plan={plan} />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="mx-auto w-full max-w-6xl flex-1 px-4 py-10 sm:px-6"
+      >
         {plan === "none" ? (
           <Paywall lapsed={user.plan === "basic" || user.plan === "pro"} />
         ) : (

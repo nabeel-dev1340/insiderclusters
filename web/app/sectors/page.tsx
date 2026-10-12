@@ -1,8 +1,8 @@
+import { JsonLd } from "@/components/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getSectorDirectory, type SectorSummary } from "@/lib/sectors";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
-import { Badge } from "@/components/ui/badge";
 import { SITE_URL, sectorPath } from "@/lib/site";
 import { formatDate, formatNumber } from "@/lib/format";
 
@@ -39,7 +39,12 @@ export default async function SectorsPage() {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Sectors", item: `${SITE_URL}/sectors` },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Sectors",
+          item: `${SITE_URL}/sectors`,
+        },
       ],
     },
     {
@@ -65,7 +70,11 @@ export default async function SectorsPage() {
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-5xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-5xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -80,9 +89,9 @@ export default async function SectorsPage() {
           </h1>
           <p className="mt-4 text-pretty leading-relaxed text-muted">
             Where insiders are putting their own money, grouped by sector. Each
-            hub lists every company in the sector with a detected cluster buy
-            — two or more insiders buying on the open market around the same time —
-            parsed from SEC Form 4 filings.
+            hub lists every company in the sector with a detected cluster buy —
+            two or more insiders buying on the open market around the same time
+            — parsed from SEC Form 4 filings.
           </p>
         </header>
 
@@ -93,28 +102,32 @@ export default async function SectorsPage() {
             </p>
           </div>
         ) : (
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-8 border-t border-border">
             {sectors.map((s) => (
               <li key={s.slug}>
-                <Link
-                  href={sectorPath(s.slug)}
-                  className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="text-lg font-semibold">{s.sector}</span>
-                    <Badge tone="accent" className="shrink-0">
-                      {formatNumber(s.clusterCount)}{" "}
-                      {s.clusterCount === 1 ? "cluster" : "clusters"}
-                    </Badge>
+                <Link href={sectorPath(s.slug)} className="directory-record">
+                  <div>
+                    <span className="record-name">{s.sector}</span>
+                    <p className="record-company">
+                      {formatNumber(s.totalInsiders)} insiders in tracked
+                      clusters
+                    </p>
                   </div>
-                  <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted">
-                    <span>
-                      {formatNumber(s.tickerCount)}{" "}
-                      {s.tickerCount === 1 ? "stock" : "stocks"} ·{" "}
-                      {formatNumber(s.totalInsiders)} insiders
-                    </span>
-                    <span>{formatDate(s.lastDetectedAt)}</span>
+                  <div className="record-number">
+                    {formatNumber(s.clusterCount)}
+                    <small>Detected clusters</small>
                   </div>
+                  <div className="record-number">
+                    {formatNumber(s.tickerCount)}
+                    <small>Companies</small>
+                  </div>
+                  <div className="record-date text-sm">
+                    {formatDate(s.lastDetectedAt)}
+                    <small>Last detected</small>
+                  </div>
+                  <span aria-hidden className="text-accent">
+                    ↗
+                  </span>
                 </Link>
               </li>
             ))}
@@ -124,10 +137,7 @@ export default async function SectorsPage() {
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/json-ld";
 import { cache } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -42,10 +43,16 @@ export async function generateMetadata({
   const cik = cikFromSlug(slug);
   const data = cik ? await load(cik) : null;
   if (!data) {
-    return { title: "Insider not found", robots: { index: false, follow: false } };
+    return {
+      title: "Insider not found",
+      robots: { index: false, follow: false },
+    };
   }
 
-  const topTickers = data.positions.slice(0, 2).map((p) => p.ticker).join(", ");
+  const topTickers = data.positions
+    .slice(0, 2)
+    .map((p) => p.ticker)
+    .join(", ");
   const title = `${data.name} — Insider Trading & Form 4 Buys${topTickers ? ` (${topTickers})` : ""}`;
   const description =
     `${data.name} has bought ${formatMoneyCompact(data.totalValue)} of stock across ` +
@@ -93,8 +100,18 @@ export default async function InsiderPage({
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Insiders", item: `${SITE_URL}/insiders` },
-        { "@type": "ListItem", position: 3, name: data.name, item: `${SITE_URL}${canonical}` },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Insiders",
+          item: `${SITE_URL}/insiders`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: data.name,
+          item: `${SITE_URL}${canonical}`,
+        },
       ],
     },
     {
@@ -109,7 +126,12 @@ export default async function InsiderPage({
           ? {
               jobTitle: data.latestRole,
               ...(data.latestRoleCompany
-                ? { worksFor: { "@type": "Organization", name: data.latestRoleCompany } }
+                ? {
+                    worksFor: {
+                      "@type": "Organization",
+                      name: data.latestRoleCompany,
+                    },
+                  }
                 : {}),
             }
           : {}),
@@ -121,7 +143,11 @@ export default async function InsiderPage({
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-3xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-3xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -136,7 +162,9 @@ export default async function InsiderPage({
 
         <header className="mt-4">
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-3xl font-semibold tracking-tight">{data.name}</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">
+              {data.name}
+            </h1>
             {data.isSenior && <ConvictionBadge size="xs" />}
           </div>
           {data.latestRole && (
@@ -158,7 +186,10 @@ export default async function InsiderPage({
         </header>
 
         <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Stat label="Total bought" value={formatMoneyCompact(data.totalValue)} />
+          <Stat
+            label="Total bought"
+            value={formatMoneyCompact(data.totalValue)}
+          />
           <Stat label="Open-market buys" value={formatNumber(data.buyCount)} />
           <Stat label="Companies" value={formatNumber(data.tickerCount)} />
           <Stat label="Last buy" value={formatDate(data.lastBuyDate)} />
@@ -191,14 +222,21 @@ export default async function InsiderPage({
                     )}
                   </div>
                   <p className="mt-3 text-sm leading-relaxed text-muted">
-                    {p.buyCount === 1 ? "One purchase" : `${p.buyCount} purchases`}{" "}
+                    {p.buyCount === 1
+                      ? "One purchase"
+                      : `${p.buyCount} purchases`}{" "}
                     totalling {formatMoneyCompact(p.totalValue)}
                     {p.avgPrice != null && (
-                      <> at an average of {formatSharePrice(p.avgPrice)} per share</>
+                      <>
+                        {" "}
+                        at an average of {formatSharePrice(p.avgPrice)} per
+                        share
+                      </>
                     )}
                     {p.lastPrice != null && (
                       <>
-                        ; the stock last traded at {formatSharePrice(p.lastPrice)}
+                        ; the stock last traded at{" "}
+                        {formatSharePrice(p.lastPrice)}
                       </>
                     )}
                     .{" "}
@@ -210,9 +248,18 @@ export default async function InsiderPage({
                     </Link>
                   </p>
                   <div className="mt-3 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
-                    <Stat label="Avg price paid" value={formatSharePrice(p.avgPrice)} />
-                    <Stat label="Latest price" value={formatSharePrice(p.lastPrice)} />
-                    <Stat label="Market cap" value={formatMarketCap(p.marketCap)} />
+                    <Stat
+                      label="Avg price paid"
+                      value={formatSharePrice(p.avgPrice)}
+                    />
+                    <Stat
+                      label="Latest price"
+                      value={formatSharePrice(p.lastPrice)}
+                    />
+                    <Stat
+                      label="Market cap"
+                      value={formatMarketCap(p.marketCap)}
+                    />
                   </div>
                 </li>
               );
@@ -224,8 +271,8 @@ export default async function InsiderPage({
           <section className="mt-10">
             <h2 className="text-lg font-semibold">Cluster participation</h2>
             <p className="mt-2 text-sm text-muted">
-              Buys that landed within days of other insiders buying the same
-              stock — the pattern this site exists to catch.
+              Qualifying buys grouped with other insiders buying the same stock
+              — the pattern this site exists to catch.
             </p>
             <ul className="mt-4 space-y-3">
               {data.clusters.map((c) => (
@@ -258,25 +305,49 @@ export default async function InsiderPage({
         <section className="mt-10">
           <h2 className="text-lg font-semibold">All reported buys</h2>
           <div className="mt-4 overflow-hidden rounded-xl border border-border">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-160 text-sm">
+            <div className="responsive-records overflow-x-auto">
+              <table role="table" className="w-full min-w-160 text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-muted text-left text-xs uppercase tracking-wide text-muted">
-                    <th className="px-4 py-3 font-medium">Date</th>
-                    <th className="px-4 py-3 font-medium">Ticker</th>
-                    <th className="px-4 py-3 text-right font-medium">Shares</th>
-                    <th className="px-4 py-3 text-right font-medium">Price</th>
-                    <th className="px-4 py-3 text-right font-medium">Value</th>
-                    <th className="px-4 py-3 font-medium">Filing</th>
+                    <th scope="col" className="px-4 py-3 font-medium">
+                      Date
+                    </th>
+                    <th scope="col" className="px-4 py-3 font-medium">
+                      Ticker
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Shares
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Price
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Value
+                    </th>
+                    <th scope="col" className="px-4 py-3 font-medium">
+                      Filing
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
                   {data.buys.map((b) => (
                     <tr key={b.id} className="bg-surface">
-                      <td className="px-4 py-3 tabular-nums text-muted">
+                      <td
+                        data-label="Date"
+                        className="px-4 py-3 tabular-nums text-muted"
+                      >
                         {formatDate(b.transactionDate)}
                       </td>
-                      <td className="px-4 py-3">
+                      <td data-label="Ticker" className="px-4 py-3">
                         <div className="flex items-center gap-2">
                           <Link
                             href={tickerPath(b.ticker)}
@@ -291,16 +362,25 @@ export default async function InsiderPage({
                           )}
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-right tabular-nums">
+                      <td
+                        data-label="Shares"
+                        className="px-4 py-3 text-right tabular-nums"
+                      >
                         {formatNumber(b.shares)}
                       </td>
-                      <td className="px-4 py-3 text-right tabular-nums">
+                      <td
+                        data-label="Price"
+                        className="px-4 py-3 text-right tabular-nums"
+                      >
                         {formatSharePrice(b.pricePerShare)}
                       </td>
-                      <td className="px-4 py-3 text-right font-semibold tabular-nums">
+                      <td
+                        data-label="Value"
+                        className="px-4 py-3 text-right font-semibold tabular-nums"
+                      >
                         {formatMoneyCompact(b.value)}
                       </td>
-                      <td className="px-4 py-3">
+                      <td data-label="Filing" className="px-4 py-3">
                         <a
                           href={b.filingUrl}
                           target="_blank"
@@ -320,14 +400,15 @@ export default async function InsiderPage({
 
         <section className="mt-12 rounded-xl border border-accent/30 bg-accent/5 p-6 text-center">
           <p className="text-sm font-medium">
-            Get alerted the next time {data.name} — or any insider — buys
+            Follow new qualifying clusters involving {data.name} or other
+            insiders
           </p>
           <p className="mx-auto mt-1 max-w-md text-sm text-muted">
-            We watch every Form 4 as it hits SEC EDGAR and alert you when
-            insiders cluster into the same stock.
+            Explore qualifying clusters from public SEC filings. Pro adds email
+            and Telegram notifications after detection.
           </p>
-          <div className="mt-4 flex justify-center gap-3">
-            <ButtonLink href="/login">Get alerts free</ButtonLink>
+          <div className="mt-4 flex flex-wrap justify-center gap-3">
+            <ButtonLink href="/login">Start a trial</ButtonLink>
             <ButtonLink href="/pricing" variant="secondary">
               See pricing
             </ButtonLink>
@@ -340,9 +421,9 @@ export default async function InsiderPage({
             Figures are parsed from {data.name}&apos;s Form 4 filings on SEC
             EDGAR (CIK {data.cik}) and cover open-market purchases (transaction
             code <span className="font-mono">P</span>) — grants, option
-            exercises, and sales are excluded, which
-            is why totals here can differ from raw filing counts. Every row
-            links to its source document.
+            exercises, and sales are excluded, which is why totals here can
+            differ from raw filing counts. Every row links to its source
+            document.
           </p>
           <p className="mt-3 text-xs text-muted">
             This page is informational and reflects public filing data. It is
@@ -353,10 +434,7 @@ export default async function InsiderPage({
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }
@@ -364,7 +442,9 @@ export default async function InsiderPage({
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-lg border border-border bg-surface px-3 py-2.5">
-      <div className="text-[11px] uppercase tracking-wide text-muted">{label}</div>
+      <div className="text-[11px] uppercase tracking-wide text-muted">
+        {label}
+      </div>
       <div className="mt-0.5 font-semibold tabular-nums">{value}</div>
     </div>
   );

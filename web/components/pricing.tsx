@@ -2,7 +2,12 @@ import { ButtonLink } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/cn";
 import type { PaidTier } from "@/lib/plan";
-import { MONTHLY_PRICE, annualPrice, TRIAL_DAYS, ANNUAL_DISCOUNT_PCT } from "@/lib/billing";
+import {
+  MONTHLY_PRICE,
+  annualPrice,
+  TRIAL_DAYS,
+  ANNUAL_DISCOUNT_PCT,
+} from "@/lib/billing";
 
 // Single source of truth for plan marketing copy, reused on the landing page,
 // the /pricing route, and the dashboard paywall. There is no free plan: both
@@ -26,7 +31,7 @@ export const PLANS: Plan[] = [
     name: "Basic",
     tagline: "Every cluster, in real time.",
     features: [
-      "Real-time cluster feed — no delay, no caps",
+      "Cluster feed with no browsing caps",
       "Full multi-year cluster history",
       "Weekly email digest of the top cluster",
       "Direct links to the underlying SEC filings",
@@ -71,31 +76,27 @@ export function PricingCards({ checkout = false }: { checkout?: boolean }) {
       {PLANS.map((plan) => (
         <div
           key={plan.id}
-          className={cn(
-            "flex flex-col rounded-2xl border bg-surface p-6 shadow-sm",
-            plan.featured ? "border-accent/50 ring-1 ring-accent/20" : "border-border"
-          )}
+          className={cn("plan-card", plan.featured ? "featured" : "")}
         >
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold">{plan.name}</h3>
-            {plan.featured && <Badge tone="accent">Most popular</Badge>}
+            {plan.featured && <Badge tone="accent">Instant alerts</Badge>}
           </div>
           <p className="mt-1 text-sm text-muted">{plan.tagline}</p>
 
           <div className="mt-5 flex items-baseline gap-1.5">
-            <span className="text-4xl font-bold tracking-tight">
-              ${MONTHLY_PRICE[plan.id]}
-            </span>
+            <span className="plan-price">${MONTHLY_PRICE[plan.id]}</span>
             <span className="text-sm text-muted">per month</span>
           </div>
           <p className="mt-1 text-xs text-muted">
-            or ${annualPrice(plan.id)}/year — save {ANNUAL_DISCOUNT_PCT}%
+            or ${annualPrice(plan.id).toFixed(2)}/year — save{" "}
+            {ANNUAL_DISCOUNT_PCT}%
           </p>
 
           <ButtonLink
             href={checkout ? `/checkout?plan=${plan.id}` : "/login"}
             variant={plan.featured ? "primary" : "secondary"}
-            className="mt-5 w-full"
+            className="mt-6 w-full"
           >
             Start {TRIAL_DAYS}-day free trial
           </ButtonLink>

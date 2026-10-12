@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/json-ld";
 import { cache } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -30,7 +31,10 @@ export async function generateMetadata({
   const { month } = await params;
   const data = await load(month);
   if (!data) {
-    return { title: "Month not found", robots: { index: false, follow: false } };
+    return {
+      title: "Month not found",
+      robots: { index: false, follow: false },
+    };
   }
 
   const label = ymLabel(data.ym);
@@ -93,7 +97,8 @@ export default async function MonthArchivePage({
       description: `Notable open-market insider purchases and cluster buys during ${label}, derived from public SEC Form 4 filings.`,
       url: `${SITE_URL}${monthPath(data.ym)}`,
       creator: { "@type": "Organization", name: "InsiderClusters" },
-      isBasedOn: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
+      isBasedOn:
+        "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
       temporalCoverage: data.ym,
     },
   ];
@@ -102,7 +107,11 @@ export default async function MonthArchivePage({
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-3xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-3xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -121,17 +130,26 @@ export default async function MonthArchivePage({
           </h1>
           <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted">
             What corporate insiders bought with their own money in {label}:
-            every qualifying open-market purchase, and the
-            stocks where two or more insiders bought within the same rolling
-            window. Parsed from SEC Form 4 filings, linked to the source.
+            every qualifying open-market purchase, and the stocks where two or
+            more insiders bought within the same rolling window. Parsed from SEC
+            Form 4 filings, linked to the source.
           </p>
         </header>
 
         <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Stat label="Total bought" value={formatMoneyCompact(data.summary.totalValue)} />
-          <Stat label="Notable buys" value={formatNumber(data.summary.buyCount)} />
+          <Stat
+            label="Total bought"
+            value={formatMoneyCompact(data.summary.totalValue)}
+          />
+          <Stat
+            label="Notable buys"
+            value={formatNumber(data.summary.buyCount)}
+          />
           <Stat label="Stocks" value={formatNumber(data.summary.tickerCount)} />
-          <Stat label="Clusters" value={formatNumber(data.summary.clusterCount)} />
+          <Stat
+            label="Clusters"
+            value={formatNumber(data.summary.clusterCount)}
+          />
         </section>
 
         {data.clusters.length > 0 && (
@@ -178,21 +196,37 @@ export default async function MonthArchivePage({
               Biggest individual buys of {label}
             </h2>
             <div className="mt-4 overflow-hidden rounded-xl border border-border">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-160 text-sm">
+              <div className="responsive-records overflow-x-auto">
+                <table role="table" className="w-full min-w-160 text-sm">
                   <thead>
                     <tr className="border-b border-border bg-surface-muted text-left text-xs uppercase tracking-wide text-muted">
-                      <th className="px-4 py-3 font-medium">Insider</th>
-                      <th className="px-4 py-3 font-medium">Ticker</th>
-                      <th className="px-4 py-3 text-right font-medium">Date</th>
-                      <th className="px-4 py-3 text-right font-medium">Value</th>
-                      <th className="px-4 py-3 font-medium">Filing</th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        Insider
+                      </th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        Ticker
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3 text-right font-medium"
+                      >
+                        Date
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3 text-right font-medium"
+                      >
+                        Value
+                      </th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        Filing
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
                     {data.topBuys.map((b) => (
                       <tr key={b.id} className="bg-surface">
-                        <td className="px-4 py-3">
+                        <td data-label="Insider" className="px-4 py-3">
                           {b.insiderCik ? (
                             <Link
                               href={insiderPath(b.insiderCik, b.insiderName)}
@@ -209,7 +243,7 @@ export default async function MonthArchivePage({
                             </div>
                           )}
                         </td>
-                        <td className="px-4 py-3">
+                        <td data-label="Ticker" className="px-4 py-3">
                           <Link
                             href={tickerPath(b.ticker)}
                             className="font-mono font-medium hover:text-accent"
@@ -217,13 +251,19 @@ export default async function MonthArchivePage({
                             {b.ticker}
                           </Link>
                         </td>
-                        <td className="px-4 py-3 text-right tabular-nums text-muted">
+                        <td
+                          data-label="Date"
+                          className="px-4 py-3 text-right tabular-nums text-muted"
+                        >
                           {formatDate(b.transactionDate)}
                         </td>
-                        <td className="px-4 py-3 text-right font-semibold tabular-nums">
+                        <td
+                          data-label="Value"
+                          className="px-4 py-3 text-right font-semibold tabular-nums"
+                        >
                           {formatMoneyCompact(b.value)}
                         </td>
-                        <td className="px-4 py-3">
+                        <td data-label="Filing" className="px-4 py-3">
                           <a
                             href={b.filingUrl}
                             target="_blank"
@@ -242,16 +282,25 @@ export default async function MonthArchivePage({
           </section>
         )}
 
-        <nav className="mt-10 flex items-center justify-between text-sm" aria-label="Adjacent months">
+        <nav
+          className="mt-10 flex items-center justify-between text-sm"
+          aria-label="Adjacent months"
+        >
           {data.prevYm ? (
-            <Link href={monthPath(data.prevYm)} className="text-accent hover:underline">
+            <Link
+              href={monthPath(data.prevYm)}
+              className="text-accent hover:underline"
+            >
               ← {ymLabel(data.prevYm)}
             </Link>
           ) : (
             <span />
           )}
           {data.nextYm ? (
-            <Link href={monthPath(data.nextYm)} className="text-accent hover:underline">
+            <Link
+              href={monthPath(data.nextYm)}
+              className="text-accent hover:underline"
+            >
               {ymLabel(data.nextYm)} →
             </Link>
           ) : (
@@ -264,11 +313,11 @@ export default async function MonthArchivePage({
             Don&apos;t wait for the month-end recap
           </p>
           <p className="mx-auto mt-1 max-w-md text-sm text-muted">
-            Paid subscribers get an alert the moment a new cluster forms —
-            while the buying window is still open.
+            Pro subscribers receive email and Telegram alerts after new
+            qualifying clusters are detected. Basic includes a weekly digest.
           </p>
-          <div className="mt-4 flex justify-center gap-3">
-            <ButtonLink href="/login">Get alerts free</ButtonLink>
+          <div className="mt-4 flex flex-wrap justify-center gap-3">
+            <ButtonLink href="/login">Start a trial</ButtonLink>
             <ButtonLink href="/pricing" variant="secondary">
               See pricing
             </ButtonLink>
@@ -278,10 +327,7 @@ export default async function MonthArchivePage({
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }
@@ -289,7 +335,9 @@ export default async function MonthArchivePage({
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-lg border border-border bg-surface px-3 py-2.5">
-      <div className="text-[11px] uppercase tracking-wide text-muted">{label}</div>
+      <div className="text-[11px] uppercase tracking-wide text-muted">
+        {label}
+      </div>
       <div className="mt-0.5 font-semibold tabular-nums">{value}</div>
     </div>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/site";
 import { LegalPage } from "@/components/legal-page";
 import { MONTHLY_PRICE, TRIAL_DAYS, ANNUAL_DISCOUNT_PCT } from "@/lib/billing";
 
@@ -8,6 +9,11 @@ export const metadata: Metadata = {
   title: "Terms of Service",
   description:
     "The terms governing your use of InsiderClusters, including the informational nature of the service and the absence of investment advice.",
+  openGraph: {
+    title: "Terms of Service",
+    url: `${SITE_URL}/terms`,
+    type: "website",
+  },
   alternates: { canonical: "/terms" },
   robots: { index: true, follow: true },
 };
@@ -46,12 +52,12 @@ export default function TermsPage() {
       <section>
         <h2>3. Eligibility and accounts</h2>
         <p>
-          You must be at least 18 years old to use the Service. We use passwordless
-          “magic link” sign-in: you provide an email address and we send a
-          single-use link to authenticate you. You are responsible for
+          You must be at least 18 years old to use the Service. We use
+          passwordless “magic link” sign-in: you provide an email address and we
+          send a single-use link to authenticate you. You are responsible for
           maintaining access to your email account and for all activity that
-          occurs under your account. Notify us promptly at {SUPPORT_EMAIL} if you
-          suspect unauthorized use.
+          occurs under your account. Notify us promptly at {SUPPORT_EMAIL} if
+          you suspect unauthorized use.
         </p>
       </section>
 
@@ -101,8 +107,8 @@ export default function TermsPage() {
           the SEC) and from market data sources that may be delayed or contain
           errors. We strive for accuracy but do not warrant that the data is
           complete, timely, or error-free. Each cluster links to its source
-          filing so you can verify it independently. The Service is provided
-          “as is” and “as available.”
+          filing so you can verify it independently. The Service is provided “as
+          is” and “as available.”
         </p>
       </section>
 
@@ -112,21 +118,21 @@ export default function TermsPage() {
           To the fullest extent permitted by law, InsiderClusters disclaims all
           warranties, express or implied, including merchantability, fitness for
           a particular purpose, and non-infringement. We are not liable for any
-          trading or investment losses, or for any indirect, incidental, special,
-          consequential, or punitive damages arising from your use of the
-          Service. Our total aggregate liability for any claim relating to the
-          Service will not exceed the greater of the amount you paid us in the
-          twelve months preceding the claim or USD 100.
+          trading or investment losses, or for any indirect, incidental,
+          special, consequential, or punitive damages arising from your use of
+          the Service. Our total aggregate liability for any claim relating to
+          the Service will not exceed the greater of the amount you paid us in
+          the twelve months preceding the claim or USD 100.
         </p>
       </section>
 
       <section>
         <h2>8. Termination</h2>
         <p>
-          You may stop using the Service at any time. We may suspend or terminate
-          your access if you breach these Terms or if we discontinue the Service.
-          Provisions that by their nature should survive termination will
-          survive.
+          You may stop using the Service at any time. We may suspend or
+          terminate your access if you breach these Terms or if we discontinue
+          the Service. Provisions that by their nature should survive
+          termination will survive.
         </p>
       </section>
 

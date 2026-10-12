@@ -6,7 +6,7 @@ type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 disabled:opacity-60 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 disabled:opacity-60 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
   primary: "bg-accent text-accent-foreground hover:bg-accent-hover",
@@ -16,12 +16,16 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-8 px-3 text-sm",
-  md: "h-10 px-4 text-sm",
-  lg: "h-11 px-5 text-base",
+  sm: "h-11 px-3 text-sm",
+  md: "h-12 px-4 text-sm",
+  lg: "h-13 px-5 text-base",
 };
 
-export function buttonClasses(variant: Variant = "primary", size: Size = "md", extra?: string) {
+export function buttonClasses(
+  variant: Variant = "primary",
+  size: Size = "md",
+  extra?: string,
+) {
   return cn(base, variants[variant], sizes[size], extra);
 }
 
@@ -31,7 +35,9 @@ export function Button({
   className,
   ...props
 }: ComponentProps<"button"> & { variant?: Variant; size?: Size }) {
-  return <button className={buttonClasses(variant, size, className)} {...props} />;
+  return (
+    <button className={buttonClasses(variant, size, className)} {...props} />
+  );
 }
 
 export function ButtonLink({
@@ -40,7 +46,11 @@ export function ButtonLink({
   className,
   children,
   ...props
-}: ComponentProps<typeof Link> & { variant?: Variant; size?: Size; children: ReactNode }) {
+}: ComponentProps<typeof Link> & {
+  variant?: Variant;
+  size?: Size;
+  children: ReactNode;
+}) {
   return (
     <Link className={buttonClasses(variant, size, className)} {...props}>
       {children}

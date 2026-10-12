@@ -9,8 +9,8 @@ export function LogoTile({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "relative grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-linear-to-br from-accent to-accent-hover text-white ring-1 ring-inset ring-white/20",
-        className
+        "relative grid h-8 w-8 shrink-0 place-items-center rounded-sm bg-accent text-accent-foreground",
+        className,
       )}
     >
       <BrandMark className="h-[56%] w-[56%]" />

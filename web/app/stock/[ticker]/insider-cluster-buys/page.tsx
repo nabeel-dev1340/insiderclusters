@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/json-ld";
 import { cache } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -39,7 +40,10 @@ export async function generateMetadata({
   const { ticker } = await params;
   const data = await load(ticker);
   if (!data) {
-    return { title: "Ticker not found", robots: { index: false, follow: false } };
+    return {
+      title: "Ticker not found",
+      robots: { index: false, follow: false },
+    };
   }
 
   const t = data.ticker;
@@ -141,7 +145,12 @@ export default async function TickerPage({
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Stocks", item: `${SITE_URL}/stocks` },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Stocks",
+          item: `${SITE_URL}/stocks`,
+        },
         {
           "@type": "ListItem",
           position: 3,
@@ -157,7 +166,8 @@ export default async function TickerPage({
       description: `Open-market insider purchases${hasClusters ? " and cluster buys" : ""} in ${data.ticker} (${data.issuerName}), derived from public SEC Form 4 filings.`,
       url: `${SITE_URL}${tickerPath(data.ticker)}`,
       creator: { "@type": "Organization", name: "InsiderClusters" },
-      isBasedOn: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
+      isBasedOn:
+        "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
       dateModified: data.lastActivityAt.toISOString(),
     },
     {
@@ -175,7 +185,11 @@ export default async function TickerPage({
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-3xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-3xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -195,7 +209,8 @@ export default async function TickerPage({
             </h1>
             {hasClusters && (
               <Badge tone="accent">
-                {data.totalClusters} cluster {data.totalClusters === 1 ? "buy" : "buys"}
+                {data.totalClusters} cluster{" "}
+                {data.totalClusters === 1 ? "buy" : "buys"}
               </Badge>
             )}
           </div>
@@ -204,7 +219,10 @@ export default async function TickerPage({
             {data.sector && (
               <>
                 {" · "}
-                <Link href={sectorPath(data.sector)} className="hover:text-foreground">
+                <Link
+                  href={sectorPath(data.sector)}
+                  className="hover:text-foreground"
+                >
                   {data.sector}
                 </Link>
               </>
@@ -214,12 +232,11 @@ export default async function TickerPage({
             {hasClusters ? (
               <>
                 When two or more insiders at {data.issuerName} buy {data.ticker}{" "}
-                on the open market around the same time, that clustered
-                conviction is one of the highest-signal patterns in SEC filing
-                data. Below is every cluster we&apos;ve detected in{" "}
-                {data.ticker} plus the full record of qualifying open-market
-                buys, each parsed directly from Form 4 filings and linked back
-                to the source on SEC EDGAR.
+                in a qualifying detection window, the grouped purchases provide
+                a starting point for further research. Below is every cluster
+                we&apos;ve detected in {data.ticker} plus the full record of
+                qualifying open-market buys, each parsed directly from Form 4
+                filings and linked back to the source on SEC EDGAR.
               </>
             ) : (
               <>
@@ -236,7 +253,10 @@ export default async function TickerPage({
 
         <section className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Stat label="Clusters" value={formatNumber(data.totalClusters)} />
-          <Stat label="Distinct insiders" value={formatNumber(data.insiderCount)} />
+          <Stat
+            label="Distinct insiders"
+            value={formatNumber(data.insiderCount)}
+          />
           <Stat label="Total bought" value={formatMoneyCompact(totalBought)} />
           <Stat label="Market cap" value={formatMarketCap(data.marketCap)} />
         </section>
@@ -248,7 +268,7 @@ export default async function TickerPage({
               {visible.map((c) => {
                 const inner = (
                   <>
-                    <div className="flex items-start justify-between gap-4">
+                    <div className="cluster-summary-head flex items-start justify-between gap-4">
                       <div>
                         <div className="font-semibold">
                           {formatDateRange(c.windowStart, c.windowEnd)}
@@ -263,8 +283,14 @@ export default async function TickerPage({
                       </div>
                     </div>
                     <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                      <Stat label="Total bought" value={formatMoneyCompact(c.totalValue)} />
-                      <Stat label="Market cap" value={formatMarketCap(c.marketCap)} />
+                      <Stat
+                        label="Total bought"
+                        value={formatMoneyCompact(c.totalValue)}
+                      />
+                      <Stat
+                        label="Market cap"
+                        value={formatMarketCap(c.marketCap)}
+                      />
                     </div>
                   </>
                 );
@@ -294,11 +320,12 @@ export default async function TickerPage({
                   {data.ticker}
                 </p>
                 <p className="mx-auto mt-1 max-w-md text-sm text-muted">
-                  Sign in free to see the full history, or go Pro for real-time
-                  alerts the moment new insider clusters form.
+                  Choose Basic for full history, or Pro for email and Telegram
+                  alerts after new insider clusters are detected. Both plans
+                  start with a 7-day trial.
                 </p>
-                <div className="mt-4 flex justify-center gap-3">
-                  <ButtonLink href="/login">Sign in free</ButtonLink>
+                <div className="mt-4 flex flex-wrap justify-center gap-3">
+                  <ButtonLink href="/login">Start a trial</ButtonLink>
                   <ButtonLink href="/pricing" variant="secondary">
                     See pricing
                   </ButtonLink>
@@ -314,29 +341,53 @@ export default async function TickerPage({
               All notable open-market buys in {data.ticker}
             </h2>
             <p className="mt-2 text-sm text-muted">
-              Every open-market Form 4 purchase, newest first.
-              Click an insider to see their full buying record across companies.
+              Every open-market Form 4 purchase, newest first. Click an insider
+              to see their full buying record across companies.
             </p>
             <div className="mt-4 overflow-hidden rounded-xl border border-border">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-160 text-sm">
+              <div className="responsive-records overflow-x-auto">
+                <table role="table" className="w-full min-w-160 text-sm">
                   <thead>
                     <tr className="border-b border-border bg-surface-muted text-left text-xs uppercase tracking-wide text-muted">
-                      <th className="px-4 py-3 font-medium">Date</th>
-                      <th className="px-4 py-3 font-medium">Insider</th>
-                      <th className="px-4 py-3 text-right font-medium">Shares</th>
-                      <th className="px-4 py-3 text-right font-medium">Price</th>
-                      <th className="px-4 py-3 text-right font-medium">Value</th>
-                      <th className="px-4 py-3 font-medium">Filing</th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        Date
+                      </th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        Insider
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3 text-right font-medium"
+                      >
+                        Shares
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3 text-right font-medium"
+                      >
+                        Price
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3 text-right font-medium"
+                      >
+                        Value
+                      </th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        Filing
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
                     {visibleBuys.map((b) => (
                       <tr key={b.id} className="bg-surface">
-                        <td className="px-4 py-3 tabular-nums text-muted">
+                        <td
+                          data-label="Date"
+                          className="px-4 py-3 tabular-nums text-muted"
+                        >
                           {formatDate(b.transactionDate)}
                         </td>
-                        <td className="px-4 py-3">
+                        <td data-label="Insider" className="px-4 py-3">
                           <div className="flex flex-wrap items-center gap-2">
                             {b.insiderCik ? (
                               <Link
@@ -346,7 +397,9 @@ export default async function TickerPage({
                                 {b.insiderName}
                               </Link>
                             ) : (
-                              <span className="font-medium">{b.insiderName}</span>
+                              <span className="font-medium">
+                                {b.insiderName}
+                              </span>
                             )}
                             {b.inCluster && (
                               <Badge tone="accent" className="text-[10px]">
@@ -355,19 +408,30 @@ export default async function TickerPage({
                             )}
                           </div>
                           {b.insiderRole && (
-                            <div className="mt-0.5 text-xs text-muted">{b.insiderRole}</div>
+                            <div className="mt-0.5 text-xs text-muted">
+                              {b.insiderRole}
+                            </div>
                           )}
                         </td>
-                        <td className="px-4 py-3 text-right tabular-nums">
+                        <td
+                          data-label="Shares"
+                          className="px-4 py-3 text-right tabular-nums"
+                        >
                           {formatNumber(b.shares)}
                         </td>
-                        <td className="px-4 py-3 text-right tabular-nums">
+                        <td
+                          data-label="Price"
+                          className="px-4 py-3 text-right tabular-nums"
+                        >
                           {formatSharePrice(b.pricePerShare)}
                         </td>
-                        <td className="px-4 py-3 text-right font-semibold tabular-nums">
+                        <td
+                          data-label="Value"
+                          className="px-4 py-3 text-right font-semibold tabular-nums"
+                        >
                           {formatMoneyCompact(b.value)}
                         </td>
-                        <td className="px-4 py-3">
+                        <td data-label="Filing" className="px-4 py-3">
                           <a
                             href={b.filingUrl}
                             target="_blank"
@@ -386,7 +450,8 @@ export default async function TickerPage({
 
             {hiddenBuys > 0 && (
               <div className="mt-4 rounded-xl border border-border bg-surface p-4 text-center text-sm text-muted">
-                {hiddenBuys} earlier {hiddenBuys === 1 ? "buy" : "buys"} hidden —{" "}
+                {hiddenBuys} earlier {hiddenBuys === 1 ? "buy" : "buys"} hidden
+                —{" "}
                 <Link href="/login" className="text-accent hover:underline">
                   sign in free
                 </Link>{" "}
@@ -415,7 +480,8 @@ export default async function TickerPage({
                       </span>
                     </span>
                     <Badge tone="neutral" className="shrink-0">
-                      {t.totalClusters} {t.totalClusters === 1 ? "cluster" : "clusters"}
+                      {t.totalClusters}{" "}
+                      {t.totalClusters === 1 ? "cluster" : "clusters"}
                     </Badge>
                   </Link>
                 </li>
@@ -440,7 +506,9 @@ export default async function TickerPage({
             {faqs.map((f) => (
               <div key={f.q}>
                 <dt className="text-sm font-medium">{f.q}</dt>
-                <dd className="mt-1 text-sm leading-relaxed text-muted">{f.a}</dd>
+                <dd className="mt-1 text-sm leading-relaxed text-muted">
+                  {f.a}
+                </dd>
               </div>
             ))}
           </dl>
@@ -451,39 +519,45 @@ export default async function TickerPage({
             How we track insider buying in {data.ticker}
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">
-            We continuously poll SEC EDGAR for new Form 4 filings and parse every
-            open-market purchase (transaction code <span className="font-mono">P</span>).
-            A cluster is recorded when two or more <em>distinct</em> insiders —
-            officers, directors, or 10% owners — each buy {data.ticker} within a
-            rolling window. We track clusters at every company size, from
-            micro-caps to mega-caps. Every
-            figure on this page traces back to an official filing; open any row
-            to jump straight to the source document.{" "}
-            <Link href="/learn/what-is-a-cluster-buy" className="text-accent hover:underline">
+            We continuously poll SEC EDGAR for new Form 4 filings and parse
+            every open-market purchase (transaction code{" "}
+            <span className="font-mono">P</span>). A cluster is recorded when
+            two or more <em>distinct</em> insiders — officers, directors, or 10%
+            owners — each buy {data.ticker} within a rolling window. We track
+            clusters at every company size, from micro-caps to mega-caps.
+            Transactions link to official filings; prices and market
+            capitalizations may be cached market data. Read our{" "}
+            <Link href="/methodology" className="text-accent hover:underline">
+              methodology and data limits
+            </Link>{" "}
+            before interpreting the figures.{" "}
+            <Link
+              href="/learn/what-is-a-cluster-buy"
+              className="text-accent hover:underline"
+            >
               What counts as a cluster buy?
             </Link>
           </p>
           <p className="mt-3 text-xs text-muted">
-            This page is informational and reflects public filing data. It is not
-            investment advice or a recommendation regarding {data.ticker}.
+            This page is informational and reflects public filing data. It is
+            not investment advice or a recommendation regarding {data.ticker}.
           </p>
         </section>
       </main>
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-border bg-surface px-3 py-2.5">
-      <div className="text-[11px] uppercase tracking-wide text-muted">{label}</div>
+    <div className="border-t border-border pt-3">
+      <div className="text-[11px] uppercase tracking-wide text-muted">
+        {label}
+      </div>
       <div className="mt-0.5 font-semibold tabular-nums">{value}</div>
     </div>
   );

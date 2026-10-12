@@ -8,11 +8,13 @@ import { SITE_URL, learnPath, sectorPath } from "@/lib/site";
 // no DB — so both route handlers can be force-static and cost nothing.
 
 // Newest article revision — a cheap, honest "last updated" for both files.
-const LAST_UPDATED = LEARN_ARTICLES.map((a) => a.updated).sort().at(-1);
+const LAST_UPDATED = LEARN_ARTICLES.map((a) => a.updated)
+  .sort()
+  .at(-1);
 
 const HEADER = `# InsiderClusters
 
-> InsiderClusters detects insider cluster buys — two or more corporate insiders (officers, directors, or 10% owners) each buying their own company's stock on the open market within a rolling window — by parsing every SEC Form 4 filing as it hits EDGAR, and alerts subscribers in real time.
+> InsiderClusters detects insider cluster buys — two or more corporate insiders (officers, directors, or 10% owners) each buying their own company's stock on the open market within a rolling window — by monitoring and parsing public SEC Form 4 filings on EDGAR, and alerts subscribers after detection.
 
 Site: ${SITE_URL}
 Content last updated: ${LAST_UPDATED}
@@ -20,10 +22,10 @@ Content last updated: ${LAST_UPDATED}
 Key facts about the methodology:
 
 - A cluster buy requires two or more distinct insiders; the same person filing twice never counts as two.
-- Only open-market purchases (Form 4 transaction code P) qualify; grants, option exercises, tax withholding, and 10b5-1 scheduled trades are excluded.
-- Every open-market purchase counts, regardless of dollar size.
+- Qualifying code-P purchases are filtered from Form 4 filings. Code P includes open-market and private purchases; the filter does not independently exclude every 10b5-1 scheduled purchase. Grants, option exercises, tax withholding, and sales are excluded.
+- Purchases must meet the configured value and data-quality filters; the code defaults to a $1 minimum and a 90-day rolling window. Deployment settings can override these defaults.
 - Detection runs across companies of every size, from micro-caps to mega-caps — no market-cap ceiling.
-- Every figure on the site links back to its original SEC filing on EDGAR. Nothing is estimated.
+- Transactions link to original SEC filings on EDGAR. Prices and market capitalizations may be delayed cached data; derived ratios are estimates, not ownership stakes or total returns.
 - InsiderClusters is an informational tool built on public SEC filings, not investment advice.
 `;
 
@@ -33,6 +35,7 @@ function line(title: string, url: string, desc?: string): string {
 
 const LIVE_DATA = `## Live data
 
+${line("Data and detection methodology", "/methodology", "sources, qualifying purchases, detection rules, metric definitions, and limitations")}
 ${line("Stocks with insider buying", "/stocks", "every stock with a detected cluster buy or qualifying open-market insider purchase, with per-ticker history pages")}
 ${line("Insider leaderboard", "/insiders", "the individual insiders buying the most, each with a cross-company purchase history")}
 ${line("Sectors", "/sectors", "insider cluster activity grouped by sector")}
@@ -66,9 +69,13 @@ export function buildLlmsIndex(): string {
     "this index plus the complete text of every glossary article, in one markdown file",
   )}`;
   return (
-    [HEADER, `## Full content\n\n${fullLink}`, LIVE_DATA, learnIndex(), sectorIndex()].join(
-      "\n\n",
-    ) + "\n"
+    [
+      HEADER,
+      `## Full content\n\n${fullLink}`,
+      LIVE_DATA,
+      learnIndex(),
+      sectorIndex(),
+    ].join("\n\n") + "\n"
   );
 }
 

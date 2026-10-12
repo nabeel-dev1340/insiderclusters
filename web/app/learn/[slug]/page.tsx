@@ -1,7 +1,8 @@
+import { JsonLd } from "@/components/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { LEARN_ARTICLES, getArticle } from "@/lib/learn";
+import { LEARN_ARTICLES, getArticle, articleHeadings } from "@/lib/learn";
 import { getRecentClusters, type ClusterSummary } from "@/lib/clusters";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
@@ -26,7 +27,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) {
-    return { title: "Article not found", robots: { index: false, follow: false } };
+    return {
+      title: "Article not found",
+      robots: { index: false, follow: false },
+    };
   }
   const canonical = learnPath(article.slug);
   return {
@@ -60,6 +64,7 @@ export default async function LearnArticlePage({
     recent = [];
   }
 
+  const headings = articleHeadings(article);
   const related = article.related
     .map((s) => getArticle(s))
     .filter((a): a is NonNullable<typeof a> => a != null);
@@ -70,7 +75,12 @@ export default async function LearnArticlePage({
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Learn", item: `${SITE_URL}/learn` },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Learn",
+          item: `${SITE_URL}/learn`,
+        },
         {
           "@type": "ListItem",
           position: 3,
@@ -86,8 +96,14 @@ export default async function LearnArticlePage({
       description: article.description,
       dateModified: article.updated,
       url: `${SITE_URL}${learnPath(article.slug)}`,
-      author: { "@type": "Organization", name: "InsiderClusters" },
-      publisher: { "@type": "Organization", name: "InsiderClusters" },
+      author: {
+        "@type": "Organization",
+        "@id": `${SITE_URL}/#organization`,
+        name: "InsiderClusters",
+        url: `${SITE_URL}/methodology`,
+      },
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      mainEntityOfPage: `${SITE_URL}${learnPath(article.slug)}`,
     },
     // FAQPage mirrors the visible FAQ section verbatim (a validity
     // requirement) so AI engines and rich results can quote exact answers.
@@ -106,7 +122,11 @@ export default async function LearnArticlePage({
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-3xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-3xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -123,10 +143,24 @@ export default async function LearnArticlePage({
           <h1 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
             {article.title}
           </h1>
-          <div className="mt-3 text-sm text-muted">
-            Updated {article.updated} · InsiderClusters
+          <div className="article-provenance">
+            By InsiderClusters · Updated{" "}
+            <time dateTime={article.updated}>{article.updated}</time> ·{" "}
+            <Link href="/methodology">Sources & methodology</Link>
           </div>
-          <div className="mt-2 text-[15px]">{article.body}</div>
+          <nav className="article-toc" aria-label="In this guide">
+            <span className="eyebrow">In this guide</span>
+            <ul>
+              {headings.map((heading) => (
+                <li key={heading.id}>
+                  <a href={`#${heading.id}`}>
+                    {heading.text} <span aria-hidden>↓</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="mt-6 text-base">{article.body}</div>
 
           <section className="mt-10">
             <h2 className="text-xl font-semibold tracking-tight">
@@ -207,10 +241,7 @@ export default async function LearnArticlePage({
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }

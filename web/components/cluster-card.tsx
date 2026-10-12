@@ -21,7 +21,9 @@ import { ReturnBadge } from "@/components/return-badge";
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <div className="text-[11px] uppercase tracking-wide text-muted">{label}</div>
+      <div className="text-[11px] uppercase tracking-wide text-muted">
+        {label}
+      </div>
       <div className="mt-0.5 font-semibold tabular-nums">{value}</div>
     </div>
   );
@@ -41,12 +43,12 @@ export function ClusterCard({
   return (
     <Link
       href={`/dashboard/clusters/${cluster.id}`}
-      className="group block rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:border-accent/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+      className="cluster-card group block rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:border-accent/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-mono text-lg font-bold tracking-tight">
+            <span className="cluster-ticker font-mono text-lg font-bold tracking-tight">
               {cluster.ticker}
             </span>
             {isNew && <Badge tone="accent">New</Badge>}
@@ -66,26 +68,33 @@ export function ClusterCard({
       </div>
 
       <div className="mt-5 grid grid-cols-3 gap-3 text-sm">
-        <Stat label="Total bought" value={formatMoneyCompact(cluster.totalValue)} />
+        <Stat
+          label="Total bought"
+          value={formatMoneyCompact(cluster.totalValue)}
+        />
         <Stat label="Avg paid" value={formatSharePrice(avg)} />
         <Stat label="Market cap" value={formatMarketCap(cluster.marketCap)} />
       </div>
 
       {(roleMix || frac != null) && (
         <div className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-muted">
-          {roleMix && <span className="font-medium text-foreground">{roleMix}</span>}
+          {roleMix && (
+            <span className="font-medium text-foreground">{roleMix}</span>
+          )}
           {roleMix && frac != null && <span aria-hidden>·</span>}
-          {frac != null && <span>{formatPercent(frac)} of company</span>}
+          {frac != null && <span>{formatPercent(frac)} of market cap</span>}
         </div>
       )}
 
-      <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted">
+      <div className="mt-4 flex flex-wrap gap-2 items-center justify-between border-t border-border pt-3 text-xs text-muted">
         <span>
           {formatDateRange(cluster.windowStart, cluster.windowEnd)}
-          <span className="px-1.5" aria-hidden>·</span>
+          <span className="px-1.5" aria-hidden>
+            ·
+          </span>
           {formatRelative(cluster.detectedAt)}
         </span>
-        <span className="font-medium text-accent opacity-0 transition-opacity group-hover:opacity-100">
+        <span className="cluster-details font-medium text-accent opacity-0 transition-opacity group-hover:opacity-100">
           View details →
         </span>
       </div>

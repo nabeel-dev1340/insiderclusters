@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/json-ld";
+import { StockDirectory } from "@/components/stock-directory";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -7,11 +9,9 @@ import {
   type SignalOnlyTicker,
 } from "@/lib/clusters";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
-import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
-import { ConvictionBadge } from "@/components/conviction-badge";
 import { SITE_URL, tickerPath } from "@/lib/site";
-import { formatMarketCap, formatDate, formatMoneyCompact, formatNumber } from "@/lib/format";
+import { formatDate, formatMoneyCompact, formatNumber } from "@/lib/format";
 
 const TITLE = "Stocks with insider cluster buys";
 const DESCRIPTION =
@@ -88,7 +88,11 @@ export default async function StocksPage() {
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-5xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-5xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -102,10 +106,9 @@ export default async function StocksPage() {
             Stocks with insider cluster buys
           </h1>
           <p className="mt-4 text-pretty leading-relaxed text-muted">
-            Every company where two or more insiders bought stock on
-            the open market within a rolling window — the highest-signal
-            pattern in SEC filing data. Each ticker links to its full cluster
-            history, parsed directly from Form 4 filings.
+            Research companies where two or more insiders reported qualifying
+            purchases within a rolling detection window. Each ticker links to
+            its full cluster history, parsed directly from Form 4 filings.
           </p>
           {tickers.length > 0 && (
             <p className="mt-3 text-sm text-muted">
@@ -133,37 +136,7 @@ export default async function StocksPage() {
             </div>
           </div>
         ) : (
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {tickers.map((t) => (
-              <li key={t.ticker}>
-                <Link
-                  href={tickerPath(t.ticker)}
-                  className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="font-mono text-lg font-bold">
-                      {t.ticker}
-                    </span>
-                    <Badge tone="accent" className="shrink-0">
-                      {t.totalClusters}{" "}
-                      {t.totalClusters === 1 ? "cluster" : "clusters"}
-                    </Badge>
-                  </div>
-                  <div className="mt-1 flex items-center gap-2">
-                    <p className="truncate text-sm text-muted">{t.issuerName}</p>
-                    {t.hasSeniorInsider && <ConvictionBadge size="xs" className="shrink-0" />}
-                  </div>
-                  <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted">
-                    <span>
-                      {formatNumber(t.insiderCount)} insiders ·{" "}
-                      {formatMarketCap(t.marketCap)} cap
-                    </span>
-                    <span>{formatDate(t.lastDetectedAt)}</span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <StockDirectory tickers={tickers} />
         )}
 
         {signalOnly.length > 0 && (
@@ -177,21 +150,43 @@ export default async function StocksPage() {
               it, and the price paid.
             </p>
             <div className="mt-6 overflow-hidden rounded-xl border border-border">
-              <div className="overflow-x-auto">
-                <table className="w-full min-w-160 text-sm">
+              <div className="responsive-records overflow-x-auto">
+                <table role="table" className="w-full min-w-160 text-sm">
                   <thead>
                     <tr className="border-b border-border bg-surface-muted text-left text-xs uppercase tracking-wide text-muted">
-                      <th className="px-4 py-3 font-medium">Ticker</th>
-                      <th className="px-4 py-3 font-medium">Company</th>
-                      <th className="px-4 py-3 text-right font-medium">Buys</th>
-                      <th className="px-4 py-3 text-right font-medium">Total bought</th>
-                      <th className="px-4 py-3 text-right font-medium">Last buy</th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        Ticker
+                      </th>
+                      <th scope="col" className="px-4 py-3 font-medium">
+                        Company
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3 text-right font-medium"
+                      >
+                        Buys
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3 text-right font-medium"
+                      >
+                        Total bought
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3 text-right font-medium"
+                      >
+                        Last buy
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
                     {signalOnly.map((t) => (
-                      <tr key={t.ticker} className="bg-surface transition-colors hover:bg-surface-muted/50">
-                        <td className="px-4 py-3">
+                      <tr
+                        key={t.ticker}
+                        className="bg-surface transition-colors hover:bg-surface-muted/50"
+                      >
+                        <td data-label="Ticker" className="px-4 py-3">
                           <Link
                             href={tickerPath(t.ticker)}
                             className="font-mono font-semibold hover:text-accent"
@@ -199,16 +194,28 @@ export default async function StocksPage() {
                             {t.ticker}
                           </Link>
                         </td>
-                        <td className="max-w-64 truncate px-4 py-3 text-muted">
+                        <td
+                          data-label="Company"
+                          className="max-w-64 truncate px-4 py-3 text-muted"
+                        >
                           {t.issuerName}
                         </td>
-                        <td className="px-4 py-3 text-right tabular-nums">
+                        <td
+                          data-label="Buys"
+                          className="px-4 py-3 text-right tabular-nums"
+                        >
                           {formatNumber(t.buyCount)}
                         </td>
-                        <td className="px-4 py-3 text-right font-semibold tabular-nums">
+                        <td
+                          data-label="Total bought"
+                          className="px-4 py-3 text-right font-semibold tabular-nums"
+                        >
                           {formatMoneyCompact(t.totalValue)}
                         </td>
-                        <td className="px-4 py-3 text-right tabular-nums text-muted">
+                        <td
+                          data-label="Last buy"
+                          className="px-4 py-3 text-right tabular-nums text-muted"
+                        >
                           {formatDate(t.lastBuyDate)}
                         </td>
                       </tr>
@@ -223,10 +230,7 @@ export default async function StocksPage() {
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }

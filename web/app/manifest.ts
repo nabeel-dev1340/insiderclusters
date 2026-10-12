@@ -10,8 +10,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Real-time alerts when multiple insiders buy the same stock, sourced from SEC Form 4 filings.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0a0a0c",
-    theme_color: "#059669",
+    background_color: "#f7f6f0",
+    theme_color: "#234f3d",
     icons: [
       { src: "/icon.svg", type: "image/svg+xml", sizes: "any", purpose: "any" },
       { src: "/apple-icon", type: "image/png", sizes: "180x180" },

@@ -1,3 +1,4 @@
+import { JsonLd } from "@/components/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getMostActiveInsiders, type InsiderLeader } from "@/lib/clusters";
@@ -8,7 +9,7 @@ import { ConvictionBadge } from "@/components/conviction-badge";
 import { SITE_URL, insiderPath, tickerPath } from "@/lib/site";
 import { formatMoneyCompact, formatDate, formatNumber } from "@/lib/format";
 
-const TITLE = "Most active insiders";
+const TITLE = "Most active insider buyers";
 const DESCRIPTION =
   "The insiders buying the most stock on the open market, ranked by total dollars purchased across SEC Form 4 filings. See who's backing their own companies.";
 
@@ -43,7 +44,12 @@ export default async function InsidersPage() {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Insiders", item: `${SITE_URL}/insiders` },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Insiders",
+          item: `${SITE_URL}/insiders`,
+        },
       ],
     },
     {
@@ -65,7 +71,11 @@ export default async function InsidersPage() {
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-5xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-5xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -76,13 +86,14 @@ export default async function InsidersPage() {
 
         <header className="mt-4 max-w-2xl">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Most active insiders
+            Most active insider buyers
           </h1>
           <p className="mt-4 text-pretty leading-relaxed text-muted">
             The corporate insiders buying the most stock on the open market,
-            ranked by total dollars purchased across the Form 4 filings we track.
-            A <span className="font-medium text-foreground">High conviction</span>{" "}
-            tag marks C-suite officers backing their own companies.
+            ranked by total dollars purchased across the Form 4 filings we
+            track. A{" "}
+            <span className="font-medium text-foreground">Executive buyer</span>{" "}
+            tag identifies a senior executive from the reported role text.
           </p>
         </header>
 
@@ -98,16 +109,37 @@ export default async function InsidersPage() {
           </div>
         ) : (
           <div className="mt-8 overflow-hidden rounded-xl border border-border">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-180 text-sm">
+            <div className="responsive-records overflow-x-auto">
+              <table role="table" className="w-full min-w-180 text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-muted text-left text-xs uppercase tracking-wide text-muted">
-                    <th className="px-4 py-3 font-medium">#</th>
-                    <th className="px-4 py-3 font-medium">Insider</th>
-                    <th className="px-4 py-3 font-medium">Tickers</th>
-                    <th className="px-4 py-3 text-right font-medium">Buys</th>
-                    <th className="px-4 py-3 text-right font-medium">Total bought</th>
-                    <th className="px-4 py-3 text-right font-medium">Last buy</th>
+                    <th scope="col" className="px-4 py-3 font-medium">
+                      #
+                    </th>
+                    <th scope="col" className="px-4 py-3 font-medium">
+                      Insider
+                    </th>
+                    <th scope="col" className="px-4 py-3 font-medium">
+                      Tickers
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Buys
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Total bought
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 py-3 text-right font-medium"
+                    >
+                      Last buy
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
@@ -116,8 +148,13 @@ export default async function InsidersPage() {
                       key={l.key}
                       className="bg-surface transition-colors hover:bg-surface-muted/50"
                     >
-                      <td className="px-4 py-3 tabular-nums text-muted">{i + 1}</td>
-                      <td className="px-4 py-3">
+                      <td
+                        data-label="#"
+                        className="px-4 py-3 tabular-nums text-muted"
+                      >
+                        {i + 1}
+                      </td>
+                      <td data-label="Insider" className="px-4 py-3">
                         <div className="flex flex-wrap items-center gap-2">
                           {l.cik ? (
                             <Link
@@ -132,14 +169,19 @@ export default async function InsidersPage() {
                           {l.isSenior && <ConvictionBadge size="xs" />}
                         </div>
                         {l.role && (
-                          <div className="mt-0.5 text-xs text-muted">{l.role}</div>
+                          <div className="mt-0.5 text-xs text-muted">
+                            {l.role}
+                          </div>
                         )}
                       </td>
-                      <td className="px-4 py-3">
+                      <td data-label="Tickers" className="px-4 py-3">
                         <div className="flex flex-wrap gap-1.5">
                           {l.tickers.slice(0, 4).map((t) => (
                             <Link key={t} href={tickerPath(t)}>
-                              <Badge tone="neutral" className="font-mono hover:border-accent/40">
+                              <Badge
+                                tone="neutral"
+                                className="font-mono hover:border-accent/40"
+                              >
                                 {t}
                               </Badge>
                             </Link>
@@ -151,13 +193,22 @@ export default async function InsidersPage() {
                           )}
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-right tabular-nums">
+                      <td
+                        data-label="Buys"
+                        className="px-4 py-3 text-right tabular-nums"
+                      >
                         {formatNumber(l.buyCount)}
                       </td>
-                      <td className="px-4 py-3 text-right font-semibold tabular-nums">
+                      <td
+                        data-label="Total bought"
+                        className="px-4 py-3 text-right font-semibold tabular-nums"
+                      >
                         {formatMoneyCompact(l.totalValue)}
                       </td>
-                      <td className="px-4 py-3 text-right tabular-nums text-muted">
+                      <td
+                        data-label="Last buy"
+                        className="px-4 py-3 text-right tabular-nums text-muted"
+                      >
                         {formatDate(l.lastBuyDate)}
                       </td>
                     </tr>
@@ -171,10 +222,7 @@ export default async function InsidersPage() {
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }

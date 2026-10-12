@@ -19,7 +19,11 @@ export default async function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-2xl font-semibold tracking-tight">Settings</h1>
+      <span className="eyebrow">Make it yours</span>
+      <h1 className="mt-4">Your research preferences.</h1>
+      <p className="mt-4 text-sm text-muted">
+        Manage your account, plan, and where new cluster alerts reach you.
+      </p>
 
       {/* Account */}
       <Section title="Account">
@@ -53,7 +57,10 @@ export default async function SettingsPage() {
             </p>
             <ul className="mt-3 space-y-2">
               {PRO_EXTRAS.map((f) => (
-                <li key={f} className="flex items-center gap-2 text-sm text-muted">
+                <li
+                  key={f}
+                  className="flex items-center gap-2 text-sm text-muted"
+                >
                   <CheckIcon />
                   {f}
                 </li>
@@ -111,12 +118,16 @@ export default async function SettingsPage() {
   );
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <section className="mt-8">
-      <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
-        {title}
-      </h2>
+      <h2 className="mb-3 text-2xl font-normal text-foreground">{title}</h2>
       <Card>
         <div className="divide-y divide-border">{children}</div>
       </Card>
@@ -134,12 +145,12 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 px-5 py-4">
+    <div className="flex flex-col items-start justify-between gap-4 px-5 py-5 sm:flex-row sm:items-center">
       <div>
         <div className="text-sm font-medium">{label}</div>
         <div className="mt-0.5 text-sm text-muted">{description}</div>
       </div>
-      <div className="shrink-0">{children}</div>
+      <div className="max-w-full shrink-0 break-all">{children}</div>
     </div>
   );
 }

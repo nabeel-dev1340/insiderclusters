@@ -16,7 +16,14 @@ import {
 // One sitemap per page type (served at /sitemap/<id>.xml) so Search Console
 // reports indexation per type — the plan's early-warning signal for thin
 // content. robots.ts lists all of them; Next generates no index sitemap.
-const SITEMAP_IDS = ["core", "stocks", "insiders", "sectors", "learn", "months"] as const;
+const SITEMAP_IDS = [
+  "core",
+  "stocks",
+  "insiders",
+  "sectors",
+  "learn",
+  "months",
+] as const;
 export type SitemapId = (typeof SITEMAP_IDS)[number];
 
 export async function generateSitemaps(): Promise<{ id: SitemapId }[]> {
@@ -41,14 +48,51 @@ export default async function sitemap(props: {
         // it's Disallow-ed in robots.txt and has no organic value.
         return [
           { url: `${SITE_URL}/`, changeFrequency: "daily", priority: 1 },
-          { url: `${SITE_URL}/stocks`, changeFrequency: "daily", priority: 0.9 },
-          { url: `${SITE_URL}/insiders`, changeFrequency: "daily", priority: 0.8 },
-          { url: `${SITE_URL}/sectors`, changeFrequency: "daily", priority: 0.8 },
-          { url: `${SITE_URL}/learn`, changeFrequency: "weekly", priority: 0.7 },
-          { url: `${SITE_URL}/insider-buying`, changeFrequency: "daily", priority: 0.7 },
-          { url: `${SITE_URL}/pricing`, changeFrequency: "monthly", priority: 0.8 },
-          { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.3 },
-          { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.3 },
+          {
+            url: `${SITE_URL}/stocks`,
+            changeFrequency: "daily",
+            priority: 0.9,
+          },
+          {
+            url: `${SITE_URL}/insiders`,
+            changeFrequency: "daily",
+            priority: 0.8,
+          },
+          {
+            url: `${SITE_URL}/sectors`,
+            changeFrequency: "daily",
+            priority: 0.8,
+          },
+          {
+            url: `${SITE_URL}/learn`,
+            changeFrequency: "weekly",
+            priority: 0.7,
+          },
+          {
+            url: `${SITE_URL}/insider-buying`,
+            changeFrequency: "daily",
+            priority: 0.7,
+          },
+          {
+            url: `${SITE_URL}/methodology`,
+            changeFrequency: "monthly",
+            priority: 0.6,
+          },
+          {
+            url: `${SITE_URL}/pricing`,
+            changeFrequency: "monthly",
+            priority: 0.8,
+          },
+          {
+            url: `${SITE_URL}/terms`,
+            changeFrequency: "yearly",
+            priority: 0.3,
+          },
+          {
+            url: `${SITE_URL}/privacy`,
+            changeFrequency: "yearly",
+            priority: 0.3,
+          },
         ];
 
       case "stocks": {
@@ -92,13 +136,12 @@ export default async function sitemap(props: {
       case "months": {
         const months = await getArchiveMonths();
         return months.map((m) => {
-          // A past month's page stops changing once the month (plus filing
-          // lag) is over; the current month updates as filings land.
+          // Omit lastModified: transaction months do not prove when the
+          // archive content changed (late filings and backfills can change it).
           const end = new Date(`${ymRange(m.ym).endExclusive}T00:00:00Z`);
           const isClosed = Date.now() > end.getTime() + 7 * 24 * 3600 * 1000;
           return {
             url: `${SITE_URL}${monthPath(m.ym)}`,
-            lastModified: isClosed ? end : new Date(),
             changeFrequency: isClosed ? "yearly" : "daily",
             priority: 0.5,
           };

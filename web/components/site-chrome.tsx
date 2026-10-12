@@ -14,20 +14,22 @@ export function Wordmark({ className }: { className?: string }) {
       href="/"
       aria-label="InsiderClusters home"
       className={cn(
-        "group inline-flex items-center gap-2.5 font-semibold tracking-tight",
-        className
+        "wordmark group inline-flex items-center gap-2.5 font-semibold tracking-tight",
+        className,
       )}
     >
       <LogoTile className="transition-transform duration-200 group-hover:-translate-y-0.5" />
-      <span className="text-[15px]">InsiderClusters</span>
+      <span className="text-[16px] sm:text-[19px]">
+        Insider<span className="font-normal">Clusters</span>
+      </span>
     </Link>
   );
 }
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 h-16 border-b border-border/70 bg-background/80 backdrop-blur-xl">
-      <Container className="flex h-16 items-center justify-between">
+    <header className="site-header sticky top-0 z-40 border-b border-border">
+      <Container className="flex h-18 items-center justify-between gap-3">
         <Wordmark />
         <SiteNav />
       </Container>
@@ -59,8 +61,9 @@ const FOOTER_COLUMNS: {
     ],
   },
   {
-    title: "Legal & data",
+    title: "About & data",
     links: [
+      { label: "Methodology", href: "/methodology" },
       { label: "Terms", href: "/terms" },
       { label: "Privacy", href: "/privacy" },
       {
@@ -74,28 +77,19 @@ const FOOTER_COLUMNS: {
 
 export function SiteFooter() {
   return (
-    <footer className="relative mt-auto border-t border-border">
-      {/* subtle brand hairline */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-accent/40 to-transparent"
-      />
+    <footer className="site-footer relative mt-auto border-t border-border">
       <Container className="py-14">
         <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div className="max-w-xs">
             <Wordmark />
             <p className="mt-3 text-sm text-muted">
-              High-signal insider cluster-buy alerts, sourced straight from SEC
-              Form 4 filings.
+              A clearer view of insider buying. Independent research tools built
+              from public SEC Form 4 filings.
             </p>
-            <span className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs text-muted">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-accent/60 motion-safe:animate-pulse-ring" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-              </span>
-              Monitoring SEC EDGAR in real time
-            </span>
+            <Link href="/methodology" className="text-link mt-3">
+              Read our methodology <span aria-hidden>↗</span>
+            </Link>
           </div>
 
           {/* Link columns */}
@@ -122,7 +116,7 @@ export function SiteFooter() {
                     ) : (
                       <Link
                         href={link.href}
-                        className="text-muted transition-colors hover:text-foreground"
+                        className="inline-flex min-h-8 items-center text-muted transition-colors hover:text-foreground"
                       >
                         {link.label}
                       </Link>

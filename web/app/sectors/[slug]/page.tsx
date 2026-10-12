@@ -1,18 +1,19 @@
+import { JsonLd } from "@/components/json-ld";
 import { cache } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSectorPage, SECTOR_INTROS, GENERIC_SECTOR_INTRO } from "@/lib/sectors";
+import {
+  getSectorPage,
+  SECTOR_INTROS,
+  GENERIC_SECTOR_INTRO,
+} from "@/lib/sectors";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
 import { ConvictionBadge } from "@/components/conviction-badge";
 import { SITE_URL, sectorPath, tickerPath } from "@/lib/site";
-import {
-  formatDate,
-  formatMarketCap,
-  formatNumber,
-} from "@/lib/format";
+import { formatDate, formatMarketCap, formatNumber } from "@/lib/format";
 
 type Params = { slug: string };
 
@@ -28,7 +29,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const data = await load(slug);
   if (!data) {
-    return { title: "Sector not found", robots: { index: false, follow: false } };
+    return {
+      title: "Sector not found",
+      robots: { index: false, follow: false },
+    };
   }
 
   const title = `Insider Buying in ${data.sector} Stocks — Cluster Buys`;
@@ -68,7 +72,12 @@ export default async function SectorPage({
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-        { "@type": "ListItem", position: 2, name: "Sectors", item: `${SITE_URL}/sectors` },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Sectors",
+          item: `${SITE_URL}/sectors`,
+        },
         {
           "@type": "ListItem",
           position: 3,
@@ -99,7 +108,11 @@ export default async function SectorPage({
     <div className="flex min-h-full flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-5xl px-6 py-12">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="editorial-main mx-auto w-full max-w-5xl px-6 py-12"
+      >
         <nav className="text-sm text-muted" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-foreground">
             Home
@@ -138,14 +151,19 @@ export default async function SectorPage({
                 className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
               >
                 <div className="flex items-center justify-between gap-3">
-                  <span className="font-mono text-lg font-bold">{t.ticker}</span>
+                  <span className="font-mono text-lg font-bold">
+                    {t.ticker}
+                  </span>
                   <Badge tone="accent" className="shrink-0">
-                    {t.totalClusters} {t.totalClusters === 1 ? "cluster" : "clusters"}
+                    {t.totalClusters}{" "}
+                    {t.totalClusters === 1 ? "cluster" : "clusters"}
                   </Badge>
                 </div>
                 <div className="mt-1 flex items-center gap-2">
                   <p className="truncate text-sm text-muted">{t.issuerName}</p>
-                  {t.hasSeniorInsider && <ConvictionBadge size="xs" className="shrink-0" />}
+                  {t.hasSeniorInsider && (
+                    <ConvictionBadge size="xs" className="shrink-0" />
+                  )}
                 </div>
                 <div className="mt-4 flex items-center justify-between border-t border-border pt-3 text-xs text-muted">
                   <span>
@@ -161,14 +179,15 @@ export default async function SectorPage({
 
         <section className="mt-12 rounded-xl border border-accent/30 bg-accent/5 p-6 text-center">
           <p className="text-sm font-medium">
-            Get alerted when insiders cluster into a {data.sector.toLowerCase()} stock
+            Get alerted when insiders cluster into a {data.sector.toLowerCase()}{" "}
+            stock
           </p>
           <p className="mx-auto mt-1 max-w-md text-sm text-muted">
-            We watch every Form 4 as it hits SEC EDGAR. Real-time alerts the
-            moment two or more insiders buy the same stock.
+            Pro delivers email and Telegram alerts after our monitor detects a
+            qualifying cluster from public SEC filings.
           </p>
-          <div className="mt-4 flex justify-center gap-3">
-            <ButtonLink href="/login">Get alerts free</ButtonLink>
+          <div className="mt-4 flex flex-wrap justify-center gap-3">
+            <ButtonLink href="/login">Start a trial</ButtonLink>
             <ButtonLink href="/stocks" variant="secondary">
               Browse all stocks
             </ButtonLink>
@@ -178,10 +197,7 @@ export default async function SectorPage({
 
       <SiteFooter />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }

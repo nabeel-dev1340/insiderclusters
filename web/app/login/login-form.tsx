@@ -56,7 +56,9 @@ export function LoginForm({
   if (status === "sent") {
     return (
       <div className="rounded-lg border border-accent/30 bg-accent/5 px-4 py-3 text-sm">
-        <p className="font-medium text-foreground">{message}</p>
+        <p role="status" className="font-medium text-foreground">
+          {message}
+        </p>
         {devLink && (
           <p className="mt-2 break-all text-xs text-muted">
             Dev link:{" "}
@@ -74,9 +76,17 @@ export function LoginForm({
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-2.5">
       <div
-        className={cn("flex gap-2.5", isRow ? "flex-col sm:flex-row" : "flex-col")}
+        className={cn(
+          "flex gap-2.5",
+          isRow ? "flex-col sm:flex-row" : "flex-col",
+        )}
       >
         <Input
+          name="email"
+          autoComplete="email"
+          inputMode="email"
+          aria-invalid={status === "error"}
+          aria-describedby={status === "error" ? "login-error" : undefined}
           type="email"
           required
           autoFocus={autoFocus}
@@ -94,7 +104,9 @@ export function LoginForm({
         </Button>
       </div>
       {status === "error" && message && (
-        <p className="text-sm text-danger">{message}</p>
+        <p id="login-error" role="alert" className="text-sm text-danger">
+          {message}
+        </p>
       )}
     </form>
   );

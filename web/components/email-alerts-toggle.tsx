@@ -24,18 +24,19 @@ export function EmailAlertsToggle({ initial }: { initial: boolean }) {
     <button
       type="button"
       role="switch"
+      aria-label="Email alerts"
       aria-checked={enabled}
       onClick={toggle}
       disabled={pending}
       className={cn(
-        "relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 disabled:opacity-60",
-        enabled ? "bg-accent" : "bg-border"
+        "alert-switch relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 disabled:opacity-60",
+        enabled ? "bg-accent" : "bg-border",
       )}
     >
       <span
         className={cn(
-          "inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform",
-          enabled ? "translate-x-5" : "translate-x-0.5"
+          "inline-block h-5 w-5 transform rounded-full bg-surface shadow transition-transform",
+          enabled ? "translate-x-5" : "translate-x-0.5",
         )}
       />
     </button>
