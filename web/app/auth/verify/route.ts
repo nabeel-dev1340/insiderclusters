@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { safeAuthNext } from "@/lib/auth/next";
 import { consumeToken } from "@/lib/auth/tokens";
 import { createSession, setSessionCookie } from "@/lib/auth/session";
 import { posthog } from "@/lib/posthog";
@@ -31,7 +32,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     event: "user signed in",
   });
 
-  const res = NextResponse.redirect(new URL("/dashboard", base));
+  const res = NextResponse.redirect(new URL(safeAuthNext(req.nextUrl.searchParams.get("next")), base));
   setSessionCookie(res, sessionToken, expiresAt);
   return res;
 }

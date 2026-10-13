@@ -23,8 +23,8 @@ export function Paywall({ lapsed }: { lapsed: boolean }) {
       </div>
 
       <p className="mt-6 text-center text-xs text-muted">
-        Annual billing ({ANNUAL_DISCOUNT_PCT}% off) is offered at checkout. Card
-        handled by Polar, our payment provider.
+        Annual billing ({ANNUAL_DISCOUNT_PCT}% off) can be selected above. Card
+        handled by Creem, our payment provider.
       </p>
     </div>
   );

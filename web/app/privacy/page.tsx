@@ -36,8 +36,8 @@ export default function PrivacyPage() {
             hashed, never in plain text.
           </li>
           <li>
-            <strong>Billing data:</strong> if you subscribe to Pro, our payment
-            processor handles your card details. We never see or store full card
+            <strong>Billing data:</strong> if you subscribe to Basic or Pro, Creem
+            handles your card details. We never see or store full card
             numbers; we retain only a customer/subscription reference and
             status.
           </li>

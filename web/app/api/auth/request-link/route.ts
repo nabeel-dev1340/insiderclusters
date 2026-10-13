@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { safeAuthNext } from "@/lib/auth/next";
 import { createMagicToken } from "@/lib/auth/tokens";
 import { isRateLimited } from "@/lib/auth/rate-limit";
 import { sendMagicLink } from "@/lib/email";
@@ -42,7 +43,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         { status: 400 }
       );
     }
-    const { email } = validation.data!;
+    const { email, next } = validation.data!;
 
     // 3. Rate limiting.
     //    a) In-memory per-email cap (fast, stops rapid repeats).
@@ -89,7 +90,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // 4. Create the token and send the link.
     const token = await createMagicToken(email);
     const appUrl = process.env.APP_URL ?? req.nextUrl.origin;
-    const link = `${appUrl}/auth/verify?token=${encodeURIComponent(token)}`;
+    const linkUrl = new URL("/auth/verify", appUrl);
+    linkUrl.searchParams.set("token", token);
+    linkUrl.searchParams.set("next", safeAuthNext(next));
+    const link = linkUrl.href;
     await sendMagicLink(email, link);
 
     posthog().capture({ distinctId: email, event: "magic link requested" });

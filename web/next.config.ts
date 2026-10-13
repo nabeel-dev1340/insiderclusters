@@ -9,7 +9,7 @@ const isProd = process.env.NODE_ENV === "production";
 // PostHog (posthog-js, see instrumentation-client.ts): it loads its bundle from
 // the PostHog assets host and sends events / session-replay data to the
 // ingestion host, so both origins must be allow-listed below. Server-side
-// custom events still use posthog-node; Resend/Lemon Squeezy are called from the
+// custom events still use posthog-node; Resend/Creem are called from the
 // server. The only inline scripts are Next.js's own hydration (RSC flight)
 // scripts and a JSON-LD data block.
 //

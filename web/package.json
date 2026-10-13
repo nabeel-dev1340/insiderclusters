@@ -6,11 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "NODE_OPTIONS='--conditions=react-server' tsx --env-file-if-exists=../.env --test --test-concurrency=1 'test/**/*.test.ts'"
   },
   "dependencies": {
     "@insiderclusters/db": "*",
-    "@polar-sh/sdk": "^0.48.1",
     "next": "16.2.9",
     "posthog-js": "^1.396.6",
     "posthog-node": "^5.39.2",
@@ -27,6 +27,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
+    "tsx": "4.23.15",
     "typescript": "^5"
   }
 }

@@ -71,10 +71,8 @@ export default function TermsPage() {
           checkout and the first charge occurs when the trial ends, unless you
           cancel before then. Paid subscriptions renew automatically each
           billing period until cancelled. You may cancel at any time, and
-          cancellation takes effect at the end of the current billing period.
-          Fees are stated exclusive of any applicable taxes. Where payments are
-          processed by a third-party payment provider, that provider’s terms
-          also apply to the transaction.
+          the billing portal confirms when cancellation takes effect and access ends.
+          Fees are stated exclusive of any applicable taxes. Creem processes new subscriptions as our merchant of record; its terms also apply to the transaction.
         </p>
       </section>
 

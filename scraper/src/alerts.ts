@@ -241,7 +241,8 @@ const RECIPIENT_COLS = `id, email,
 
 // Mirrors web/lib/plan.ts hasAccess: a tier counts only while the subscription
 // is active or trialing (7-day trials get full tier behavior).
-const TIER_LIVE = `subscription_status IN ('active', 'trialing')`;
+const TIER_LIVE = `subscription_status IN ('active', 'trialing')
+  AND (creem_access_until IS NULL OR creem_access_until > now())`;
 
 /** Pro + live subscription + at least one channel on. */
 async function eligibleProUsers(): Promise<Recipient[]> {

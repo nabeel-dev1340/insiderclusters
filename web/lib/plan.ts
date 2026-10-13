@@ -6,7 +6,7 @@ import type { SessionUser } from "./auth/session";
 // this cross-check is the single source of truth used everywhere in the app.
 //
 // There is no free tier: users without an active/trialing subscription hit the
-// dashboard paywall. 'trialing' grants full access — Polar collects the card at
+// dashboard paywall. 'trialing' grants full access — Creem collects the card at
 // checkout and converts the 7-day trial automatically.
 
 export type PaidTier = "basic" | "pro";

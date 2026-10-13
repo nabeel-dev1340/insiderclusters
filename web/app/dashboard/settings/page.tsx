@@ -74,9 +74,11 @@ export default async function SettingsPage() {
 
         <Row
           label="Billing"
-          description="Invoices, card, plan changes, and cancellation are handled by Polar — use the secure link in any Polar receipt email."
+          description="Manage invoices, your payment method, and cancellation securely with Creem."
         >
-          <span />
+          {user.billingProvider === "creem" ? (
+            <ButtonLink href="/billing" size="sm" variant="secondary">Manage billing</ButtonLink>
+          ) : <ButtonLink href="/pricing" size="sm" variant="secondary">Choose a plan</ButtonLink>}
         </Row>
       </Section>
 

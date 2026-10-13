@@ -9,6 +9,7 @@ import { emailSchema, tokenSchema } from "./index";
 // POST /api/auth/request-link
 export const requestLinkSchema = z.object({
   email: emailSchema,
+  next: z.string().max(500).optional(),
 });
 
 export type RequestLinkPayload = z.infer<typeof requestLinkSchema>;

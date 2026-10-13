@@ -74,7 +74,9 @@ GIT_SSH_COMMAND="ssh -i ~/.ssh/insiderclusters_vps" git push vps main   # deploy
 git push origin main                                                    # GitHub backup
 ```
 
-The scraper still points at the GitHub source and is deployed by hand.
+The scraper also uses the bare VPS repository and is deployed by hand through
+Coolify (application `2002nxlu0cvuijdjnlgpmdwx`). Deploy it after the web app
+when shared database or alert eligibility changes.
 
 ## Search engines
 
@@ -92,8 +94,28 @@ criteria before the next begins.
 1. **Phase 1** — Scraper core (poller, parser, signal filter, market-cap gate, cluster detection)
 2. **Phase 2** — Magic-link auth
 3. **Phase 3** — Web dashboard
-4. **Phase 4** — Billing (Lemon Squeezy)
+4. **Phase 4** — Billing (Creem)
 5. **Phase 5** — Email alerts
 6. **Phase 6** — Telegram alerts
 7. **Phase 7** — SEO / content layer
 8. **Phase 8** — Ops / deployment (Coolify on Hetzner)
+
+## Payments
+
+Creem handles Basic ($9/month or $86.40/year) and Pro ($19/month or $182.40/year),
+each with a seven-day free trial. `/checkout?plan=basic|pro&interval=month|year`
+requires a signed-in account. `/billing` opens that account's customer portal;
+`/billing/change` confirms changes to an existing subscription before charging.
+
+Set `CREEM_API_KEY`, `CREEM_WEBHOOK_SECRET`, and `CREEM_TEST_MODE=false` as
+runtime secrets in Coolify. The live webhook is
+`https://insiderclusters.com/api/webhook/creem` and subscribes to checkout
+completion and all subscription lifecycle events. Fulfillment uses verified
+webhooks and retrieves current subscription state from Creem. Duplicate events
+are transactional; a late event cannot restore a canceled subscription.
+The success redirect never grants access. The database migration runs on startup.
+
+For sandbox testing, use a test API key, a test webhook signing secret,
+`CREEM_TEST_MODE=true`, and all four `CREEM_TEST_*_PRODUCT_ID` variables from
+`.env.example`. Live IDs are never used in test mode. Run `npm test --workspace web`
+with a local PostgreSQL connection in `.env`; tests use an isolated temporary schema.

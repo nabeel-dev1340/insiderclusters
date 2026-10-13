@@ -31,7 +31,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How does the free trial work?",
-    a: `Both plans start with a ${TRIAL_DAYS}-day free trial. You enter a card at checkout but aren't charged until the trial ends, and you can cancel any time before then at no cost. Polar, our payment provider, emails you a reminder before the trial converts.`,
+    a: `Both plans start with a ${TRIAL_DAYS}-day free trial. You enter a card at checkout but aren't charged until the trial ends, and you can cancel any time before then at no cost. You can manage your subscription through Creem, our payment provider.`,
   },
   {
     q: `What's the difference between Basic and Pro?`,
@@ -39,7 +39,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How does annual billing work?",
-    a: `Each plan has an annual option at ${ANNUAL_DISCOUNT_PCT}% off the monthly price — you'll see both billing choices side by side at checkout.`,
+    a: `Each plan has an annual option at ${ANNUAL_DISCOUNT_PCT}% off the monthly price — choose monthly or annual billing on the plan cards.`,
   },
   {
     q: "How fast are Pro alerts?",
@@ -108,8 +108,7 @@ export default async function PricingPage() {
             <div>
               <PricingCards checkout={!!user} />
               <p className="mt-5 text-xs text-muted">
-                Annual billing saves {ANNUAL_DISCOUNT_PCT}% and is available at
-                checkout. Your card is charged after the trial unless you
+                Annual billing saves {ANNUAL_DISCOUNT_PCT}% and can be selected on the plan cards. Your card is charged after the trial unless you
                 cancel.
               </p>
             </div>

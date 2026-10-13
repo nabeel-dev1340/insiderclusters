@@ -11,9 +11,9 @@ import {
 
 // Single source of truth for plan marketing copy, reused on the landing page,
 // the /pricing route, and the dashboard paywall. There is no free plan: both
-// tiers carry a 7-day free trial (Polar collects the card at checkout, no
+// tiers carry a 7-day free trial (Creem collects the card at checkout, no
 // charge until the trial ends), and each has a monthly and an annual product —
-// the annual option is offered on Polar's checkout page itself.
+// visitors can choose either interval below.
 
 export const PRO_PRICE_MONTHLY = MONTHLY_PRICE.pro;
 
@@ -94,11 +94,19 @@ export function PricingCards({ checkout = false }: { checkout?: boolean }) {
           </p>
 
           <ButtonLink
-            href={checkout ? `/checkout?plan=${plan.id}` : "/login"}
+            href={checkout ? `/checkout?plan=${plan.id}` : `/login?next=${encodeURIComponent(`/checkout?plan=${plan.id}`)}`}
             variant={plan.featured ? "primary" : "secondary"}
             className="mt-6 w-full"
           >
             Start {TRIAL_DAYS}-day free trial
+          </ButtonLink>
+
+          <ButtonLink
+            href={checkout ? `/checkout?plan=${plan.id}&interval=year` : `/login?next=${encodeURIComponent(`/checkout?plan=${plan.id}&interval=year`)}`}
+            variant="ghost"
+            className="mt-2 w-full"
+          >
+            Start annual trial — ${annualPrice(plan.id).toFixed(2)}/year
           </ButtonLink>
 
           <ul className="mt-6 space-y-3 text-sm">

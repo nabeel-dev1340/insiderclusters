@@ -84,7 +84,7 @@ export function getAPIKey(keyName: keyof typeof API_KEY_REGISTRY): string | unde
  *
  * Note: Only keys for implemented phases are required:
  * - Phase 5 (email alerts): RESEND
- * - Phase 4 (billing): LEMONSQUEEZY_WEBHOOK_SECRET (not yet implemented, optional)
+ * - Phase 4 (billing): CREEM_API_KEY and CREEM_WEBHOOK_SECRET (server-only)
  * - Phase 6 (Telegram alerts): TELEGRAM_BOT_TOKEN + TELEGRAM_WEBHOOK_SECRET (optional)
  */
 export function validateRequiredAPIKeys(): { valid: boolean; missing: string[] } {
