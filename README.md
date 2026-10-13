@@ -79,9 +79,10 @@ The scraper still points at the GitHub source and is deployed by hand.
 ## Search engines
 
 The IndexNow key is served from `web/public/b48b74afdc5441e99eb19d09a8363ee2.txt`.
-After a deploy that changed pages, `npm run indexnow` submits the sitemap URLs
-whose `lastmod` moved since yesterday (`--all` for every URL, `--dry-run` to
-list without sending).
+The Coolify task `indexnow-daily` runs `npm run indexnow` in the web container
+every morning (06:00 UTC) and submits the sitemap URLs whose `lastmod` moved
+since yesterday; after a deploy that changed many pages, run it by hand with
+`--all` (every URL) or `--dry-run` (list without sending).
 
 ## Build order
 
