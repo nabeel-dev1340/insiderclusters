@@ -13,7 +13,7 @@ import { SESSION_COOKIE } from "@/lib/auth/constants";
 // page itself (which would cause a redirect loop).
 export function proxy(req: NextRequest): NextResponse {
   if (!req.cookies.has(SESSION_COOKIE)) {
-    const url = new URL("/login", req.url);
+    const url = new URL("/login", process.env.APP_URL ?? req.url);
     url.searchParams.set("next", req.nextUrl.pathname);
     return NextResponse.redirect(url);
   }

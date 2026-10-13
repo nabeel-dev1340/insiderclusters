@@ -7,9 +7,10 @@ import { pool } from "@/lib/db";
 import { logger } from "@/lib/logger";
 
 export async function GET(req: NextRequest): Promise<NextResponse> {
+  const origin = process.env.APP_URL ?? req.nextUrl.origin;
   const user = await getCurrentUser();
   if (!user) {
-    const url = new URL("/login", req.nextUrl.origin);
+    const url = new URL("/login", origin);
     url.searchParams.set("next", req.nextUrl.pathname + req.nextUrl.search);
     return NextResponse.redirect(url);
   }
@@ -29,7 +30,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const account = rows[0];
     if (account.creem_subscription_id) {
       await client.query("COMMIT");
-      return NextResponse.redirect(new URL(`/billing/change?plan=${plan}&interval=${interval}`, req.nextUrl.origin));
+      return NextResponse.redirect(new URL(`/billing/change?plan=${plan}&interval=${interval}`, origin));
     }
     const product = creemProduct(plan, interval);
     const existing = await client.query<{ url: string }>(
@@ -43,7 +44,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
         product_id: product, request_id: randomUUID(),
         customer: account.creem_customer_id ? { id: account.creem_customer_id } : { email: user.email },
         metadata: { userId: String(user.id) },
-        success_url: new URL("/checkout/success", process.env.APP_URL ?? req.nextUrl.origin).href,
+        success_url: new URL("/checkout/success", origin).href,
       });
       url = creemRedirectUrl(checkout.checkout_url).href;
       await client.query("INSERT INTO creem_checkouts(id,user_id,product_id,url) VALUES ($1,$2,$3,$4)",

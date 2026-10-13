@@ -10,6 +10,7 @@ import { processCreemEvent, verifyCreemSignature } from "../lib/creem-webhook";
 import { POST } from "../app/api/webhook/creem/route";
 import { NextRequest } from "next/server";
 import { pool } from "../lib/db";
+import { proxy } from "../proxy";
 
 const schema = `billing_test_${randomUUID().replaceAll("-", "")}`;
 const database = new URL(process.env.DATABASE_URL!);
@@ -68,6 +69,19 @@ test("safe checkout redirects survive sign-in and reject external destinations",
   }
   assert.throws(() => creemRedirectUrl("https://creem.io.evil.com/checkout"));
   assert.throws(() => creemRedirectUrl("http://creem.io/checkout"));
+});
+test("authentication redirects use the public origin behind the production proxy", () => {
+  const original = process.env.APP_URL;
+  process.env.APP_URL = "https://insiderclusters.com";
+  try {
+    const response = proxy(new NextRequest("http://0.0.0.0:3000/dashboard/settings"));
+    const location = new URL(response.headers.get("location")!);
+    assert.equal(location.origin, "https://insiderclusters.com");
+    assert.equal(location.searchParams.get("next"), "/dashboard/settings");
+  } finally {
+    if (original === undefined) delete process.env.APP_URL;
+    else process.env.APP_URL = original;
+  }
 });
 test("webhook signatures reject missing, malformed and tampered payloads", async () => {
   const body = JSON.stringify({ id: "evt_ignored", eventType: "unhandled", object: { id: "obj_test" } });

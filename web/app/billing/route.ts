@@ -4,12 +4,13 @@ import { pool } from "@/lib/db";
 import { creemRequest, creemRedirectUrl } from "@/lib/creem";
 import { logger } from "@/lib/logger";
 export async function GET(req: NextRequest): Promise<NextResponse> {
+  const origin = process.env.APP_URL ?? req.nextUrl.origin;
   const user = await getCurrentUser();
-  if (!user) return NextResponse.redirect(new URL("/login", req.nextUrl.origin));
+  if (!user) return NextResponse.redirect(new URL("/login", origin));
   const { rows } = await pool.query<{ creem_customer_id: string | null }>(
     "SELECT creem_customer_id FROM users WHERE id=$1", [user.id],
   );
-  if (!rows[0]?.creem_customer_id) return NextResponse.redirect(new URL("/dashboard/settings", req.nextUrl.origin));
+  if (!rows[0]?.creem_customer_id) return NextResponse.redirect(new URL("/dashboard/settings", origin));
   try {
     const portal = await creemRequest<{ customer_portal_link: string }>("customers/billing", {
       customer_id: rows[0].creem_customer_id,
