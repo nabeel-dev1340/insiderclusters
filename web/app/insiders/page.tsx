@@ -1,7 +1,18 @@
 import { JsonLd } from "@/components/json-ld";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getMostActiveInsiders, type InsiderLeader } from "@/lib/clusters";
+import { getPublicInsiderDirectoryPage } from "@/lib/public-directory";
+import { notFound } from "next/navigation";
+import {
+  DIRECTORY_PAGE_SIZE,
+  directoryQuery,
+  directoryUrl,
+  type DirectoryParams,
+} from "@/lib/directory-query";
+import {
+  DirectoryControls,
+  DirectoryPagination,
+} from "@/components/directory-controls";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
 import { ButtonLink } from "@/components/ui/button";
@@ -13,30 +24,60 @@ const TITLE = "Most active insider buyers";
 const DESCRIPTION =
   "The insiders buying the most stock on the open market, ranked by total dollars purchased across SEC Form 4 filings. See who's backing their own companies.";
 
-const LIMIT = 100;
-
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: "/insiders" },
-  openGraph: {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<DirectoryParams>;
+}): Promise<Metadata> {
+  const query = {
+    ...directoryQuery(await searchParams),
+    sort: "recent" as const,
+    buysPage: 1,
+  };
+  const canonical = directoryUrl("/insiders", query);
+  if (query.page > 1) {
+    const result = await getPublicInsiderDirectoryPage(query.page, query.q);
+    if (
+      query.page >
+      Math.max(1, Math.ceil(result.totalCount / DIRECTORY_PAGE_SIZE))
+    )
+      notFound();
+  }
+  return {
     title: TITLE,
     description: DESCRIPTION,
-    url: `${SITE_URL}/insiders`,
-    type: "website",
-  },
-};
+    alternates: { canonical },
+    robots: query.q ? { index: false, follow: true } : undefined,
+    openGraph: {
+      title: TITLE,
+      description: DESCRIPTION,
+      url: `${SITE_URL}${canonical}`,
+      type: "website",
+    },
+  };
+}
 
-// Rebuild hourly — the ranking shifts slowly and we don't want a DB hit per hit.
+// Cache each public result page hourly; account/session data is never cached.
 export const revalidate = 3600;
 
-export default async function InsidersPage() {
-  let leaders: InsiderLeader[] = [];
-  try {
-    leaders = await getMostActiveInsiders(LIMIT);
-  } catch {
-    leaders = [];
-  }
+export default async function InsidersPage({
+  searchParams,
+}: {
+  searchParams: Promise<DirectoryParams>;
+}) {
+  const query = {
+    ...directoryQuery(await searchParams),
+    sort: "recent" as const,
+    buysPage: 1,
+  };
+  const result = await getPublicInsiderDirectoryPage(query.page, query.q);
+  const listing = {
+    items: result.items,
+    pages: Math.max(1, Math.ceil(result.totalCount / DIRECTORY_PAGE_SIZE)),
+    offset: (query.page - 1) * DIRECTORY_PAGE_SIZE,
+  };
+  if (query.page > listing.pages) notFound();
+  const leaders = listing.items;
 
   const jsonLd = [
     {
@@ -58,9 +99,9 @@ export default async function InsidersPage() {
       name: TITLE,
       description: DESCRIPTION,
       numberOfItems: leaders.length,
-      itemListElement: leaders.slice(0, 50).map((l, i) => ({
+      itemListElement: leaders.map((l, i) => ({
         "@type": "ListItem",
-        position: i + 1,
+        position: listing.offset + i + 1,
         name: l.name,
         ...(l.cik ? { url: `${SITE_URL}${insiderPath(l.cik, l.name)}` } : {}),
       })),
@@ -96,12 +137,23 @@ export default async function InsidersPage() {
             tag identifies a senior executive from the reported role text.
           </p>
         </header>
+        <DirectoryControls
+          path="/insiders"
+          query={query}
+          sorts={false}
+          label="Search by insider name or ticker"
+        />
+        <p className="my-4 text-sm text-muted">
+          {formatNumber(result.totalCount)} matching insiders · ranked by total
+          dollars purchased in our tracked filings
+        </p>
 
         {leaders.length === 0 ? (
           <div className="mt-10 rounded-xl border border-border bg-surface p-8 text-center">
             <p className="text-sm text-muted">
-              No insider buys recorded yet. This leaderboard fills in as Form 4
-              purchases are detected.
+              {query.q
+                ? "No insiders match this search. Try another name or ticker."
+                : "No insider buys recorded yet. This directory fills in as purchases are detected."}
             </p>
             <div className="mt-5">
               <ButtonLink href="/login">Get alerted first</ButtonLink>
@@ -152,12 +204,13 @@ export default async function InsidersPage() {
                         data-label="#"
                         className="px-4 py-3 tabular-nums text-muted"
                       >
-                        {i + 1}
+                        {listing.offset + i + 1}
                       </td>
                       <td data-label="Insider" className="px-4 py-3">
                         <div className="flex flex-wrap items-center gap-2">
                           {l.cik ? (
                             <Link
+                              prefetch={false}
                               href={insiderPath(l.cik, l.name)}
                               className="font-medium hover:text-accent hover:underline"
                             >
@@ -218,6 +271,12 @@ export default async function InsidersPage() {
             </div>
           </div>
         )}
+        <DirectoryPagination
+          label="Insider directory pages"
+          page={query.page}
+          pages={listing.pages}
+          href={(page) => directoryUrl("/insiders", { ...query, page })}
+        />
       </main>
 
       <SiteFooter />

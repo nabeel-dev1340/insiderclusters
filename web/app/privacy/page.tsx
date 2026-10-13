@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SUPPORT_EMAIL } from "@/lib/site";
 import { LegalPage } from "@/components/legal-page";
-
-const SUPPORT_EMAIL = "support@beelodev.com";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",

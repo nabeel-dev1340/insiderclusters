@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { JsonLd } from "@/components/json-ld";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SUPPORT_EMAIL } from "@/lib/site";
 
 const TITLE = "Insider Buying Data & Cluster Detection Methodology";
 const DESCRIPTION =
@@ -173,7 +173,7 @@ export default function MethodologyPage() {
             . The data is processed automatically, and the educational content
             explains the process without claiming an independent expert review.
             To report a suspected data issue, email{" "}
-            <a href="mailto:support@beelodev.com">support@beelodev.com</a> with
+            <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a> with
             the ticker, filing URL, and figure to check.
           </p>
           <p>

@@ -5,6 +5,8 @@ export const SITE_URL = (
   process.env.APP_URL ?? "https://insiderclusters.com"
 ).replace(/\/+$/, "");
 
+export const SUPPORT_EMAIL = "support@insiderclusters.com";
+
 /** Public SEO path for a ticker's cluster-buy page. Ticker is uppercased. */
 export function tickerPath(ticker: string): string {
   return `/stock/${encodeURIComponent(ticker.toUpperCase())}/insider-cluster-buys`;

@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/container";
 import { LogoTile } from "@/components/logo";
 import { SiteNav } from "@/components/site-nav";
 import { cn } from "@/lib/cn";
+import { SUPPORT_EMAIL } from "@/lib/site";
 
 // Shared marketing chrome for public, crawlable pages (landing, pricing,
 // legal, ticker pages). Keeping one header/footer keeps navigation and the
@@ -90,6 +91,12 @@ export function SiteFooter() {
             <Link href="/methodology" className="text-link mt-3">
               Read our methodology <span aria-hidden>↗</span>
             </Link>
+            <p className="mt-3 text-sm text-muted">
+              Support:{" "}
+              <a href={`mailto:${SUPPORT_EMAIL}`} className="text-link">
+                {SUPPORT_EMAIL}
+              </a>
+            </p>
           </div>
 
           {/* Link columns */}

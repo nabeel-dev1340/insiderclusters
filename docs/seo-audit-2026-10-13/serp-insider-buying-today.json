@@ -1,0 +1,623 @@
+{
+  "version": "0.1.20260917",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "4.6836 sec.",
+  "cost": 0.002,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "10130105-2750-0139-0000-78fd5fe92cdf",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "time": "4.5879 sec.",
+      "cost": 0.002,
+      "result_count": 1,
+      "path": [
+        "v3",
+        "serp",
+        "google",
+        "organic",
+        "live",
+        "advanced"
+      ],
+      "data": {
+        "api": "serp",
+        "function": "live",
+        "se": "google",
+        "se_type": "organic",
+        "keyword": "insider buying today",
+        "location_code": 2840,
+        "language_code": "en",
+        "depth": 10,
+        "device": "desktop",
+        "os": "windows"
+      },
+      "result": [
+        {
+          "keyword": "insider buying today",
+          "type": "organic",
+          "se_domain": "google.com",
+          "location_code": 2840,
+          "language_code": "en",
+          "check_url": "https://www.google.com/search?q=insider%20buying%20today&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+          "datetime": "2026-10-13 01:05:47 +00:00",
+          "spell": null,
+          "refinement_chips": null,
+          "item_types": [
+            "ai_overview",
+            "organic",
+            "people_also_ask",
+            "related_searches"
+          ],
+          "se_results_count": 459,
+          "pages_count": 1,
+          "items_count": 12,
+          "items": [
+            {
+              "type": "organic",
+              "rank_group": 1,
+              "rank_absolute": 1,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+              "domain": "finviz.com",
+              "title": "Latest Insider Trading - Insider Transactions - Form 4",
+              "url": "https://finviz.com/insidertrading",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://finviz.com \u203a insidertrading",
+              "website_name": "Finviz",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Latest Insider Trading |. Sep 14 '26 Sale 6.60 2,500 16,500 97,291 Oct 09 09:30 PM. Join thousands of traders. Real-time quotes, advanced visualizations,\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Latest Insider Trading"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "ai_overview",
+              "rank_group": 1,
+              "rank_absolute": 2,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]",
+              "asynchronous_ai_overview": false,
+              "markdown": "You can track real-time insider purchases and SEC Form 4 filings using the [Finviz Insider Trading Screener](https://finviz.com/insidertrading) or the [OpenInsider Purchases Tracker](http://openinsider.com/insider-purchases).[[1]](https://finviz.com/insidertrading)[[2]](http://openinsider.com/insider-purchases)\n\nRecent notable open-market insider buying activity recorded in filings includes:\n\n- **SKYA (Bastion Trading Ltd):** Purchased 44,000 shares at $1.78 per share (total value: ~$78,263).[[1]](https://finviz.com/insidertrading)\n- **SAH (Sonic Automotive Inc. \u2013 Director Paul Rusnak):** Purchased $1.29 million in company stock.[[1]](https://www.investing.com/news/insider-trading-news)\n- **GME (GameStop \u2013 Ryan Cohen):** Purchased 700,000 Class A shares at $24.41 per share.[[1]](https://fintel.io/insiders/ceo)\n- **Other Open-Market Buyers:** Active filings tracked via [Barchart Insider Trading Activity](https://www.barchart.com/investing-ideas/insider-trading-activity) also show recent insider accumulation across companies like CRBG, LND, AIRG, and IBKR.[[1]](https://www.barchart.com/investing-ideas/insider-trading-activity)[[2]](http://openinsider.com/insider-purchases)\n\nWould you like to search for insider buying activity for a **specific stock ticker** , or look at **executive-level (CEO/CFO)** open-market purchases?",
+              "items": [
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "You can track real-time insider purchases and SEC Form 4 filings using the Finviz Insider Trading Screener or the OpenInsider Purchases Tracker.",
+                  "markdown": "You can track real-time insider purchases and SEC Form 4 filings using the [Finviz Insider Trading Screener](https://finviz.com/insidertrading) or the [OpenInsider Purchases Tracker](http://openinsider.com/insider-purchases).[[1]](https://finviz.com/insidertrading)[[2]](http://openinsider.com/insider-purchases)",
+                  "links": [
+                    {
+                      "type": "link_element",
+                      "title": "Finviz Insider Trading Screener",
+                      "description": null,
+                      "url": "https://finviz.com/insidertrading",
+                      "domain": "finviz.com"
+                    },
+                    {
+                      "type": "link_element",
+                      "title": "OpenInsider Purchases Tracker",
+                      "description": null,
+                      "url": "http://openinsider.com/insider-purchases",
+                      "domain": "openinsider.com"
+                    }
+                  ],
+                  "images": null,
+                  "references": [
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "Finviz",
+                      "domain": "finviz.com",
+                      "url": "https://finviz.com/insidertrading",
+                      "title": "Latest Insider Trading - Insider Transactions - Form 4",
+                      "text": "Table_title: Latest Insider Trading Table_content: | Ticker | Owner | Relationship | Date | Transaction | Cost | #Shares | Value ("
+                    },
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "OpenInsider",
+                      "domain": "openinsider.com",
+                      "url": "http://openinsider.com/insider-purchases",
+                      "title": "Latest Insider Purchases - - OpenInsider",
+                      "text": "Insider Purchases: OpenInsider data from filing dates around October 1-5, 2026, lists numerous open-market stock purchases (Trade ..."
+                    }
+                  ]
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Recent notable open-market insider buying activity recorded in filings includes:",
+                  "markdown": "Recent notable open-market insider buying activity recorded in filings includes:",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Would you like to search for insider buying activity for a specific stock ticker, or look at executive-level (CEO/CFO) open-market purchases?",
+                  "markdown": "Would you like to search for insider buying activity for a **specific stock ticker** , or look at **executive-level (CEO/CFO)** open-market purchases?",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                }
+              ],
+              "references": [
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "OpenInsider",
+                  "domain": "openinsider.com",
+                  "url": "http://openinsider.com/insider-purchases",
+                  "title": "Latest Insider Purchases - - OpenInsider",
+                  "text": "Insider Purchases: OpenInsider data from filing dates around October 1-5, 2026, lists numerous open-market stock purchases (Trade ..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "Finviz",
+                  "domain": "finviz.com",
+                  "url": "https://finviz.com/insidertrading",
+                  "title": "Latest Insider Trading - Insider Transactions - Form 4",
+                  "text": "Table_title: Latest Insider Trading Table_content: | Ticker | Owner | Relationship | Date | Transaction | Cost | #Shares | Value ("
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "Barchart.com",
+                  "domain": "www.barchart.com",
+                  "url": "https://www.barchart.com/investing-ideas/insider-trading-activity",
+                  "title": "Insider Trading Activity \u2013 Follow the Smart Money - Barchart.com",
+                  "text": "Definition: Insider trading involves executives, directors, or major shareholders buying or selling company stock using non-public..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "Fintel",
+                  "domain": "fintel.io",
+                  "url": "https://fintel.io/insiders/ceo",
+                  "title": "Insider CEO Purchases - Last 7 Days",
+                  "text": "Open-Market CEO Purchases (Sep 28 \u2013 Oct 5, 2026): ACCV: Michael Rubiera purchased Class A stock (3,200 and 200,000 shares at $18.0..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "Investing.com",
+                  "domain": "www.investing.com",
+                  "url": "https://www.investing.com/news/insider-trading-news",
+                  "title": "Insider Trading News Today",
+                  "text": "Whether you're monitoring the markets or interested in today's top headlines, our insider trades tracker provides timely insights ..."
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 2,
+              "rank_absolute": 3,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]",
+              "domain": "openinsider.com",
+              "title": "Latest Insider Purchases",
+              "url": "http://openinsider.com/insider-purchases",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "http://openinsider.com \u203a insider-purchases",
+              "website_name": "OpenInsider",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Latest Insider Purchases. Monitor SEC Form 4 Insider Trading Filings for Insider Buying and Selling. Purchase $21.75 +1,376 26,322 +6% +$29,927 AM. Purchase $\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Purchase $21.75"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 3,
+              "rank_absolute": 4,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[5]/div[1]/div[1]",
+              "domain": "www.barchart.com",
+              "title": "Insider Trading Activity \u2013 Follow the Smart Money",
+              "url": "https://www.barchart.com/investing-ideas/insider-trading-activity",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.barchart.com \u203a investing-ideas \u203a insider-tradi...",
+              "website_name": "Barchart.com",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Barchart's Insider Trading Activity page shows all insider trading recorded for the last 5 calendar days, with the option to filter by a specific transaction\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "all insider trading recorded for the last 5 calendar days"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 4,
+              "rank_absolute": 5,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[7]/div[1]/div[1]",
+              "domain": "www.secform4.com",
+              "title": "Insider Trading Tracker | SEC Form 4 Filings and Insider ...",
+              "url": "https://www.secform4.com/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.secform4.com",
+              "website_name": "SEC Form 4 Data",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Stocks with Recent Insider Purchases ; +903%. TOYOTA MOTOR CORP ; +678%. Alibaba Group Holding Ltd ; +608%. GRUPO FINANCIERO GALICIA SA ; +121%. Strive Inc. ; +91%. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Stocks with Recent Insider Purchases"
+              ],
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Read more",
+                  "description": null,
+                  "url": "https://www.secform4.com/#:~:text=Stocks%20with%20Recent%20Insider%20Purchases&text=%2B903%25,TOYOTA%20MOTOR%20CORP&text=%2B678%25,Alibaba%20Group%20Holding%20Ltd&text=%2B608%25,GRUPO%20FINANCIERO%20GALICIA%20SA&text=%2B121%25,Strive%20Inc.&text=%2B91%25",
+                  "domain": "www.secform4.com"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 5,
+              "rank_absolute": 6,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[9]/div[1]/div[1]",
+              "domain": "www.insiderfinance.io",
+              "title": "Insider Trades Tracker",
+              "url": "https://www.insiderfinance.io/insider-trades",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.insiderfinance.io \u203a insider-trades",
+              "website_name": "InsiderFinance",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "The #1 real-time SEC Form 4 filing tracker for insider transactions and insider trading. Be an open insider - monitor the portfolios\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "insider transactions and insider trading"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 6,
+              "rank_absolute": 7,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[11]/div[1]/div[1]",
+              "domain": "www.quiverquant.com",
+              "title": "Insider Trading Dashboard",
+              "url": "https://www.quiverquant.com/insiders/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.quiverquant.com \u203a insiders",
+              "website_name": "Quiver Quantitative",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Track insider trading by public companies. See the latest transactions, the top transactions over the last month, and search insider trading by company.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Track insider trading by public companies"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "people_also_ask",
+              "rank_group": 1,
+              "rank_absolute": 8,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[13]/div[1]/div[1]/div[1]",
+              "items": [
+                {
+                  "type": "people_also_ask_element",
+                  "title": "What 3 stocks to buy today?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[13]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_ai_overview_expanded_element",
+                      "items": null,
+                      "references": null,
+                      "asynchronous_ai_overview": true
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "What are the latest news on insider trading?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[13]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_ai_overview_expanded_element",
+                      "items": null,
+                      "references": null,
+                      "asynchronous_ai_overview": true
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "How to find out what stocks insiders are buying?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[13]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_ai_overview_expanded_element",
+                      "items": null,
+                      "references": null,
+                      "asynchronous_ai_overview": true
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "What stocks are billionaires buying right now?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[13]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_ai_overview_expanded_element",
+                      "items": null,
+                      "references": null,
+                      "asynchronous_ai_overview": true
+                    }
+                  ]
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 7,
+              "rank_absolute": 9,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[15]/div[1]/div[1]",
+              "domain": "fintel.io",
+              "title": "Insider Trading Tracker - Form 3, 4, 5 Filings",
+              "url": "https://fintel.io/insiders",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://fintel.io \u203a insiders",
+              "website_name": "Fintel",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "This page shows the most recent significant insider filings. Use the following form to search our transaction database. Latest day Last 3 days Last 1 week",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Use the following form to search our transaction database"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 8,
+              "rank_absolute": 10,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[17]/div[1]/div[1]",
+              "domain": "stockcircle.com",
+              "title": "Insider Trades - Executive Stock Transactions",
+              "url": "https://stockcircle.com/insider-trades",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://stockcircle.com \u203a insider-trades",
+              "website_name": "Stockcircle",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Track insider trading activity from company executives and directors. See which insiders are buying and selling company stock.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "insiders are buying and selling company stock"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 9,
+              "rank_absolute": 11,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[19]/div[1]/div[1]",
+              "domain": "www.investing.com",
+              "title": "Insider Trading News Today",
+              "url": "https://www.investing.com/news/insider-trading-news",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.investing.com \u203a news \u203a insider-trading-news",
+              "website_name": "Investing.com",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Get the latest insider trading news and updates. Track recent insider trades, stock activity, and explore recent cases.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Get the latest insider trading news and updates"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "related_searches",
+              "rank_group": 1,
+              "rank_absolute": 12,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]",
+              "items": [
+                "Free insider buying today",
+                "Best insider buying today",
+                "Openinsider",
+                "Insider buying stock screener",
+                "What stocks are insiders buying today",
+                "Free insider trading tracker",
+                "Best insider trading websites",
+                "Insider buys this Week"
+              ],
+              "rectangle": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

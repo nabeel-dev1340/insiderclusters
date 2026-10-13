@@ -49,20 +49,14 @@ export async function generateMetadata({
     };
   }
 
-  const topTickers = data.positions
-    .slice(0, 2)
-    .map((p) => p.ticker)
-    .join(", ");
-  const title = `${data.name} — Insider Trading & Form 4 Buys${topTickers ? ` (${topTickers})` : ""}`;
+  const title = `${data.name} — Insider Buying`;
   const description =
-    `${data.name} has bought ${formatMoneyCompact(data.totalValue)} of stock across ` +
-    `${data.buyCount} open-market Form 4 ${data.buyCount === 1 ? "purchase" : "purchases"} ` +
-    `in ${data.tickerCount} ${data.tickerCount === 1 ? "company" : "companies"}. ` +
-    `Latest buy ${formatDate(data.lastBuyDate)}. Full SEC filing history, prices paid, and cluster activity.`;
+    `${formatMoneyCompact(data.totalValue)} purchased in ${data.buyCount} qualifying buys across ${data.tickerCount} companies. ` +
+    `Review prices, ownership details, and original SEC Form 4 filings. Latest buy: ${formatDate(data.lastBuyDate)}.`;
   const canonical = insiderPath(data.cik, data.name);
 
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical },
     // Below the substance bar: keep the page for visitors and link equity
@@ -176,8 +170,7 @@ export default async function InsiderPage({
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">
             Every open-market stock purchase {data.name} has reported to the SEC
             on Form 4 that met our signal bar, parsed straight from the filings.
-            Insiders sell for many reasons, but they buy with their own money
-            for one — this page tracks where{" "}
+            This page tracks where{" "}
             {clusterCount > 0
               ? "those buys landed inside insider clusters and"
               : ""}{" "}

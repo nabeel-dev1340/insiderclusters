@@ -573,7 +573,10 @@ export interface InsiderLeader {
  * ranked by total dollars bought. Powers the public /insiders leaderboard — a
  * crawlable surface and a "who's buying" view competitors (13Radar) lean on.
  */
-export async function getMostActiveInsiders(limit: number): Promise<InsiderLeader[]> {
+export async function getInsiderDirectoryPage(
+  page: number,
+  q: string,
+): Promise<{ items: InsiderLeader[]; totalCount: number }> {
   const { rows } = await pool.query<{
     key: string;
     cik: string | null;
@@ -585,8 +588,9 @@ export async function getMostActiveInsiders(limit: number): Promise<InsiderLeade
     ticker_count: number;
     tickers: string[];
     last_buy_date: string;
+    total_count: number;
   }>(
-    `SELECT
+    `WITH leaders AS (SELECT
        coalesce(t.insider_cik, t.insider_name) AS key,
        max(t.insider_cik) AS cik,
        (array_agg(t.insider_name ORDER BY f.filed_at DESC))[1] AS name,
@@ -600,23 +604,29 @@ export async function getMostActiveInsiders(limit: number): Promise<InsiderLeade
      FROM transactions t
      JOIN filings f ON f.id = t.filing_id
      WHERE t.is_signal = TRUE AND f.ticker IS NOT NULL AND f.ticker <> ''
-     GROUP BY coalesce(t.insider_cik, t.insider_name)
-     ORDER BY sum(t.value) DESC NULLS LAST, count(*) DESC
-     LIMIT $1`,
-    [limit]
+     GROUP BY coalesce(t.insider_cik, t.insider_name))
+     SELECT *, count(*) OVER()::int AS total_count
+       FROM leaders
+      WHERE strpos(lower(name || ' ' || array_to_string(tickers, ' ')), lower($3)) > 0
+      ORDER BY total_value DESC NULLS LAST, buy_count DESC, key
+      LIMIT $1 OFFSET $2`,
+    [50, (page - 1) * 50, q],
   );
-  return rows.map((r) => ({
-    key: r.key,
-    cik: r.cik,
-    name: r.name,
-    role: r.role,
-    isSenior: r.is_senior ?? false,
-    buyCount: r.buy_count,
-    totalValue: r.total_value == null ? 0 : Number(r.total_value),
-    tickerCount: r.ticker_count,
-    tickers: r.tickers ?? [],
-    lastBuyDate: r.last_buy_date,
-  }));
+  return {
+    totalCount: rows[0]?.total_count ?? 0,
+    items: rows.map((r) => ({
+      key: r.key,
+      cik: r.cik,
+      name: r.name,
+      role: r.role,
+      isSenior: r.is_senior ?? false,
+      buyCount: r.buy_count,
+      totalValue: r.total_value == null ? 0 : Number(r.total_value),
+      tickerCount: r.ticker_count,
+      tickers: r.tickers ?? [],
+      lastBuyDate: r.last_buy_date,
+    })),
+  };
 }
 
 /**

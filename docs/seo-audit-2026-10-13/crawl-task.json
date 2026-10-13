@@ -1,0 +1,58 @@
+{
+  "version": "0.1.20260917",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0.1831 sec.",
+  "cost": 0.03,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "10130104-2750-0216-0000-2df606e066a9",
+      "status_code": 20100,
+      "status_message": "Task Created.",
+      "time": "0.0045 sec.",
+      "cost": 0.03,
+      "result_count": 0,
+      "path": [
+        "v3",
+        "on_page",
+        "task_post"
+      ],
+      "data": {
+        "api": "on_page",
+        "function": "task_post",
+        "target": "insiderclusters.com",
+        "max_crawl_pages": 200,
+        "crawl_delay": 500,
+        "priority_urls": [
+          "https://insiderclusters.com/stocks",
+          "https://insiderclusters.com/insiders",
+          "https://insiderclusters.com/sectors",
+          "https://insiderclusters.com/learn",
+          "https://insiderclusters.com/insider-buying",
+          "https://insiderclusters.com/methodology",
+          "https://insiderclusters.com/pricing",
+          "https://insiderclusters.com/learn/what-is-a-cluster-buy",
+          "https://insiderclusters.com/learn/how-to-read-a-form-4",
+          "https://insiderclusters.com/learn/form-4-transaction-codes",
+          "https://insiderclusters.com/stock/NVCT/insider-cluster-buys",
+          "https://insiderclusters.com/stock/AAM/insider-cluster-buys",
+          "https://insiderclusters.com/stock/AB-LEND/insider-cluster-buys",
+          "https://insiderclusters.com/insider/2142128-kleine-brigitte",
+          "https://insiderclusters.com/insider/1201333-subin-neil-s",
+          "https://insiderclusters.com/sectors/healthcare",
+          "https://insiderclusters.com/sectors/financials",
+          "https://insiderclusters.com/insider-buying/2026-10",
+          "https://insiderclusters.com/insider-buying/2025-10",
+          "https://insiderclusters.com/privacy"
+        ],
+        "enable_javascript": false,
+        "load_resources": false,
+        "store_raw_html": true,
+        "tag": "seo-audit-2026-10-13"
+      },
+      "result": null
+    }
+  ]
+}

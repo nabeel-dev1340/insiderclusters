@@ -1,5 +1,6 @@
 import "server-only";
-import { getTickerDirectory, type TickerDirectoryEntry } from "./clusters";
+import type { TickerDirectoryEntry } from "./clusters";
+import { getPublicTickerDirectory } from "./public-directory";
 import { slugify } from "./site";
 
 // Sector hubs (SEO plan P3). Sectors come from the market-cap cache via the
@@ -19,7 +20,9 @@ export interface SectorPage extends SectorSummary {
   tickers: TickerDirectoryEntry[]; // newest cluster activity first
 }
 
-function groupBySector(entries: TickerDirectoryEntry[]): Map<string, TickerDirectoryEntry[]> {
+function groupBySector(
+  entries: TickerDirectoryEntry[],
+): Map<string, TickerDirectoryEntry[]> {
   const bySector = new Map<string, TickerDirectoryEntry[]>();
   for (const e of entries) {
     if (!e.sector) continue;
@@ -30,7 +33,10 @@ function groupBySector(entries: TickerDirectoryEntry[]): Map<string, TickerDirec
   return bySector;
 }
 
-function summarize(sector: string, tickers: TickerDirectoryEntry[]): SectorSummary {
+function summarize(
+  sector: string,
+  tickers: TickerDirectoryEntry[],
+): SectorSummary {
   return {
     sector,
     slug: slugify(sector),
@@ -39,14 +45,14 @@ function summarize(sector: string, tickers: TickerDirectoryEntry[]): SectorSumma
     totalInsiders: tickers.reduce((s, t) => s + t.insiderCount, 0),
     lastDetectedAt: tickers.reduce(
       (m, t) => (t.lastDetectedAt > m ? t.lastDetectedAt : m),
-      tickers[0]!.lastDetectedAt
+      tickers[0]!.lastDetectedAt,
     ),
   };
 }
 
 /** All sectors with at least one cluster ticker, most clusters first. */
 export async function getSectorDirectory(): Promise<SectorSummary[]> {
-  const entries = await getTickerDirectory();
+  const entries = await getPublicTickerDirectory();
   return [...groupBySector(entries).entries()]
     .map(([sector, tickers]) => summarize(sector, tickers))
     .sort((a, b) => b.clusterCount - a.clusterCount);
@@ -54,7 +60,7 @@ export async function getSectorDirectory(): Promise<SectorSummary[]> {
 
 /** One sector hub by slug, or null when no cluster ticker has that sector. */
 export async function getSectorPage(slug: string): Promise<SectorPage | null> {
-  const entries = await getTickerDirectory();
+  const entries = await getPublicTickerDirectory();
   for (const [sector, tickers] of groupBySector(entries)) {
     if (slugify(sector) === slug) {
       return { ...summarize(sector, tickers), tickers };

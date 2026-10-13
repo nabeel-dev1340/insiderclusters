@@ -1,0 +1,610 @@
+{
+  "version": "0.1.20260917",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "6.6739 sec.",
+  "cost": 0.002,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "10130105-2750-0139-0000-42a4dbcc301f",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "time": "6.5882 sec.",
+      "cost": 0.002,
+      "result_count": 1,
+      "path": [
+        "v3",
+        "serp",
+        "google",
+        "organic",
+        "live",
+        "advanced"
+      ],
+      "data": {
+        "api": "serp",
+        "function": "live",
+        "se": "google",
+        "se_type": "organic",
+        "keyword": "insider cluster buying",
+        "location_code": 2840,
+        "language_code": "en",
+        "depth": 10,
+        "device": "desktop",
+        "os": "windows"
+      },
+      "result": [
+        {
+          "keyword": "insider cluster buying",
+          "type": "organic",
+          "se_domain": "google.com",
+          "location_code": 2840,
+          "language_code": "en",
+          "check_url": "https://www.google.com/search?q=insider%20cluster%20buying&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+          "datetime": "2026-10-13 01:05:49 +00:00",
+          "spell": null,
+          "refinement_chips": null,
+          "item_types": [
+            "ai_overview",
+            "organic",
+            "video",
+            "related_searches"
+          ],
+          "se_results_count": 122,
+          "pages_count": 1,
+          "items_count": 11,
+          "items": [
+            {
+              "type": "organic",
+              "rank_group": 1,
+              "rank_absolute": 1,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+              "domain": "openinsider.com",
+              "title": "Latest Cluster Buys",
+              "url": "http://openinsider.com/latest-cluster-buys",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "http://openinsider.com \u203a latest-cluster-buys",
+              "website_name": "OpenInsider",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Latest Cluster Buys. Monitor SEC Form 4 Insider Trading Filings for Insider Buying and Selling. Purchase $8.64 +36,000 81,217 +80% Purchase $37.52 +262,790 -\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Latest Cluster Buys"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 2,
+              "rank_absolute": 2,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]",
+              "domain": "www.reddit.com",
+              "title": "Do you treat insider buying as a meaningful signal in your ...",
+              "url": "https://www.reddit.com/r/ValueInvesting/comments/1stu08b/do_you_treat_insider_buying_as_a_meaningful/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "20+ comments  \u00b7  5 months ago",
+              "website_name": "Reddit\u00a0\u00b7\u00a0r/ValueInvesting",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "I am curious how people here actually use insider activity in practice.\n\nMy current view is that single insider sales usually do not tell you much because ...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": null,
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "How to filter Insider Trading data: Why buying high is ... - Reddit",
+                  "description": null,
+                  "url": "https://www.reddit.com/r/investing/comments/1qscdw2/how_to_filter_insider_trading_data_why_buying/",
+                  "domain": "www.reddit.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "How do you analyze insider transactions and do you use in ...",
+                  "description": null,
+                  "url": "https://www.reddit.com/r/ValueInvesting/comments/yoaz4c/how_do_you_analyze_insider_transactions_and_do/",
+                  "domain": "www.reddit.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "More results from www.reddit.com",
+                  "description": null,
+                  "url": "https://www.google.com/search?q=insider+cluster+buying+site:www.reddit.com&sca_esv=aafd06183b936b5d&hl=en&gl=US&sxsrf=APpeQnvsZ7IX_h3VYzmmTihCNxFELn0PrQ:1791853548126&sa=X&ved=2ahUKEwjAwebR5rWXAxWHe0EAHRLOEDAQrQIoAnoECCQQAw",
+                  "domain": "www.google.com"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "ai_overview",
+              "rank_group": 1,
+              "rank_absolute": 3,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]",
+              "asynchronous_ai_overview": false,
+              "markdown": "An insider cluster buy happens when three or more company executives, board members, or major stakeholders independently purchase open-market shares within a short timeframe.[[1]](https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal)[[2]](https://nydar.co.uk/help/insider-clusters)\n\n- **High Conviction:** While a single executive buying stock may be routine or part of a plan, multiple leaders buying with their own personal money signals deep, shared confidence that the stock is undervalued.[[1]](https://www.barchart.com/story/news/34648764/follow-the-money-insider-clusters-that-signal-conviction)[[2]](https://kedm.com/services/cluster-insider-buys/)[[3]](https://nydar.co.uk/help/insider-clusters)\n- **Stronger Returns:** Academic research shows that cluster purchases outperform the broader market and generate higher abnormal returns than solitary insider trades.[[1]](https://nydar.co.uk/help/insider-clusters)[[2]](https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal)\n- **Catalysts:** These clusters often precede major positive corporate events, such as restructurings, spinoffs, or mergers and acquisitions (M&A).[[1]](https://www.barchart.com/story/news/34648764/follow-the-money-insider-clusters-that-signal-conviction)\n\n### Where to Track Cluster Buys\n\nYou can monitor and screen for these high-conviction trades using dedicated tracking platforms:\n\n- Check real-time tables and filters on [OpenInsider](http://openinsider.com/latest-cluster-buys).[[1]](http://openinsider.com/latest-cluster-buys)\n- View global tracking metrics on [Insider Screener](https://www.insiderscreener.com/en/screener/cluster_buys).[[1]](https://www.insiderscreener.com/en/screener/cluster_buys)\n- Review aggregated transaction logs and recent activity via [Inside Arbitrage](https://www.insidearbitrage.com/insider-cluster-purchases).[[1]](https://www.insidearbitrage.com/insider-cluster-purchases)\n- Read detailed guides on market signals through [2iQ Research](https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal).[[1]](https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal)\n\nIf you'd like, I can:\n\n- Detail **how to set up alerts** for these filings\n- Explain the difference between **open-market purchases and stock options** \n- Share specific **recent examples** from the market\n\nLet me know how you want to proceed.",
+              "items": [
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "An insider cluster buy happens when three or more company executives, board members, or major stakeholders independently purchase open-market shares within a short timeframe.",
+                  "markdown": "An insider cluster buy happens when three or more company executives, board members, or major stakeholders independently purchase open-market shares within a short timeframe.[[1]](https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal)[[2]](https://nydar.co.uk/help/insider-clusters)",
+                  "links": null,
+                  "images": null,
+                  "references": [
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "2iQ Research",
+                      "domain": "www.2iqresearch.com",
+                      "url": "https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal",
+                      "title": "Guide to Cluster Buying",
+                      "text": "Definition: Three or more top insiders making open market purchases in quick succession. Significance: Stronger signal than solita..."
+                    },
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "nydar.co.uk",
+                      "domain": "nydar.co.uk",
+                      "url": "https://nydar.co.uk/help/insider-clusters",
+                      "title": "Insider Clusters Widget Guide",
+                      "text": "What Are Insider Clusters? Corporate insiders \u2014 officers, directors, and shareholders with more than 10% ownership \u2014 are required ..."
+                    }
+                  ]
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Where to Track Cluster Buys",
+                  "markdown": "### Where to Track Cluster Buys",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "You can monitor and screen for these high-conviction trades using dedicated tracking platforms:",
+                  "markdown": "You can monitor and screen for these high-conviction trades using dedicated tracking platforms:",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "If you'd like, I can:Detail how to set up alerts for these filings\nExplain the difference between open-market purchases and stock options\nShare specific recent examples from the market\nLet me know how you want to proceed.",
+                  "markdown": "If you'd like, I can:\n\n- Detail **how to set up alerts** for these filings\n- Explain the difference between **open-market purchases and stock options** \n- Share specific **recent examples** from the market\n\nLet me know how you want to proceed.",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                }
+              ],
+              "references": [
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "OpenInsider",
+                  "domain": "openinsider.com",
+                  "url": "http://openinsider.com/latest-cluster-buys",
+                  "title": "Latest Cluster Buys - - OpenInsider",
+                  "text": "OpenInsider Latest Cluster Buys: Table of open-market insider purchase transactions (P - Purchase) reported between August and Sep..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "insider screener",
+                  "domain": "www.insiderscreener.com",
+                  "url": "https://www.insiderscreener.com/en/screener/cluster_buys",
+                  "title": "Top cluster buys | insider screener",
+                  "text": "Top Cluster Buys: PayPoint plc (13 insiders, $2.2k), J D Wetherspoon PLC (11 insiders, $2.0k), AmorePacific Holdings Corp (8 insid..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "2iQ Research",
+                  "domain": "www.2iqresearch.com",
+                  "url": "https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal",
+                  "title": "Guide to Cluster Buying",
+                  "text": "Definition: Three or more top insiders making open market purchases in quick succession. Significance: Stronger signal than solita..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "Barchart.com",
+                  "domain": "www.barchart.com",
+                  "url": "https://www.barchart.com/story/news/34648764/follow-the-money-insider-clusters-that-signal-conviction",
+                  "title": "Follow The Money: Insider Clusters That Signal Conviction",
+                  "text": "Insider Buying: Clustered trades by 3 or more executives (CEO, CFO, directors) within 30-60 days signal true conviction and underv..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "InsideArbitrage",
+                  "domain": "www.insidearbitrage.com",
+                  "url": "https://www.insidearbitrage.com/insider-cluster-purchases",
+                  "title": "Insider Cluster Purchases",
+                  "text": "FUL FULLER H B CO # Insiders: 5 Latest Transaction Date Sep 28, 2026 Cost $49.33 # Shares 10,077 Value ($) 497,069 Latest Filing D..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "KEDM",
+                  "domain": "kedm.com",
+                  "url": "https://kedm.com/services/cluster-insider-buys/",
+                  "title": "Cluster Insider Buys",
+                  "text": "Cluster Insider Buys Cluster insider buying refers to the open market purchases of stock by multiple insiders of a public company,"
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "nydar.co.uk",
+                  "domain": "nydar.co.uk",
+                  "url": "https://nydar.co.uk/help/insider-clusters",
+                  "title": "Insider Clusters Widget Guide",
+                  "text": "What Are Insider Clusters? Corporate insiders \u2014 officers, directors, and shareholders with more than 10% ownership \u2014 are required ..."
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 3,
+              "rank_absolute": 4,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[4]/div[1]/div[1]",
+              "domain": "www.insiderscreener.com",
+              "title": "Top cluster buys",
+              "url": "https://www.insiderscreener.com/en/screener/cluster_buys",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.insiderscreener.com \u203a Home \u203a Screeners",
+              "website_name": "insider screener",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Top cluster buys: Stocks with the highest number of insiders buying the stock - when multiple insiders buy the same stock in a short period of time.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Stocks with the highest number of insiders buying the stock"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 4,
+              "rank_absolute": 5,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[6]/div[1]/div[1]",
+              "domain": "www.insiderfinance.io",
+              "title": "Insider Trades Tracker",
+              "url": "https://www.insiderfinance.io/insider-trades",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.insiderfinance.io \u203a insider-trades",
+              "website_name": "InsiderFinance",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Cluster buys : Multiple insiders buying within a short timeframe suggests shared confidence in the company's prospects. 2. Insider ... Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Cluster buys",
+                "insiders buying",
+                "Insider"
+              ],
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Read more",
+                  "description": null,
+                  "url": "https://www.insiderfinance.io/insider-trades#:~:text=Cluster%20buys%3A%20Multiple%20insiders%20buying,2.%20Insider%20Selling",
+                  "domain": "www.insiderfinance.io"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 5,
+              "rank_absolute": 6,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[8]/div[1]/div[1]",
+              "domain": "kedm.com",
+              "title": "Cluster Insider Buys",
+              "url": "https://kedm.com/services/cluster-insider-buys/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://kedm.com \u203a Services",
+              "website_name": "KEDM",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Cluster insider buying refers to the open market purchases of stock by multiple insiders of a public company, including top executives like the CEO, CFO, COO,\u00a0... Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "open market purchases of stock by multiple insiders of"
+              ],
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Read more",
+                  "description": null,
+                  "url": "https://kedm.com/services/cluster-insider-buys/#:~:text=Cluster%20insider%20buying%20refers%20to,CEO%2C%20CFO%2C%20COO%2C%20and%20Directors.",
+                  "domain": "kedm.com"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 6,
+              "rank_absolute": 7,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[10]/div[1]/div[1]",
+              "domain": "www.2iqresearch.com",
+              "title": "Guide to Cluster Buying",
+              "url": "https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.2iqresearch.com \u203a blog \u203a what-is-cluster-b...",
+              "website_name": "2iQ Research",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Jan 12, 2021 \u2014 A stock purchasing event whereby three or more top-ranking company insiders make open market purchases within quick succession of one another. Read more",
+              "pre_snippet": "01/12/2021 00:00:00",
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "three or more top-ranking company insiders make open market purchases"
+              ],
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Read more",
+                  "description": null,
+                  "url": "https://www.2iqresearch.com/blog/what-is-cluster-buying-and-why-is-it-such-a-powerful-insider-signal#:~:text=A%20stock%20purchasing%20event%20whereby,quick%20succession%20of%20one%20another.",
+                  "domain": "www.2iqresearch.com"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": "2021-01-12 00:00:00 +00:00",
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 7,
+              "rank_absolute": 8,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[12]/div[1]/div[1]",
+              "domain": "www.tradealgo.com",
+              "title": "Insider Trading Signals: How to Track SEC Form 4 Filings ...",
+              "url": "https://www.tradealgo.com/trading-guides/stocks/insider-trading-signals-how-to-track-sec-form-4-filings-for-investment-ideas",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.tradealgo.com \u203a Trading Guides \u203a Stocks",
+              "website_name": "TradeAlgo",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Cluster buying occurs when three or more insiders at the same company purchase shares within a short window, typically 30 days.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Cluster buying",
+                "insiders"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "video",
+              "rank_group": 1,
+              "rank_absolute": 9,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[14]/div[1]",
+              "items": [
+                {
+                  "type": "video_element",
+                  "source": "YouTube \u00b7 unknown",
+                  "title": "Cluster insider buying is a key signal of future success",
+                  "timestamp": "2026-03-14 00:00:00 +00:00",
+                  "url": "https://www.youtube.com/shorts/vQAgpjmMmHw"
+                },
+                {
+                  "type": "video_element",
+                  "source": "YouTube \u00b7 InsightfulValue Official",
+                  "title": "The Insightful Value Guide to Insider Cluster Buying",
+                  "timestamp": "2026-06-26 00:00:00 +00:00",
+                  "url": "https://www.youtube.com/watch?v=6oZRR9Zls8E"
+                },
+                {
+                  "type": "video_element",
+                  "source": "YouTube \u00b7 Algovibes",
+                  "title": "I Copied Every Legal Insider Trade",
+                  "timestamp": "2026-10-11 01:05:48 +00:00",
+                  "url": "https://www.youtube.com/watch?v=daMWQTAPAeQ"
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 8,
+              "rank_absolute": 10,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[16]/div[1]/div[1]",
+              "domain": "www.insidearbitrage.com",
+              "title": "Track Insider Buying: Track Insider Stock Purchases",
+              "url": "https://www.insidearbitrage.com/insider-buying/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.insidearbitrage.com \u203a insider-buying",
+              "website_name": "InsideArbitrage",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Insider buying is the open-market purchase of a company's stock by someone with inside access - an officer, director, or an owner of 10% or more of the shares. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "open-market purchase of a company's stock"
+              ],
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Read more",
+                  "description": null,
+                  "url": "https://www.insidearbitrage.com/insider-buying/#:~:text=Insider%20buying%20is%20the%20open-market,or%20more%20of%20the%20shares.",
+                  "domain": "www.insidearbitrage.com"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "related_searches",
+              "rank_group": 1,
+              "rank_absolute": 11,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]",
+              "items": [
+                "Openinsider insider cluster buying",
+                "Insider cluster buying reddit",
+                "Insider cluster buying strategy",
+                "Free insider cluster buying",
+                "Insider cluster buying stock screener",
+                "Best insider trading websites",
+                "Free insider trading tracker",
+                "Free insider buying stock screener"
+              ],
+              "rectangle": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

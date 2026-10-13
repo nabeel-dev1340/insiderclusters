@@ -1,0 +1,88 @@
+{
+  "version": "0.1.20260917",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0.4242 sec.",
+  "cost": 0.024036,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "10130104-2750-0265-0000-b9939f42771c",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "time": "0.4117 sec.",
+      "cost": 0.024036,
+      "result_count": 1,
+      "path": [
+        "v3",
+        "backlinks",
+        "summary",
+        "live"
+      ],
+      "data": {
+        "api": "backlinks",
+        "function": "summary",
+        "target": "insiderclusters.com",
+        "include_subdomains": true
+      },
+      "result": [
+        {
+          "target": "insiderclusters.com",
+          "first_seen": "2026-09-28 00:27:28 +00:00",
+          "lost_date": null,
+          "rank": 0,
+          "backlinks": 3,
+          "backlinks_spam_score": 35,
+          "crawled_pages": 13055,
+          "info": {
+            "server": null,
+            "cms": null,
+            "platform_type": [
+              "organization"
+            ],
+            "ip_address": "192.236.217.45",
+            "country": null,
+            "is_ip": false,
+            "target_spam_score": 3
+          },
+          "internal_links_count": 112005,
+          "external_links_count": 45636,
+          "broken_backlinks": 0,
+          "broken_pages": 4156,
+          "referring_domains": 2,
+          "referring_domains_nofollow": 1,
+          "referring_main_domains": 2,
+          "referring_main_domains_nofollow": 1,
+          "referring_ips": 2,
+          "referring_subnets": 2,
+          "referring_pages": 2,
+          "referring_pages_nofollow": 1,
+          "referring_links_tld": {
+            "agency": 1,
+            "club": 1
+          },
+          "referring_links_types": {
+            "anchor": 2
+          },
+          "referring_links_attributes": {
+            "nofollow": 1,
+            "noopener": 1
+          },
+          "referring_links_platform_types": {
+            "blogs": 1,
+            "cms": 1,
+            "organization": 1
+          },
+          "referring_links_semantic_locations": {
+            "article": 1,
+            "section": 1
+          },
+          "referring_links_countries": {
+            "": 2
+          }
+        }
+      ]
+    }
+  ]
+}

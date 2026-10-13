@@ -1,0 +1,637 @@
+{
+  "version": "0.1.20260917",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "6.4395 sec.",
+  "cost": 0.002,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "10130105-2750-0139-0000-8aa88c053d27",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "time": "6.3064 sec.",
+      "cost": 0.002,
+      "result_count": 1,
+      "path": [
+        "v3",
+        "serp",
+        "google",
+        "organic",
+        "live",
+        "advanced"
+      ],
+      "data": {
+        "api": "serp",
+        "function": "live",
+        "se": "google",
+        "se_type": "organic",
+        "keyword": "insider buying",
+        "location_code": 2840,
+        "language_code": "en",
+        "depth": 10,
+        "device": "desktop",
+        "os": "windows"
+      },
+      "result": [
+        {
+          "keyword": "insider buying",
+          "type": "organic",
+          "se_domain": "google.com",
+          "location_code": 2840,
+          "language_code": "en",
+          "check_url": "https://www.google.com/search?q=insider%20buying&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+          "datetime": "2026-10-13 01:05:49 +00:00",
+          "spell": null,
+          "refinement_chips": null,
+          "item_types": [
+            "ai_overview",
+            "organic",
+            "people_also_ask",
+            "product_considerations",
+            "related_searches"
+          ],
+          "se_results_count": 133,
+          "pages_count": 1,
+          "items_count": 13,
+          "items": [
+            {
+              "type": "organic",
+              "rank_group": 1,
+              "rank_absolute": 1,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+              "domain": "finviz.com",
+              "title": "Latest Insider Trading - Insider Transactions - Form 4",
+              "url": "https://finviz.com/insidertrading",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://finviz.com \u203a insidertrading",
+              "website_name": "Finviz",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Latest Insider Trading |. Join thousands of traders who make more informed decisions with our premium features. Real-time quotes, advanced visualizations,\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Latest Insider Trading"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 2,
+              "rank_absolute": 2,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]",
+              "domain": "www.barchart.com",
+              "title": "Insider Trading Activity \u2013 Follow the Smart Money",
+              "url": "https://www.barchart.com/investing-ideas/insider-trading-activity",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.barchart.com \u203a investing-ideas \u203a insider-trad...",
+              "website_name": "Barchart.com",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Insider trading refers to when a company's executives, board of directors, and/or major shareholders buy or sell company stock based on non-public company\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Insider trading",
+                "buy"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 3,
+              "rank_absolute": 3,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[3]/div[1]/div[1]",
+              "domain": "www.secform4.com",
+              "title": "Insider Trading Tracker | SEC Form 4 Filings and Insider ...",
+              "url": "https://www.secform4.com/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.secform4.com",
+              "website_name": "SEC Form 4 Data",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Form 4 is filed when corporate insiders trade stock. It provides transparency into executive and director buying or selling activity.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "buying"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 4,
+              "rank_absolute": 4,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[5]/div[1]/div[1]",
+              "domain": "www.insiderfinance.io",
+              "title": "Insider Trades Tracker",
+              "url": "https://www.insiderfinance.io/insider-trades",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.insiderfinance.io \u203a insider-trades",
+              "website_name": "InsiderFinance",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Insider trading refers to the buying or selling of a company's stock by individuals with access to non-public information about the\u00a0... Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "buying or selling of a company's stock"
+              ],
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Read more",
+                  "description": null,
+                  "url": "https://www.insiderfinance.io/insider-trades#:~:text=Insider%20trading%20refers%20to%20the,to%20non-public%20information%20about%20the",
+                  "domain": "www.insiderfinance.io"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 5,
+              "rank_absolute": 5,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[7]/div[1]/div[1]",
+              "domain": "openinsider.com",
+              "title": "OpenInsider: SEC Form 4 Insider Trading Screener -",
+              "url": "http://openinsider.com/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "http://openinsider.com",
+              "website_name": "OpenInsider",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Latest Insider Trading (all filings) Latest Insider Purchases $25k+ Latest Officer Purchases $25k+. Purchase $37.52 +262,790. Insider Sales $100k+ \u2026 m top Data\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Latest Insider Purchases $25k"
+              ],
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Charts",
+                  "description": null,
+                  "url": "http://openinsider.com/charts",
+                  "domain": "openinsider.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "Latest",
+                  "description": null,
+                  "url": "http://openinsider.com/latest-cluster-buys",
+                  "domain": "openinsider.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "Top",
+                  "description": null,
+                  "url": "http://openinsider.com/top-officer-purchases-of-the-day",
+                  "domain": "openinsider.com"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "ai_overview",
+              "rank_group": 1,
+              "rank_absolute": 6,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[8]/div[1]/div[1]",
+              "asynchronous_ai_overview": false,
+              "markdown": "Insider buying is the legal purchase of a company's shares by its own executives, directors, or major shareholders (owning 10% or more) using public information.[[1]](https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets)[[2]](https://www.investopedia.com/terms/i/insider-buying.asp)\n\n- **SEC Form 4:** Insiders must report their open-market stock purchases and sales to the U.S. Securities and Exchange Commission (SEC) within **two business days** of the transaction.[[1]](https://www.quiverquant.com/insiders/)[[2]](https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets)\n- **Legality vs. Illegal Insider Trading:** Insider *buying* is completely legal when it relies on public information or standard compensation. Illegal insider trading occurs when anyone trades securities while possessing material, non-public information in breach of a fiduciary duty.[[1]](https://www.investopedia.com/terms/i/insider-buying.asp)[[2]](https://www.investor.gov/introduction-investing/investing-basics/glossary/insider-trading)\n\n### Why Investors Track Insider Buying\n\n- **Confidence Signal:** Executives typically buy shares because they believe the stock is undervalued or that future performance will improve . As the saying goes, insiders might sell stock for many reasons (such as personal diversification or liquidity), but they usually buy for only one: they expect the price to go up.[[1]](https://www.youtube.com/watch?v=TjfUiA_fU4A)[[2]](https://www.investopedia.com/terms/i/insider-buying.asp)\n- **Cluster Buys:** Investors often look for \"cluster purchases,\" which happen when multiple executives or board members buy shares of the same company around the same time.[[1]](https://www.insiderscreener.com/en/)\n- **Limitations:** Public disclosures usually hit the database a day or two after the trade. Because the market often prices in these shifts quickly, retail investors rarely capture an immediate or guaranteed edge.[[1]](https://www.youtube.com/watch?v=daMWQTAPAeQ&t=48)[[2]](https://www.youtube.com/watch?v=GcoTiTBrYMY&t=143)\n\n### Where to Track Live Insider Trades\n\n- [OpenInsider](http://openinsider.com/) : A free, searchable database for tracking recent SEC Form 4 insider filings.[[1]](http://openinsider.com/)\n- [Quiver Quantitative](https://www.quiverquant.com/insiders/) : An insider trading dashboard tracking executive buy-and-sell sentiment.[[1]](https://www.quiverquant.com/insiders/)\n- [SEC Form 4](https://www.secform4.com/) : A tracker for real-time insider and institutional filings directly from SEC EDGAR.[[1]](https://www.secform4.com/)",
+              "items": [
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Insider buying is the legal purchase of a company's shares by its own executives, directors, or major shareholders (owning 10% or more) using public information.",
+                  "markdown": "Insider buying is the legal purchase of a company's shares by its own executives, directors, or major shareholders (owning 10% or more) using public information.[[1]](https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets)[[2]](https://www.investopedia.com/terms/i/insider-buying.asp)",
+                  "links": null,
+                  "images": null,
+                  "references": [
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "SEC.gov",
+                      "domain": "www.sec.gov",
+                      "url": "https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets",
+                      "title": "Insider Transactions Data Sets",
+                      "text": "January 2006 - June 2026 Section 16 of the Securities Exchange Act of 1934 requires senior executives, directors, and 10%+ shareho..."
+                    },
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "Investopedia",
+                      "domain": "www.investopedia.com",
+                      "url": "https://www.investopedia.com/terms/i/insider-buying.asp",
+                      "title": "Insider Buying Insights: How it Works and What to Know",
+                      "text": "What Is Insider Buying? Insider buying is the legal purchase of shares by company insiders such as directors, officers, or executi..."
+                    }
+                  ]
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Why Investors Track Insider Buying",
+                  "markdown": "### Why Investors Track Insider Buying",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Where to Track Live Insider Trades",
+                  "markdown": "### Where to Track Live Insider Trades",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                }
+              ],
+              "references": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 6,
+              "rank_absolute": 7,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[10]/div[1]/div[1]",
+              "domain": "www.insiderscreener.com",
+              "title": "Insider Trading Tracker - Monitor Insider Buying",
+              "url": "https://www.insiderscreener.com/en/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.insiderscreener.com \u203a ...",
+              "website_name": "insider screener",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Monitor real-time insider trading & Form 4 filings globally with insider screener. Screen insider buys and sells, customize filters, and get email alerts.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "insider trading",
+                "insider buys"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 7,
+              "rank_absolute": 8,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[12]/div[1]/div[1]",
+              "domain": "www.sec.gov",
+              "title": "Insider Transactions Data Sets",
+              "url": "https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.sec.gov \u203a data-research \u203a sec-markets-data",
+              "website_name": "SEC.gov",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Insiders Transactions (PDF) provides documentation of scope, organization, file formats and table definitions. Find out more about Forms 3, 4, and 5. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "provides documentation of scope, organization, file formats and table definitions"
+              ],
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Read more",
+                  "description": null,
+                  "url": "https://www.sec.gov/data-research/sec-markets-data/insider-transactions-data-sets#:~:text=Insiders%20Transactions%20(PDF)%20provides%20documentation,Forms%203%2C%204%2C%20and%205.",
+                  "domain": "www.sec.gov"
+                }
+              ],
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "people_also_ask",
+              "rank_group": 1,
+              "rank_absolute": 9,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[14]/div[1]/div[1]/div[1]",
+              "items": [
+                {
+                  "type": "people_also_ask_element",
+                  "title": "Is insider buying illegal?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[14]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_ai_overview_expanded_element",
+                      "items": null,
+                      "references": null,
+                      "asynchronous_ai_overview": true
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "What is the 7% sell rule?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[14]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_ai_overview_expanded_element",
+                      "items": null,
+                      "references": null,
+                      "asynchronous_ai_overview": true
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "Who is the most famous insider trader?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[14]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_ai_overview_expanded_element",
+                      "items": null,
+                      "references": null,
+                      "asynchronous_ai_overview": true
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "Which stocks are predicted to have insider buying in 2026?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[14]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_ai_overview_expanded_element",
+                      "items": null,
+                      "references": null,
+                      "asynchronous_ai_overview": true
+                    }
+                  ]
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 8,
+              "rank_absolute": 10,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[16]/div[1]/div[1]",
+              "domain": "www.quiverquant.com",
+              "title": "Insider Trading Dashboard",
+              "url": "https://www.quiverquant.com/insiders/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.quiverquant.com \u203a insiders",
+              "website_name": "Quiver Quantitative",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Track insider trading by public companies. See the latest transactions, the top transactions over the last month, and search insider trading by company.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Track insider trading by public companies"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 9,
+              "rank_absolute": 11,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[18]/div[1]/div[1]",
+              "domain": "www.investor.gov",
+              "title": "Insider Trading",
+              "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/insider-trading",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.investor.gov \u203a investing-basics \u203a glossary",
+              "website_name": "Investor.gov",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "checks": null,
+              "description": "Illegal insider trading refers generally to buying or selling a security, in breach of a fiduciary duty or other relationship of trust and confidence,\u00a0...",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "buying or selling a security"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "product_considerations",
+              "rank_group": 1,
+              "rank_absolute": 12,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[20]/div[1]",
+              "title": "Things to know",
+              "items": [
+                {
+                  "type": "product_considerations_element",
+                  "title": "What are the regulations surrounding insider buying?",
+                  "consideration_category": "Regulations",
+                  "expanded_element": null
+                },
+                {
+                  "type": "product_considerations_element",
+                  "title": "What are the motivations behind insider buying?",
+                  "consideration_category": "Motivations",
+                  "expanded_element": null
+                },
+                {
+                  "type": "product_considerations_element",
+                  "title": "What are the potential benefits of insider buying for investors?",
+                  "consideration_category": "Benefits for Investors",
+                  "expanded_element": null
+                },
+                {
+                  "type": "product_considerations_element",
+                  "title": "What are the different types of insider buying transactions?",
+                  "consideration_category": "Types of Transactions",
+                  "expanded_element": null
+                },
+                {
+                  "type": "product_considerations_element",
+                  "title": "How does insider buying affect stock prices?",
+                  "consideration_category": "Impact on Stock Prices",
+                  "expanded_element": null
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "related_searches",
+              "rank_group": 1,
+              "rank_absolute": 13,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[15]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]",
+              "items": [
+                "Insider buying stock screener",
+                "Openinsider",
+                "Free insider trading tracker",
+                "Insider buying companies",
+                "Best insider trading websites",
+                "Free insider buying stock screener",
+                "Insider buying and selling",
+                "Insider buys this Week"
+              ],
+              "rectangle": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

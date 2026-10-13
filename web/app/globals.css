@@ -431,7 +431,7 @@ main[id="main-content"]:focus {
   border-top: 1px solid var(--border);
 }
 .workflow-item > span {
-  color: var(--ochre);
+  color: var(--accent);
   font-size: 11px;
 }
 .workflow-item h3 {

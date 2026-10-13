@@ -92,6 +92,16 @@ const nextConfig: NextConfig = {
   // Keep `pg` (and its optional native bindings) as a runtime require rather
   // than bundling it into server chunks.
   serverExternalPackages: ["pg"],
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.insiderclusters.com" }],
+        destination: "https://insiderclusters.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
   // Security headers applied to every response at the framework level. Works
   // for both statically-generated and dynamic routes, so we don't need to run
   // JS middleware on every request just to set headers.

@@ -5,10 +5,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   getTickerPage,
-  getTickerDirectory,
   PUBLIC_TICKER_CLUSTER_LIMIT,
   type TickerDirectoryEntry,
 } from "@/lib/clusters";
+import { getPublicTickerDirectory } from "@/lib/public-directory";
 import { getCurrentUser } from "@/lib/auth/session";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { Badge } from "@/components/ui/badge";
@@ -47,16 +47,10 @@ export async function generateMetadata({
   }
 
   const t = data.ticker;
-  const title = `${t} Insider Buying — Cluster Buys & Form 4 History | ${data.issuerName}`;
+  const title = `${t} Insider Buying & Form 4 History`;
   const description =
-    data.totalClusters > 0
-      ? `${data.insiderCount} insiders have bought ${t} (${data.issuerName}) on the open market, ` +
-        `including ${data.totalClusters} cluster ${data.totalClusters === 1 ? "buy" : "buys"} — ` +
-        `parsed from SEC Form 4 filings. Latest activity ${formatDate(data.lastActivityAt)}. ` +
-        `See who bought, at what price, and when.`
-      : `${data.insiderCount} ${data.insiderCount === 1 ? "insider has" : "insiders have"} bought ` +
-        `${t} (${data.issuerName}) on the open market — every buy parsed from SEC Form 4 filings. ` +
-        `Latest activity ${formatDate(data.lastActivityAt)}. See who bought, at what price, and when.`;
+    `${data.insiderCount} ${data.insiderCount === 1 ? "insider" : "insiders"} bought ${t}; ${data.totalClusters} cluster buys detected. ` +
+    `Explore buyers, prices, and SEC Form 4 filings. Latest qualifying activity: ${formatDate(data.lastActivityAt)}.`;
   const canonical = tickerPath(t);
 
   return {
@@ -131,7 +125,7 @@ export default async function TickerPage({
   let related: TickerDirectoryEntry[] = [];
   if (data.sector) {
     try {
-      related = (await getTickerDirectory())
+      related = (await getPublicTickerDirectory())
         .filter((t) => t.sector === data.sector && t.ticker !== data.ticker)
         .slice(0, 6);
     } catch {

@@ -1,0 +1,81 @@
+{
+  "source_directory": "/Users/nabeel/Downloads/insiderclusters.com-Coverage-2026-10-13",
+  "latest_snapshot": {
+    "Date": "2026-10-09",
+    "Not indexed": "3906",
+    "Indexed": "4206",
+    "Impressions": "12"
+  },
+  "issues": [
+    {
+      "Reason": "Not found (404)",
+      "Source": "Website",
+      "Validation": "Failed",
+      "Pages": "1082"
+    },
+    {
+      "Reason": "Excluded by \u2018noindex\u2019 tag",
+      "Source": "Website",
+      "Validation": "Not Started",
+      "Pages": "1168"
+    },
+    {
+      "Reason": "Alternate page with proper canonical tag",
+      "Source": "Website",
+      "Validation": "Not Started",
+      "Pages": "162"
+    },
+    {
+      "Reason": "Page with redirect",
+      "Source": "Website",
+      "Validation": "Not Started",
+      "Pages": "124"
+    },
+    {
+      "Reason": "Crawled - currently not indexed",
+      "Source": "Google systems",
+      "Validation": "Not Started",
+      "Pages": "305"
+    },
+    {
+      "Reason": "Discovered - currently not indexed",
+      "Source": "Google systems",
+      "Validation": "Started",
+      "Pages": "1065"
+    }
+  ],
+  "not_indexed_reconciliation": 3906,
+  "metadata": [
+    {
+      "Property": "Sitemap",
+      "Value": "All known pages"
+    }
+  ],
+  "non_critical": [],
+  "decline_date_comparison": [
+    {
+      "Date": "2026-09-22",
+      "Not indexed": "3835",
+      "Indexed": "4271",
+      "Impressions": "17"
+    },
+    {
+      "Date": "2026-09-27",
+      "Not indexed": "3835",
+      "Indexed": "4271",
+      "Impressions": "87"
+    },
+    {
+      "Date": "2026-09-28",
+      "Not indexed": "3835",
+      "Indexed": "4271",
+      "Impressions": "9"
+    },
+    {
+      "Date": "2026-10-05",
+      "Not indexed": "3906",
+      "Indexed": "4206",
+      "Impressions": "6"
+    }
+  ]
+}

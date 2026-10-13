@@ -1,0 +1,80 @@
+[
+  {
+    "name": "core",
+    "url": "https://insiderclusters.com/sitemap/core.xml",
+    "status": 200,
+    "count": 10,
+    "sample": [
+      "https://insiderclusters.com/",
+      "https://insiderclusters.com/stocks",
+      "https://insiderclusters.com/insiders",
+      "https://insiderclusters.com/sectors",
+      "https://insiderclusters.com/learn"
+    ]
+  },
+  {
+    "name": "stocks",
+    "url": "https://insiderclusters.com/sitemap/stocks.xml",
+    "status": 200,
+    "count": 3035,
+    "sample": [
+      "https://insiderclusters.com/stock/AADX/insider-cluster-buys",
+      "https://insiderclusters.com/stock/AAM/insider-cluster-buys",
+      "https://insiderclusters.com/stock/AAOI/insider-cluster-buys",
+      "https://insiderclusters.com/stock/AAON/insider-cluster-buys",
+      "https://insiderclusters.com/stock/AAP/insider-cluster-buys"
+    ]
+  },
+  {
+    "name": "insiders",
+    "url": "https://insiderclusters.com/sitemap/insiders.xml",
+    "status": 200,
+    "count": 9048,
+    "sample": [
+      "https://insiderclusters.com/insider/2142128-kleine-brigitte",
+      "https://insiderclusters.com/insider/2142412-allen-zipporah",
+      "https://insiderclusters.com/insider/2142660-coyle-john-joseph",
+      "https://insiderclusters.com/insider/1111908-kamfar-ramin",
+      "https://insiderclusters.com/insider/2082158-nassif-mikheal"
+    ]
+  },
+  {
+    "name": "sectors",
+    "url": "https://insiderclusters.com/sitemap/sectors.xml",
+    "status": 200,
+    "count": 11,
+    "sample": [
+      "https://insiderclusters.com/sectors/financials",
+      "https://insiderclusters.com/sectors/healthcare",
+      "https://insiderclusters.com/sectors/industrials",
+      "https://insiderclusters.com/sectors/technology",
+      "https://insiderclusters.com/sectors/consumer-discretionary"
+    ]
+  },
+  {
+    "name": "learn",
+    "url": "https://insiderclusters.com/sitemap/learn.xml",
+    "status": 200,
+    "count": 12,
+    "sample": [
+      "https://insiderclusters.com/learn/what-is-a-cluster-buy",
+      "https://insiderclusters.com/learn/form-4-transaction-codes",
+      "https://insiderclusters.com/learn/how-to-read-a-form-4",
+      "https://insiderclusters.com/learn/what-is-a-10b5-1-plan",
+      "https://insiderclusters.com/learn/who-counts-as-an-insider"
+    ]
+  },
+  {
+    "name": "months",
+    "url": "https://insiderclusters.com/sitemap/months.xml",
+    "status": 200,
+    "count": 148,
+    "sample": [
+      "https://insiderclusters.com/insider-buying/2026-10",
+      "https://insiderclusters.com/insider-buying/2026-09",
+      "https://insiderclusters.com/insider-buying/2026-08",
+      "https://insiderclusters.com/insider-buying/2026-07",
+      "https://insiderclusters.com/insider-buying/2026-06"
+    ]
+  }
+]

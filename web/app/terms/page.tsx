@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SUPPORT_EMAIL } from "@/lib/site";
 import { LegalPage } from "@/components/legal-page";
 import { MONTHLY_PRICE, TRIAL_DAYS, ANNUAL_DISCOUNT_PCT } from "@/lib/billing";
-
-const SUPPORT_EMAIL = "support@beelodev.com";
 
 export const metadata: Metadata = {
   title: "Terms of Service",

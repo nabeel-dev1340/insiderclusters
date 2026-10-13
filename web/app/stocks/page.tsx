@@ -2,50 +2,115 @@ import { JsonLd } from "@/components/json-ld";
 import { StockDirectory } from "@/components/stock-directory";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
-  getTickerDirectory,
-  getSignalOnlyTickers,
-  type TickerDirectoryEntry,
-  type SignalOnlyTicker,
-} from "@/lib/clusters";
+  getPublicTickerDirectory,
+  getPublicSignalOnlyTickers,
+} from "@/lib/public-directory";
+import {
+  directoryQuery,
+  directorySlice,
+  directoryUrl,
+  matchesDirectoryQuery,
+  type DirectoryParams,
+} from "@/lib/directory-query";
+import {
+  DirectoryControls,
+  DirectoryPagination,
+} from "@/components/directory-controls";
 import { SiteHeader, SiteFooter } from "@/components/site-chrome";
 import { ButtonLink } from "@/components/ui/button";
 import { SITE_URL, tickerPath } from "@/lib/site";
 import { formatDate, formatMoneyCompact, formatNumber } from "@/lib/format";
 
-const TITLE = "Stocks with insider cluster buys";
+const TITLE = "Insider Buying Stocks & Cluster Buys";
 const DESCRIPTION =
-  "Browse every stock where two or more insiders bought on the open market around the same time, detected from SEC Form 4 filings. See each ticker's full cluster-buy history.";
+  "Research stocks with insider buying and cluster purchases. Browse recent detections, purchase histories, and original SEC Form 4 filings by ticker or company.";
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: "/stocks" },
-  openGraph: {
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<DirectoryParams>;
+}): Promise<Metadata> {
+  const query = directoryQuery(await searchParams);
+  const canonical = directoryUrl("/stocks", query);
+  if (query.page > 1 || query.buysPage > 1) {
+    const [tickers, buys] = await Promise.all([
+      getPublicTickerDirectory(),
+      getPublicSignalOnlyTickers(),
+    ]);
+    if (
+      query.page >
+        directorySlice(
+          tickers.filter((t) =>
+            matchesDirectoryQuery(query.q, t.ticker, t.issuerName),
+          ),
+          query.page,
+        ).pages ||
+      query.buysPage >
+        directorySlice(
+          buys.filter((t) =>
+            matchesDirectoryQuery(query.q, t.ticker, t.issuerName),
+          ),
+          query.buysPage,
+        ).pages
+    )
+      notFound();
+  }
+  return {
     title: TITLE,
     description: DESCRIPTION,
-    url: `${SITE_URL}/stocks`,
-    type: "website",
-  },
-};
+    alternates: { canonical },
+    robots:
+      query.q || query.sort !== "recent"
+        ? { index: false, follow: true }
+        : undefined,
+    openGraph: {
+      title: TITLE,
+      description: DESCRIPTION,
+      url: `${SITE_URL}${canonical}`,
+      type: "website",
+    },
+  };
+}
 
-// Rebuild hourly so newly-detected tickers appear as crawlable links well
-// within the "24h from first cluster" target, without a DB hit per request.
+// Public directory data is cached hourly, including query-string pages.
 export const revalidate = 3600;
 
-export default async function StocksPage() {
-  // Degrade gracefully if the DB is unreachable at build time.
-  let tickers: TickerDirectoryEntry[] = [];
-  let signalOnly: SignalOnlyTicker[] = [];
-  try {
-    [tickers, signalOnly] = await Promise.all([
-      getTickerDirectory(),
-      getSignalOnlyTickers(),
-    ]);
-  } catch {
-    tickers = [];
-    signalOnly = [];
-  }
+export default async function StocksPage({
+  searchParams,
+}: {
+  searchParams: Promise<DirectoryParams>;
+}) {
+  const query = directoryQuery(await searchParams);
+  const [allTickers, allSignalOnly] = await Promise.all([
+    getPublicTickerDirectory(),
+    getPublicSignalOnlyTickers(),
+  ]);
+  const tickers = allTickers
+    .filter((t) => matchesDirectoryQuery(query.q, t.ticker, t.issuerName))
+    .sort(
+      (a, b) =>
+        (query.sort === "name"
+          ? a.ticker.localeCompare(b.ticker)
+          : query.sort === "clusters"
+            ? b.totalClusters - a.totalClusters
+            : b.lastDetectedAt.getTime() - a.lastDetectedAt.getTime()) ||
+        a.ticker.localeCompare(b.ticker),
+    );
+  const signalOnly = allSignalOnly
+    .filter((t) => matchesDirectoryQuery(query.q, t.ticker, t.issuerName))
+    .sort(
+      (a, b) =>
+        (query.sort === "name"
+          ? a.ticker.localeCompare(b.ticker)
+          : b.lastBuyDate.localeCompare(a.lastBuyDate)) ||
+        a.ticker.localeCompare(b.ticker),
+    );
+  const clusterPage = directorySlice(tickers, query.page);
+  const buyPage = directorySlice(signalOnly, query.buysPage);
+  if (query.page > clusterPage.pages || query.buysPage > buyPage.pages)
+    notFound();
 
   const totalClusters = tickers.reduce((s, t) => s + t.totalClusters, 0);
 
@@ -68,15 +133,15 @@ export default async function StocksPage() {
       "@type": "CollectionPage",
       name: TITLE,
       description: DESCRIPTION,
-      url: `${SITE_URL}/stocks`,
+      url: `${SITE_URL}${directoryUrl("/stocks", query)}`,
       // The list of ticker pages this hub links to — helps crawlers understand
       // the collection and each member's URL.
       mainEntity: {
         "@type": "ItemList",
-        numberOfItems: tickers.length,
-        itemListElement: tickers.slice(0, 100).map((t, i) => ({
+        numberOfItems: clusterPage.items.length,
+        itemListElement: clusterPage.items.map((t, i) => ({
           "@type": "ListItem",
-          position: i + 1,
+          position: clusterPage.offset + i + 1,
           name: `${t.ticker} insider cluster buys`,
           url: `${SITE_URL}${tickerPath(t.ticker)}`,
         })),
@@ -103,12 +168,17 @@ export default async function StocksPage() {
 
         <header className="mt-4 max-w-2xl">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Stocks with insider cluster buys
+            Stocks with insider buying
           </h1>
           <p className="mt-4 text-pretty leading-relaxed text-muted">
             Research companies where two or more insiders reported qualifying
             purchases within a rolling detection window. Each ticker links to
             its full cluster history, parsed directly from Form 4 filings.
+          </p>
+          <p className="mt-3 text-sm text-muted">
+            Latest activity means when a cluster was detected. Purchase dates
+            and filing dates appear on each stock page; a recent detection can
+            include older trades.
           </p>
           {tickers.length > 0 && (
             <p className="mt-3 text-sm text-muted">
@@ -125,19 +195,35 @@ export default async function StocksPage() {
           )}
         </header>
 
+        <DirectoryControls path="/stocks" query={query} />
+        <p className="my-4 text-sm text-muted">
+          {formatNumber(tickers.length)} cluster stocks ·{" "}
+          {formatNumber(signalOnly.length)} other stocks
+          {query.q && <> matching “{query.q}”</>}
+        </p>
+
         {tickers.length === 0 ? (
           <div className="mt-10 rounded-xl border border-border bg-surface p-8 text-center">
             <p className="text-sm text-muted">
-              No cluster buys detected yet. New tickers appear here the moment a
-              cluster forms.
+              {query.q
+                ? "No cluster stocks match this search. Check the other purchases below or try another ticker or company."
+                : "No cluster buys detected yet. New tickers appear here after a cluster is detected."}
             </p>
             <div className="mt-5">
               <ButtonLink href="/login">Get alerted first</ButtonLink>
             </div>
           </div>
         ) : (
-          <StockDirectory tickers={tickers} />
+          <StockDirectory tickers={clusterPage.items} />
         )}
+        <DirectoryPagination
+          label="Cluster stock pages"
+          page={query.page}
+          pages={clusterPage.pages}
+          href={(page) =>
+            directoryUrl("/stocks", { ...query, page, buysPage: 1 })
+          }
+        />
 
         {signalOnly.length > 0 && (
           <section className="mt-14">
@@ -181,13 +267,14 @@ export default async function StocksPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
-                    {signalOnly.map((t) => (
+                    {buyPage.items.map((t) => (
                       <tr
                         key={t.ticker}
                         className="bg-surface transition-colors hover:bg-surface-muted/50"
                       >
                         <td data-label="Ticker" className="px-4 py-3">
                           <Link
+                            prefetch={false}
                             href={tickerPath(t.ticker)}
                             className="font-mono font-semibold hover:text-accent"
                           >
@@ -224,6 +311,14 @@ export default async function StocksPage() {
                 </table>
               </div>
             </div>
+            <DirectoryPagination
+              label="Other insider buying stock pages"
+              page={query.buysPage}
+              pages={buyPage.pages}
+              href={(buysPage) =>
+                directoryUrl("/stocks", { ...query, page: 1, buysPage })
+              }
+            />
           </section>
         )}
       </main>

@@ -10,6 +10,7 @@ import Link from "next/link";
 export interface LearnArticle {
   slug: string;
   title: string; // H1 / <title>
+  seoTitle?: string; // Short search title when the full article heading is longer.
   description: string; // meta description
   /** Published/updated date shown on the page and in Article schema (ISO). */
   updated: string;
@@ -252,271 +253,378 @@ export const LEARN_ARTICLES: LearnArticle[] = [
   },
   {
     slug: "form-4-transaction-codes",
-    title: "Form 4 transaction codes explained (P, S, A, M, F, G…)",
+    title: "SEC Form 4 transaction codes explained",
+    seoTitle: "Form 4 Transaction Codes Explained",
     description:
-      "Every SEC Form 4 transaction carries a one-letter code. P and S are the ones that matter for signal — here's the full table and what each code actually means.",
-    updated: "2026-10-12",
+      "Decode SEC Form 4 transaction codes with a complete reference table. Understand purchases, sales, grants, exercises, and the separate acquired/disposed flag.",
+    updated: "2026-10-13",
     related: [
       "how-to-read-a-form-4",
       "what-is-open-market-purchase",
-      "form-3-vs-form-4-vs-form-5",
+      "what-is-a-10b5-1-plan",
     ],
     faq: [
       {
-        q: "What does transaction code P mean on a Form 4?",
-        a: "Code P reports an open-market or private purchase. Read the ownership details, plan designation, and footnotes to understand who bought and under what circumstances.",
+        q: "What does Form 4 code P mean?",
+        a: "P identifies an open-market or private purchase. It does not by itself establish personal cash funding, discretionary timing, or a purchase on a stock exchange. Check ownership, plan disclosures, and footnotes.",
       },
       {
-        q: "What does transaction code A mean on a Form 4?",
-        a: "Code A marks a grant or award of shares from the company. It is compensation, not a buying decision, so it carries no signal about the insider's outlook.",
+        q: "Is the acquired/disposed A the same as transaction code A?",
+        a: "No. In the acquired/disposed column, A means securities were acquired. In the transaction-code column, A describes a grant, award, or other acquisition under Rule 16b-3(d).",
       },
       {
-        q: "Which Form 4 codes indicate real insider buying?",
-        a: "Only code P reflects a voluntary purchase with the insider's own money; codes A, M, F, G, C, D, and X describe compensation or administrative events.",
+        q: "Does an option exercise count as an open-market purchase?",
+        a: "No. Code M identifies an exercise or conversion under Rule 16b-3. It may be accompanied by acquired shares and a separate sale, so read both tables and the footnotes.",
       },
     ],
     body: (
       <>
         <P>
-          Every transaction reported on a{" "}
-          <Ext href="https://www.sec.gov/about/forms/form4.pdf">SEC Form 4</Ext>{" "}
-          carries a single-letter code describing <em>how</em> the insider
-          acquired or disposed of the shares. Most codes describe administrative
-          events — compensation, taxes, transfers. Only a couple describe an
-          insider making a real market decision with real money, which is why
-          filtering by code is the first step in any insider-trading analysis.
+          <Strong>
+            Form 4 transaction codes describe how securities changed hands.
+          </Strong>{" "}
+          P means a purchase, S a sale, A a grant or award, and M an exercise or
+          conversion. These codes are separate from the acquired/disposed flag
+          and the direct/indirect ownership column.
         </P>
-        <H2>The codes that matter</H2>
+        <H2>Complete transaction-code reference</H2>
+        <P>
+          This table follows Instruction 8 of the{" "}
+          <Ext href="https://www.sec.gov/files/form4.pdf">
+            SEC Form 4 instructions
+          </Ext>
+          . Interpretation depends on the transaction and its footnotes.
+        </P>
         <CodeTable
           rows={[
             [
               "P",
-              "Open-market or private purchase",
-              "A purchase; verify ownership and context in the footnotes",
+              "Purchase, on-market or private",
+              "Check price, ownership, and whether it was scheduled",
             ],
             [
               "S",
-              "Open-market or private sale",
-              "Weak negative — insiders sell for taxes, diversification, houses",
+              "Sale, on-market or private",
+              "The code alone does not explain why the holder sold",
+            ],
+            [
+              "V",
+              "Reported voluntarily before required",
+              "A timing designation, not a purchase signal",
             ],
             [
               "A",
-              "Grant or award from the company",
-              "None — it's compensation, not a decision",
+              "Grant, award, or other Rule 16b-3(d) acquisition",
+              "Distinguish an award from a market purchase",
             ],
             [
-              "M",
-              "Option or derivative exercise",
-              "None by itself — often paired with a same-day S",
+              "D",
+              "Transfer of issuer securities back to the issuer",
+              "Read the transaction terms",
             ],
             [
               "F",
-              "Shares withheld to pay tax on vesting",
-              "None — automatic, not discretionary",
+              "Securities used for exercise costs or taxes",
+              "Can involve delivery or withholding of shares",
             ],
-            ["G", "Bona fide gift", "None — estate planning, charity"],
-            ["C", "Conversion of a derivative security", "None — mechanical"],
             [
-              "D",
-              "Disposition back to the company",
-              "None — usually plan-related",
+              "I",
+              "Discretionary transaction under Rule 16b-3(f)",
+              "Read the plan and transaction details",
+            ],
+            [
+              "M",
+              "Rule 16b-3 exercise or conversion",
+              "An acquisition can result without a market purchase",
+            ],
+            [
+              "C",
+              "Derivative conversion",
+              "Compare the derivative and underlying security rows",
+            ],
+            [
+              "E",
+              "Short derivative position expires",
+              "Not an open-market stock purchase",
+            ],
+            [
+              "H",
+              "Long derivative expires or is canceled for value",
+              "Check what value was received",
+            ],
+            [
+              "O",
+              "Out-of-the-money derivative exercise",
+              "Review exercise terms",
             ],
             [
               "X",
-              "Exercise of in-the-money options at expiry",
-              "None — forced by the calendar",
+              "In-the-money or at-the-money derivative exercise",
+              "Review exercise terms",
+            ],
+            ["G", "Gift", "A transfer, not a purchase for cash"],
+            [
+              "L",
+              "Small acquisition under Rule 16a-6",
+              "Check reporting exceptions",
+            ],
+            [
+              "W",
+              "Inheritance or transfer by will",
+              "Not an open-market stock purchase",
+            ],
+            [
+              "Z",
+              "Transfer into or out of a voting trust",
+              "Check beneficial ownership",
             ],
             [
               "J",
-              "Other (described in a footnote)",
-              "Read the footnote — occasionally interesting",
+              "Other acquisition or disposition",
+              "The explanation of responses defines the event",
+            ],
+            [
+              "K",
+              "Equity swap or similar instrument",
+              "May accompany another code, such as P/K or S/K",
+            ],
+            [
+              "U",
+              "Shares tendered in a change of control",
+              "Check the tender terms",
             ],
           ]}
         />
-        <H2>Why we only track code P</H2>
+        <H2>Code P does not prove discretionary buying</H2>
         <P>
-          A code-<Mono>P</Mono> purchase is the only routine Form 4 event where
-          an insider voluntarily converts personal cash into more exposure to
-          their own company. Codes <Mono>A</Mono>, <Mono>M</Mono>, and{" "}
-          <Mono>F</Mono> dominate filing volume but carry no intent at all —
-          counting them as &quot;insider buying&quot; is the most common mistake
-          in DIY Form 4 analysis. Even <Mono>S</Mono> sales are weakly
-          informative at best; see{" "}
-          <A href="/learn/insider-buying-vs-selling">
-            why buying and selling aren&apos;t symmetric signals
-          </A>
-          .
+          Purchase code P includes private transactions and may include trades
+          under a <A href="/learn/what-is-a-10b5-1-plan">10b5-1 plan</A>. The
+          checkbox and footnotes provide that context. Joint reporting owners
+          can also describe the same economic purchase; adding every
+          owner&apos;s reported value can double-count it.
         </P>
+        <H2>A real exercise-and-sale example</H2>
         <P>
-          When two or more insiders file code-<Mono>P</Mono> purchases in the
-          same stock within days, that&apos;s a{" "}
-          <A href="/learn/what-is-a-cluster-buy">cluster buy</A> — the pattern
-          this site tracks in real time across{" "}
-          <A href="/stocks">every stock with detected activity</A>.
+          In{" "}
+          <Ext href="https://www.sec.gov/Archives/edgar/data/1082554/000123142725000004/xslF345X05/primarydocument.xml">
+            Christopher Patusky&apos;s UTHR filing for December 15, 2025
+          </Ext>
+          , Table I records 1,000 shares acquired with code M and 1,000 disposed
+          with code S. The acquired flag does not turn the M transaction into a
+          code-P purchase.
+        </P>
+        <H2>How InsiderClusters uses the codes</H2>
+        <P>
+          Our detector uses qualifying non-derivative code-P records. It does
+          not independently exclude every scheduled or private purchase. Read
+          the <A href="/methodology">methodology</A>, follow the{" "}
+          <A href="/learn/how-to-read-a-form-4">filing walkthrough</A>, and
+          compare the source documents on the{" "}
+          <A href="/stocks">insider buying directory</A>.
         </P>
       </>
     ),
   },
   {
     slug: "how-to-read-a-form-4",
-    title: "How to read a Form 4 filing",
+    title: "How to read SEC Form 4: a filing walkthrough",
+    seoTitle: "How to Read SEC Form 4",
     description:
-      "A walkthrough of the SEC Form 4: the reporting owner, Table I vs Table II, transaction codes, prices, and footnotes — and the traps that mislead first-time readers.",
-    updated: "2026-07-04",
+      "Read SEC Form 4 step by step: identify the owner, decode transactions, compare acquired and disposed shares, and check footnotes with a real filing example.",
+    updated: "2026-10-13",
     related: [
       "form-4-transaction-codes",
-      "form-3-vs-form-4-vs-form-5",
+      "what-is-a-10b5-1-plan",
       "form-4-filing-deadline",
     ],
     faq: [
       {
-        q: "What is Table I on a Form 4?",
-        a: "Table I lists non-derivative transactions in the company's stock — the date, one-letter transaction code, share count, price, and shares owned after the transaction.",
+        q: "What is Table I on SEC Form 4?",
+        a: "Table I covers non-derivative securities. Read the date, transaction code, shares, price, acquired/disposed flag, holdings after the transaction, and direct/indirect ownership.",
       },
       {
-        q: "Why do option exercises look like buying on a Form 4?",
-        a: "An option exercise (code M) shows shares being acquired without any market purchase, and it is often paired with a same-day sale of the exercised shares.",
+        q: "Is every acquisition on Form 4 an insider purchase?",
+        a: "No. Shares can be acquired through grants, exercises, conversions, or purchases. Use the transaction code rather than the acquired flag alone.",
       },
       {
-        q: "Where does a Form 4 show that a trade was under a 10b5-1 plan?",
-        a: "In the plan checkbox and the footnotes — a footnoted 10b5-1 trade was scheduled months in advance and carries far less signal than a discretionary buy.",
+        q: "Where is a 10b5-1 plan disclosed?",
+        a: "Current Form 4 has a plan checkbox, and the plan adoption date is disclosed in the explanation of responses. Older filings may require additional context.",
       },
     ],
     body: (
       <>
         <P>
-          A Form 4 is the document a corporate insider files with the SEC when
-          their ownership of company stock changes. It&apos;s short — one page
-          of structured tables — but the structure trips up first-time readers.
-          Here&apos;s the map.
+          <Strong>
+            Read Form 4 in this order: owner, security, date, code, shares,
+            price, ownership, and footnotes.
+          </Strong>{" "}
+          It reports changes in beneficial ownership, not just cash purchases.
+          The{" "}
+          <Ext href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-69">
+            SEC investor bulletin
+          </Ext>{" "}
+          explains how Forms 3, 4, and 5 fit together.
         </P>
-        <H2>The header: who and where</H2>
+        <H2>Identify the company and reporting owner</H2>
         <P>
-          The top of the form identifies the <Strong>issuer</Strong> (the
-          company and its ticker) and the <Strong>reporting owner</Strong> (the
-          insider), including the relationship: director, officer (with title),
-          10% owner, or other. One filing can have multiple reporting owners — a
-          fund and its manager often file jointly. Each person also has a CIK,
-          the SEC&apos;s permanent identifier, which is how we{" "}
-          <A href="/insiders">
-            track an insider&apos;s history across companies
-          </A>
-          .
+          The header names the issuer and reporting owner, identifies their
+          relationship to the company, and indicates individual or joint filing.
+          A reporting owner may be a person, fund, trust, or other entity. The
+          CIK identifies the filer; a joint filing can describe shared ownership
+          of one transaction.
         </P>
-        <H2>Table I: non-derivative transactions</H2>
+        <H2>Read Table I and Table II together</H2>
         <P>
-          This is the table that matters. Each row shows the security, the date,
-          a one-letter{" "}
-          <A href="/learn/form-4-transaction-codes">transaction code</A>, the
-          number of shares, the price, and whether shares were acquired (
-          <Mono>A</Mono>) or disposed of (<Mono>D</Mono>). The last column shows
-          shares owned after the transaction — useful for judging how big the
-          trade is relative to the insider&apos;s existing stake.
+          Table I covers non-derivative securities; Table II covers derivatives.
+          Use the <A href="/learn/form-4-transaction-codes">transaction code</A>{" "}
+          to distinguish purchases from grants or exercises. A in the
+          acquired/disposed column means acquired and does not mean transaction
+          code A.
         </P>
-        <H2>Table II: derivative transactions</H2>
+        <H2>Walk through a real filing</H2>
         <P>
-          Options, warrants, RSUs, convertible notes. Most rows here are
-          compensation mechanics. The classic trap: an option exercise shows up
-          in Table II (code <Mono>M</Mono>) alongside a Table I acquisition — it
-          looks like buying, but no market purchase happened, and it&apos;s
-          usually followed by a same-day sale of the exercised shares.
+          Open{" "}
+          <Ext href="https://www.sec.gov/Archives/edgar/data/1082554/000123142725000004/xslF345X05/primarydocument.xml">
+            Christopher Patusky&apos;s UTHR Form 4
+          </Ext>
+          . It lists him as a director and reports activity dated December 15,
+          2025.
         </P>
-        <H2>Footnotes: where the story hides</H2>
+        <UL>
+          <li>
+            Table I: 1,000 shares acquired with code M at $101.80, then 1,000
+            shares disposed with code S.
+          </li>
+          <li>
+            Table II: the corresponding 1,000-share option exercise explains
+            where the acquired shares came from.
+          </li>
+          <li>
+            The sale price is $495.9539, and footnote 1 explains that it is a
+            weighted average of multiple executions.
+          </li>
+          <li>
+            The form separately shows directly held shares and shares held
+            indirectly through a trust.
+          </li>
+        </UL>
         <P>
-          Weighted-average price disclosures, 10b5-1 plan designations, trust
-          and family-holding explanations all live in the footnotes. A purchase
-          made under a{" "}
-          <A href="/learn/what-is-a-10b5-1-plan">pre-arranged 10b5-1 plan</A>{" "}
-          was scheduled months earlier and carries far less signal than a
-          discretionary open-market buy — the footnote is the only place that
-          distinction appears.
+          This is an exercise and sale, not a new code-P purchase. Do not infer
+          the purpose of the sale from its code alone.
         </P>
-        <H2>Or skip the parsing</H2>
+        <H2>Check ownership, plans, and footnotes</H2>
         <P>
-          We parse every Form 4 as it hits EDGAR, filter to meaningful
-          open-market purchases, and flag when{" "}
-          <A href="/learn/what-is-a-cluster-buy">
-            multiple insiders buy the same stock at once
-          </A>
-          . Every number links back to the original filing.
+          Direct and indirect ownership can change the meaning of a transaction.
+          Prices may be averages or involve noncash consideration. Check the{" "}
+          <A href="/learn/what-is-a-10b5-1-plan">10b5-1 plan</A> designation and
+          the explanation of responses. The{" "}
+          <Ext href="https://www.sec.gov/files/form4.pdf">
+            Form 4 instructions
+          </Ext>{" "}
+          provide the definitions.
+        </P>
+        <H2>Keep the transaction date separate from the filing date</H2>
+        <P>
+          A trade generally becomes public after it occurs, and late filings can
+          report older transactions. Read the{" "}
+          <A href="/learn/form-4-filing-deadline">filing-deadline guide</A>. On
+          our <A href="/stocks">stock research pages</A>, follow the original
+          filing links to verify the data and context.
         </P>
       </>
     ),
   },
   {
     slug: "what-is-a-10b5-1-plan",
-    title: "What is a 10b5-1 trading plan?",
+    title: "What is a Rule 10b5-1 trading plan?",
+    seoTitle: "10b5-1 Plans: Rules & Form 4 Disclosures",
     description:
-      "10b5-1 plans let insiders schedule trades in advance to avoid insider-trading liability. Here's how they work and why plan trades carry less signal than discretionary buys.",
-    updated: "2026-07-04",
+      "Understand Rule 10b5-1 trading plans, cooling-off periods, and Form 4 disclosures. Learn how scheduled trades differ from current discretionary purchases.",
+    updated: "2026-10-13",
     related: [
       "how-to-read-a-form-4",
-      "insider-buying-vs-selling",
+      "form-4-transaction-codes",
       "form-4-filing-deadline",
     ],
     faq: [
       {
-        q: "What is a Rule 10b5-1 plan in simple terms?",
-        a: "A 10b5-1 plan is a written schedule an insider adopts in advance that lets a broker trade their company stock automatically, giving the insider a defense against insider-trading charges.",
+        q: "What is a 10b5-1 plan?",
+        a: "It is a prearranged contract, instruction, or trading plan that can provide an affirmative defense to insider-trading liability if the rule's conditions are met. It is not automatic immunity.",
       },
       {
-        q: "Do 10b5-1 plan trades carry any signal?",
-        a: "Very little — plan trades were scheduled months earlier, so they reflect an old decision rather than a fresh judgment about today's price.",
+        q: "How can I identify a plan trade on Form 4?",
+        a: "Current Form 4 has a checkbox for transactions under arrangements intended to satisfy Rule 10b5-1(c). The explanation of responses includes the adoption date.",
       },
       {
-        q: "How can I tell if a Form 4 trade was made under a 10b5-1 plan?",
-        a: "Since the SEC's 2023 amendments, Form 4 includes a checkbox identifying plan transactions, with the plan adoption date disclosed in the footnotes.",
+        q: "Does InsiderClusters exclude all 10b5-1 purchases?",
+        a: "No. Our code-P purchase filter does not independently exclude every plan transaction. Check the source filing's plan disclosure before interpreting a cluster.",
       },
     ],
     body: (
       <>
         <P>
-          A <Strong>Rule 10b5-1 plan</Strong> is a written trading schedule an
-          insider adopts while they (supposedly) hold no material non-public
-          information. Once the plan is in place, a broker executes the trades
-          automatically — so many shares on such dates, or at such prices — and
-          the insider gets an affirmative defense against insider-trading
-          charges even if the trades later coincide with big news.
+          <Strong>
+            A Rule 10b5-1 plan arranges trades before they take place.
+          </Strong>{" "}
+          It can provide an affirmative defense to insider-trading liability
+          when its conditions are satisfied, including adoption without
+          awareness of material nonpublic information. The arrangement can set
+          trading terms or delegate decisions within the rule&apos;s limits.
         </P>
-        <H2>The 2023 tightening</H2>
+        <H2>What the rules require</H2>
         <P>
-          After research showed plan trades beating the market suspiciously
-          often, the SEC{" "}
-          <Ext href="https://www.sec.gov/news/press-release/2022-222">
-            tightened Rule 10b5-1
+          The{" "}
+          <Ext href="https://www.sec.gov/resources-small-businesses/small-business-compliance-guides/insider-trading-arrangements-and-related-disclosures">
+            SEC compliance guide
           </Ext>{" "}
-          effective 2023: a mandatory cooling-off period before the first trade
-          (90+ days for officers and directors), a ban on overlapping plans,
-          limits on single-trade plans, and a checkbox on Form 4 itself
-          identifying plan transactions.
+          describes good-faith requirements, director and officer
+          certifications, restrictions on overlapping arrangements, and limits
+          on single-trade plans. Exceptions and the type of participant matter.
         </P>
-        <H2>Why it matters for reading Form 4s</H2>
+        <H2>Cooling-off periods before trading</H2>
         <UL>
           <li>
-            <Strong>Plan sales are near-noise.</Strong> A CEO selling monthly
-            through a plan adopted a year ago tells you about their mortgage,
-            not their outlook.
+            For directors and officers, trading generally waits until the later
+            of 90 days after adoption or certain modifications, or two business
+            days after the relevant quarter&apos;s financial results are
+            disclosed. The required period is capped at 120 days.
           </li>
           <li>
-            <Strong>Plan buys are scheduled, not reactive.</Strong> Some
-            insiders dollar-cost-average in through plans. Steady conviction,
-            but not a fresh judgment about today&apos;s price.
-          </li>
-          <li>
-            <Strong>Discretionary open-market buys are the signal.</Strong> An
-            unscheduled code-<Mono>P</Mono> purchase is an insider looking at
-            the current price and choosing to buy now. That&apos;s the
-            transaction type we track, and when several insiders do it within
-            days it forms a{" "}
-            <A href="/learn/what-is-a-cluster-buy">cluster buy</A>.
+            For other persons covered by the rule, except the issuer, the
+            cooling-off period is 30 days.
           </li>
         </UL>
         <P>
-          The plan designation lives in the Form 4&apos;s checkbox and footnotes
-          — one more reason to{" "}
-          <A href="/learn/how-to-read-a-form-4">read the whole filing</A>, or
-          let us do it and browse the filtered result on{" "}
-          <A href="/stocks">the live cluster feed</A>.
+          See the{" "}
+          <Ext href="https://www.sec.gov/files/rules/final/2022/33-11138.pdf">
+            SEC adopting release
+          </Ext>{" "}
+          for the precise conditions. A plan designation is not proof that every
+          condition was satisfied.
+        </P>
+        <H2>Find the disclosure on Form 4</H2>
+        <P>
+          Check the plan checkbox and adoption date in the explanation of
+          responses. A purchase can still carry{" "}
+          <A href="/learn/form-4-transaction-codes">transaction code P</A> when
+          made under a plan. Older filings may have different disclosure
+          formats.
+        </P>
+        <H2>Interpret the timing of a purchase</H2>
+        <P>
+          A scheduled execution may reflect an earlier decision rather than a
+          new assessment of today&apos;s price. Neither a scheduled nor an
+          unscheduled purchase establishes a future return. Compare adoption,
+          transaction, and filing dates using the{" "}
+          <A href="/learn/how-to-read-a-form-4">filing walkthrough</A>.
+        </P>
+        <H2>How this affects cluster research</H2>
+        <P>
+          Our detector groups qualifying purchases without independently
+          excluding every 10b5-1 trade. Review the{" "}
+          <A href="/methodology">detection methodology</A> and source filings in
+          the <A href="/stocks">stock directory</A> before interpreting whether
+          buyers acted on separate recent decisions.
         </P>
       </>
     ),
@@ -598,75 +706,105 @@ export const LEARN_ARTICLES: LearnArticle[] = [
   },
   {
     slug: "form-4-filing-deadline",
-    title: "How fast must insiders report trades? (Form 4 deadlines)",
+    title: "Form 4 filing deadline: the two-business-day rule",
+    seoTitle: "Form 4 Filing Deadline: Two Business Days",
     description:
-      "Insiders must file a Form 4 within two business days of a trade. Here's the exact rule, the exceptions, and why the deadline makes real-time monitoring possible.",
-    updated: "2026-07-04",
+      "Form 4 is generally due within two business days of a reportable transaction. See deadline examples, exceptions, and how filing dates differ from trade dates.",
+    updated: "2026-10-13",
     related: [
       "how-to-read-a-form-4",
       "form-3-vs-form-4-vs-form-5",
-      "what-is-sec-edgar",
+      "what-is-a-10b5-1-plan",
     ],
     faq: [
       {
-        q: "How long do insiders have to report a trade?",
-        a: "Insiders must file a Form 4 before the end of the second business day after the transaction — trade on Monday, file by Wednesday.",
+        q: "When is Form 4 due?",
+        a: "Generally before the end of the second business day following a reportable transaction. A Monday transaction is generally due Wednesday if both following days are business days.",
       },
       {
-        q: "What happens if an insider files a Form 4 late?",
-        a: "Late filings are still accepted and processed — the form has a box for explaining the delay — which is why a new filing can carry an old transaction date.",
+        q: "Do weekends count toward the deadline?",
+        a: "No. The general rule counts business days. A Friday transaction is generally due Tuesday when Monday and Tuesday are business days; holidays can change that timeline.",
       },
       {
-        q: "When do new Form 4 filings appear on EDGAR?",
-        a: "EDGAR accepts filings from 6 a.m. to 10 p.m. Eastern on business days and publishes them publicly within seconds of acceptance.",
+        q: "Does a new Form 4 mean the trade happened today?",
+        a: "No. Transaction, filing, and detection dates differ. Even timely filings usually follow the trade, and late filings can report substantially older activity.",
       },
     ],
     body: (
       <>
         <P>
-          Since Sarbanes-Oxley in 2002, Section 16 insiders must report a trade
-          on Form 4 <Strong>before the end of the second business day</Strong>{" "}
-          after the transaction. Trade on Monday, file by Wednesday. Before 2002
-          the deadline was the 10th of the following month — up to 40 days of
-          lag; today the market learns about insider trades while they&apos;re
-          still fresh.
+          <Strong>
+            Form 4 is generally due before the end of the second business day
+            after a reportable transaction.
+          </Strong>{" "}
+          The{" "}
+          <Ext href="https://www.sec.gov/files/form4.pdf">
+            SEC Form 4 instructions
+          </Ext>{" "}
+          specify the rule and exceptions, including rules for determining
+          execution dates in some transactions.
         </P>
-        <H2>The practical timeline</H2>
+        <H2>Examples of the general deadline</H2>
         <UL>
           <li>
-            <Strong>Day 0:</Strong> the insider trades (the &quot;transaction
-            date&quot; on the form).
+            Monday trade: generally due Wednesday, if Tuesday and Wednesday are
+            business days.
           </li>
           <li>
-            <Strong>Day 1–2:</Strong> counsel or the insider&apos;s broker
-            prepares and files the Form 4 electronically on{" "}
-            <A href="/learn/what-is-sec-edgar">SEC EDGAR</A>. Filings appear
-            publicly within seconds of acceptance, and EDGAR accepts them until
-            10 p.m. Eastern.
+            Friday trade: generally due Tuesday, if Monday and Tuesday are
+            business days.
           </li>
           <li>
-            <Strong>Late filings happen</Strong> — a small percentage arrive
-            days or even months late (the form has a box for explaining). Late
-            Form 4s still get processed; it&apos;s why historical data
-            occasionally shows a &quot;new&quot; buy with an old transaction
-            date.
+            If a relevant day is a holiday, check the applicable business-day
+            calendar rather than adding two calendar days.
           </li>
         </UL>
-        <H2>Why the two-day rule matters for cluster detection</H2>
+        <H2>Exceptions and delayed reports</H2>
         <P>
-          Because every insider is on the same two-day clock, a genuine burst of
-          buying shows up on EDGAR as a burst of filings. That&apos;s what makes{" "}
-          <A href="/learn/what-is-a-cluster-buy">cluster buys</A> detectable in
-          near-real-time: we poll EDGAR continuously, parse each Form 4 as it
-          lands, and alert the moment a second distinct insider buys the same
-          stock within the window. Paid subscribers get that alert while the
-          window is still open — see <A href="/pricing">pricing</A>.
+          Not every change in ownership follows the same reporting treatment.
+          Certain exempt acquisitions can be reported later on Form 5; the{" "}
+          <Ext href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins-69">
+            SEC investor bulletin
+          </Ext>{" "}
+          explains the distinction. A plan trade is not automatically exempt
+          from Form 4 reporting.
+        </P>
+        <P>
+          A late filing can report an older transaction. Read the transaction
+          date and explanation of responses rather than assuming the filing date
+          is the purchase date. An amended filing can correct prior information
+          without representing a new trade.
+        </P>
+        <H2>Three dates to keep separate</H2>
+        <UL>
+          <li>
+            <Strong>Transaction date:</Strong> when the reported purchase or
+            other event occurred.
+          </li>
+          <li>
+            <Strong>Filing date:</Strong> when the report was filed with the
+            SEC.
+          </li>
+          <li>
+            <Strong>Detection date:</Strong> when our system processed enough
+            information to identify a cluster.
+          </li>
+        </UL>
+        <H2>What this means for insider buying alerts</H2>
+        <P>
+          Alerts follow public filing, processing, and delivery. They do not
+          arrive at the moment an insider trades. Compare dates in the{" "}
+          <A href="/stocks">insider buying directory</A> and use the{" "}
+          <A href="/learn/how-to-read-a-form-4">Form 4 walkthrough</A> to check
+          the underlying record. Our <A href="/methodology">methodology</A>{" "}
+          describes detection and data limits.
         </P>
       </>
     ),
   },
   {
     slug: "form-3-vs-form-4-vs-form-5",
+    seoTitle: "Form 3 vs Form 4 vs Form 5",
     title: "Form 3 vs Form 4 vs Form 5: what's the difference?",
     description:
       "Form 3 declares initial ownership, Form 4 reports trades within two days, Form 5 catches up on exempt transactions annually. Which one carries signal?",
@@ -733,6 +871,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
   },
   {
     slug: "insider-buying-vs-selling",
+    seoTitle: "Insider Buying vs Selling",
     title:
       "Insider buying vs insider selling: why the signals aren't symmetric",
     description:
@@ -815,6 +954,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
   },
   {
     slug: "insider-buying-vs-share-buyback",
+    seoTitle: "Insider Buying vs Share Buybacks",
     title: "Insider buying vs share buybacks: which signal is stronger?",
     description:
       "Buybacks spend shareholder money; insider buys spend the executive's own. Why personal purchases are the cleaner conviction signal, and what each is good for.",
@@ -880,6 +1020,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
   },
   {
     slug: "what-is-open-market-purchase",
+    seoTitle: "Open-Market Purchases & Form 4 Code P",
     title: "What is an open-market purchase (Form 4 code P)?",
     description:
       "An open-market purchase is an insider buying company stock on the exchange with personal cash — transaction code P on Form 4. Why it's the only routine filing event with real signal.",
@@ -957,6 +1098,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
   },
   {
     slug: "why-small-cap-insider-buying-matters",
+    seoTitle: "Small-Cap Insider Buying",
     title: "Why insider buying matters most in small-caps",
     description:
       "The information gap between insiders and the market is widest in small and micro-cap stocks — no analyst coverage, thin liquidity, and binary outcomes. Here's the logic and the evidence.",
@@ -1027,6 +1169,7 @@ export const LEARN_ARTICLES: LearnArticle[] = [
   },
   {
     slug: "what-is-sec-edgar",
+    seoTitle: "SEC EDGAR & Insider Filings",
     title: "What is SEC EDGAR (and how insider filings get there)?",
     description:
       "EDGAR is the SEC's public filing system — every Form 4 appears there within seconds of acceptance. How the pipeline works and how to read filings at the source.",

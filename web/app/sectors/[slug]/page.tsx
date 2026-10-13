@@ -14,6 +14,17 @@ import { ButtonLink } from "@/components/ui/button";
 import { ConvictionBadge } from "@/components/conviction-badge";
 import { SITE_URL, sectorPath, tickerPath } from "@/lib/site";
 import { formatDate, formatMarketCap, formatNumber } from "@/lib/format";
+import {
+  directoryQuery,
+  directorySlice,
+  directoryUrl,
+  matchesDirectoryQuery,
+  type DirectoryParams,
+} from "@/lib/directory-query";
+import {
+  DirectoryControls,
+  DirectoryPagination,
+} from "@/components/directory-controls";
 
 type Params = { slug: string };
 
@@ -23,8 +34,10 @@ const load = cache((slug: string) => getSectorPage(slug));
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<Params>;
+  searchParams: Promise<DirectoryParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const data = await load(slug);
@@ -35,17 +48,35 @@ export async function generateMetadata({
     };
   }
 
-  const title = `Insider Buying in ${data.sector} Stocks — Cluster Buys`;
+  const title = `${data.sector} Insider Buying`;
   const description =
     `${data.clusterCount} insider cluster ${data.clusterCount === 1 ? "buy" : "buys"} across ` +
     `${data.tickerCount} ${data.sector.toLowerCase()} ${data.tickerCount === 1 ? "stock" : "stocks"}, ` +
-    `detected from SEC Form 4 filings. See which ${data.sector.toLowerCase()} companies insiders are buying and when.`;
-  const canonical = sectorPath(data.slug);
+    `from SEC Form 4 filings. Research buyers, dates, and purchase histories.`;
+  const query = directoryQuery(await searchParams);
+  const canonical = directoryUrl(sectorPath(data.slug), {
+    ...query,
+    buysPage: 1,
+  });
+  if (
+    query.page >
+    directorySlice(
+      data.tickers.filter((t) =>
+        matchesDirectoryQuery(query.q, t.ticker, t.issuerName),
+      ),
+      query.page,
+    ).pages
+  )
+    notFound();
 
   return {
     title,
     description,
     alternates: { canonical },
+    robots:
+      query.q || query.sort !== "recent"
+        ? { index: false, follow: true }
+        : undefined,
     openGraph: {
       title,
       description,
@@ -57,12 +88,28 @@ export async function generateMetadata({
 
 export default async function SectorPage({
   params,
+  searchParams,
 }: {
   params: Promise<Params>;
+  searchParams: Promise<DirectoryParams>;
 }) {
   const { slug } = await params;
   const data = await load(slug);
   if (!data) notFound();
+  const query = { ...directoryQuery(await searchParams), buysPage: 1 };
+  const matches = data.tickers
+    .filter((t) => matchesDirectoryQuery(query.q, t.ticker, t.issuerName))
+    .sort(
+      (a, b) =>
+        (query.sort === "name"
+          ? a.ticker.localeCompare(b.ticker)
+          : query.sort === "clusters"
+            ? b.totalClusters - a.totalClusters
+            : b.lastDetectedAt.getTime() - a.lastDetectedAt.getTime()) ||
+        a.ticker.localeCompare(b.ticker),
+    );
+  const listing = directorySlice(matches, query.page);
+  if (query.page > listing.pages) notFound();
 
   const intro = SECTOR_INTROS[data.slug] ?? GENERIC_SECTOR_INTRO(data.sector);
 
@@ -90,13 +137,13 @@ export default async function SectorPage({
       "@context": "https://schema.org",
       "@type": "CollectionPage",
       name: `Insider buying in ${data.sector} stocks`,
-      url: `${SITE_URL}${sectorPath(data.slug)}`,
+      url: `${SITE_URL}${directoryUrl(sectorPath(data.slug), query)}`,
       mainEntity: {
         "@type": "ItemList",
-        numberOfItems: data.tickers.length,
-        itemListElement: data.tickers.slice(0, 100).map((t, i) => ({
+        numberOfItems: listing.items.length,
+        itemListElement: listing.items.map((t, i) => ({
           "@type": "ListItem",
-          position: i + 1,
+          position: listing.offset + i + 1,
           name: `${t.ticker} insider buying`,
           url: `${SITE_URL}${tickerPath(t.ticker)}`,
         })),
@@ -142,11 +189,16 @@ export default async function SectorPage({
             {formatDate(data.lastDetectedAt)}
           </p>
         </header>
+        <DirectoryControls path={sectorPath(data.slug)} query={query} />
+        <p className="mt-4 text-sm text-muted">
+          {formatNumber(matches.length)} matching companies
+        </p>
 
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {data.tickers.map((t) => (
+          {listing.items.map((t) => (
             <li key={t.ticker}>
               <Link
+                prefetch={false}
                 href={tickerPath(t.ticker)}
                 className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-md"
               >
@@ -176,6 +228,19 @@ export default async function SectorPage({
             </li>
           ))}
         </ul>
+        {!matches.length && (
+          <p className="mt-8 text-muted">
+            No companies match this search. Try another ticker or company.
+          </p>
+        )}
+        <DirectoryPagination
+          label={`${data.sector} stock pages`}
+          page={query.page}
+          pages={listing.pages}
+          href={(page) =>
+            directoryUrl(sectorPath(data.slug), { ...query, page })
+          }
+        />
 
         <section className="mt-12 rounded-xl border border-accent/30 bg-accent/5 p-6 text-center">
           <p className="text-sm font-medium">

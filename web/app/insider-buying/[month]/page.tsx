@@ -38,7 +38,7 @@ export async function generateMetadata({
   }
 
   const label = ymLabel(data.ym);
-  const title = `Biggest Insider Buys of ${label} — Clusters & Form 4 Purchases`;
+  const title = `Insider Buying in ${label}`;
   const description =
     `${formatMoneyCompact(data.summary.totalValue)} of notable open-market insider buying across ` +
     `${data.summary.tickerCount} stocks in ${label}, including ` +

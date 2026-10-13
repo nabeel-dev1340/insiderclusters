@@ -1,0 +1,2087 @@
+[
+  {
+    "url": "https://insiderclusters.com/",
+    "final_url": "https://insiderclusters.com/",
+    "status": 200,
+    "seconds": 1.51,
+    "bytes": 79246,
+    "title": "Insider Buying & Cluster Alerts | InsiderClusters",
+    "title_length": 49,
+    "description": "Track insider buying from SEC Form 4 filings. Find cluster purchases, research stocks and insiders, and get email or Telegram alerts when new clusters form.",
+    "description_length": 156,
+    "robots": "index, follow",
+    "canonical": [
+      "https://insiderclusters.com"
+    ],
+    "h1": [
+      "Insider buying.",
+      "A window into",
+      " ",
+      "conviction."
+    ],
+    "h2": [
+      "Where insiders are buying.",
+      "One purchase is a data point.",
+      "Several tell a story.",
+      "Less searching. More understanding.",
+      "Stay close to",
+      "the evidence.",
+      "Good questions.",
+      "Clear answers.",
+      "Find your next research lead."
+    ],
+    "internal_link_count": 42,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://insiderclusters.com/#website",
+          "name": "InsiderClusters",
+          "url": "https://insiderclusters.com",
+          "description": "Track insider buying from SEC Form 4 filings. Find cluster purchases, research stocks and insiders, and get email or Telegram alerts when new clusters form.",
+          "publisher": {
+            "@id": "https://insiderclusters.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an insider cluster buy?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An insider cluster buy happens when two or more distinct company insiders report qualifying purchases of the same stock within a rolling detection window. InsiderClusters groups these purchases so you can research the buyers, dates, and amounts together."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does the insider buying data come from?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our data comes from public SEC Form 4 filings on EDGAR. Each transaction links to its original filing so you can check the price, shares, ownership details, and footnotes yourself."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does insider buying mean a stock will go up?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Insider buying is a research input, not a prediction of returns. Clusters can help you identify companies to investigate, but prices can fall and filings may have important context in their footnotes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When will I receive an alert?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pro includes email and Telegram alerts when our monitoring detects a new qualifying cluster. Alerts follow public filing and processing, not the moment a trade takes place. Basic includes the cluster feed and a weekly email digest."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the free trial work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both plans begin with a 7-day free trial. A card is required at checkout. You are charged after the trial unless you cancel before it ends. Annual billing is also available at checkout."
+              }
+            }
+          ]
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "Insider Buying & Cluster Alerts | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Independent research. Public evidence. Insider buying. A window into conviction. A clearer view of insider buying. Find the stocks multiple insiders are buying together, with every purchase traced back to SEC Form 4 filings. Explore insider buys \u2197 Start your free trial \u2192 7 -day trial \u00b7 Plans from $9/month \u00b7 Cancel anytime Cluster observation Latest detected REF Reformation Inc. SEC Form 4 Insiders buying 3 distinct buyers Total purchased $3.1M SHARED PURCHASE WINDOW BUYER 01 BUYER 02 BUYER 03 3 directors View research \u2197 Diagram illustrates the pattern; individual purchase dates are in the filings. The pattern we follow Two or more insiders Distinct buyers. Same company. Qualifying purchases Filtered from Form 4 filings. Evidence you can check Direct links to SEC EDGAR. The research desk Where insiders are buying. View the stock directory \u2197 REF Reformation Inc. 3 Insiders buying $3.1M Total purchased Jul 31 \u2013 Jul 31, 2026 Purchase window \u2197 BPRE Bluerock Private Real Estate Fund 3 Insiders buying $23.7M Total purchased Sep 14 \u2013 Oct 9, 2026 Purchase window \u2197 LCU Lion Copper Corp. 2 Insiders buying $111.2K Total purchased Sep 11 \u2013 Oct 9, 2026 Purchase window \u2197 CINT CI&T Inc 3 Insiders buying $153.0K Total purchased Sep 10 \u2013 Oct 7, 2026 Purchase window \u2197 AHRT AH Realty Trust, Inc. 3 Insiders buying $35.8K Total purchased Sep 28 \u2013 Oct 8, 2026 Purchase window \u2197 LCU Lion Copper Corp. 2 Insiders buying $88.8K Total purchased Sep 11 \u2013 Oct 8, 2026 Purchase window \u2197 A better starting point One purchase is a data point. Several tell a story. Insider buying can reveal where company leaders are committing their own capital. A cluster brings those decisions together, giving you a focused starting point for deeper research. Understand our methodology \u2197 01 Separate purchases from routine activity Stock grants, option exercises, an",
+    "headers": {
+      "Cache-Control": "s-maxage=600, stale-while-revalidate=31535400",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "X-Nextjs-Cache": "HIT"
+    }
+  },
+  {
+    "url": "https://www.insiderclusters.com/",
+    "final_url": "https://www.insiderclusters.com/",
+    "status": 200,
+    "seconds": 1.57,
+    "bytes": 79246,
+    "title": "Insider Buying & Cluster Alerts | InsiderClusters",
+    "title_length": 49,
+    "description": "Track insider buying from SEC Form 4 filings. Find cluster purchases, research stocks and insiders, and get email or Telegram alerts when new clusters form.",
+    "description_length": 156,
+    "robots": "index, follow",
+    "canonical": [
+      "https://insiderclusters.com"
+    ],
+    "h1": [
+      "Insider buying.",
+      "A window into",
+      " ",
+      "conviction."
+    ],
+    "h2": [
+      "Where insiders are buying.",
+      "One purchase is a data point.",
+      "Several tell a story.",
+      "Less searching. More understanding.",
+      "Stay close to",
+      "the evidence.",
+      "Good questions.",
+      "Clear answers.",
+      "Find your next research lead."
+    ],
+    "internal_link_count": 42,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://insiderclusters.com/#website",
+          "name": "InsiderClusters",
+          "url": "https://insiderclusters.com",
+          "description": "Track insider buying from SEC Form 4 filings. Find cluster purchases, research stocks and insiders, and get email or Telegram alerts when new clusters form.",
+          "publisher": {
+            "@id": "https://insiderclusters.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an insider cluster buy?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An insider cluster buy happens when two or more distinct company insiders report qualifying purchases of the same stock within a rolling detection window. InsiderClusters groups these purchases so you can research the buyers, dates, and amounts together."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does the insider buying data come from?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our data comes from public SEC Form 4 filings on EDGAR. Each transaction links to its original filing so you can check the price, shares, ownership details, and footnotes yourself."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does insider buying mean a stock will go up?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Insider buying is a research input, not a prediction of returns. Clusters can help you identify companies to investigate, but prices can fall and filings may have important context in their footnotes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When will I receive an alert?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pro includes email and Telegram alerts when our monitoring detects a new qualifying cluster. Alerts follow public filing and processing, not the moment a trade takes place. Basic includes the cluster feed and a weekly email digest."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the free trial work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both plans begin with a 7-day free trial. A card is required at checkout. You are charged after the trial unless you cancel before it ends. Annual billing is also available at checkout."
+              }
+            }
+          ]
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "Insider Buying & Cluster Alerts | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Independent research. Public evidence. Insider buying. A window into conviction. A clearer view of insider buying. Find the stocks multiple insiders are buying together, with every purchase traced back to SEC Form 4 filings. Explore insider buys \u2197 Start your free trial \u2192 7 -day trial \u00b7 Plans from $9/month \u00b7 Cancel anytime Cluster observation Latest detected REF Reformation Inc. SEC Form 4 Insiders buying 3 distinct buyers Total purchased $3.1M SHARED PURCHASE WINDOW BUYER 01 BUYER 02 BUYER 03 3 directors View research \u2197 Diagram illustrates the pattern; individual purchase dates are in the filings. The pattern we follow Two or more insiders Distinct buyers. Same company. Qualifying purchases Filtered from Form 4 filings. Evidence you can check Direct links to SEC EDGAR. The research desk Where insiders are buying. View the stock directory \u2197 REF Reformation Inc. 3 Insiders buying $3.1M Total purchased Jul 31 \u2013 Jul 31, 2026 Purchase window \u2197 BPRE Bluerock Private Real Estate Fund 3 Insiders buying $23.7M Total purchased Sep 14 \u2013 Oct 9, 2026 Purchase window \u2197 LCU Lion Copper Corp. 2 Insiders buying $111.2K Total purchased Sep 11 \u2013 Oct 9, 2026 Purchase window \u2197 CINT CI&T Inc 3 Insiders buying $153.0K Total purchased Sep 10 \u2013 Oct 7, 2026 Purchase window \u2197 AHRT AH Realty Trust, Inc. 3 Insiders buying $35.8K Total purchased Sep 28 \u2013 Oct 8, 2026 Purchase window \u2197 LCU Lion Copper Corp. 2 Insiders buying $88.8K Total purchased Sep 11 \u2013 Oct 8, 2026 Purchase window \u2197 A better starting point One purchase is a data point. Several tell a story. Insider buying can reveal where company leaders are committing their own capital. A cluster brings those decisions together, giving you a focused starting point for deeper research. Understand our methodology \u2197 01 Separate purchases from routine activity Stock grants, option exercises, an",
+    "headers": {
+      "Cache-Control": "s-maxage=600, stale-while-revalidate=31535400",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "X-Nextjs-Cache": "HIT"
+    }
+  },
+  {
+    "url": "http://insiderclusters.com/",
+    "final_url": "https://insiderclusters.com/",
+    "status": 200,
+    "seconds": 1.85,
+    "bytes": 79246,
+    "title": "Insider Buying & Cluster Alerts | InsiderClusters",
+    "title_length": 49,
+    "description": "Track insider buying from SEC Form 4 filings. Find cluster purchases, research stocks and insiders, and get email or Telegram alerts when new clusters form.",
+    "description_length": 156,
+    "robots": "index, follow",
+    "canonical": [
+      "https://insiderclusters.com"
+    ],
+    "h1": [
+      "Insider buying.",
+      "A window into",
+      " ",
+      "conviction."
+    ],
+    "h2": [
+      "Where insiders are buying.",
+      "One purchase is a data point.",
+      "Several tell a story.",
+      "Less searching. More understanding.",
+      "Stay close to",
+      "the evidence.",
+      "Good questions.",
+      "Clear answers.",
+      "Find your next research lead."
+    ],
+    "internal_link_count": 42,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": "https://insiderclusters.com/#website",
+          "name": "InsiderClusters",
+          "url": "https://insiderclusters.com",
+          "description": "Track insider buying from SEC Form 4 filings. Find cluster purchases, research stocks and insiders, and get email or Telegram alerts when new clusters form.",
+          "publisher": {
+            "@id": "https://insiderclusters.com/#organization"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an insider cluster buy?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An insider cluster buy happens when two or more distinct company insiders report qualifying purchases of the same stock within a rolling detection window. InsiderClusters groups these purchases so you can research the buyers, dates, and amounts together."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does the insider buying data come from?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Our data comes from public SEC Form 4 filings on EDGAR. Each transaction links to its original filing so you can check the price, shares, ownership details, and footnotes yourself."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does insider buying mean a stock will go up?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Insider buying is a research input, not a prediction of returns. Clusters can help you identify companies to investigate, but prices can fall and filings may have important context in their footnotes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "When will I receive an alert?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pro includes email and Telegram alerts when our monitoring detects a new qualifying cluster. Alerts follow public filing and processing, not the moment a trade takes place. Basic includes the cluster feed and a weekly email digest."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the free trial work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both plans begin with a 7-day free trial. A card is required at checkout. You are charged after the trial unless you cancel before it ends. Annual billing is also available at checkout."
+              }
+            }
+          ]
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "Insider Buying & Cluster Alerts | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Independent research. Public evidence. Insider buying. A window into conviction. A clearer view of insider buying. Find the stocks multiple insiders are buying together, with every purchase traced back to SEC Form 4 filings. Explore insider buys \u2197 Start your free trial \u2192 7 -day trial \u00b7 Plans from $9/month \u00b7 Cancel anytime Cluster observation Latest detected REF Reformation Inc. SEC Form 4 Insiders buying 3 distinct buyers Total purchased $3.1M SHARED PURCHASE WINDOW BUYER 01 BUYER 02 BUYER 03 3 directors View research \u2197 Diagram illustrates the pattern; individual purchase dates are in the filings. The pattern we follow Two or more insiders Distinct buyers. Same company. Qualifying purchases Filtered from Form 4 filings. Evidence you can check Direct links to SEC EDGAR. The research desk Where insiders are buying. View the stock directory \u2197 REF Reformation Inc. 3 Insiders buying $3.1M Total purchased Jul 31 \u2013 Jul 31, 2026 Purchase window \u2197 BPRE Bluerock Private Real Estate Fund 3 Insiders buying $23.7M Total purchased Sep 14 \u2013 Oct 9, 2026 Purchase window \u2197 LCU Lion Copper Corp. 2 Insiders buying $111.2K Total purchased Sep 11 \u2013 Oct 9, 2026 Purchase window \u2197 CINT CI&T Inc 3 Insiders buying $153.0K Total purchased Sep 10 \u2013 Oct 7, 2026 Purchase window \u2197 AHRT AH Realty Trust, Inc. 3 Insiders buying $35.8K Total purchased Sep 28 \u2013 Oct 8, 2026 Purchase window \u2197 LCU Lion Copper Corp. 2 Insiders buying $88.8K Total purchased Sep 11 \u2013 Oct 8, 2026 Purchase window \u2197 A better starting point One purchase is a data point. Several tell a story. Insider buying can reveal where company leaders are committing their own capital. A cluster brings those decisions together, giving you a focused starting point for deeper research. Understand our methodology \u2197 01 Separate purchases from routine activity Stock grants, option exercises, an",
+    "headers": {
+      "Cache-Control": "s-maxage=600, stale-while-revalidate=31535400",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "X-Nextjs-Cache": "HIT"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/stocks",
+    "final_url": "https://insiderclusters.com/stocks",
+    "status": 200,
+    "seconds": 9.55,
+    "bytes": 4728447,
+    "title": "Stocks with insider cluster buys | InsiderClusters",
+    "title_length": 50,
+    "description": "Browse every stock where two or more insiders bought on the open market around the same time, detected from SEC Form 4 filings. See each ticker's full cluster-buy history.",
+    "description_length": 171,
+    "robots": "index, follow",
+    "canonical": [
+      "https://insiderclusters.com/stocks"
+    ],
+    "h1": [
+      "Stocks with insider cluster buys"
+    ],
+    "h2": [
+      "More stocks with notable insider buying"
+    ],
+    "internal_link_count": 3842,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://insiderclusters.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Stocks",
+              "item": "https://insiderclusters.com/stocks"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Stocks with insider cluster buys",
+          "description": "Browse every stock where two or more insiders bought on the open market around the same time, detected from SEC Form 4 filings. See each ticker's full cluster-buy history.",
+          "url": "https://insiderclusters.com/stocks",
+          "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": 2146,
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "REF insider cluster buys",
+                "url": "https://insiderclusters.com/stock/REF/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "BPRE insider cluster buys",
+                "url": "https://insiderclusters.com/stock/BPRE/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "LCU insider cluster buys",
+                "url": "https://insiderclusters.com/stock/LCU/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "name": "CINT insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CINT/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 5,
+                "name": "AHRT insider cluster buys",
+                "url": "https://insiderclusters.com/stock/AHRT/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 6,
+                "name": "BBD insider cluster buys",
+                "url": "https://insiderclusters.com/stock/BBD/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 7,
+                "name": "UXIN insider cluster buys",
+                "url": "https://insiderclusters.com/stock/UXIN/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 8,
+                "name": "AGMB insider cluster buys",
+                "url": "https://insiderclusters.com/stock/AGMB/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 9,
+                "name": "INM insider cluster buys",
+                "url": "https://insiderclusters.com/stock/INM/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 10,
+                "name": "NRXS insider cluster buys",
+                "url": "https://insiderclusters.com/stock/NRXS/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 11,
+                "name": "PDI insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PDI/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 12,
+                "name": "WVVI insider cluster buys",
+                "url": "https://insiderclusters.com/stock/WVVI/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 13,
+                "name": "FUL insider cluster buys",
+                "url": "https://insiderclusters.com/stock/FUL/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 14,
+                "name": "BORR insider cluster buys",
+                "url": "https://insiderclusters.com/stock/BORR/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 15,
+                "name": "TSM insider cluster buys",
+                "url": "https://insiderclusters.com/stock/TSM/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 16,
+                "name": "STWI insider cluster buys",
+                "url": "https://insiderclusters.com/stock/STWI/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 17,
+                "name": "INLX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/INLX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 18,
+                "name": "MXF insider cluster buys",
+                "url": "https://insiderclusters.com/stock/MXF/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 19,
+                "name": "LWAY insider cluster buys",
+                "url": "https://insiderclusters.com/stock/LWAY/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 20,
+                "name": "AXIA3 insider cluster buys",
+                "url": "https://insiderclusters.com/stock/AXIA3/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 21,
+                "name": "PSUS insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PSUS/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 22,
+                "name": "ACCV insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ACCV/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 23,
+                "name": "ALP insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ALP/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 24,
+                "name": "GRCE insider cluster buys",
+                "url": "https://insiderclusters.com/stock/GRCE/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 25,
+                "name": "PALI insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PALI/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 26,
+                "name": "AIRG insider cluster buys",
+                "url": "https://insiderclusters.com/stock/AIRG/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 27,
+                "name": "EP insider cluster buys",
+                "url": "https://insiderclusters.com/stock/EP/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 28,
+                "name": "CZNC insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CZNC/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 29,
+                "name": "MKC insider cluster buys",
+                "url": "https://insiderclusters.com/stock/MKC/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 30,
+                "name": "SKYH insider cluster buys",
+                "url": "https://insiderclusters.com/stock/SKYH/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 31,
+                "name": "XAIR insider cluster buys",
+                "url": "https://insiderclusters.com/stock/XAIR/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 32,
+                "name": "AUBN insider cluster buys",
+                "url": "https://insiderclusters.com/stock/AUBN/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 33,
+                "name": "BBASX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/BBASX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 34,
+                "name": "LEEEF insider cluster buys",
+                "url": "https://insiderclusters.com/stock/LEEEF/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 35,
+                "name": "GME insider cluster buys",
+                "url": "https://insiderclusters.com/stock/GME/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 36,
+                "name": "PAM insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PAM/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 37,
+                "name": "BUKS insider cluster buys",
+                "url": "https://insiderclusters.com/stock/BUKS/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 38,
+                "name": "RGCO insider cluster buys",
+                "url": "https://insiderclusters.com/stock/RGCO/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 39,
+                "name": "MPB insider cluster buys",
+                "url": "https://insiderclusters.com/stock/MPB/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 40,
+                "name": "NYAX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/NYAX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 41,
+                "name": "VENU insider cluster buys",
+                "url": "https://insiderclusters.com/stock/VENU/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 42,
+                "name": "SBMT insider cluster buys",
+                "url": "https://insiderclusters.com/stock/SBMT/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 43,
+                "name": "PRHI insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PRHI/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 44,
+                "name": "RDGL insider cluster buys",
+                "url": "https://insiderclusters.com/stock/RDGL/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 45,
+                "name": "DKS insider cluster buys",
+                "url": "https://insiderclusters.com/stock/DKS/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 46,
+                "name": "CTM insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CTM/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 47,
+                "name": "LILA insider cluster buys",
+                "url": "https://insiderclusters.com/stock/LILA/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 48,
+                "name": "TPL insider cluster buys",
+                "url": "https://insiderclusters.com/stock/TPL/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 49,
+                "name": "SPG insider cluster buys",
+                "url": "https://insiderclusters.com/stock/SPG/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 50,
+                "name": "MOALX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/MOALX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 51,
+                "name": "XENE insider cluster buys",
+                "url": "https://insiderclusters.com/stock/XENE/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 52,
+                "name": "GPUS insider cluster buys",
+                "url": "https://insiderclusters.com/stock/GPUS/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 53,
+                "name": "CLPR insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CLPR/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 54,
+                "name": "KWY insider cluster buys",
+                "url": "https://insiderclusters.com/stock/KWY/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 55,
+                "name": "ADRX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ADRX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 56,
+                "name": "PMPEX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PMPEX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 57,
+                "name": "AFCG insider cluster buys",
+                "url": "https://insiderclusters.com/stock/AFCG/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 58,
+                "name": "DTIL insider cluster buys",
+                "url": "https://insiderclusters.com/stock/DTIL/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 59,
+                "name": "SWZ insider cluster buys",
+                "url": "https://insiderclusters.com/stock/SWZ/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 60,
+                "name": "PHIO insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PHIO/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 61,
+                "name": "TPYTX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/TPYTX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 62,
+                "name": "ANIX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ANIX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 63,
+                "name": "CULP insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CULP/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 64,
+                "name": "SNES insider cluster buys",
+                "url": "https://insiderclusters.com/stock/SNES/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 65,
+                "name": "HGBL insider cluster buys",
+                "url": "https://insiderclusters.com/stock/HGBL/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 66,
+                "name": "RCG insider cluster buys",
+                "url": "https://insiderclusters.com/stock/RCG/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 67,
+                "name": "QNBC insider cluster buys",
+                "url": "https://insiderclusters.com/stock/QNBC/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 68,
+                "name": "OVLY insider cluster buys",
+                "url": "https://insiderclusters.com/stock/OVLY/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 69,
+                "name": "FTHY insider cluster buys",
+                "url": "https://insiderclusters.com/stock/FTHY/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 70,
+                "name": "CRAFX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CRAFX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 71,
+                "name": "ACOG insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ACOG/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 72,
+                "name": "CBK insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CBK/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 73,
+                "name": "INR insider cluster buys",
+                "url": "https://insiderclusters.com/stock/INR/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 74,
+                "name": "FNWD insider cluster buys",
+                "url": "https://insiderclusters.com/stock/FNWD/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 75,
+                "name": "INBX insider cluster buys",
+                "url": "https://insiderclusters.com/stock/INBX/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 76,
+                "name": "AOMR insider cluster buys",
+                "url": "https://insiderclusters.com/stock/AOMR/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 77,
+                "name": "PLAY insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PLAY/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 78,
+                "name": "ATCH insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ATCH/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 79,
+                "name": "JCTC insider cluster buys",
+                "url": "https://insiderclusters.com/stock/JCTC/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 80,
+                "name": "ADAG insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ADAG/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 81,
+                "name": "URG insider cluster buys",
+                "url": "https://insiderclusters.com/stock/URG/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 82,
+                "name": "UMH insider cluster buys",
+                "url": "https://insiderclusters.com/stock/UMH/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 83,
+                "name": "DFDV insider cluster buys",
+                "url": "https://insiderclusters.com/stock/DFDV/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 84,
+                "name": "CUEN insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CUEN/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 85,
+                "name": "OXM insider cluster buys",
+                "url": "https://insiderclusters.com/stock/OXM/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 86,
+                "name": "HHH insider cluster buys",
+                "url": "https://insiderclusters.com/stock/HHH/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 87,
+                "name": "DY insider cluster buys",
+                "url": "https://insiderclusters.com/stock/DY/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 88,
+                "name": "GSHD insider cluster buys",
+                "url": "https://insiderclusters.com/stock/GSHD/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 89,
+                "name": "GAM insider cluster buys",
+                "url": "https://insiderclusters.com/stock/GAM/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 90,
+                "name": "CSBB insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CSBB/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 91,
+                "name": "BGDE insider cluster buys",
+                "url": "https://insiderclusters.com/stock/BGDE/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 92,
+                "name": "CV insider cluster buys",
+                "url": "https://insiderclusters.com/stock/CV/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 93,
+                "name": "AIAI insider cluster buys",
+                "url": "https://insiderclusters.com/stock/AIAI/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 94,
+                "name": "ETRA insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ETRA/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 95,
+                "name": "LUCK insider cluster buys",
+                "url": "https://insiderclusters.com/stock/LUCK/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 96,
+                "name": "SKIL insider cluster buys",
+                "url": "https://insiderclusters.com/stock/SKIL/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 97,
+                "name": "DUOT insider cluster buys",
+                "url": "https://insiderclusters.com/stock/DUOT/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 98,
+                "name": "TNC insider cluster buys",
+                "url": "https://insiderclusters.com/stock/TNC/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 99,
+                "name": "PAL insider cluster buys",
+                "url": "https://insiderclusters.com/stock/PAL/insider-cluster-buys"
+              },
+              {
+                "@type": "ListItem",
+                "position": 100,
+                "name": "ADC insider cluster buys",
+                "url": "https://insiderclusters.com/stock/ADC/insider-cluster-buys"
+              }
+            ]
+          }
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "Stocks with insider cluster buys | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Home / Stocks Stocks with insider cluster buys Research companies where two or more insiders reported qualifying purchases within a rolling detection window. Each ticker links to its full cluster history, parsed directly from Form 4 filings. Tracking 2,146 tickers across 4,137 detected clusters . Search stocks by ticker or company Sort stocks Latest activity Most clusters Ticker A\u2013Z 2,146 companies REF Reformation Inc. 1 Detected clusters 3 Distinct insiders Oct 10, 2026 Last detected \u2197 BPRE Bluerock Private Real Estate Fund Executive buyer 6 Detected clusters 3 Distinct insiders Oct 10, 2026 Last detected \u2197 LCU Lion Copper Corp. 4 Detected clusters 2 Distinct insiders Oct 9, 2026 Last detected \u2197 CINT CI&T Inc Executive buyer 4 Detected clusters 3 Distinct insiders Oct 9, 2026 Last detected \u2197 AHRT AH Realty Trust, Inc. 1 Detected clusters 3 Distinct insiders Oct 9, 2026 Last detected \u2197 BBD BANK BRADESCO Executive buyer 18 Detected clusters 22 Distinct insiders Oct 9, 2026 Last detected \u2197 UXIN Uxin Ltd Executive buyer 8 Detected clusters 2 Distinct insiders Oct 9, 2026 Last detected \u2197 AGMB AgomAb Therapeutics NV Executive buyer 3 Detected clusters 3 Distinct insiders Oct 9, 2026 Last detected \u2197 INM InMed Pharmaceuticals Inc. 5 Detected clusters 2 Distinct insiders Oct 8, 2026 Last detected \u2197 NRXS Neuraxis, INC Executive buyer 2 Detected clusters 3 Distinct insiders Oct 8, 2026 Last detected \u2197 PDI PIMCO Dynamic Income Fund 3 Detected clusters 4 Distinct insiders Oct 8, 2026 Last detected \u2197 WVVI WILLAMETTE VALLEY VINEYARDS INC Executive buyer 8 Detected clusters 8 Distinct insiders Oct 8, 2026 Last detected \u2197 FUL FULLER H B CO Executive buyer 4 Detected clusters 9 Distinct insiders Oct 8, 2026 Last detected \u2197 BORR Borr Drilling Ltd Executive buyer 12 Detected clusters 4 Distinct insiders Oct 8, 2026 Last detected \u2197",
+    "headers": {
+      "Cache-Control": "s-maxage=3600, stale-while-revalidate=31532400",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "X-Nextjs-Cache": "HIT"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/insiders",
+    "final_url": "https://insiderclusters.com/insiders",
+    "status": 200,
+    "seconds": 4.37,
+    "bytes": 368090,
+    "title": "Most active insider buyers | InsiderClusters",
+    "title_length": 44,
+    "description": "The insiders buying the most stock on the open market, ranked by total dollars purchased across SEC Form 4 filings. See who's backing their own companies.",
+    "description_length": 154,
+    "robots": "index, follow",
+    "canonical": [
+      "https://insiderclusters.com/insiders"
+    ],
+    "h1": [
+      "Most active insider buyers"
+    ],
+    "h2": [],
+    "internal_link_count": 298,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://insiderclusters.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Insiders",
+              "item": "https://insiderclusters.com/insiders"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "name": "Most active insider buyers",
+          "description": "The insiders buying the most stock on the open market, ranked by total dollars purchased across SEC Form 4 filings. See who's backing their own companies.",
+          "numberOfItems": 100,
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "VisionWave Holdings, Inc.",
+              "url": "https://insiderclusters.com/insider/2038439-visionwave-holdings-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "GENMAB A/S",
+              "url": "https://insiderclusters.com/insider/1434265-genmab-a-s"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Iberdrola, S.A.",
+              "url": "https://insiderclusters.com/insider/1360587-iberdrola-s-a"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "SUMITOMO MITSUI FINANCIAL GROUP, INC.",
+              "url": "https://insiderclusters.com/insider/1022837-sumitomo-mitsui-financial-group-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "CASCADE INVESTMENT, L.L.C.",
+              "url": "https://insiderclusters.com/insider/1052192-cascade-investment-l-l-c"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "name": "BERKSHIRE HATHAWAY INC",
+              "url": "https://insiderclusters.com/insider/1067983-berkshire-hathaway-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 7,
+              "name": "PUBLIC INVESTMENT FUND",
+              "url": "https://insiderclusters.com/insider/1767640-public-investment-fund"
+            },
+            {
+              "@type": "ListItem",
+              "position": 8,
+              "name": "Musk Elon",
+              "url": "https://insiderclusters.com/insider/1494730-musk-elon"
+            },
+            {
+              "@type": "ListItem",
+              "position": 9,
+              "name": "VOLKSWAGEN AG",
+              "url": "https://insiderclusters.com/insider/1111708-volkswagen-ag"
+            },
+            {
+              "@type": "ListItem",
+              "position": 10,
+              "name": "BUFFETT WARREN E",
+              "url": "https://insiderclusters.com/insider/315090-buffett-warren-e"
+            },
+            {
+              "@type": "ListItem",
+              "position": 11,
+              "name": "Equitable Holdings, Inc.",
+              "url": "https://insiderclusters.com/insider/1333986-equitable-holdings-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 12,
+              "name": "Endeavor Group Holdings, Inc.",
+              "url": "https://insiderclusters.com/insider/1766363-endeavor-group-holdings-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 13,
+              "name": "RA CAPITAL MANAGEMENT, L.P.",
+              "url": "https://insiderclusters.com/insider/1346824-ra-capital-management-l-p"
+            },
+            {
+              "@type": "ListItem",
+              "position": 14,
+              "name": "Roivant Sciences Ltd.",
+              "url": "https://insiderclusters.com/insider/1635088-roivant-sciences-ltd"
+            },
+            {
+              "@type": "ListItem",
+              "position": 15,
+              "name": "Control Empresarial de Capitales S.A. de C.V.",
+              "url": "https://insiderclusters.com/insider/1273693-control-empresarial-de-capitales-s-a-de-c-v"
+            },
+            {
+              "@type": "ListItem",
+              "position": 16,
+              "name": "Emanuel Ariel",
+              "url": "https://insiderclusters.com/insider/1320234-emanuel-ariel"
+            },
+            {
+              "@type": "ListItem",
+              "position": 17,
+              "name": "Silver Lake West VoteCo, L.L.C.",
+              "url": "https://insiderclusters.com/insider/1868089-silver-lake-west-voteco-l-l-c"
+            },
+            {
+              "@type": "ListItem",
+              "position": 18,
+              "name": "MS&AD Insurance Group Holdings, Inc.",
+              "url": "https://insiderclusters.com/insider/1431048-ms-ad-insurance-group-holdings-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 19,
+              "name": "Kolchinsky Peter",
+              "url": "https://insiderclusters.com/insider/1384859-kolchinsky-peter"
+            },
+            {
+              "@type": "ListItem",
+              "position": 20,
+              "name": "Paulson John",
+              "url": "https://insiderclusters.com/insider/1394923-paulson-john"
+            },
+            {
+              "@type": "ListItem",
+              "position": 21,
+              "name": "GIC Special Investments Pte Ltd",
+              "url": "https://insiderclusters.com/insider/1296212-gic-special-investments-pte-ltd"
+            },
+            {
+              "@type": "ListItem",
+              "position": 22,
+              "name": "MITSUI SUMITOMO INSURANCE CO LTD",
+              "url": "https://insiderclusters.com/insider/1142206-mitsui-sumitomo-insurance-co-ltd"
+            },
+            {
+              "@type": "ListItem",
+              "position": 23,
+              "name": "Lincoln Financial Investments Corp",
+              "url": "https://insiderclusters.com/insider/1464867-lincoln-financial-investments-corp"
+            },
+            {
+              "@type": "ListItem",
+              "position": 24,
+              "name": "Huang Jack Jiajia",
+              "url": "https://insiderclusters.com/insider/2029760-huang-jack-jiajia"
+            },
+            {
+              "@type": "ListItem",
+              "position": 25,
+              "name": "ACKMAN WILLIAM A",
+              "url": "https://insiderclusters.com/insider/1056513-ackman-william-a"
+            },
+            {
+              "@type": "ListItem",
+              "position": 26,
+              "name": "Saba Capital Management, L.P.",
+              "url": "https://insiderclusters.com/insider/1510281-saba-capital-management-l-p"
+            },
+            {
+              "@type": "ListItem",
+              "position": 27,
+              "name": "TOYOTA MOTOR CORP/",
+              "url": "https://insiderclusters.com/insider/1094517-toyota-motor-corp"
+            },
+            {
+              "@type": "ListItem",
+              "position": 28,
+              "name": "BERTARELLI ERNESTO",
+              "url": "https://insiderclusters.com/insider/1137404-bertarelli-ernesto"
+            },
+            {
+              "@type": "ListItem",
+              "position": 29,
+              "name": "CD&R Channel Holdings II, L.P.",
+              "url": "https://insiderclusters.com/insider/2044245-cd-r-channel-holdings-ii-l-p"
+            },
+            {
+              "@type": "ListItem",
+              "position": 30,
+              "name": "NANJI FARHAD",
+              "url": "https://insiderclusters.com/insider/1575023-nanji-farhad"
+            },
+            {
+              "@type": "ListItem",
+              "position": 31,
+              "name": "PAULSON & CO. INC.",
+              "url": "https://insiderclusters.com/insider/1035674-paulson-co-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 32,
+              "name": "BAKER FELIX",
+              "url": "https://insiderclusters.com/insider/1087940-baker-felix"
+            },
+            {
+              "@type": "ListItem",
+              "position": 33,
+              "name": "Blackstone Treasury Holdings III L.L.C.",
+              "url": "https://insiderclusters.com/insider/1717275-blackstone-treasury-holdings-iii-l-l-c"
+            },
+            {
+              "@type": "ListItem",
+              "position": 34,
+              "name": "MALONE JOHN C",
+              "url": "https://insiderclusters.com/insider/937797-malone-john-c"
+            },
+            {
+              "@type": "ListItem",
+              "position": 35,
+              "name": "GABELLI MARIO J",
+              "url": "https://insiderclusters.com/insider/1185533-gabelli-mario-j"
+            },
+            {
+              "@type": "ListItem",
+              "position": 36,
+              "name": "Sprott Eric",
+              "url": "https://insiderclusters.com/insider/1491714-sprott-eric"
+            },
+            {
+              "@type": "ListItem",
+              "position": 37,
+              "name": "Conifer Management, L.L.C.",
+              "url": "https://insiderclusters.com/insider/1773994-conifer-management-l-l-c"
+            },
+            {
+              "@type": "ListItem",
+              "position": 38,
+              "name": "NIPPON LIFE INSURANCE CO",
+              "url": "https://insiderclusters.com/insider/905591-nippon-life-insurance-co"
+            },
+            {
+              "@type": "ListItem",
+              "position": 39,
+              "name": "BlueArc Capital Management, LLC",
+              "url": "https://insiderclusters.com/insider/2097963-bluearc-capital-management-llc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 40,
+              "name": "Singh Ranbir",
+              "url": "https://insiderclusters.com/insider/1943408-singh-ranbir"
+            },
+            {
+              "@type": "ListItem",
+              "position": 41,
+              "name": "MEHTA NEIL",
+              "url": "https://insiderclusters.com/insider/1840890-mehta-neil"
+            },
+            {
+              "@type": "ListItem",
+              "position": 42,
+              "name": "Catalyst4, Inc.",
+              "url": "https://insiderclusters.com/insider/1900201-catalyst4-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 43,
+              "name": "BAKER BROS. ADVISORS LP",
+              "url": "https://insiderclusters.com/insider/1263508-baker-bros-advisors-lp"
+            },
+            {
+              "@type": "ListItem",
+              "position": 44,
+              "name": "Fidelity National Financial, Inc.",
+              "url": "https://insiderclusters.com/insider/1331875-fidelity-national-financial-inc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 45,
+              "name": "NORTHWESTERN MUTUAL LIFE INSURANCE CO",
+              "url": "https://insiderclusters.com/insider/73076-northwestern-mutual-life-insurance-co"
+            },
+            {
+              "@type": "ListItem",
+              "position": 46,
+              "name": "Green Jeffrey Terry",
+              "url": "https://insiderclusters.com/insider/1671445-green-jeffrey-terry"
+            },
+            {
+              "@type": "ListItem",
+              "position": 47,
+              "name": "Silver Lake West HoldCo II, L.P.",
+              "url": "https://insiderclusters.com/insider/1868087-silver-lake-west-holdco-ii-l-p"
+            },
+            {
+              "@type": "ListItem",
+              "position": 48,
+              "name": "ORBIMED ADVISORS LLC",
+              "url": "https://insiderclusters.com/insider/1055951-orbimed-advisors-llc"
+            },
+            {
+              "@type": "ListItem",
+              "position": 49,
+              "name": "Weinstein Boaz",
+              "url": "https://insiderclusters.com/insider/1608233-weinstein-boaz"
+            },
+            {
+              "@type": "ListItem",
+              "position": 50,
+              "name": "Moskovitz Dustin A.",
+              "url": "https://insiderclusters.com/insider/1549917-moskovitz-dustin-a"
+            }
+          ]
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "Most active insider buyers | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Home / Insiders Most active insider buyers The corporate insiders buying the most stock on the open market, ranked by total dollars purchased across the Form 4 filings we track. A Executive buyer tag identifies a senior executive from the reported role text. # Insider Tickers Buys Total bought Last buy 1 VisionWave Holdings, Inc. Director SVRE 18 $27.9B Jun 16, 2026 2 GENMAB A/S 10% Owner MRUS 11 $7.6B Dec 29, 2025 3 Iberdrola, S.A. 10% Owner AGR 1 $2.6B Dec 23, 2024 4 SUMITOMO MITSUI FINANCIAL GROUP, INC. Director JEF 4 $1.5B Jul 15, 2026 5 CASCADE INVESTMENT, L.L.C. 10% Owner RSG 92 $1.3B Sep 11, 2026 6 BERKSHIRE HATHAWAY INC 10% Owner LEN LSXMA LSXMK OXY + 2 78 $1.0B Oct 2, 2026 7 PUBLIC INVESTMENT FUND Director, 10% Owner LCID 2 $1.0B Oct 31, 2024 8 Musk Elon Executive buyer Director, CEO, 10% Owner TSLA 25 $1.0B Sep 12, 2025 9 VOLKSWAGEN AG 10% Owner RIVN 1 $999.9M Apr 30, 2026 10 BUFFETT WARREN E 10% Owner LSXMA LSXMK OXY SIRI + 1 43 $947.4M Aug 4, 2025 11 Equitable Holdings, Inc. 10% Owner, See Remarks AB 3 $799.5M Apr 2, 2025 12 Endeavor Group Holdings, Inc. 10% Owner TKO 81 $782.6M Jun 3, 2025 13 RA CAPITAL MANAGEMENT, L.P. Director, 10% Owner ACET ARTV BCAX COAG + 6 54 $711.6M Jul 31, 2026 14 Roivant Sciences Ltd. Director, 10% Owner IMVT 2 $686.9M Dec 12, 2025 15 Control Empresarial de Capitales S.A. de C.V. 10% Owner, Add'l Rep. Persons-see Ex.99-1 PBF PROK TALO 113 $653.1M Jun 5, 2025 16 Emanuel Ariel Executive buyer Director, Chief Executive Officer TKO 93 $574.1M May 13, 2026 17 Silver Lake West VoteCo, L.L.C. 10% Owner TKO 40 $469.1M Jun 3, 2025 18 MS&AD Insurance Group Holdings, Inc. 10% Owner WRB 50 $372.7M Feb 25, 2026 19 Kolchinsky Peter Director, 10% Owner ARTV BOLD CDTX CLYM + 4 13 $371.2M Dec 12, 2025 20 Paulson John Director BHC 8 $369.6M Aug 14, 2025 21 GIC Special Investments Pte Ltd 10% Owne",
+    "headers": {
+      "Cache-Control": "s-maxage=3600, stale-while-revalidate=31532400",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "X-Nextjs-Cache": "HIT"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/learn/form-4-transaction-codes",
+    "final_url": "https://insiderclusters.com/learn/form-4-transaction-codes",
+    "status": 200,
+    "seconds": 1.26,
+    "bytes": 62893,
+    "title": "Form 4 transaction codes explained (P, S, A, M, F, G\u2026) | InsiderClusters",
+    "title_length": 72,
+    "description": "Every SEC Form 4 transaction carries a one-letter code. P and S are the ones that matter for signal \u2014 here's the full table and what each code actually means.",
+    "description_length": 158,
+    "robots": "index, follow",
+    "canonical": [
+      "https://insiderclusters.com/learn/form-4-transaction-codes"
+    ],
+    "h1": [
+      "Form 4 transaction codes explained (P, S, A, M, F, G\u2026)"
+    ],
+    "h2": [
+      "The codes that matter",
+      "Why we only track code P",
+      "Frequently asked questions",
+      "Latest detected cluster buys",
+      "Keep reading"
+    ],
+    "internal_link_count": 36,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://insiderclusters.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Learn",
+              "item": "https://insiderclusters.com/learn"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Form 4 transaction codes explained (P, S, A, M, F, G\u2026)",
+              "item": "https://insiderclusters.com/learn/form-4-transaction-codes"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "Form 4 transaction codes explained (P, S, A, M, F, G\u2026)",
+          "description": "Every SEC Form 4 transaction carries a one-letter code. P and S are the ones that matter for signal \u2014 here's the full table and what each code actually means.",
+          "dateModified": "2026-10-12",
+          "url": "https://insiderclusters.com/learn/form-4-transaction-codes",
+          "author": {
+            "@type": "Organization",
+            "@id": "https://insiderclusters.com/#organization",
+            "name": "InsiderClusters",
+            "url": "https://insiderclusters.com/methodology"
+          },
+          "publisher": {
+            "@id": "https://insiderclusters.com/#organization"
+          },
+          "mainEntityOfPage": "https://insiderclusters.com/learn/form-4-transaction-codes"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What does transaction code P mean on a Form 4?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Code P reports an open-market or private purchase. Read the ownership details, plan designation, and footnotes to understand who bought and under what circumstances."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does transaction code A mean on a Form 4?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Code A marks a grant or award of shares from the company. It is compensation, not a buying decision, so it carries no signal about the insider's outlook."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which Form 4 codes indicate real insider buying?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Only code P reflects a voluntary purchase with the insider's own money; codes A, M, F, G, C, D, and X describe compensation or administrative events."
+              }
+            }
+          ]
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "Form 4 transaction codes explained (P, S, A, M, F, G\u2026) | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Home / Learn / Form 4 transaction codes explained (P, S, A, M, F, G\u2026) Form 4 transaction codes explained (P, S, A, M, F, G\u2026) By InsiderClusters \u00b7 Updated 2026-10-12 \u00b7 Sources & methodology In this guide The codes that matter \u2193 Why we only track code P \u2193 Every transaction reported on a SEC Form 4 carries a single-letter code describing how the insider acquired or disposed of the shares. Most codes describe administrative events \u2014 compensation, taxes, transfers. Only a couple describe an insider making a real market decision with real money, which is why filtering by code is the first step in any insider-trading analysis. The codes that matter Code Meaning Signal value P Open-market or private purchase A purchase; verify ownership and context in the footnotes S Open-market or private sale Weak negative \u2014 insiders sell for taxes, diversification, houses A Grant or award from the company None \u2014 it's compensation, not a decision M Option or derivative exercise None by itself \u2014 often paired with a same-day S F Shares withheld to pay tax on vesting None \u2014 automatic, not discretionary G Bona fide gift None \u2014 estate planning, charity C Conversion of a derivative security None \u2014 mechanical D Disposition back to the company None \u2014 usually plan-related X Exercise of in-the-money options at expiry None \u2014 forced by the calendar J Other (described in a footnote) Read the footnote \u2014 occasionally interesting Why we only track code P A code- P purchase is the only routine Form 4 event where an insider voluntarily converts personal cash into more exposure to their own company. Codes A , M , and F dominate filing volume but carry no intent at all \u2014 counting them as \"insider buying\" is the most common mistake in DIY Form 4 analysis. Even S sales are weakly informative at best; see why buying and selling aren't ",
+    "headers": {
+      "Cache-Control": "s-maxage=3600, stale-while-revalidate=31532400",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+      "X-Nextjs-Cache": "HIT"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/stock/NVCT/insider-cluster-buys",
+    "final_url": "https://insiderclusters.com/stock/NVCT/insider-cluster-buys",
+    "status": 200,
+    "seconds": 4.61,
+    "bytes": 140079,
+    "title": "NVCT Insider Buying \u2014 Cluster Buys & Form 4 History | Nuvectis Pharma, Inc. | InsiderClusters",
+    "title_length": 93,
+    "description": "8 insiders have bought NVCT (Nuvectis Pharma, Inc.) on the open market, including 4 cluster buys \u2014 parsed from SEC Form 4 filings. Latest activity Jul 1, 2026. See who bought, at what price, and when.",
+    "description_length": 200,
+    "robots": null,
+    "canonical": [
+      "https://insiderclusters.com/stock/NVCT/insider-cluster-buys"
+    ],
+    "h1": [
+      "NVCT",
+      " insider buying"
+    ],
+    "h2": [
+      "Detected clusters",
+      "All notable open-market buys in ",
+      "NVCT",
+      "More ",
+      "Healthcare",
+      " stocks with insider cluster buys",
+      "NVCT",
+      " insider buying \u2014 FAQ",
+      "How we track insider buying in ",
+      "NVCT"
+    ],
+    "internal_link_count": 62,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://insiderclusters.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Stocks",
+              "item": "https://insiderclusters.com/stocks"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "NVCT insider buying",
+              "item": "https://insiderclusters.com/stock/NVCT/insider-cluster-buys"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Dataset",
+          "name": "NVCT insider buying history",
+          "description": "Open-market insider purchases and cluster buys in NVCT (Nuvectis Pharma, Inc.), derived from public SEC Form 4 filings.",
+          "url": "https://insiderclusters.com/stock/NVCT/insider-cluster-buys",
+          "creator": {
+            "@type": "Organization",
+            "name": "InsiderClusters"
+          },
+          "isBasedOn": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
+          "dateModified": "2026-07-01T17:42:59.838Z"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Are insiders buying NVCT stock?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes \u2014 8 distinct insiders have bought NVCT (Nuvectis Pharma, Inc.) on the open market, including 4 cluster buys where two or more insiders bought within a rolling window. The most recent qualifying activity was Jul 1, 2026."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much NVCT stock have insiders bought?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Insiders have bought a combined $4.4M of NVCT across 28 open-market purchases, based on SEC Form 4 filings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is an insider cluster buy in NVCT?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A cluster buy is two or more distinct Nuvectis Pharma, Inc. insiders \u2014 officers, directors, or 10% owners \u2014 each buying NVCT on the open market within a rolling window. NVCT has 4 detected cluster buys to date."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does this NVCT insider trading data come from?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Every figure is parsed directly from SEC Form 4 filings on EDGAR, and each purchase on this page links back to its original filing document."
+              }
+            }
+          ]
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "NVCT Insider Buying \u2014 Cluster Buys & Form 4 History | Nuvectis Pharma, Inc. | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Home / Stocks / NVCT insider buying NVCT insider buying 4 cluster buys Nuvectis Pharma, Inc. \u00b7 Healthcare When two or more insiders at Nuvectis Pharma, Inc. buy NVCT in a qualifying detection window, the grouped purchases provide a starting point for further research. Below is every cluster we've detected in NVCT plus the full record of qualifying open-market buys, each parsed directly from Form 4 filings and linked back to the source on SEC EDGAR. Clusters 4 Distinct insiders 8 Total bought $4.4M Market cap $524.9M Detected clusters Jun 30 \u2013 Jun 30, 2026 Detected Jul 1, 2026 Executive buyer 2 insiders Total bought $1.2M Market cap $524.9M Oct 23 \u2013 Nov 5, 2025 Detected Nov 5, 2025 Executive buyer 4 insiders Total bought $1.1M Market cap $618.9M Nov 15, 2024 \u2013 Jun 20, 2025 Detected Jun 20, 2025 Executive buyer 4 insiders Total bought $2.1M Market cap $618.9M 1 more cluster in NVCT Choose Basic for full history, or Pro for email and Telegram alerts after new insider clusters are detected. Both plans start with a 7-day trial. Start a trial See pricing All notable open-market buys in NVCT Every open-market Form 4 purchase, newest first. Click an insider to see their full buying record across companies. Date Insider Shares Price Value Filing Jun 30, 2026 Mosseri Marlio Charles cluster 10% Owner 50,000 $18.32 $916.0K SEC \u2197 Jun 30, 2026 BENTSUR RON cluster Director, Chairman & CEO, 10% Owner 12,500 $20.00 $250.0K SEC \u2197 Nov 5, 2025 Sanchez Juan cluster Director 13,000 $5.79 $75.3K SEC \u2197 Nov 5, 2025 Kaplan Matthew L. cluster Director 11,000 $5.84 $64.2K SEC \u2197 Nov 5, 2025 BENTSUR RON cluster Director, Chairman & CEO, 10% Owner 5,000 $5.72 $28.6K SEC \u2197 Oct 27, 2025 Mosseri Marlio Charles cluster 10% Owner 72,836 $6.28 $457.4K SEC \u2197 Oct 24, 2025 Mosseri Marlio Charles cluster 10% O",
+    "headers": {
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/stock/AB-LEND/insider-cluster-buys",
+    "final_url": "https://insiderclusters.com/stock/AB-LEND/insider-cluster-buys",
+    "status": 200,
+    "seconds": 1.36,
+    "bytes": 64230,
+    "title": "AB-LEND Insider Buying \u2014 Cluster Buys & Form 4 History | AB Private Lending Fund | InsiderClusters",
+    "title_length": 98,
+    "description": "2 insiders have bought AB-LEND (AB Private Lending Fund) on the open market, including 1 cluster buy \u2014 parsed from SEC Form 4 filings. Latest activity Aug 18, 2026. See who bought, at what price, and when.",
+    "description_length": 205,
+    "robots": null,
+    "canonical": [
+      "https://insiderclusters.com/stock/AB-LEND/insider-cluster-buys"
+    ],
+    "h1": [
+      "AB-LEND",
+      " insider buying"
+    ],
+    "h2": [
+      "Detected clusters",
+      "All notable open-market buys in ",
+      "AB-LEND",
+      "AB-LEND",
+      " insider buying \u2014 FAQ",
+      "How we track insider buying in ",
+      "AB-LEND"
+    ],
+    "internal_link_count": 31,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://insiderclusters.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Stocks",
+              "item": "https://insiderclusters.com/stocks"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "AB-LEND insider buying",
+              "item": "https://insiderclusters.com/stock/AB-LEND/insider-cluster-buys"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Dataset",
+          "name": "AB-LEND insider buying history",
+          "description": "Open-market insider purchases and cluster buys in AB-LEND (AB Private Lending Fund), derived from public SEC Form 4 filings.",
+          "url": "https://insiderclusters.com/stock/AB-LEND/insider-cluster-buys",
+          "creator": {
+            "@type": "Organization",
+            "name": "InsiderClusters"
+          },
+          "isBasedOn": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
+          "dateModified": "2026-08-18T19:36:55.203Z"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Are insiders buying AB-LEND stock?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes \u2014 2 distinct insiders have bought AB-LEND (AB Private Lending Fund) on the open market, including 1 cluster buy where two or more insiders bought within a rolling window. The most recent qualifying activity was Aug 18, 2026."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much AB-LEND stock have insiders bought?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Insiders have bought a combined $14.9M of AB-LEND across 5 open-market purchases, based on SEC Form 4 filings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is an insider cluster buy in AB-LEND?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A cluster buy is two or more distinct AB Private Lending Fund insiders \u2014 officers, directors, or 10% owners \u2014 each buying AB-LEND on the open market within a rolling window. AB-LEND has 1 detected cluster buy to date."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does this AB-LEND insider trading data come from?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Every figure is parsed directly from SEC Form 4 filings on EDGAR, and each purchase on this page links back to its original filing document."
+              }
+            }
+          ]
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "AB-LEND Insider Buying \u2014 Cluster Buys & Form 4 History | AB Private Lending Fund | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Home / Stocks / AB-LEND insider buying AB-LEND insider buying 1 cluster buy AB Private Lending Fund When two or more insiders at AB Private Lending Fund buy AB-LEND in a qualifying detection window, the grouped purchases provide a starting point for further research. Below is every cluster we've detected in AB-LEND plus the full record of qualifying open-market buys, each parsed directly from Form 4 filings and linked back to the source on SEC EDGAR. Clusters 1 Distinct insiders 2 Total bought $14.9M Market cap Unknown Detected clusters Jan 2 \u2013 Mar 2, 2026 Detected Aug 18, 2026 2 insiders Total bought $2.8M Market cap Unknown All notable open-market buys in AB-LEND Every open-market Form 4 purchase, newest first. Click an insider to see their full buying record across companies. Date Insider Shares Price Value Filing Mar 2, 2026 PM Alpha II DAC cluster 10% Owner 53,059.823 $24.99 $1.3M SEC \u2197 Jan 2, 2026 PM Alpha DAC cluster 10% Owner 56,700.71 $25.20 $1.4M SEC \u2197 Dec 1, 2025 PM Alpha DAC 10% Owner 103,596.959 $25.27 $2.6M SEC \u2197 Nov 3, 2025 PM Alpha DAC 10% Owner 144,744.094 $25.29 $3.7M SEC \u2197 Sep 30, 2025 PM Alpha DAC 10% Owner 232,618 $25.30 $5.9M SEC \u2197 AB-LEND insider buying \u2014 FAQ Are insiders buying AB-LEND stock? Yes \u2014 2 distinct insiders have bought AB-LEND (AB Private Lending Fund) on the open market, including 1 cluster buy where two or more insiders bought within a rolling window. The most recent qualifying activity was Aug 18, 2026. How much AB-LEND stock have insiders bought? Insiders have bought a combined $14.9M of AB-LEND across 5 open-market purchases, based on SEC Form 4 filings. What is an insider cluster buy in AB-LEND? A cluster buy is two or more distinct AB Private Lending Fund insiders \u2014 officers, directors, or 10% owners \u2014 each buying AB-LEND o",
+    "headers": {
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/stock/OXM/insider-cluster-buys",
+    "final_url": "https://insiderclusters.com/stock/OXM/insider-cluster-buys",
+    "status": 200,
+    "seconds": 1.26,
+    "bytes": 80619,
+    "title": "OXM Insider Buying \u2014 Cluster Buys & Form 4 History | OXFORD INDUSTRIES INC | InsiderClusters",
+    "title_length": 92,
+    "description": "5 insiders have bought OXM (OXFORD INDUSTRIES INC) on the open market, including 3 cluster buys \u2014 parsed from SEC Form 4 filings. Latest activity Sep 25, 2026. See who bought, at what price, and when.",
+    "description_length": 200,
+    "robots": null,
+    "canonical": [
+      "https://insiderclusters.com/stock/OXM/insider-cluster-buys"
+    ],
+    "h1": [
+      "OXM",
+      " insider buying"
+    ],
+    "h2": [
+      "Detected clusters",
+      "All notable open-market buys in ",
+      "OXM",
+      "OXM",
+      " insider buying \u2014 FAQ",
+      "How we track insider buying in ",
+      "OXM"
+    ],
+    "internal_link_count": 34,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://insiderclusters.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Stocks",
+              "item": "https://insiderclusters.com/stocks"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "OXM insider buying",
+              "item": "https://insiderclusters.com/stock/OXM/insider-cluster-buys"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Dataset",
+          "name": "OXM insider buying history",
+          "description": "Open-market insider purchases and cluster buys in OXM (OXFORD INDUSTRIES INC), derived from public SEC Form 4 filings.",
+          "url": "https://insiderclusters.com/stock/OXM/insider-cluster-buys",
+          "creator": {
+            "@type": "Organization",
+            "name": "InsiderClusters"
+          },
+          "isBasedOn": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
+          "dateModified": "2026-09-25T10:22:55.733Z"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Are insiders buying OXM stock?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes \u2014 5 distinct insiders have bought OXM (OXFORD INDUSTRIES INC) on the open market, including 3 cluster buys where two or more insiders bought within a rolling window. The most recent qualifying activity was Sep 25, 2026."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much OXM stock have insiders bought?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Insiders have bought a combined $1.1M of OXM across 8 open-market purchases, based on SEC Form 4 filings."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is an insider cluster buy in OXM?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A cluster buy is two or more distinct OXFORD INDUSTRIES INC insiders \u2014 officers, directors, or 10% owners \u2014 each buying OXM on the open market within a rolling window. OXM has 3 detected cluster buys to date."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where does this OXM insider trading data come from?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Every figure is parsed directly from SEC Form 4 filings on EDGAR, and each purchase on this page links back to its original filing document."
+              }
+            }
+          ]
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "OXM Insider Buying \u2014 Cluster Buys & Form 4 History | OXFORD INDUSTRIES INC | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Home / Stocks / OXM insider buying OXM insider buying 3 cluster buys OXFORD INDUSTRIES INC When two or more insiders at OXFORD INDUSTRIES INC buy OXM in a qualifying detection window, the grouped purchases provide a starting point for further research. Below is every cluster we've detected in OXM plus the full record of qualifying open-market buys, each parsed directly from Form 4 filings and linked back to the source on SEC EDGAR. Clusters 3 Distinct insiders 5 Total bought $1.1M Market cap Unknown Detected clusters Sep 9 \u2013 Sep 24, 2026 Detected Sep 25, 2026 Executive buyer 2 insiders Total bought $203.4K Market cap Unknown Sep 9 \u2013 Sep 15, 2026 Detected Sep 15, 2026 Executive buyer 2 insiders Total bought $138.0K Market cap Unknown Jun 16 \u2013 Jun 18, 2025 Detected Jun 18, 2025 Executive buyer 2 insiders Total bought $674.6K Market cap $537.1M All notable open-market buys in OXM Every open-market Form 4 purchase, newest first. Click an insider to see their full buying record across companies. Date Insider Shares Price Value Filing Sep 24, 2026 Chubb Thomas Caldecot III cluster Director, CEO and President 2,500 $26.15 $65.4K SEC \u2197 Sep 15, 2026 GRASSMYER SCOTT cluster EVP 1,000 $29.73 $29.7K SEC \u2197 Sep 9, 2026 Chubb Thomas Caldecot III cluster Director, CEO and President 3,500 $30.93 $108.3K SEC \u2197 Dec 12, 2025 Chubb Thomas Caldecot III Director, CEO and President 5,000 $35.12 $175.6K SEC \u2197 Aug 1, 2025 Chubb Thomas Caldecot III Director, CEO and President 317.61 $38.19 $12.1K SEC \u2197 Jun 18, 2025 Trauber Robert S. cluster CEO, Johnny Was 10,000 $41.38 $413.8K SEC \u2197 Jun 16, 2025 Chubb Thomas Caldecot III cluster Director, CEO and President 6,500 $40.12 $260.8K SEC \u2197 Apr 2, 2025 McGuirt Milford W Director 1,000 $58.70 $58.7K SEC \u2197 OXM insider buying \u2014 FAQ Are insiders buying OXM s",
+    "headers": {
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/insider/2142128-kleine-brigitte",
+    "final_url": "https://insiderclusters.com/insider/2142128-kleine-brigitte",
+    "status": 200,
+    "seconds": 1.28,
+    "bytes": 49463,
+    "title": "Kleine Brigitte \u2014 Insider Trading & Form 4 Buys (REF) | InsiderClusters",
+    "title_length": 71,
+    "description": "Kleine Brigitte has bought $3.0K of stock across 1 open-market Form 4 purchase in 1 company. Latest buy Jul 31, 2026. Full SEC filing history, prices paid, and cluster activity.",
+    "description_length": 177,
+    "robots": null,
+    "canonical": [
+      "https://insiderclusters.com/insider/2142128-kleine-brigitte"
+    ],
+    "h1": [
+      "Kleine Brigitte"
+    ],
+    "h2": [
+      "Where the buys stand today",
+      "Cluster participation",
+      "All reported buys",
+      "About this data"
+    ],
+    "internal_link_count": 30,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://insiderclusters.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Insiders",
+              "item": "https://insiderclusters.com/insiders"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Kleine Brigitte",
+              "item": "https://insiderclusters.com/insider/2142128-kleine-brigitte"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          "dateModified": "2026-07-31",
+          "mainEntity": {
+            "@type": "Person",
+            "name": "Kleine Brigitte",
+            "identifier": "SEC CIK 2142128",
+            "jobTitle": "Director",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Reformation Inc."
+            }
+          }
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "Kleine Brigitte \u2014 Insider Trading & Form 4 Buys (REF) | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Home / Insiders / Kleine Brigitte Kleine Brigitte Director \u00b7 Reformation Inc. Every open-market stock purchase Kleine Brigitte has reported to the SEC on Form 4 that met our signal bar, parsed straight from the filings. Insiders sell for many reasons, but they buy with their own money for one \u2014 this page tracks where those buys landed inside insider clusters and how the prices paid compare to where the stock trades now. Total bought $3.0K Open-market buys 1 Companies 1 Last buy Jul 31, 2026 Where the buys stand today REF Reformation Inc. One purchase totalling $3.0K at an average of $15.00 per share . See all insider buying in REF \u2192 Avg price paid $15.00 Latest price \u2014 Market cap Unknown Cluster participation Qualifying buys grouped with other insiders buying the same stock \u2014 the pattern this site exists to catch. REF Jul 31 \u2013 Jul 31, 2026 3 insiders $3.1M All reported buys Date Ticker Shares Price Value Filing Jul 31, 2026 REF cluster 200 $15.00 $3.0K SEC \u2197 Follow new qualifying clusters involving Kleine Brigitte or other insiders Explore qualifying clusters from public SEC filings. Pro adds email and Telegram notifications after detection. Start a trial See pricing About this data Figures are parsed from Kleine Brigitte 's Form 4 filings on SEC EDGAR (CIK 2142128 ) and cover open-market purchases (transaction code P ) \u2014 grants, option exercises, and sales are excluded, which is why totals here can differ from raw filing counts. Every row links to its source document. This page is informational and reflects public filing data. It is not investment advice. Insider Clusters A clearer view of insider buying. Independent research tools built from public SEC Form 4 filings. Read our methodology \u2197 Product Stocks Insiders Sectors Monthly archive Learn Pricing Account Sign in Create account About &",
+    "headers": {
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/insider-buying/2026-10",
+    "final_url": "https://insiderclusters.com/insider-buying/2026-10",
+    "status": 200,
+    "seconds": 2.5,
+    "bytes": 258742,
+    "title": "Biggest Insider Buys of October 2026 \u2014 Clusters & Form 4 Purchases | InsiderClusters",
+    "title_length": 84,
+    "description": "$368.0M of notable open-market insider buying across 70 stocks in October 2026, including 64 cluster buys \u2014 every figure parsed from SEC Form 4 filings.",
+    "description_length": 152,
+    "robots": "index, follow",
+    "canonical": [
+      "https://insiderclusters.com/insider-buying/2026-10"
+    ],
+    "h1": [
+      "Insider buying in ",
+      "October 2026"
+    ],
+    "h2": [
+      "Cluster buys detected in ",
+      "October 2026",
+      "Biggest individual buys of ",
+      "October 2026"
+    ],
+    "internal_link_count": 121,
+    "schema_present_in_response": [
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://insiderclusters.com"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Insider buying by month",
+              "item": "https://insiderclusters.com/insider-buying"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "October 2026",
+              "item": "https://insiderclusters.com/insider-buying/2026-10"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Dataset",
+          "name": "Insider buying in October 2026",
+          "description": "Notable open-market insider purchases and cluster buys during October 2026, derived from public SEC Form 4 filings.",
+          "url": "https://insiderclusters.com/insider-buying/2026-10",
+          "creator": {
+            "@type": "Organization",
+            "name": "InsiderClusters"
+          },
+          "isBasedOn": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4",
+          "temporalCoverage": "2026-10"
+        }
+      ],
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://insiderclusters.com/#organization",
+        "name": "InsiderClusters",
+        "url": "https://insiderclusters.com",
+        "description": "Track insider buying and cluster purchases from SEC Form 4 filings. Explore stocks, insider histories, and sectors, with email and Telegram alerts.",
+        "parentOrganization": {
+          "@type": "Organization",
+          "name": "Beelodev",
+          "url": "https://beelodev.com"
+        },
+        "logo": "https://insiderclusters.com/icon.svg"
+      }
+    ],
+    "body_excerpt": "Biggest Insider Buys of October 2026 \u2014 Clusters & Form 4 Purchases | InsiderClusters Skip to content Insider Clusters Stocks Insiders Sectors Archive Learn Pricing Sign in Start free trial \u2197 Home / Insider buying / October 2026 Insider buying in October 2026 What corporate insiders bought with their own money in October 2026 : every qualifying open-market purchase, and the stocks where two or more insiders bought within the same rolling window. Parsed from SEC Form 4 filings, linked to the source. Total bought $368.0M Notable buys 263 Stocks 70 Clusters 64 Cluster buys detected in October 2026 GME GameStop Corp. Executive buyer 5 insiders $76.4M Sep 8 \u2013 Oct 2, 2026 Unknown market cap GME GameStop Corp. Executive buyer 5 insiders $59.3M Sep 8 \u2013 Oct 1, 2026 Unknown market cap BORR Borr Drilling Ltd Executive buyer 3 insiders $32.7M Aug 13 \u2013 Oct 7, 2026 Unknown market cap BORR Borr Drilling Ltd Executive buyer 3 insiders $27.3M Aug 13 \u2013 Oct 6, 2026 Unknown market cap BPRE Bluerock Private Real Estate Fund Executive buyer 3 insiders $23.7M Sep 14 \u2013 Oct 9, 2026 Unknown market cap BORR Borr Drilling Ltd Executive buyer 3 insiders $21.0M Aug 13 \u2013 Oct 5, 2026 Unknown market cap AXIA3 AXIA Energia S.A. 3 insiders $15.6M Jul 15 \u2013 Oct 2, 2026 Unknown market cap BPRE Bluerock Private Real Estate Fund Executive buyer 3 insiders $15.2M Sep 14 \u2013 Oct 5, 2026 Unknown market cap BPRE Bluerock Private Real Estate Fund Executive buyer 3 insiders $11.8M Sep 14 \u2013 Oct 2, 2026 Unknown market cap PSUS Pershing Square USA, Ltd. Executive buyer 2 insiders $9.9M Aug 18 \u2013 Oct 6, 2026 Unknown market cap LWAY Lifeway Foods, Inc. Executive buyer 2 insiders $8.3M Aug 13 \u2013 Oct 6, 2026 Unknown market cap ACCV Accelevation Holdings Corp. Executive buyer 5 insiders $4.1M Oct 1 \u2013 Oct 1, 2026 Unknown market cap MXF MEXICO FUND INC 4 insiders $2.8M Jul 8 \u2013 Oct 5, 2026 Unknown market cap MXF MEXICO FUND INC 4 insiders $2.3M Jul 7 \u2013 Oct 2, 2026 Unknown market cap PDI PIMCO Dynamic Income Fund 4 insiders $2.",
+    "headers": {
+      "Cache-Control": "private, no-cache, no-store, max-age=0, must-revalidate",
+      "Content-Type": "text/html; charset=utf-8",
+      "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+    }
+  },
+  {
+    "url": "https://insiderclusters.com/seo-audit-nonexistent",
+    "status": 404,
+    "final_url": "https://insiderclusters.com/seo-audit-nonexistent"
+  }
+]

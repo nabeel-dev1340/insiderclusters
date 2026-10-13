@@ -34,11 +34,11 @@ export async function generateMetadata({
   }
   const canonical = learnPath(article.slug);
   return {
-    title: article.title,
+    title: article.seoTitle ?? article.title,
     description: article.description,
     alternates: { canonical },
     openGraph: {
-      title: article.title,
+      title: article.seoTitle ?? article.title,
       description: article.description,
       url: `${SITE_URL}${canonical}`,
       type: "article",

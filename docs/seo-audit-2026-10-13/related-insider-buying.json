@@ -1,0 +1,3895 @@
+{
+  "version": "0.1.20260917",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "0.1013 sec.",
+  "cost": 0.01536,
+  "tasks_count": 1,
+  "tasks_error": 0,
+  "tasks": [
+    {
+      "id": "10130104-2750-0387-0000-c79add65c9f6",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "time": "0.0679 sec.",
+      "cost": 0.01536,
+      "result_count": 1,
+      "path": [
+        "v3",
+        "dataforseo_labs",
+        "google",
+        "related_keywords",
+        "live"
+      ],
+      "data": {
+        "api": "dataforseo_labs",
+        "function": "related_keywords",
+        "se_type": "google",
+        "location_code": 2840,
+        "language_code": "en",
+        "keyword": "insider buying",
+        "depth": 2,
+        "limit": 60
+      },
+      "result": [
+        {
+          "se_type": "google",
+          "seed_keyword": "insider buying",
+          "seed_keyword_data": null,
+          "location_code": 2840,
+          "language_code": "en",
+          "total_count": 28,
+          "items_count": 28,
+          "items": [
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "openinsider",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-13 12:57:22 +00:00",
+                  "competition": 0.03,
+                  "competition_level": "LOW",
+                  "cpc": 12.13,
+                  "search_volume": 8100,
+                  "low_top_of_page_bid": 2.03,
+                  "high_top_of_page_bid": 15.64,
+                  "categories": [
+                    10008
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 6600
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 6600
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 6600
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 8100
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 8100
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 8100
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 8100
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 9900
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 8100
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 8100
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 12100
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 9900
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": -33
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 12,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=openinsider&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "people_also_ask",
+                    "related_searches",
+                    "images"
+                  ],
+                  "se_results_count": 143,
+                  "last_updated_time": "2026-07-30 11:03:50 +00:00",
+                  "previous_updated_time": "2026-05-15 11:23:32 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 2982.1,
+                  "dofollow": 2264.5,
+                  "referring_pages": 2459.4,
+                  "referring_domains": 83.1,
+                  "referring_main_domains": 64.9,
+                  "rank": 114.4,
+                  "main_domain_rank": 472.1,
+                  "last_updated_time": "2026-07-30 11:03:51 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "navigational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 16:52:32 +00:00"
+                }
+              },
+              "depth": 1,
+              "related_keywords": [
+                "openinsider reddit",
+                "openinsider stock",
+                "is openinsider legit",
+                "openinsider chart",
+                "openinsider com insider purchases",
+                "openinsider api",
+                "how to use openinsider",
+                "openinsider alternative"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider buying",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 02:09:09 +00:00",
+                  "competition": 0.02,
+                  "competition_level": "LOW",
+                  "cpc": 1.52,
+                  "search_volume": 1000,
+                  "low_top_of_page_bid": 1.43,
+                  "high_top_of_page_bid": 8.83,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 1600
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 1300
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 1300
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 1000
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 880
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 1000
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 1000
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 1000
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 1000
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 1000
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 1300
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 1000
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 23,
+                    "quarterly": 23,
+                    "yearly": 23
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": "buy inside",
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 55,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20buying&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "product_considerations",
+                    "people_also_ask",
+                    "top_stories",
+                    "related_searches"
+                  ],
+                  "se_results_count": 289000000,
+                  "last_updated_time": "2026-03-30 16:09:20 +00:00",
+                  "previous_updated_time": "2026-02-09 12:32:52 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 1820,
+                  "dofollow": 1760.1,
+                  "referring_pages": 1810.5,
+                  "referring_domains": 66.2,
+                  "referring_main_domains": 57.1,
+                  "rank": 229.8,
+                  "main_domain_rank": 414.6,
+                  "last_updated_time": "2026-03-30 16:09:21 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": [
+                    "commercial"
+                  ],
+                  "last_updated_time": "2026-04-28 06:11:20 +00:00"
+                }
+              },
+              "depth": 0,
+              "related_keywords": [
+                "insider buying stock screener",
+                "openinsider",
+                "free insider trading tracker",
+                "insider buying companies",
+                "best insider trading websites",
+                "insider buying and selling",
+                "insider buys this week",
+                "insider buying reddit"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "recent insider trading",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-17 13:36:31 +00:00",
+                  "competition": 0,
+                  "competition_level": "LOW",
+                  "cpc": 0.12,
+                  "search_volume": 210,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10012,
+                    10095,
+                    10098,
+                    11827,
+                    13459
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 720
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 480
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 260
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 170
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 170
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 170
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 170
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 110
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 50,
+                    "quarterly": 177,
+                    "yearly": 414
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": "recent insider trades",
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 33,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=recent%20insider%20trading&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "people_also_ask",
+                    "related_searches"
+                  ],
+                  "se_results_count": 78500000,
+                  "last_updated_time": "2026-03-21 22:00:54 +00:00",
+                  "previous_updated_time": "2025-11-15 08:28:56 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 4404.3,
+                  "dofollow": 1977.5,
+                  "referring_pages": 4279,
+                  "referring_domains": 64.3,
+                  "referring_main_domains": 61.9,
+                  "rank": 212.3,
+                  "main_domain_rank": 432.1,
+                  "last_updated_time": "2026-03-21 22:00:54 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 19:05:46 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "recent insider trading this week",
+                "recent insider trading today",
+                "best insider trading websites",
+                "recent insider trading google search",
+                "free insider trading tracker",
+                "insider trading act",
+                "insider trading news today",
+                "open insider trading"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider buying and selling",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-14 21:14:03 +00:00",
+                  "competition": 0.04,
+                  "competition_level": "LOW",
+                  "cpc": 3.75,
+                  "search_volume": 140,
+                  "low_top_of_page_bid": 2.5,
+                  "high_top_of_page_bid": 8.03,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 210
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 210
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 170
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 170
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 140
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 170
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 170
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 24,
+                    "yearly": 91
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": "insider buys and sells",
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 56,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20buying%20and%20selling&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "related_searches"
+                  ],
+                  "se_results_count": 242000000,
+                  "last_updated_time": "2026-05-03 09:28:41 +00:00",
+                  "previous_updated_time": "2026-03-22 03:46:41 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 1742,
+                  "dofollow": 1703,
+                  "referring_pages": 1734.3,
+                  "referring_domains": 60.4,
+                  "referring_main_domains": 58.7,
+                  "rank": 211.1,
+                  "main_domain_rank": 440.6,
+                  "last_updated_time": "2026-05-03 09:28:41 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 15:30:57 +00:00"
+                }
+              },
+              "depth": 1,
+              "related_keywords": [
+                "free insider trading tracker",
+                "recent insider buying and selling",
+                "free insider buying and selling",
+                "insider buying stock screener",
+                "insider buying and selling companies",
+                "openinsider",
+                "best insider trading websites",
+                "insider trading activity tracker"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider trading data",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 20:16:44 +00:00",
+                  "competition": 0.05,
+                  "competition_level": "LOW",
+                  "cpc": 9.38,
+                  "search_volume": 110,
+                  "low_top_of_page_bid": 1.85,
+                  "high_top_of_page_bid": 13.35,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 140
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 140
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 140
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 210
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 90
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 56,
+                    "yearly": -33
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 54,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20trading%20data&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic",
+                    "related_searches"
+                  ],
+                  "se_results_count": 131,
+                  "last_updated_time": "2026-09-17 12:46:48 +00:00",
+                  "previous_updated_time": "2026-07-13 08:41:57 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 6744.6,
+                  "dofollow": 4960.3,
+                  "referring_pages": 5246.9,
+                  "referring_domains": 122.5,
+                  "referring_main_domains": 95,
+                  "rank": 261.9,
+                  "main_domain_rank": 376.9,
+                  "last_updated_time": "2026-09-17 12:46:48 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-28 14:39:36 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "openinsider",
+                "free insider trading tracker",
+                "free insider trading data",
+                "best insider trading websites",
+                "insider buying stock screener",
+                "insider trading politician tracker",
+                "insider trading act",
+                "best insider trading tracker"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "free insider trading tracker",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 22:30:18 +00:00",
+                  "competition": 0.38,
+                  "competition_level": "MEDIUM",
+                  "cpc": 5.2,
+                  "search_volume": 90,
+                  "low_top_of_page_bid": 2,
+                  "high_top_of_page_bid": 5.1,
+                  "categories": [
+                    10012,
+                    10095,
+                    11819
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 110
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 29,
+                    "quarterly": 29,
+                    "yearly": -18
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 59,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=free%20insider%20trading%20tracker&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic",
+                    "people_also_ask",
+                    "related_searches"
+                  ],
+                  "se_results_count": 119,
+                  "last_updated_time": "2026-09-20 08:17:01 +00:00",
+                  "previous_updated_time": "2026-07-16 06:09:31 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 6742.4,
+                  "dofollow": 4972.4,
+                  "referring_pages": 5245.8,
+                  "referring_domains": 112,
+                  "referring_main_domains": 92.9,
+                  "rank": 303.7,
+                  "main_domain_rank": 388.2,
+                  "last_updated_time": "2026-09-20 08:17:01 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 21:04:09 +00:00"
+                }
+              },
+              "depth": 1,
+              "related_keywords": [
+                "openinsider",
+                "best free insider trading tracker",
+                "free insider trading tracker app",
+                "free insider trading tracker reddit",
+                "best insider trading websites",
+                "best insider trading tracker",
+                "insider trading politician tracker",
+                "free insider buying stock screener"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "openinsider reddit",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-16 04:37:04 +00:00",
+                  "competition": 0,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 90,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 110
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 140
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 110
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": -36,
+                    "quarterly": 40,
+                    "yearly": -50
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 7,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=openinsider%20reddit&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "people_also_ask",
+                    "related_searches"
+                  ],
+                  "se_results_count": 106,
+                  "last_updated_time": "2026-09-19 11:57:53 +00:00",
+                  "previous_updated_time": "2026-07-12 22:37:05 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 4782,
+                  "dofollow": 3062.9,
+                  "referring_pages": 3292.4,
+                  "referring_domains": 53.4,
+                  "referring_main_domains": 43.7,
+                  "rank": 63.6,
+                  "main_domain_rank": 708.2,
+                  "last_updated_time": "2026-09-19 11:57:54 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "navigational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 20:02:53 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "openinsider reddit review",
+                "openinsider reddit today",
+                "openinsider reddit crypto",
+                "openinsider reddit stocks",
+                "is openinsider legit",
+                "insiderwave reddit",
+                "how to use open insider",
+                "openinsider ai"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "best insider trading websites",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-16 20:11:24 +00:00",
+                  "competition": 0.39,
+                  "competition_level": "MEDIUM",
+                  "cpc": 5.85,
+                  "search_volume": 70,
+                  "low_top_of_page_bid": 1.64,
+                  "high_top_of_page_bid": 4.18,
+                  "categories": [
+                    10012,
+                    10095,
+                    11819
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 90
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 25,
+                    "yearly": -44
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": "best insider trading website",
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 55,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=best%20insider%20trading%20websites&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic",
+                    "people_also_ask",
+                    "related_searches"
+                  ],
+                  "se_results_count": 129,
+                  "last_updated_time": "2026-09-24 23:04:42 +00:00",
+                  "previous_updated_time": "2026-07-20 22:18:40 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 7361.5,
+                  "dofollow": 4915.1,
+                  "referring_pages": 5219.6,
+                  "referring_domains": 79.3,
+                  "referring_main_domains": 68.7,
+                  "rank": 256.3,
+                  "main_domain_rank": 412.1,
+                  "last_updated_time": "2026-09-24 23:04:43 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "commercial",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 02:02:37 +00:00"
+                }
+              },
+              "depth": 1,
+              "related_keywords": [
+                "best insider trading websites reddit",
+                "openinsider",
+                "best insider trading websites free",
+                "best insider trading websites for crypto",
+                "free insider trading tracker",
+                "best insider trading tracker",
+                "recent insider trading",
+                "insider trading politician tracker"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider buying stock screener",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-13 18:22:40 +00:00",
+                  "competition": 0.33,
+                  "competition_level": "MEDIUM",
+                  "cpc": 3.37,
+                  "search_volume": 50,
+                  "low_top_of_page_bid": 1.49,
+                  "high_top_of_page_bid": 4.43,
+                  "categories": [
+                    10012,
+                    10095,
+                    11827,
+                    13459
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 70
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 40,
+                    "quarterly": 250,
+                    "yearly": -36
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 0,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20buying%20stock%20screener&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic",
+                    "people_also_ask",
+                    "images"
+                  ],
+                  "se_results_count": 134000,
+                  "last_updated_time": "2026-09-28 00:32:39 +00:00",
+                  "previous_updated_time": "2026-07-28 16:02:39 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 0.2,
+                  "dofollow": 0.2,
+                  "referring_pages": 0.2,
+                  "referring_domains": 0.1,
+                  "referring_main_domains": 0.1,
+                  "rank": 11.6,
+                  "main_domain_rank": 478.6,
+                  "last_updated_time": "2026-09-28 00:32:39 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": [
+                    "navigational",
+                    "commercial"
+                  ],
+                  "last_updated_time": "2026-04-28 02:57:13 +00:00"
+                }
+              },
+              "depth": 1,
+              "related_keywords": [
+                "openinsider",
+                "free insider buying stock screener",
+                "best insider buying stock screener",
+                "best insider trading websites",
+                "insider buying and selling",
+                "best free insider trading tracker",
+                "openinsider com insider purchases",
+                "insider buy/sell ratio"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider buys this week",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 07:15:20 +00:00",
+                  "competition": 0.08,
+                  "competition_level": "LOW",
+                  "cpc": 6.35,
+                  "search_volume": 50,
+                  "low_top_of_page_bid": 2,
+                  "high_top_of_page_bid": 5.52,
+                  "categories": [
+                    10012,
+                    10095,
+                    11827,
+                    13459
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 70
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 300,
+                    "yearly": -43
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 0,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20buys%20this%20week&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic",
+                    "people_also_ask",
+                    "images"
+                  ],
+                  "se_results_count": 169000,
+                  "last_updated_time": "2026-09-28 00:31:46 +00:00",
+                  "previous_updated_time": "2026-07-28 16:03:44 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 3.3,
+                  "dofollow": 1.4,
+                  "referring_pages": 3.1,
+                  "referring_domains": 1.4,
+                  "referring_main_domains": 1.4,
+                  "rank": 31.7,
+                  "main_domain_rank": 498.1,
+                  "last_updated_time": "2026-09-28 00:31:46 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "commercial",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-28 11:39:43 +00:00"
+                }
+              },
+              "depth": 1,
+              "related_keywords": [
+                "stock insider buys this week",
+                "crypto insider buys this week",
+                "free insider trading tracker",
+                "best insider trading websites",
+                "recent insider trading",
+                "insider trading data",
+                "insider trading tracker reddit",
+                "openinsider"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "best insider trading tracker",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 00:27:03 +00:00",
+                  "competition": 0.35,
+                  "competition_level": "MEDIUM",
+                  "cpc": 6.47,
+                  "search_volume": 50,
+                  "low_top_of_page_bid": 2.48,
+                  "high_top_of_page_bid": 5.95,
+                  "categories": [
+                    10012,
+                    10095,
+                    11819
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 20
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 40,
+                    "yearly": 133
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": 0,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=best%20insider%20trading%20tracker&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic",
+                    "people_also_ask",
+                    "discussions_and_forums"
+                  ],
+                  "se_results_count": 122000,
+                  "last_updated_time": "2026-09-30 11:26:26 +00:00",
+                  "previous_updated_time": "2026-05-12 23:29:23 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 1.4,
+                  "dofollow": 1.4,
+                  "referring_pages": 1.4,
+                  "referring_domains": 1.2,
+                  "referring_main_domains": 1.2,
+                  "rank": 13.6,
+                  "main_domain_rank": 493.8,
+                  "last_updated_time": "2026-09-30 11:26:42 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "commercial",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 06:33:47 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "best insider trading tracker reddit",
+                "openinsider",
+                "free insider trading tracker",
+                "best insider trading tracker free",
+                "best insider trading tracker app",
+                "free insider buying stock screener",
+                "finviz insider trading",
+                "insider trading chart"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "openinsider com insider purchases",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 04:39:24 +00:00",
+                  "competition": 0.08,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 40,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10095,
+                    11827,
+                    13459
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 70
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": -40,
+                    "quarterly": 0,
+                    "yearly": -73
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": "openinsider.com insider purchases",
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 10,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=openinsider%20com%20insider%20purchases&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic",
+                    "related_searches"
+                  ],
+                  "se_results_count": 141,
+                  "last_updated_time": "2026-10-02 12:14:59 +00:00",
+                  "previous_updated_time": "2026-08-13 00:40:50 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 1860,
+                  "dofollow": 1825.6,
+                  "referring_pages": 1855.9,
+                  "referring_domains": 36.2,
+                  "referring_main_domains": 26.9,
+                  "rank": 95.3,
+                  "main_domain_rank": 579.7,
+                  "last_updated_time": "2026-10-02 12:15:01 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "navigational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 18:51:47 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "free insider trading tracker",
+                "best insider trading websites",
+                "sec insider trading search",
+                "insider stock trading tracker",
+                "insider transactions stocks",
+                "insider buys this week",
+                "insider trading data",
+                "insider trading examples"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "openinsider stock",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-13 05:34:39 +00:00",
+                  "competition": 0.02,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 40,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10012,
+                    10012,
+                    10095,
+                    10095,
+                    10098,
+                    11827,
+                    11827,
+                    13459
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 30
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 40,
+                    "quarterly": 40,
+                    "yearly": 75
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": 37,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=openinsider%20stock&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "people_also_ask",
+                    "related_searches"
+                  ],
+                  "se_results_count": 148,
+                  "last_updated_time": "2026-10-02 12:07:15 +00:00",
+                  "previous_updated_time": "2026-08-14 19:26:06 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 5548.2,
+                  "dofollow": 3248.7,
+                  "referring_pages": 3488.1,
+                  "referring_domains": 86.9,
+                  "referring_main_domains": 68.6,
+                  "rank": 158.7,
+                  "main_domain_rank": 469.6,
+                  "last_updated_time": "2026-10-02 12:07:16 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 20:29:20 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "openinsider reddit",
+                "is openinsider legit",
+                "openinsider com insider purchases",
+                "openinsider app",
+                "insider buying stock screener",
+                "free insider buying stock screener",
+                "free insider trading tracker",
+                "openinsider api"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "is openinsider legit",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-13 02:06:59 +00:00",
+                  "competition": 0,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 40,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10002,
+                    10028,
+                    10222,
+                    11087
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 90
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 50
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 125,
+                    "quarterly": 350,
+                    "yearly": 80
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 0,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=is%20openinsider%20legit&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic"
+                  ],
+                  "se_results_count": 7,
+                  "last_updated_time": "2026-10-03 06:38:57 +00:00",
+                  "previous_updated_time": "2026-08-15 21:29:57 +00:00"
+                },
+                "avg_backlinks_info": null,
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-28 03:50:21 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "is openinsider legit reddit",
+                "is openinsider legit for cryptocurrency",
+                "openinsider reddit",
+                "how to use openinsider",
+                "is openinsider free",
+                "how to use openinsider to make money",
+                "openinsider down",
+                "openinsider ai"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "openinsider api",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 11:53:25 +00:00",
+                  "competition": 0.31,
+                  "competition_level": "LOW",
+                  "cpc": 14.17,
+                  "search_volume": 40,
+                  "low_top_of_page_bid": 2.3,
+                  "high_top_of_page_bid": 11.22,
+                  "categories": [
+                    10008
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 40
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": -33,
+                    "quarterly": -33,
+                    "yearly": -60
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": "open insider api",
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 0,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=openinsider%20api&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "ai_overview",
+                    "people_also_ask",
+                    "related_searches"
+                  ],
+                  "se_results_count": 104,
+                  "last_updated_time": "2026-10-02 12:14:57 +00:00",
+                  "previous_updated_time": "2026-08-14 19:24:03 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 3.7,
+                  "dofollow": 2.1,
+                  "referring_pages": 3,
+                  "referring_domains": 1.4,
+                  "referring_main_domains": 1.4,
+                  "rank": 22,
+                  "main_domain_rank": 460.6,
+                  "last_updated_time": "2026-10-02 12:14:59 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": [
+                    "navigational"
+                  ],
+                  "last_updated_time": "2026-04-29 20:05:22 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "openinsider api key",
+                "openinsider api reddit",
+                "openinsider api free",
+                "openinsider api key free",
+                "openinsider api github",
+                "openinsider api download",
+                "openinsider reddit",
+                "insider trading api"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "famous examples of insider trading",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-17 12:43:01 +00:00",
+                  "competition": 0,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 40,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 40
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": -33
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": 0,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=famous%20examples%20of%20insider%20trading&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "ai_overview",
+                    "organic",
+                    "people_also_ask",
+                    "images"
+                  ],
+                  "se_results_count": 42400,
+                  "last_updated_time": "2026-10-04 00:07:30 +00:00",
+                  "previous_updated_time": "2026-08-16 14:04:01 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 9.2,
+                  "dofollow": 7.8,
+                  "referring_pages": 8.8,
+                  "referring_domains": 1.1,
+                  "referring_main_domains": 1.1,
+                  "rank": 10.2,
+                  "main_domain_rank": 493,
+                  "last_updated_time": "2026-10-04 00:07:31 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-27 18:49:03 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "recent examples of insider trading",
+                "insider trading examples",
+                "martha stewart insider trading",
+                "why is insider trading illegal",
+                "history of insider trading",
+                "how is insider trading caught",
+                "recent insider trading scandals",
+                "types of insider trading"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider buy/sell ratio",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-13 15:38:47 +00:00",
+                  "competition": 0.05,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 30,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10012,
+                    10095,
+                    10098,
+                    11827,
+                    13459
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 50
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 40
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": -50,
+                    "quarterly": -50,
+                    "yearly": -80
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": "insider buy sell ratio",
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 25,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20buy%2Fsell%20ratio&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "people_also_ask",
+                    "related_searches"
+                  ],
+                  "se_results_count": 131,
+                  "last_updated_time": "2026-08-15 22:18:04 +00:00",
+                  "previous_updated_time": "2026-05-09 12:50:14 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 2015.1,
+                  "dofollow": 1992.4,
+                  "referring_pages": 2010.3,
+                  "referring_domains": 33.2,
+                  "referring_main_domains": 32.4,
+                  "rank": 164.6,
+                  "main_domain_rank": 366.3,
+                  "last_updated_time": "2026-08-15 22:18:05 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-28 01:57:05 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "insider buy/sell ratio tradingview",
+                "insider buy sell ratio chart",
+                "s&p 500 corporate insider buy sell ratio",
+                "insider buy sell ratio usa overall market",
+                "buy/sell ratio indicator",
+                "free insider trading tracker",
+                "buy sell ratio crypto",
+                "insider buying stock screener"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider trading tracker reddit",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 04:17:33 +00:00",
+                  "competition": 0,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 30,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10095,
+                    11819
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 40
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 70
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 20
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 100,
+                    "quarterly": -33,
+                    "yearly": -60
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": 2,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20trading%20tracker%20reddit&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "people_also_ask",
+                    "video",
+                    "related_searches"
+                  ],
+                  "se_results_count": 107,
+                  "last_updated_time": "2026-08-29 04:27:57 +00:00",
+                  "previous_updated_time": "2026-06-16 20:25:40 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 26.9,
+                  "dofollow": 3.6,
+                  "referring_pages": 25.6,
+                  "referring_domains": 22.6,
+                  "referring_main_domains": 14.3,
+                  "rank": 44.9,
+                  "main_domain_rank": 697.2,
+                  "last_updated_time": "2026-08-29 04:27:58 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "navigational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 17:00:05 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "openinsider",
+                "free insider trading tracker reddit",
+                "best insider trading tracker reddit",
+                "free insider trading tracker",
+                "best insider trading tracker",
+                "insider trading game reddit",
+                "insider trading website",
+                "insider trader"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "how to use openinsider",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-13 15:54:33 +00:00",
+                  "competition": 0.11,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 20,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10008
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 20
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": -67
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 2,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=how%20to%20use%20openinsider&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "video",
+                    "ai_overview",
+                    "people_also_ask",
+                    "people_also_search",
+                    "related_searches"
+                  ],
+                  "se_results_count": 12600,
+                  "last_updated_time": "2026-03-10 19:13:55 +00:00",
+                  "previous_updated_time": "2025-12-23 13:52:54 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 1135.6,
+                  "dofollow": 1057.8,
+                  "referring_pages": 1131.3,
+                  "referring_domains": 52.9,
+                  "referring_main_domains": 42.5,
+                  "rank": 42.5,
+                  "main_domain_rank": 548.2,
+                  "last_updated_time": "2026-03-10 19:14:50 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-28 08:56:59 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "how to use openinsider to make money",
+                "how to use openinsider for beginners",
+                "how to use openinsider reddit",
+                "openinsider reddit",
+                "is openinsider safe",
+                "openinsider api",
+                "openinsider down",
+                "what is open insider"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider buying reddit",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-17 03:21:42 +00:00",
+                  "competition": 0,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 10
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": 0
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 0,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20buying%20reddit&num=100&hl=en&gl=US&gws_rd=cr&ie=UTF-8&oe=UTF-8&glp=1&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "related_searches"
+                  ],
+                  "se_results_count": 30900000,
+                  "last_updated_time": "2025-01-04 20:26:10 +00:00",
+                  "previous_updated_time": null
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 0.4,
+                  "dofollow": 0.4,
+                  "referring_pages": 0.4,
+                  "referring_domains": 0.4,
+                  "referring_main_domains": 0.4,
+                  "rank": 17.4,
+                  "main_domain_rank": 796.3,
+                  "last_updated_time": "2025-01-04 20:26:11 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "navigational",
+                  "foreign_intent": [
+                    "informational"
+                  ],
+                  "last_updated_time": "2026-04-28 03:01:50 +00:00"
+                }
+              },
+              "depth": 1,
+              "related_keywords": [
+                "best insider buying reddit",
+                "free insider buying reddit",
+                "how do people get caught insider trading reddit",
+                "insider trading activity tracker",
+                "insider trading strategy",
+                "is insider buying a good sign",
+                "insider trading tracker reddit",
+                "famous examples of insider trading"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "free insider buying stock screener",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-17 01:01:36 +00:00",
+                  "competition": 0.51,
+                  "competition_level": "MEDIUM",
+                  "cpc": 2.85,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": 2.29,
+                  "high_top_of_page_bid": 4.61,
+                  "categories": [
+                    10012,
+                    10095,
+                    11827,
+                    13459
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 0
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 0
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 0
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": null
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": null,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": null,
+                "avg_backlinks_info": null,
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "commercial",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-05-05 21:58:00 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": null
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "best free insider trading tracker",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 18:17:27 +00:00",
+                  "competition": 0.26,
+                  "competition_level": "LOW",
+                  "cpc": 3.17,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": 1.93,
+                  "high_top_of_page_bid": 3,
+                  "categories": [
+                    10012,
+                    10095,
+                    11819
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 10
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 50,
+                    "quarterly": 200,
+                    "yearly": 200
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": null,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": null,
+                "avg_backlinks_info": null,
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "commercial",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-25 04:37:51 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": null
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "openinsider chart",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-14 05:05:13 +00:00",
+                  "competition": 0.33,
+                  "competition_level": "LOW",
+                  "cpc": 2.6,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": 1.76,
+                  "high_top_of_page_bid": 3.14,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 0
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 0
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 10
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": 0
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": null,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": null,
+                "avg_backlinks_info": null,
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 20:18:07 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": null
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "openinsider alternative",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-16 16:07:28 +00:00",
+                  "competition": 0.23,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10019,
+                    10168,
+                    10885,
+                    13114
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 0
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 0
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 0
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 0
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 0
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": null
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": null,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": null,
+                "avg_backlinks_info": null,
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "navigational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 17:31:27 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": null
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "recent insider buying and selling",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-12 01:07:26 +00:00",
+                  "competition": 0,
+                  "competition_level": "LOW",
+                  "cpc": null,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 50
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 100,
+                    "yearly": null
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": null,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": null,
+                "avg_backlinks_info": null,
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "transactional",
+                  "foreign_intent": [
+                    "informational",
+                    "commercial"
+                  ],
+                  "last_updated_time": "2026-05-02 13:08:32 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": null
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider trading activity tracker",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-16 02:25:25 +00:00",
+                  "competition": 0.25,
+                  "competition_level": "LOW",
+                  "cpc": 4.85,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10095,
+                    11819
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 10
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": -67
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": 58,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20trading%20activity%20tracker&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "organic",
+                    "related_searches"
+                  ],
+                  "se_results_count": 6210000,
+                  "last_updated_time": "2025-10-19 09:55:07 +00:00",
+                  "previous_updated_time": "2025-08-24 17:42:40 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 2896.8,
+                  "dofollow": 2597.4,
+                  "referring_pages": 2859,
+                  "referring_domains": 103.1,
+                  "referring_main_domains": 97.6,
+                  "rank": 247.8,
+                  "main_domain_rank": 387.6,
+                  "last_updated_time": "2025-10-19 09:55:07 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "navigational",
+                  "foreign_intent": [
+                    "informational"
+                  ],
+                  "last_updated_time": "2026-04-28 01:31:54 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "free insider trading activity tracker",
+                "free insider trading tracker",
+                "best insider trading activity tracker",
+                "insider trading activity follow the smart money",
+                "best insider trading websites",
+                "insider trading tracker reddit",
+                "insider trading screener",
+                "insider trading reports"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "insider trading strategy",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-14 18:24:21 +00:00",
+                  "competition": 0.16,
+                  "competition_level": "LOW",
+                  "cpc": 7.41,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": 2.3,
+                  "high_top_of_page_bid": 5.81,
+                  "categories": [
+                    10012,
+                    10095,
+                    11819
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 30
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 10
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 200,
+                    "quarterly": 200,
+                    "yearly": 200
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": "text_processing",
+                  "keyword_difficulty": 20,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=insider%20trading%20strategy&num=100&hl=en&gl=US&gws_rd=cr&ie=UTF-8&oe=UTF-8&glp=1&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "organic",
+                    "discussions_and_forums",
+                    "related_searches"
+                  ],
+                  "se_results_count": 49500000,
+                  "last_updated_time": "2025-01-04 20:24:50 +00:00",
+                  "previous_updated_time": null
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 102.8,
+                  "dofollow": 53,
+                  "referring_pages": 98.6,
+                  "referring_domains": 54.5,
+                  "referring_main_domains": 51,
+                  "rank": 101.3,
+                  "main_domain_rank": 576.3,
+                  "last_updated_time": "2025-01-04 20:24:55 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-28 07:50:32 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "free insider trading strategy",
+                "best insider trading strategy",
+                "best insider trading websites",
+                "why is it bad to have too much insider ownership?",
+                "insider buying stocks tracker",
+                "insider buying stock screener",
+                "insider trading dashboard",
+                "free insider trading tracker"
+              ]
+            },
+            {
+              "se_type": "google",
+              "keyword_data": {
+                "se_type": "google",
+                "keyword": "is insider buying a good sign",
+                "location_code": 2840,
+                "language_code": "en",
+                "keyword_info": {
+                  "se_type": "google",
+                  "last_updated_time": "2026-09-17 02:44:56 +00:00",
+                  "competition": 0.02,
+                  "competition_level": "LOW",
+                  "cpc": 2.42,
+                  "search_volume": 10,
+                  "low_top_of_page_bid": null,
+                  "high_top_of_page_bid": null,
+                  "categories": [
+                    10012,
+                    10098
+                  ],
+                  "monthly_searches": [
+                    {
+                      "year": 2026,
+                      "month": 8,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 7,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 6,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 5,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 4,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 3,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 2,
+                      "search_volume": 10
+                    },
+                    {
+                      "year": 2026,
+                      "month": 1,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 12,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 11,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 10,
+                      "search_volume": 20
+                    },
+                    {
+                      "year": 2025,
+                      "month": 9,
+                      "search_volume": 10
+                    }
+                  ],
+                  "search_volume_trend": {
+                    "monthly": 0,
+                    "quarterly": 0,
+                    "yearly": 0
+                  }
+                },
+                "keyword_info_normalized_with_bing": null,
+                "keyword_info_normalized_with_clickstream": null,
+                "clickstream_keyword_info": null,
+                "keyword_properties": {
+                  "se_type": "google",
+                  "core_keyword": null,
+                  "synonym_clustering_algorithm": null,
+                  "keyword_difficulty": 23,
+                  "detected_language": "en",
+                  "is_another_language": false
+                },
+                "serp_info": {
+                  "se_type": "google",
+                  "check_url": "https://www.google.com/search?q=is%20insider%20buying%20a%20good%20sign&num=100&hl=en&gl=US&gws_rd=cr&ie=UTF-8&oe=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+                  "serp_item_types": [
+                    "featured_snippet",
+                    "people_also_ask",
+                    "organic",
+                    "related_searches"
+                  ],
+                  "se_results_count": 92,
+                  "last_updated_time": "2023-06-09 08:08:59 +00:00",
+                  "previous_updated_time": "2023-04-12 05:14:58 +00:00"
+                },
+                "avg_backlinks_info": {
+                  "se_type": "google",
+                  "backlinks": 39.9,
+                  "dofollow": 19.1,
+                  "referring_pages": 30.9,
+                  "referring_domains": 9.4,
+                  "referring_main_domains": 12.8,
+                  "rank": 30.9,
+                  "main_domain_rank": 908.4,
+                  "last_updated_time": "2023-06-09 08:08:59 +00:00"
+                },
+                "search_intent_info": {
+                  "se_type": "google",
+                  "main_intent": "informational",
+                  "foreign_intent": null,
+                  "last_updated_time": "2026-04-29 16:37:20 +00:00"
+                }
+              },
+              "depth": 2,
+              "related_keywords": [
+                "why is it bad to have too much insider ownership?",
+                "is insider selling a bad sign",
+                "insider buying stock screener",
+                "stocks insiders are buying now",
+                "insider selling meaning",
+                "insider buying and selling chart",
+                "insider buying tracker",
+                "when can insiders buy stock"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

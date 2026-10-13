@@ -1,0 +1,135 @@
+{
+  "balance_before_usd": 50.19348,
+  "balance_after_usd": 49.953632,
+  "actual_balance_deducted_usd": 0.239848,
+  "response_cost_total_usd": 0.239848,
+  "responses": [
+    {
+      "file": "historical-broken-pages.json",
+      "cost_usd": 0.02418,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "backlink-domains.json",
+      "cost_usd": 0.024072,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "suggestions-sec-form4.json",
+      "cost_usd": 0.0216,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "ranked-keywords.json",
+      "cost_usd": 0.01236,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "crawl-summary.json",
+      "cost_usd": 0,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "domain-overview.json",
+      "cost_usd": 0.01212,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "keyword-overview.json",
+      "cost_usd": 0.01512,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "serp-insider-buying-today.json",
+      "cost_usd": 0.002,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "crawl-task.json",
+      "cost_usd": 0.03,
+      "task_status": [
+        20100
+      ]
+    },
+    {
+      "file": "suggestions-insider-buying.json",
+      "cost_usd": 0.024,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "lighthouse-home-mobile.json",
+      "cost_usd": 0.005,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "suggestions-form-4.json",
+      "cost_usd": 0.024,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "crawl-pages.json",
+      "cost_usd": 0,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "backlinks-summary.json",
+      "cost_usd": 0.024036,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "serp-cluster-buys.json",
+      "cost_usd": 0.002,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "serp-form4-codes.json",
+      "cost_usd": 0.002,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "serp-insider-buying.json",
+      "cost_usd": 0.002,
+      "task_status": [
+        20000
+      ]
+    },
+    {
+      "file": "related-insider-buying.json",
+      "cost_usd": 0.01536,
+      "task_status": [
+        20000
+      ]
+    }
+  ],
+  "failed_request": "Mobile Lighthouse for /stocks returned HTTP 500. No result was received."
+}
