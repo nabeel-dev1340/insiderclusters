@@ -60,6 +60,13 @@ applied by a small idempotent runner. No ORM auto-sync. See
 npm run migrate        # applies any pending *.sql migrations
 ```
 
+## Search engines
+
+The IndexNow key is served from `web/public/b48b74afdc5441e99eb19d09a8363ee2.txt`.
+After a deploy that changed pages, `npm run indexnow` submits the sitemap URLs
+whose `lastmod` moved since yesterday (`--all` for every URL, `--dry-run` to
+list without sending).
+
 ## Build order
 
 Phases 1–8 are built in sequence per the PRD; each must pass its acceptance

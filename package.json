@@ -15,7 +15,8 @@
     "db:up": "docker compose up -d postgres",
     "db:down": "docker compose down",
     "dev:web": "npm run dev --workspace web",
-    "dev:scraper": "npm run dev --workspace scraper"
+    "dev:scraper": "npm run dev --workspace scraper",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "engines": {
     "node": ">=22"
