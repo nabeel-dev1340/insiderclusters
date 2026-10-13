@@ -60,6 +60,22 @@ applied by a small idempotent runner. No ORM auto-sync. See
 npm run migrate        # applies any pending *.sql migrations
 ```
 
+## Deploying
+
+Production runs on Coolify on the RackNerd VPS. The web app deploys from a
+bare repository on the box, not from GitHub: Coolify's GitHub App lost access
+to this repository (every native deployment since 12 October 2026 failed with
+"installation token could not access the repository"), so the app now clones
+`git@192.236.217.45:/opt/git/insiderclusters.git` like the other sites on the
+box, and a push there triggers the deploy through a post-receive hook:
+
+```bash
+GIT_SSH_COMMAND="ssh -i ~/.ssh/insiderclusters_vps" git push vps main   # deploy
+git push origin main                                                    # GitHub backup
+```
+
+The scraper still points at the GitHub source and is deployed by hand.
+
 ## Search engines
 
 The IndexNow key is served from `web/public/b48b74afdc5441e99eb19d09a8363ee2.txt`.
